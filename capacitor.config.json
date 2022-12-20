@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "pi-varotra",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

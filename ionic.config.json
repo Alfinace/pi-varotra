@@ -1,0 +1,7 @@
+{
+  "name": "pi-varotra",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
