@@ -10,17 +10,104 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "~@ionic/angular/css/core.css";
+@import '~@ionic/angular/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
 @import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+@font-face {
+  font-family: 'Geometria';
+  src: url('./assets/fonts/geometria-cufonfonts/Geometria-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./assets/fonts/Roboto/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'DM sans';
+  src: url('./assets/fonts/DM_Sans/DMSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'DM sans medium';
+  src: url('./assets/fonts/DM_Sans/DMSans-Medium.ttf');
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+
+  height: 170px;
+  width: 400px;
+
+  margin: 0 auto;
+}
+
+b {
+  width: 100%;
+}
+
+.ripple-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid transparent;
+
+  user-select: none;
+  background: var(--ion-color-primary);
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.custom-parent {
+  color: var(--ion-color-light);
+  font-size: var(--ion-text-size-2x);
+}
+
+.btn-primary {
+  background: var(--ion-color-primary);
+}
+
+.btn-warning {
+  background: var(--ion-color-warning);
+}
+
+.btn-danger {
+  background: var(--ion-color-danger);
+}
+
+.btn-row {
+  margin-top: 20px;
+}
+
+.text-primary {
+  color: var(--ion-color-primary);
+}
+
+.small-size {
+  font-size: var(--ion-text-size-2x);
+}
+.w-full {
+  width: 100%;
+}

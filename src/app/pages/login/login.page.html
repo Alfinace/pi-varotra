@@ -1,0 +1,58 @@
+<ion-content class="ion-padding-horizontal">
+  <div class="ion-justify-content-around " style="margin-top: 20px; display: flex;flex-direction: column;">
+    <form [formGroup]="loginForm" >
+      <ion-img  [src]="'/assets/images/pi_varotra.png'"></ion-img>
+        <ion-row>
+          <ion-col size="12">
+            <h1 class="ion-text-center">Bienvenue de retour!</h1>
+          </ion-col>
+          <ion-col size="12">
+            <p class="ion-no-margin">Connectez-vous à votre compte</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Adresse email</ion-label>
+              <ion-input required formControlName="email"  type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item class="ion-no-padding-start">
+              <ion-label position="floating">Mot de passe</ion-label>
+              <ion-input required  type="password" formControlName="password"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row class="mt small-size d-flex">
+            <ion-item lines="none" class="checkbox">
+              <ion-checkbox slot="start" mode="md" ></ion-checkbox>
+              <ion-label>Souviens-moi</ion-label>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label>
+                Mot de passe oublié?
+              </ion-label>
+            </ion-item>
+        </ion-row>
+      <ion-row class="btn-row mt">
+        <ion-col size="12">
+          <div class="ion-activatable ripple-parent custom-parent btn-primary">
+            Se connecter
+            <ion-ripple-effect></ion-ripple-effect>
+          </div>
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-row class="small-size w-full" style="margin-top: 100px">
+      <ion-col size="12">
+        <div class="ion-justify-content-center gap-1x">
+          <span>Vous n'avez pas du compte?</span>
+          <span class="text-primary">Inscription</span>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

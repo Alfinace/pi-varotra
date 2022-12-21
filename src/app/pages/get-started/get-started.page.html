@@ -1,0 +1,32 @@
+<ion-header  class="ion-no-border">
+  <ion-toolbar >
+    <ion-buttons slot="end" [routerLink]="['/login']">
+      <ion-button style="text-transform: capitalize;">
+        Ignorer
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-slides  pager="true" [options]="slideOpts" >
+    <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
+      <h1 class="ion-text-start">Bienvenue sur Pi-varotra</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, mollitia. Nisi aliquam distinctio tenetur maiores, vero in eaque alias delectus blanditiis nostrum voluptatum? Obcaecati natus tenetur facilis! Architecto, qui accusamus!
+      </p>
+          <ion-img [src]="'./assets/images/img4.jpg'"></ion-img>
+    </ion-slide>
+    <ion-slide>
+      <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
+        <h1 class="ion-text-start">Bienvenue sur Pi-varotra</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, mollitia. Nisi aliquam distinctio tenetur maiores, vero in eaque alias delectus blanditiis nostrum voluptatum? Obcaecati natus tenetur facilis! Architecto, qui accusamus!
+        </p>
+            <ion-img [src]="'./assets/images/img5.png'"></ion-img>
+      </ion-slide>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
