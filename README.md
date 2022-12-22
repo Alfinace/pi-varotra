@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.ibb.co/4VBBN3P/smartmockups-lbyr46r2.png" width="500" alt="Preview app" />
+  <img src="https://i.ibb.co/4VBBN3P/smartmockups-lbyr46r2.png" width="800" alt="Preview app" />
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
