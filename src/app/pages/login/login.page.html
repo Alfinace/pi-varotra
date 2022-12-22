@@ -39,10 +39,15 @@
         </ion-row>
       <ion-row class="btn-row mt">
         <ion-col size="12">
-          <div class="ion-activatable ripple-parent custom-parent btn-primary">
-            Se connecter
+          <button [disabled]="isSubmited" (click)="login()" class="ion-activatable ripple-parent custom-parent btn-primary">
+            <ng-container *ngIf="!isSubmited;else templateLoading" >
+              Se connecter
+            </ng-container>
+            <ng-template #templateLoading>
+              <ion-spinner name="circular" style="color:#FFF"></ion-spinner>
+            </ng-template>
             <ion-ripple-effect></ion-ripple-effect>
-          </div>
+          </button>
         </ion-col>
       </ion-row>
     </form>
