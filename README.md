@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://minepi.com/" target="blank"><img src="https://minepi.com/assets/about-us/pi1-748cccc3a0328c5b7542c454d9260fddf4e9069affb2b54da0fef4b498386ea9.png" width="500" alt="Nest Logo" /></a>
+  <img src="https://i.ibb.co/4VBBN3P/smartmockups-lbyr46r2.png" width="500" alt="Preview app" />
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
@@ -26,36 +26,4 @@ $ npm install
 # development
 $ npm run start
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
