@@ -58,6 +58,21 @@
 
   margin: 0 auto;
 }
+.custom-ng-otp-input-wrapper {
+  height: 70px !important;
+  justify-content: center;
+}
+.custom-opt-input {
+  width: 70px !important;
+  font-size: 20px !important;
+  height: 50px !important;
+  border: none !important;
+  border-radius: 10px !important;
+  background: #ececef !important;
+  &:focus-visible {
+    outline: 1px solid var(--ion-color-primary) !important;
+  }
+}
 
 b {
   width: 100%;
@@ -105,9 +120,104 @@ b {
   color: var(--ion-color-primary);
 }
 
+.text-secondary {
+  color: var(--ion-color-secondary);
+}
+
 .small-size {
   font-size: var(--ion-text-size-2x);
 }
+.large-size {
+  font-size: var(--ion-text-size-4x);
+}
+.normal-size {
+  font-size: var(--ion-text-size-3x);
+}
 .w-full {
   width: 100%;
+}
+a {
+  text-decoration: none;
+}
+ion-content {
+  font-family: 'DM sans';
+  ion-item,
+  .checkbox {
+    --background-hover: transparent;
+    --background: transparent;
+    --border-radius: 0;
+    &::part(native) {
+      padding-inline-start: 0;
+      .item-inner {
+        padding-inline-end: 0;
+      }
+    }
+    ion-checkbox {
+      margin: 10px;
+      margin-left: 0;
+    }
+  }
+  ion-item.checkbox {
+    --background-hover: transparent;
+    --background-focused: transparent;
+    --background-focused-opacity: 0;
+    --background-activated: transparent;
+    --background-activated-opacity: 0;
+  }
+  h1,
+  ion-title,
+  h2,
+  h3 {
+    font-size: var(--ion-text-size-4x);
+    font-weight: 600;
+    font-family: 'DM sans medium';
+    background: -webkit-linear-gradient(
+      top left,
+      var(--ion-color-primary),
+      var(--ion-color-secondary)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  ion-row {
+    margin: 10px 0;
+    p {
+      font-size: var(--ion-text-size-3x);
+      color: var(--ion-color-medium-tint);
+      font-family: 'DM sans medium';
+      text-align: center;
+    }
+  }
+
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  ion-img {
+    width: 20%;
+    margin: auto;
+    height: 20%;
+  }
+  ion-item {
+    font-size: var(--ion-text-size-2x);
+  }
+
+  .b-login {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  form {
+    width: 100%;
+  }
+
+  .mt {
+    margin-top: 10px;
+  }
+  .gap-1x {
+    display: flex;
+    gap: 10px;
+  }
 }
