@@ -1,5 +1,5 @@
 import { ConditionTermComponent } from './../../modals/condition-term/condition-term.component';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -9,15 +9,17 @@ import { ModalController } from '@ionic/angular';
 })
 export class CreateEmailComponent implements OnInit {
   public isSubmited = false;
+  @ViewChild('checkbox') checkbox: any;
   @Output() public stepperEvent: EventEmitter<any> = new EventEmitter();
   constructor(private modalController: ModalController) { }
 
   ngOnInit() { }
 
   public next() {
-    this.stepperEvent.emit('next');
+    if (this.checkbox.checked) {
+      this.stepperEvent.emit('next');
+    }
   }
-
   async openModalCondtion() {
     const modal = await this.modalController.create({
       component: ConditionTermComponent,
@@ -26,5 +28,9 @@ export class CreateEmailComponent implements OnInit {
 
     await modal.present();
 
+  }
+
+  public toggleCheck() {
+    this.checkbox.checked = !this.checkbox.checked;
   }
 }

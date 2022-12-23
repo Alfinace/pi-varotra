@@ -16,20 +16,16 @@
       </ion-col>
     </ion-row>
     <ion-row class="mt normal-size d-flex ion-justify-content-start ion-align-items-center" class="ion-nowrap" >
-        <ion-item lines="none" class="checkbox">
-          <ion-checkbox slot="start" mode="md" ></ion-checkbox>
-          <ion-label class="ion-no-margin">
-            <span class="ion-no-margin small-size">
-              J'ai lu et j'accepte les
-            </span>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label class="ion-no-margin">
-            <span class="text-primary ion-no-margin small-size" 
-            style="white-space: nowrap" (click)="openModalCondtion()">termes et conditions</span>
-          </ion-label>
-        </ion-item>
+      <div class="flex-row">
+        <ion-checkbox slot="start" #checkbox mode="md" ></ion-checkbox>
+        <span (click)="toggleCheck()" class="ion-no-margin normal-size pointer">
+          J'ai lu et j'accepte les
+        </span>
+        <span class="text-primary ion-no-margin normal-size pointer" 
+        style="white-space: nowrap" (click)="openModalCondtion()">
+        termes et conditions d'utilisation
+      </span>
+      </div>
     </ion-row>
   <ion-row class="btn-row mt">
     <ion-col size="12">
