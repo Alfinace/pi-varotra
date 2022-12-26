@@ -1,5 +1,7 @@
+import { ToastService } from './../../services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,10 @@ export class LoginPage implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
   });
-  constructor() { }
+  constructor(
+    private toastService: ToastService,
+    private http: HttpService
+  ) { }
 
   ngOnInit() {
   }
@@ -20,11 +25,16 @@ export class LoginPage implements OnInit {
   public login(): void {
     if (this.loginForm.valid) {
       this.isSubmited = true;
-      setTimeout(() => {
+      this.http.post('auth/login', this.loginForm.value).subscribe((res: any) => {
         this.isSubmited = false;
-        console.log(this.loginForm.value);
-      }, 3000);
+        this.toastService.show('success', 'Connexion réussie');
+      }, (err: any) => {
+        console.log(err);
+        this.toastService.show('dark', 'Email ou mot de passe incorrect');
+        this.isSubmited = false;
+      })
     }
   }
+
 
 }

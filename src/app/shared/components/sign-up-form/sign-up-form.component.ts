@@ -1,3 +1,4 @@
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -6,11 +7,19 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./sign-up-form.component.scss'],
 })
 export class SignUpFormComponent implements OnInit {
+  public signUpForm: FormGroup;
   @Input() public viewStep = 0;
   @Output() public stepperEvent: EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.signUpForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      firstname: [''],
+      lastname: [''],
+      password: [''],
+    })
+  }
 
   public onChangeStep(step: string) {
     if (step === 'next') {

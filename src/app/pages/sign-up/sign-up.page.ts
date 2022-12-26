@@ -1,4 +1,6 @@
+import { checkPasswords } from './../../utils/validators';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpPage implements OnInit {
   public viewStep: number = 0;
-
-  constructor() { }
+  public signUpForm: FormGroup;
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
   }
