@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { CreateProfilePasswordComponent } from './create-profile-password.component';
 import { CreateEmailComponent } from './../create-email/create-email.component';
 import { NgModule } from '@angular/core';
@@ -14,6 +15,7 @@ import { IonicModule } from '@ionic/angular';
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
+    RouterModule,
     FormsModule
   ]
 })

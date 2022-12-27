@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ClientPage } from './layouts/client/client.page';
 
 const routes: Routes = [
   {
     path: 'client',
-    loadChildren: () => import('./layouts/client/client.module').then(m => m.ClientPageModule)
+    component: ClientPage,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./layouts/client/client.module').then(m => m.ClientPageModule)
+      }
+    ]
   },
   {
     path: 'admin',
@@ -16,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'client',
     pathMatch: 'full'
   },
   {

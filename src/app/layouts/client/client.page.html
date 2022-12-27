@@ -1,1 +1,40 @@
-<ion-router-outlet></ion-router-outlet>
+<ion-header [translucent]="true" class="ion-no-border">
+	<ion-toolbar>
+		<ion-buttons slot="secondary">
+			<ion-button>
+				<ion-icon new="0" slot="icon-only" name="notifications-outline"></ion-icon>
+			</ion-button>
+			<ion-button>
+				<ion-icon new="10" slot="icon-only" name="cart-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<ion-title>Pi-varotra</ion-title>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<ion-router-outlet></ion-router-outlet>
+</ion-content>
+<ion-tabs>
+	<ion-tab-bar slot="bottom,top">
+		<ion-tab-button tab="tab1">
+			<ion-icon name="home-outline"></ion-icon>
+			<ion-label>Accueil</ion-label>
+		</ion-tab-button>
+		<ion-tab-button tab="tab2">
+			<ion-icon name="megaphone-outline"></ion-icon>
+			<ion-label>Nouveau</ion-label>
+		</ion-tab-button>
+		<ion-tab-button tab="tab2">
+			<ion-icon size="large" name="apps-outline"></ion-icon>
+			<ion-label>Menu</ion-label>
+		</ion-tab-button>
+		<ion-tab-button tab="tab3">
+			<ion-icon name="clipboard-outline"></ion-icon>
+			<ion-label>Commande</ion-label>
+		</ion-tab-button>
+		<ion-tab-button tab="tab3">
+			<ion-icon name="person-outline"></ion-icon>
+			<ion-label>Profile</ion-label>
+		</ion-tab-button>
+	</ion-tab-bar>
+</ion-tabs>

@@ -1,0 +1,29 @@
+.title {
+  font-size: 25px;
+  color: #fff;
+  font-weight: 700;
+  font-family: 'DM sans';
+}
+h5 {
+  font-size: 11px;
+  color: #fff;
+}
+
+.flex {
+  background: red;
+  width: 100%;
+  height: 170px;
+  margin: auto;
+  border-radius: 15px;
+  .child {
+    width: 59%;
+    padding: 10px;
+    height: 100%;
+    background: #3669c9;
+    border-radius: 10px 100px 100px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+}

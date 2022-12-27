@@ -1,20 +1,44 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="ion-padding-horizontal" style="margin-top: 70px">
+    <ion-searchbar color="light" class="ion-no-border ion-no-padding" show-clear-button="always"></ion-searchbar>
+    <br>
+    <swiper [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()">
+      <ng-template *ngFor="let item of [1,1,1,1,1,1,1,1]" swiperSlide>
+        <app-pub-card></app-pub-card>
+      </ng-template>
+    </swiper>
+    <br>
+    <div style="display:flex" class="ion-justify-content-between ion-align-items-center">
+      <h3>Catgories</h3>
+      <a href="http://">Voir plus</a>
+    </div>
+    <br>
+    <swiper [config]="catConfig">
+      <ng-template *ngFor="let item of [1,1,1,1,1,1,1,1]" swiperSlide>
+        <div class="b-cat">
+          <div class="box">
+            <ion-img [src]="'./assets/images/cat2.png'"></ion-img>
+          </div>
+          <span>Computer</span>
+        </div>
+      </ng-template>
+    </swiper>
+    <br>
+  </div>
+  <div style="background: #FAFAFA;
+  border-radius: 10px 10px 0px 0px;;" class="ion-padding-horizontal">
+    <div style="display:flex" class="ion-justify-content-between  ion-align-items-center">
+      <h3>Featured Product</h3>
+      <a href="http://">Voir plus</a>
+    </div>
+    <br>
+    <div style="display: flex; gap: 10px;" class="ion-justify-content-center ion-align-items-center ion-wrap">
+      <app-article *ngFor="let item of [1,1,1,1,1,1,1,1]"></app-article>
+    </div>
+    <br>
+    <br>
   </div>
 </ion-content>

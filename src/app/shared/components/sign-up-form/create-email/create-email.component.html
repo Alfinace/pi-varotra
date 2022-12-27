@@ -29,7 +29,7 @@
     </ion-row>
   <ion-row class="btn-row mt">
     <ion-col size="12">
-      <button [disabled]="isSubmited || f.email.invalid" (click)="next()" class="ion-activatable ripple-parent custom-parent btn-primary">
+      <button [disabled]="isSubmited || signUpForm.invalid || !checkbox.checked" (click)="next()" class="ion-activatable ripple-parent custom-parent btn-primary">
         <ng-container *ngIf="!isSubmited;else templateLoading" >
           Continue
         </ng-container>

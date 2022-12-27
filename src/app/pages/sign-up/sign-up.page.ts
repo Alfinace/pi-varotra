@@ -8,7 +8,7 @@ import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms'
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage implements OnInit {
-  public viewStep: number = 0;
+  public viewStep: number = 2;
   public signUpForm: FormGroup;
   constructor(private fb: FormBuilder) { }
 

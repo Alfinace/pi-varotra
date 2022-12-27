@@ -19,4 +19,8 @@ export class UserService {
   public resendCode(email: string) {
     return this.http.post('resend-code', { email });
   }
+
+  public save(payload: { email: string, password: string, firstname: string, lastname: string }) {
+    return this.http.post('user/complete-register', { ...payload });
+  }
 }
