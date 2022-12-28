@@ -60,8 +60,9 @@ ion-img {
   }
 }
 
-app-article {
-  width: 48%;
+app-article,
+app-pub-card {
+  width: 100%;
 }
 .swiper-slide {
   text-align: center;
