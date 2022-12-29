@@ -2,6 +2,7 @@ import { ToastService } from './../../services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from 'src/app/services/http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginPage implements OnInit {
   });
   constructor(
     private toastService: ToastService,
-    private http: HttpService
+    private http: HttpService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -36,5 +38,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-
+  public backHome(): void {
+    this.router.navigate(['/client']);
+  }
 }

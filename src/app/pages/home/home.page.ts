@@ -44,7 +44,6 @@ export class HomePage implements AfterViewInit {
 
   public doRefresh(event: any) {
     setTimeout(() => {
-      // Any calls to load data go here
       event.target.complete();
     }, 5000);
   }
@@ -57,8 +56,6 @@ export class HomePage implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log(this.swiperComponent.swiperRef.autoplay);
-
     this.swiperComponent.swiperRef.autoplay.running = true;
   }
 }

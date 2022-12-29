@@ -1,41 +1,49 @@
-<ion-content class="ion-padding" >
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-icon class="ion-padding-start" size="large" slot="start" (click)="backHome()" name="chevron-back-outline">
+    </ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
   <div class="ion-justify-content-center center">
-    <form [formGroup]="loginForm" >
-      <ion-img  [src]="'/assets/images/pi_varotra.png'"></ion-img>
-        <ion-row>
-          <ion-col size="12">
-            <h1 class="ion-text-center">Bienvenue de retour!</h1>
-          </ion-col>
-          <ion-col size="12">
-            <p class="ion-no-margin">Connectez-vous à votre compte</p>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-no-margin">
-          <ion-col size="12">
-            <ion-item  class="ion-no-padding">
-              <ion-label position="floating">Adresse email</ion-label>
-              <ion-input required formControlName="email"  type="text"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-no-margin">
-          <ion-col size="12">
-            <ion-item class="ion-no-padding">
-              <ion-label position="floating">Mot de passe</ion-label>
-              <ion-input required  type="password" formControlName="password"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row class="mt normal-size d-flex" >
-            <ion-item lines="none" class="checkbox">
-              <ion-checkbox slot="start" mode="md" ></ion-checkbox>
-              <ion-label>Souviens-moi</ion-label>
-            </ion-item>
-        </ion-row>
+    <form [formGroup]="loginForm">
+      <ion-img [src]="'/assets/images/pi_varotra.png'"></ion-img>
+      <ion-row>
+        <ion-col size="12">
+          <h1 class="ion-text-center">Bienvenue de retour!</h1>
+        </ion-col>
+        <ion-col size="12">
+          <p class="ion-no-margin">Connectez-vous à votre compte</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-no-margin">
+        <ion-col size="12">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Adresse email</ion-label>
+            <ion-input required formControlName="email" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-no-margin">
+        <ion-col size="12">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Mot de passe</ion-label>
+            <ion-input required type="password" formControlName="password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="mt normal-size d-flex">
+        <ion-item lines="none" class="checkbox">
+          <ion-checkbox slot="start" mode="md"></ion-checkbox>
+          <ion-label>Souviens-moi</ion-label>
+        </ion-item>
+      </ion-row>
       <ion-row class="btn-row mt">
         <ion-col size="12">
-          <button [disabled]="isSubmited" (click)="login()" class="ion-activatable ripple-parent custom-parent btn-primary">
-            <ng-container *ngIf="!isSubmited;else templateLoading" >
+          <button [disabled]="isSubmited" (click)="login()"
+            class="ion-activatable ripple-parent custom-parent btn-primary">
+            <ng-container *ngIf="!isSubmited;else templateLoading">
               Se connecter
             </ng-container>
             <ng-template #templateLoading>
@@ -57,7 +65,7 @@
       <ion-col size="12">
         <div class="ion-justify-content-center gap-1x">
           <span>Vous n'avez pas du compte?</span>
-          <a href="" [routerLink]="['/sign-up']" routerLinkActive="router-link-active" >
+          <a href="" [routerLink]="['/sign-up']" routerLinkActive="router-link-active">
             <span class="text-primary">Inscription</span>
           </a>
         </div>

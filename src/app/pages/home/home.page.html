@@ -2,7 +2,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <div class="ion-padding-horizontal" style="margin-top: 70px">
+  <div class="ion-padding-horizontal mt-70">
     <ion-searchbar color="light" class="ion-no-border ion-no-padding" show-clear-button="always"></ion-searchbar>
     <br>
     <swiper #swiperComponent [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()">
@@ -35,9 +35,6 @@
       <a href="http://">Voir plus</a>
     </div>
     <br>
-    <!-- <div style="display: flex; gap: 10px;" class="ion-justify-content-center ion-align-items-center ion-wrap">
-      <app-article *ngFor="let item of [1,1,1,1,1,1,1,1]"></app-article>
-    </div> -->
     <swiper [config]="configP">
       <ng-template *ngFor="let item of [1,1,1,1,1,1,1,1]" swiperSlide>
         <app-article></app-article>
