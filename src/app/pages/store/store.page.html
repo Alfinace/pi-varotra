@@ -1,0 +1,15 @@
+<ion-content class="bg-gray">
+  <div class="ion-padding-horizontal mt-70">
+    <div class=" d-flex ion-justify-content-between ion-align-items-center">
+      <h3>Magasins</h3>
+      <ion-icon size="large" slot="end" name="filter-outline"></ion-icon>
+    </div>
+    <br>
+    <ion-searchbar color="light" class="ion-no-border  ion-no-padding" show-clear-button="always">
+    </ion-searchbar>
+    <br>
+    <div class="d-flex ion-justify-content ion-wrap  ion-padding-top" style="row-gap: 15px">
+      <app-store-card *ngFor="let item of [1,1,1,1,1,1]"></app-store-card>
+    </div>
+  </div>
+</ion-content>

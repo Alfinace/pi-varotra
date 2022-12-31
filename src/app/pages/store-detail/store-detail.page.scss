@@ -1,0 +1,32 @@
+.header {
+  margin-top: 121px !important;
+  border: 1px solid #ddd;
+  background-color: #ffe181;
+  // height: 100%;
+  border-radius: 30px 30px 0 0;
+  ion-avatar {
+    margin: auto;
+    position: absolute;
+    transform: translate(0%, -50%);
+    left: 25%;
+    right: 25%;
+    width: 100px;
+    height: 100px;
+  }
+}
+ion-content {
+  --background: #fafafa;
+}
+
+.d-flex {
+  gap: 10px;
+}
+
+app-article {
+  width: 48%;
+}
+// .grid-container {
+//   display: grid;
+//   grid-template-columns: auto auto;
+//   // padding: 10px;
+// }

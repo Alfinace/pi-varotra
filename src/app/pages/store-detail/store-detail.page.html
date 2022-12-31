@@ -1,0 +1,35 @@
+<ion-content>
+  <div class="ion-padding-horizontal header">
+    <ion-avatar slot="start">
+      <img [src]="'/assets/images/img3.jpg'" />
+    </ion-avatar>
+    <br>
+    <br>
+    <ion-text class="ion-margin-bottom" color="primary">
+      <h4 class=" text-black ion-text-center">Shop Larson Electronic</h4>
+    </ion-text>
+
+    <div class="d-flex ion-justify-content-start ion-margin-bottom ion-align-items-center">
+      <ion-icon size="small" name="call-outline"></ion-icon>
+      <span>0348804720</span>
+    </div>
+    <div class="d-flex ion-justify-content-start ion-align-items-center">
+      <ion-icon size="small" name="location-outline"></ion-icon>
+      <span>Tanambao , Fianarantsoa</span>
+    </div>
+    <div class="d-flex ion-justify-content-around ion-margin-vertical">
+      <img width="40px" height="40px" style="object-fit:cover" [src]="'/assets/icon/facebook.png'" />
+      <img width="40px" height="40px" style="object-fit:cover" [src]="'/assets/icon/instagram.png'" />
+      <img width="40px" height="40px" style="object-fit:cover" [src]="'/assets/icon/telegram.png'" />
+    </div>
+    <br>
+    <div class=" d-flex ion-justify-content-between  ion-align-items-center">
+      <h3>Produits</h3>
+      <ion-icon size="large" name="filter-outline"></ion-icon>
+    </div>
+    <br>
+    <div style="display: flex; gap: 10px;" class="ion-justify-content-center ion-align-items-center ion-wrap">
+      <app-article *ngFor="let item of [1,1,1,1,1,1,1,1]"></app-article>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,30 @@
+ion-title {
+  font-size: var(--ion-text-size-4x);
+  font-weight: 600;
+  font-family: 'DM sans medium';
+  background: -webkit-linear-gradient(
+    top left,
+    var(--ion-color-primary),
+    var(--ion-color-secondary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+ion-header ion-icon {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: red;
+    top: 0;
+    right: 0;
+    background: red;
+    z-index: 100;
+    border-radius: 50%;
+  }
+}
+ion-label {
+  font-size: 10px;
+}

@@ -1,0 +1,55 @@
+<ion-row>
+  <ion-col size="12">
+    <h1 class="ion-text-center">Information email</h1>
+  </ion-col>
+  <ion-col size="12">
+    <p class="ion-no-margin">Veuillez remplier correctement les champs demandés</p>
+  </ion-col>
+</ion-row>
+<form [formGroup]="signUpForm">
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Entrer votre adresse email</ion-label>
+          <ion-input required  formControlName="email" type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="mt normal-size d-flex ion-justify-content-start ion-align-items-center" class="ion-nowrap" >
+      <div class="flex-row">
+        <ion-checkbox slot="start" #checkbox mode="md" ></ion-checkbox>
+        <span (click)="toggleCheck()" class="ion-no-margin normal-size pointer">
+          J'ai lu et j'accepte les
+        </span>
+        <span class="text-primary ion-no-margin normal-size pointer" 
+        style="white-space: nowrap" (click)="openModalCondtion()">
+        termes et conditions d'utilisation
+      </span>
+      </div>
+    </ion-row>
+  <ion-row class="btn-row mt">
+    <ion-col size="12">
+      <button [disabled]="isSubmited || signUpForm.invalid || !checkbox.checked" (click)="next()" class="ion-activatable ripple-parent custom-parent btn-primary">
+        <ng-container *ngIf="!isSubmited;else templateLoading" >
+          Continue
+        </ng-container>
+        <ng-template #templateLoading>
+          <ion-spinner name="circular" style="color:#FFF"></ion-spinner>
+        </ng-template>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </ion-col>
+  </ion-row>
+</form>
+<br>
+<br>
+<ion-row class="normal-size w-full">
+  <ion-col size="12">
+    <div class="ion-justify-content-center gap-1x">
+      <span>Avez-vous dèja un compte?</span>
+      <a href="" [routerLink]="['/login']" routerLinkActive="router-link-active" >
+        <span class="text-primary">Se connecter</span>
+      </a>
+    </div>
+  </ion-col>
+</ion-row>

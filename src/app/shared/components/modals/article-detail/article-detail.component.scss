@@ -1,0 +1,35 @@
+ion-slides {
+  height: 100%;
+  ion-slide {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+ion-item.reviews {
+  &::part(native) {
+    align-items: flex-start;
+  }
+}
+
+.fixed-row {
+  position: fixed;
+  width: 93%;
+  bottom: 0;
+  z-index: 10;
+}
+.btn-row {
+  transition: 1s all ease-in;
+  &:active {
+    transition: 1s all ease-in;
+    transform: scale(1.5);
+  }
+}
+.box-btn-row {
+  &:hover {
+    opacity: 1;
+  }
+}

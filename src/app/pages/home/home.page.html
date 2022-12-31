@@ -1,20 +1,116 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="ion-padding-horizontal mt-70">
+    <ion-searchbar color="light" class="ion-no-border ion-no-padding" show-clear-button="always"></ion-searchbar>
+    <br>
+    <swiper #swiperComponent [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()">
+      <ng-template *ngFor="let item of articles" swiperSlide>
+        <app-pub-card></app-pub-card>
+      </ng-template>
+    </swiper>
+    <br>
+    <div class=" d-flex ion-justify-content-between ion-align-items-center">
+      <h3>Catgories</h3>
+      <a href="http://">Voir plus</a>
+    </div>
+    <br>
+    <swiper [config]="catConfig">
+      <ng-template *ngFor="let item of articles" swiperSlide>
+        <div class="b-cat">
+          <div class="box">
+            <ion-img [src]="'./assets/images/cat2.png'"></ion-img>
+          </div>
+          <span>Computer</span>
+        </div>
+      </ng-template>
+    </swiper>
+    <br>
+  </div>
+  <div class=" bg-white-around ion-padding-horizontal">
+    <div class=" d-flex ion-justify-content-between  ion-align-items-center">
+      <h3>Featured Product</h3>
+      <a href="http://">Voir plus</a>
+    </div>
+    <br>
+    <swiper [config]="configP">
+      <ng-template *ngFor="let item of articles" swiperSlide>
+        <app-article [article]="item"></app-article>
+      </ng-template>
+    </swiper>
+    <br>
+    <swiper #swiperComponent [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()">
+      <ng-template *ngFor="let item of articles" swiperSlide>
+        <app-pub-card></app-pub-card>
+      </ng-template>
+    </swiper>
+    <div class=" d-flex ion-justify-content-between  ion-align-items-center">
+      <h3>Best Seller</h3>
+      <a href="http://">Voir plus</a>
+    </div>
+    <br>
+    <swiper [config]="configP">
+      <ng-template *ngFor="let item of articles" swiperSlide>
+        <app-article [article]="item"></app-article>
+      </ng-template>
+    </swiper>
+    <br>
+    <br>
+    <swiper #swiperComponent [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()">
+      <ng-template *ngFor="let item of articles" swiperSlide>
+        <app-pub-card></app-pub-card>
+      </ng-template>
+    </swiper>
+    <br>
+    <div class=" d-flex ion-justify-content-between  ion-align-items-center">
+      <h3>New product</h3>
+      <a href="http://">Voir plus</a>
+    </div>
+    <br>
+    <swiper [config]="configP">
+      <ng-template *ngFor="let item of articles" swiperSlide>
+        <app-article [article]="item"></app-article>
+      </ng-template>
+    </swiper>
+    <br>
+    <div class=" d-flex ion-justify-content-between  ion-align-items-center">
+      <h3>Top Rated</h3>
+      <a href="http://">Voir plus</a>
+    </div>
+    <br>
+    <swiper [config]="configP">
+      <ng-template *ngFor="let item of articles" swiperSlide>
+        <app-article [article]="item"></app-article>
+      </ng-template>
+    </swiper>
+    <br>
+    <div class=" d-flex ion-justify-content-between  ion-align-items-center">
+      <h3>Special Produit</h3>
+      <a href="http://">Voir plus</a>
+    </div>
+    <br>
+    <swiper [config]="configP">
+      <ng-template *ngFor="let item of articles" swiperSlide>
+        <app-article [article]="item"></app-article>
+      </ng-template>
+    </swiper>
+    <br>
+    <br>
+  </div>
+  <div class="ion-padding-horizontal d-flex flex-col">
+    <div class=" d-flex ion-justify-content-between ion-align-items-center">
+      <h3>Lastest news</h3>
+      <a href="http://">Voir plus</a>
+    </div>
+    <app-new-card [new]="new" *ngFor="let new of news"></app-new-card>
+    <ion-row class="btn-row mt">
+      <ion-col size="12">
+        <button class="ion-activatable ripple-parent custom-parent btn-primary">
+          <ion-label>View All</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-content>

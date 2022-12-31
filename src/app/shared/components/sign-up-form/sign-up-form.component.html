@@ -1,0 +1,13 @@
+<!-- <ion-content class="ion-padding-horizontal"> -->
+  <ng-container [ngSwitch]="viewStep">
+    <ng-container *ngSwitchCase="0">
+      <app-create-email [signUpForm]='signUpForm' (stepperEvent)="onChangeStep($event)"></app-create-email>
+    </ng-container>
+    <ng-container *ngSwitchCase="1">
+      <app-confirm-email [signUpForm]='signUpForm' (stepperEvent)="onChangeStep($event)"></app-confirm-email>
+    </ng-container>
+    <ng-container *ngSwitchCase="2">
+      <app-create-profile-password [signUpForm]='signUpForm'></app-create-profile-password>
+      </ng-container>
+  </ng-container>
+<!-- </ion-content> -->

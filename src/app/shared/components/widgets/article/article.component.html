@@ -1,0 +1,31 @@
+<div class="card" *ngIf="article">
+	<div (click)="show()">
+		<ion-img *ngIf="article?.images?.length" style="margin: auto" [src]="article!.images[0] ?? ''"></ion-img>
+		<p class="ion-no-margin" style="font-family: 'DM Sans Medium';">
+			{{ article!.designation}}
+		</p>
+		<div class="d-flex ion-align-items-center ion-justify-content-start" style="gap: 5px">
+			<label style="font-family: 'DM Sans Medium';">Prix :</label>
+			<span style="font-family: Serif" class="init">
+				π
+			</span>
+			<span style="font-family: 'DM Sans Medium';" class="price">
+				0.0001
+			</span>
+		</div>
+	</div>
+	<div style="display:flex" class="ion-justify-content-between ion-align-items-center">
+		<div class="d-flex ion-align-items-center" style="gap: 5px;">
+			<ion-icon style="margin-bottom: 4px" color="warning" name="star"></ion-icon>
+			<span style="font-size: 12px">
+				{{article!.rate}}
+			</span>
+		</div>
+		<div style="font-size: 12px">
+			{{article!.reviews}} Reviews
+		</div>
+		<ion-button class="" fill="clear">
+			<ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+		</ion-button>
+	</div>
+</div>

@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ClientPage } from './layouts/client/client.page';
 
 const routes: Routes = [
   {
     path: 'client',
-    loadChildren: () => import('./layouts/client/client.module').then(m => m.ClientPageModule)
+    component: ClientPage,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./layouts/client/client.module').then(m => m.ClientPageModule)
+      }
+    ]
   },
   {
     path: 'admin',
@@ -16,12 +23,20 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'client',
     pathMatch: 'full'
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'sign-up',
+    loadChildren: () => import('./pages/sign-up/sign-up.module').then(m => m.SignUpPageModule)
+  },
+  {
+    path: 'new',
+    loadChildren: () => import('./pages/new/new.module').then(m => m.NewPageModule)
   }
 ];
 

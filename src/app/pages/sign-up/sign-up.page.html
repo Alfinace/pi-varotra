@@ -1,0 +1,12 @@
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-icon class="ion-padding-start" size="large" *ngIf="viewStep > 0" slot="start" (click)="back()"
+      name="chevron-back-outline"></ion-icon>
+    <ion-title class="ion-text-center">Inscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-horizontal">
+  <ion-img [src]="'/assets/images/pi_varotra.png'"></ion-img>
+  <app-sign-up-form (stepperEvent)="onChange($event)" [viewStep]="viewStep"></app-sign-up-form>
+</ion-content>
