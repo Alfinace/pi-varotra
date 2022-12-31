@@ -60,6 +60,22 @@ ion-img {
   }
 }
 
+.bg-white-around {
+  background: #fafafa;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.bordered {
+  border-bottom: 1px solid #beb9b985;
+}
+
+.img-round {
+  width: 130px;
+  height: 130px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
 app-article,
 app-pub-card {
   width: 100%;

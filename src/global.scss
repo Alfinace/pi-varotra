@@ -249,3 +249,14 @@ button[disabled] {
   font-size: 25px;
   color: #000;
 }
+.text-medium {
+  font-family: 'DM Sans Medium';
+}
+.flex-col {
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filter-modal {
+  --border-radius: 20px;
+}

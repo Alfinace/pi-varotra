@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border" mode="ios">
+  <ion-toolbar class="transparent-background" mode="ios">
+    <ion-buttons slot="start" (click)="modalController.dismiss()">
+      <ion-back-button  [color]="isEdit ? 'dark': 'light'" defaultHref="" mode="md"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-margin-start" size="large">
+      <h3>Réseaux sociaux</h3>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-col class="parent-container">
+    <div class="child-container min-h-screen m-t-20">
+      <ion-item lines="none">
+        <ion-img src="/assets/icon/search.png" slot="start" alt="" srcset=""></ion-img>
+        <ion-input
+          placeholder="Rechercher"
+          (ionInput)="onSearch($event)"
+          type="text"
+        >
+        </ion-input>
+      </ion-item>
+      <form>
+        <div
+          *ngFor="let s of social; let i = index"
+          (click)="selectSocial(s)"
+          class="container-country"
+        >
+          <div
+            class="country-icon"
+            [ngClass]="{ 'border-selected': checkName(s) }"
+          >
+            <ion-img [src]="s.icon" alt=""></ion-img>
+          </div>
+          <ion-item
+            class="country-name"
+            [ngClass]="{ 'border-selected': checkName(s) }"
+            lines="full"
+          >
+            <ion-input
+              type="text"
+              [placeholder]="s.name"
+              [value]="s.value"
+              (ionChange)="onChangeValue($event, i)"
+            >
+            </ion-input>
+          </ion-item>
+        </div>
+      </form>
+
+      <div [ngClass]="isEdit ? 'fixed-bottom-white': 'fixed-bottom'">
+        <ion-button  (click)="validateSocial()">Valider</ion-button>
+      </div>
+    </div>
+  </ion-col>
+</ion-content>

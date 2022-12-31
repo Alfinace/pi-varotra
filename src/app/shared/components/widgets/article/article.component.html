@@ -1,10 +1,10 @@
-<div class="card">
+<div class="card" *ngIf="article">
 	<div (click)="show()">
-		<ion-img style="margin: auto" [src]="'/assets/images/headphone.png'"></ion-img>
+		<ion-img *ngIf="article?.images?.length" style="margin: auto" [src]="article!.images[0] ?? ''"></ion-img>
 		<p class="ion-no-margin" style="font-family: 'DM Sans Medium';">
-			TMA-2 HD Wireless
+			{{ article!.designation}}
 		</p>
-		<div style="display:flex; align-items: center; gap: 5px;justify-content: flex-start;">
+		<div class="d-flex ion-align-items-center ion-justify-content-start" style="gap: 5px">
 			<label style="font-family: 'DM Sans Medium';">Prix :</label>
 			<span style="font-family: Serif" class="init">
 				π
@@ -15,12 +15,14 @@
 		</div>
 	</div>
 	<div style="display:flex" class="ion-justify-content-between ion-align-items-center">
-		<div style="display: flex; align-items: center;gap: 5px;">
+		<div class="d-flex ion-align-items-center" style="gap: 5px;">
 			<ion-icon style="margin-bottom: 4px" color="warning" name="star"></ion-icon>
-			<span style="font-size: 12px">40</span>
+			<span style="font-size: 12px">
+				{{article!.rate}}
+			</span>
 		</div>
 		<div style="font-size: 12px">
-			75 Reviews
+			{{article!.reviews}} Reviews
 		</div>
 		<ion-button class="" fill="clear">
 			<ion-icon slot="icon-only" name="cart-outline"></ion-icon>

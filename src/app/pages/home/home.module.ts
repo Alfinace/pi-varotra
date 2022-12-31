@@ -1,3 +1,4 @@
+import { NewCardModule } from './../../shared/components/widgets/new-card/new-card.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -17,6 +18,7 @@ import { ArticleModule } from 'src/app/shared/components/widgets/article/article
     HomePageRoutingModule,
     SwiperModule,
     PubCardModule,
+    NewCardModule,
     ArticleModule
   ],
   declarations: [HomePage]

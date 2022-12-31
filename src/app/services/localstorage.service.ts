@@ -18,4 +18,8 @@ export class LocalstorageService {
     return JSON.parse(localStorage.getItem(`${this.prefix}${key}`) ?? '');
   }
 
+  public removeItem(key: string) {
+    localStorage.removeItem(`${this.prefix}${key}`)
+  }
+
 }

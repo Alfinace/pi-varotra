@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { StorePageRoutingModule } from './store-routing.module';
 
 import { StorePage } from './store.page';
+import { StoreCardModule } from 'src/app/shared/components/widgets/store-card/store-card.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    StorePageRoutingModule
+    StorePageRoutingModule,
+    StoreCardModule
   ],
   declarations: [StorePage]
 })
-export class StorePageModule {}
+export class StorePageModule { }
