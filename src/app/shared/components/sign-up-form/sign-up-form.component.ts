@@ -9,7 +9,7 @@ import { checkPasswords } from 'src/app/utils/validators';
 })
 export class SignUpFormComponent implements OnInit {
   public signUpForm: FormGroup;
-  @Input() public viewStep = 2;
+  @Input() public viewStep = 0;
   @Output() public stepperEvent: EventEmitter<any> = new EventEmitter();
   constructor(private fb: FormBuilder) { }
 
