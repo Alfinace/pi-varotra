@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { StoreCardComponent } from './store-card.component';
 import { NgModule } from '@angular/core';
@@ -10,7 +11,8 @@ import { CommonModule } from '@angular/common';
   exports: [StoreCardComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    RouterModule
   ]
 })
 export class StoreCardModule { }

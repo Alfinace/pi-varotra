@@ -1,7 +1,8 @@
 import { FilterSortingComponent } from './filter-sorting.component';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonProgressBar } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -11,6 +12,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     IonicModule,
+    FormsModule
   ]
 })
 export class FilterSortingModule { }
