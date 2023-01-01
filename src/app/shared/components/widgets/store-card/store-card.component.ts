@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from 'src/app/models/store-model';
 
 @Component({
@@ -8,8 +9,11 @@ import { Store } from 'src/app/models/store-model';
 })
 export class StoreCardComponent implements OnInit {
   @Input() store: Store;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() { }
 
+  public onViewDetail() {
+    this.router.navigate(['client', 'store-detail', 6])
+  }
 }

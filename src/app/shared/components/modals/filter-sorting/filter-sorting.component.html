@@ -2,9 +2,99 @@
   <ion-toolbar>
     <ion-title>Filtre & Trie</ion-title>
     <ion-buttons slot="secondary">
-      <ion-button>
+      <ion-button (click)="close()">
         <ion-icon size="large" slot="icon-only" name="close-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-content class="ion-padding-horizontal">
+  <div class="d-flex ion-justify-content-start ion-margin-top tabs">
+    <ion-label (click)="changeTab(1)" [ngClass]="{'selected': stateFilter}">Filtre</ion-label>
+    <ion-label (click)="changeTab(2)" [ngClass]="{'selected': stateSorting}">Trie</ion-label>
+  </div>
+  <br>
+  <div class="filter" *ngIf="stateFilter">
+    <div class="d-flex" style="flex-direction: column;gap: 10px;">
+      <ion-label>Interval de prix : <strong color="warning">{{filter.range.lower}} - {{filter.range.upper}} </strong>
+      </ion-label>
+      <ion-range class="ion-no-padding" min="0" max="1000" dualKnobs="true" pin="true" snaps="true" step="1"
+        ticks="true" [value]="{lower: filter.range.lower, upper: filter.range.upper}" color="primary"
+        (ionChange)="rangeChange($event)">
+        <ion-icon size="small" slot="start" name="arrow-down-outline"></ion-icon>
+        <ion-icon slot="end" name="arrow-up-outline"></ion-icon>
+
+      </ion-range>
+    </div>
+    <ion-item>
+      <ion-label>Villes</ion-label>
+      <ion-select interface="action-sheet" multiple [(ngModel)]="filter.villes" placeholder="Selectionner les villes">
+        <ion-select-option *ngFor="let item of ville" [value]="item">{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br>
+    <div class="d-flex" style="flex-direction: column;gap: 10px;">
+      <div class="d-flex ion-justify-content-between ion-align-items-center" style="flex-direction: row;gap: 10px;">
+        <h4>Catégories</h4>
+        <ion-label (click)="selectAllCategorie()">Selectionner tous</ion-label>
+      </div>
+      <br>
+      <div class="container-category">
+        <ion-item lines="none" class="checkbox" (click)="onSelectCategorie(item.id)" *ngFor="let item of categories">
+          <ion-checkbox [checked]="shouldChecked(item.id)" slot="end" mode="md"></ion-checkbox>
+          <ion-label>
+            {{item!.name}}
+          </ion-label>
+        </ion-item>
+      </div>
+    </div>
+
+  </div>
+  <div class="sorting" *ngIf="stateSorting">
+    <div class="d-flex ion-justify-content-between">
+      <ion-list style="width:100%">
+        <ion-radio-group name="auto" (ionChange)="order($event)" [value]="filter.order">
+          <ion-list-header>
+            <ion-label>Ordre</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Aa - Zz </ion-label>
+            <ion-radio value="ASC"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Zz - Aa</ion-label>
+            <ion-radio value="DESC"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <ion-radio-group name="auto" (ionChange)="orderBy($event)" [value]="filter.orderBy">
+          <ion-list-header>
+            <ion-label>Par</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Designation</ion-label>
+            <ion-radio value="designation"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Date</ion-label>
+            <ion-radio value="updatedAt"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </div>
+  </div>
+  <ion-row class="btn-row mt">
+    <ion-col size="6">
+      <button (click)="onReset()" class="ion-activatable ripple-parent custom-parent btn-warning">
+        Initialiser
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </ion-col>
+    <ion-col size="6">
+      <button (click)="apply()" [disabled]="filter.categories.length == 0 || filter.villes.length == 0"
+        class="ion-activatable ripple-parent custom-parent btn-primary">
+        Appliquer
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -40,7 +40,7 @@ export class HomePage implements AfterViewInit {
   public catConfig: SwiperOptions = { ...this.config, slidesPerView: 4, spaceBetween: 10, loop: false };
   public news: New[] = [
     {
-      id: 1,
+      id: 74,
       title: 'Pi network still enclosed Mainnet',
       detail: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed, facere! Repudiandae, aliquid. Quae est officiis q...',
       createdAt: '10/11/2022',
@@ -48,7 +48,7 @@ export class HomePage implements AfterViewInit {
       image: '/assets/images/img1.png'
     },
     {
-      id: 1,
+      id: 14,
       title: 'Pi network still enclosed Mainnet',
       detail: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed, facere! Repudiandae, aliquid. Quae est officiis q...',
       createdAt: '10/11/2022',
@@ -56,7 +56,7 @@ export class HomePage implements AfterViewInit {
       image: '/assets/images/img1.png'
     },
     {
-      id: 1,
+      id: 21,
       title: 'Pi network still enclosed Mainnet',
       detail: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed, facere! Repudiandae, aliquid. Quae est officiis q...',
       createdAt: '10/11/2022',
@@ -64,7 +64,7 @@ export class HomePage implements AfterViewInit {
       image: '/assets/images/img1.png'
     },
     {
-      id: 1,
+      id: 13,
       title: 'Pi network still enclosed Mainnet',
       detail: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed, facere! Repudiandae, aliquid. Quae est officiis q...',
       createdAt: '10/11/2022',
@@ -76,7 +76,7 @@ export class HomePage implements AfterViewInit {
 
   public articles: Article[] = [
     {
-      id: 1,
+      id: 8,
       designation: 'Article 1',
       detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies ultricies, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Donec auctor, nisl eget ultricies ultricies, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.',
       images: [
@@ -90,7 +90,7 @@ export class HomePage implements AfterViewInit {
       updatedAt: '2021-06-01',
     },
     {
-      id: 1,
+      id: 2,
       designation: 'Article 1',
       detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies ultricies, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Donec auctor, nisl eget ultricies ultricies, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.',
       images: [
@@ -104,7 +104,7 @@ export class HomePage implements AfterViewInit {
       updatedAt: '2021-06-01',
     },
     {
-      id: 1,
+      id: 3,
       designation: 'Article 1',
       detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies ultricies, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Donec auctor, nisl eget ultricies ultricies, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.',
       images: [
@@ -118,7 +118,7 @@ export class HomePage implements AfterViewInit {
       updatedAt: '2021-06-01',
     },
     {
-      id: 1,
+      id: 4,
       designation: 'Article 1',
       detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies ultricies, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Donec auctor, nisl eget ultricies ultricies, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.',
       images: [
@@ -132,7 +132,7 @@ export class HomePage implements AfterViewInit {
       updatedAt: '2021-06-01',
     },
     {
-      id: 1,
+      id: 5,
       designation: 'Article 1',
       detail: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies ultricies, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl. Donec auctor, nisl eget ultricies ultricies, nisl nisl aliquam nisl, eget aliquam nisl nisl sit amet nisl.',
       images: [
@@ -158,10 +158,9 @@ export class HomePage implements AfterViewInit {
   }
 
   onSwiper(swiper: any) {
-    console.log(swiper);
   }
   public onSlideChange() {
-    console.log('slide change');
+
   }
 
   ngAfterViewInit() {

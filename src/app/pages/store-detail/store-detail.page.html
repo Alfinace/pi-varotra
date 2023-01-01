@@ -29,7 +29,7 @@
     </div>
     <br>
     <div style="display: flex; gap: 10px;" class="ion-justify-content-center ion-align-items-center ion-wrap">
-      <app-article *ngFor="let item of [1,1,1,1,1,1,1,1]"></app-article>
+      <app-article [article]="item" *ngFor="let item of articles"></app-article>
     </div>
   </div>
 </ion-content>

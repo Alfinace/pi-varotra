@@ -8,6 +8,7 @@ import { SearchArticlePageRoutingModule } from './search-article-routing.module'
 
 import { SearchArticlePage } from './search-article.page';
 import { FilterSortingModule } from 'src/app/shared/components/modals/filter-sorting/filter-sorting.module';
+import { ArticleModule } from 'src/app/shared/components/widgets/article/article.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { FilterSortingModule } from 'src/app/shared/components/modals/filter-sor
     FormsModule,
     IonicModule,
     SearchArticlePageRoutingModule,
-    FilterSortingModule
+    FilterSortingModule,
+    ArticleModule
   ],
   declarations: [SearchArticlePage]
 })

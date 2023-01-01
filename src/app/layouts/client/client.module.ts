@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ClientPageRoutingModule } from './client-routing.module';
 import { ClientPage } from './client.page';
+import { CartModule } from 'src/app/shared/components/modals/cart/cart.module';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { ClientPage } from './client.page';
     FormsModule,
     IonicModule,
     ClientPageRoutingModule,
+    CartModule
   ],
   declarations: [ClientPage]
 })
