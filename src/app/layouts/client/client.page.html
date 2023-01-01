@@ -2,10 +2,10 @@
 	<ion-toolbar>
 		<ion-buttons slot="secondary">
 			<ion-button>
-				<ion-icon new="0" slot="icon-only" name="notifications-outline"></ion-icon>
+				<ion-icon id="0" slot="icon-only" name="notifications-outline"></ion-icon>
 			</ion-button>
 			<ion-button>
-				<ion-icon new="10" slot="icon-only" name="cart-outline"></ion-icon>
+				<ion-icon [id]="carts.length" slot="icon-only" name="cart-outline"></ion-icon>
 			</ion-button>
 		</ion-buttons>
 		<ion-title>Pi-varotra</ion-title>
