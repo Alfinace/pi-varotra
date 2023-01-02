@@ -1,6 +1,7 @@
 import { NewCardComponent } from './new-card.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TruncatePipeModule } from 'src/app/pipes/truncate.pipe.module';
 
 
 
@@ -8,7 +9,8 @@ import { CommonModule } from '@angular/common';
   declarations: [NewCardComponent],
   exports: [NewCardComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    TruncatePipeModule
   ]
 })
 export class NewCardModule { }

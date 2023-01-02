@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Instagram",
+    "value": "",
+    "icon": "/assets/social/instagram.png"
+  },
+  {
+    "name": "Facebook",
+    "value": "",
+    "icon": "/assets/social/facebook.png"
+  },
+  {
+    "name": "Twitter",
+    "value": "",
+    "icon": "/assets/social/twitter.png"
+  },
+  {
+    "name": "telegram",
+    "value": "",
+    "icon": "/assets/social/.png"
+  }
+]
