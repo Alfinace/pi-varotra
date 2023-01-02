@@ -33,3 +33,26 @@ ion-item.reviews {
     opacity: 1;
   }
 }
+
+ion-header .cart ion-icon {
+  position: relative;
+  &::after {
+    content: attr(id);
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: red;
+    top: 0;
+    transform: scale(0.9);
+    padding: 1px;
+    right: 0;
+    color: white;
+    font-size: 9px;
+    font-weight: bold;
+    z-index: 100;
+    border-radius: 50%;
+  }
+}

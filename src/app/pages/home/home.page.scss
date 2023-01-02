@@ -80,10 +80,10 @@ app-article,
 app-pub-card {
   width: 100%;
 }
-app-article:active {
-  transition: 500ms all ease-in;
-  transform: scale(1.05);
-}
+// app-article:active {
+//   transition: 500ms all ease-in;
+//   transform: scale(1.05);
+// }
 .swiper-slide {
   text-align: center;
   font-size: 18px;

@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'search',
     loadChildren: () => import('../../pages/search-article/search-article.module').then(m => m.SearchArticlePageModule)
+  },
+  {
+    path: 'space-client',
+    loadChildren: () => import('../../pages/space-client/space-client.module').then(m => m.SpaceClientPageModule)
   }
 ];
 

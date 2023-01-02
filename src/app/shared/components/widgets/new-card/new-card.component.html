@@ -4,7 +4,7 @@
       {{new.title}}
     </h4>
     <p style="color: gray">
-      {{new.detail}}
+      {{new!.detail | truncate:59}}
     </p>
     <p>
       {{new.updatedAt}}

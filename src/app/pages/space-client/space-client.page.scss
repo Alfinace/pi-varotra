@@ -1,0 +1,36 @@
+.card {
+  flex-direction: column;
+  box-shadow: 0px 20px 20px 2px #140dda2e;
+  border-radius: 8px;
+  font-size: 10px;
+  gap: 5px;
+  width: 30%;
+  padding: 10px 15px;
+}
+
+.primary {
+  font-size: var(--ion-text-size-4x);
+  font-weight: 600;
+  font-family: 'DM sans medium';
+  background: -webkit-linear-gradient(
+    top left,
+    var(--ion-color-primary),
+    var(--ion-color-secondary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-warning {
+  color: var(--ion-color-warning);
+}
+
+.text-primary {
+  color: var(--ion-color-primary);
+}
+ion-card {
+  box-shadow: -1px 15px 10px 0px #dbdaf9;
+}
+ion-label {
+  text-align: center;
+}

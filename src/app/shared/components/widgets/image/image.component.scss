@@ -1,0 +1,41 @@
+.image-prod {
+  max-width: 450px;
+  max-height: 450px;
+  image-cropper,
+  .image-update {
+    max-width: 450px;
+    max-height: 350px;
+  }
+}
+.image-cropped {
+  width: 300px;
+  height: 250px;
+}
+.details-desc {
+  text-align: center;
+  button {
+    max-width: 150px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 5px 15px;
+    margin-left: 20px;
+    .fa-paperclip {
+      margin-right: 10px;
+    }
+  }
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.down-file {
+  width: 100%;
+}
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0px;
+}

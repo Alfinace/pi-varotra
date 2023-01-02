@@ -1,0 +1,53 @@
+<ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-icon class="ion-padding-start" size="large" slot="start" (click)="close()" name="chevron-back-outline">
+    </ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-col class="params-page">
+    <div class="params-header">
+      <ion-avatar class="avatar">
+        <img src="https://www.w3schools.com/howto/img_avatar.png" />
+      </ion-avatar>
+      <div class="user-info">
+        <h3>John Doe</h3>
+      </div>
+    </div>
+
+    <div class="params-content">
+      <ion-list class="param-list">
+        <ion-item (click)="editProfile()">
+          <ion-label>Editer le profile</ion-label>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item [routerLink]="['/home/tabs/profile/notif_settings']">
+          <ion-label> 🔔 Notifications </ion-label>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label> 🚨 Sécurité </ion-label>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label> 🗣 Langue </ion-label>
+          <span class="language">Français</span>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label> ❓ Centre d’aide </ion-label>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+    <ion-row class="btn-row mt">
+      <ion-col size="12">
+        <button class="ion-activatable ripple-parent custom-parent btn-danger">
+          <ion-label>Déconnexion</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+</ion-content>

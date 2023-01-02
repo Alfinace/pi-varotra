@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AnimationController, Platform } from '@ionic/angular';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,7 @@ import { AnimationController, Platform } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() { }
+  constructor() {
+    defineCustomElements(window);
+  }
 }

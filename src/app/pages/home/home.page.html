@@ -40,13 +40,13 @@
       </ng-template>
     </swiper>
     <br>
-    <swiper #swiperComponent [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()">
+    <!-- <swiper #swiperComponent [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()">
       <ng-template *ngFor="let item of articles" swiperSlide>
         <app-pub-card></app-pub-card>
       </ng-template>
-    </swiper>
+    </swiper> -->
     <div class=" d-flex ion-justify-content-between  ion-align-items-center">
-      <h3>Best Seller</h3>
+      <h3>Meilleur veudeur</h3>
       <a href="http://">Voir plus</a>
     </div>
     <br>
@@ -64,7 +64,7 @@
     </swiper>
     <br>
     <div class=" d-flex ion-justify-content-between  ion-align-items-center">
-      <h3>New product</h3>
+      <h3>Nouveau produit</h3>
       <a href="http://">Voir plus</a>
     </div>
     <br>
@@ -74,10 +74,10 @@
       </ng-template>
     </swiper>
     <br>
-    <div class=" d-flex ion-justify-content-between  ion-align-items-center">
+    <!-- <div class=" d-flex ion-justify-content-between  ion-align-items-center">
       <h3>Top Rated</h3>
       <a href="http://">Voir plus</a>
-    </div>
+    </div> -->
     <br>
     <swiper [config]="configP">
       <ng-template *ngFor="let item of articles" swiperSlide>
@@ -86,7 +86,7 @@
     </swiper>
     <br>
     <div class=" d-flex ion-justify-content-between  ion-align-items-center">
-      <h3>Special Produit</h3>
+      <h3>Produit special</h3>
       <a href="http://">Voir plus</a>
     </div>
     <br>
@@ -100,14 +100,13 @@
   </div>
   <div class="ion-padding-horizontal d-flex flex-col">
     <div class=" d-flex ion-justify-content-between ion-align-items-center">
-      <h3>Lastest news</h3>
-      <a href="http://">Voir plus</a>
+      <h3>Derniére nouveau</h3>
     </div>
     <app-new-card [new]="new" *ngFor="let new of news"></app-new-card>
     <ion-row class="btn-row mt">
       <ion-col size="12">
-        <button class="ion-activatable ripple-parent custom-parent btn-primary">
-          <ion-label>View All</ion-label>
+        <button [routerLink]="['/client/new']" class="ion-activatable ripple-parent custom-parent btn-primary">
+          <ion-label>Voir plus</ion-label>
           <ion-ripple-effect></ion-ripple-effect>
         </button>
       </ion-col>
