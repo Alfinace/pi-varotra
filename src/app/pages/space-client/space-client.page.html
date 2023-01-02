@@ -37,15 +37,15 @@
   <br>
   <ion-card>
     <ion-card-content>
-      <canvas #barCanvas style="position: relative; height:10vh; width:40vw"></canvas>
+      <canvas #barCanvas style="position: relative; height:15vh; width:40vw"></canvas>
     </ion-card-content>
   </ion-card>
   <br>
   <div class="d-flex ion-justify-content-center ion-wrap ion-margin-horizontal" style="gap: 20px">
-    <div class="d-flex ion-align-items-center card" style="padding: 10px">
+    <div (click)="onOpenParams()" class="d-flex ion-align-items-center card" style="padding: 10px">
       <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px;flex-direction: column;">
-        <ion-icon size="large" color="primary" name="person-outline"></ion-icon>
-        <ion-label style="font-size: 10px">Profile</ion-label>
+        <ion-icon size="large" color="primary" name="settings-outline"></ion-icon>
+        <ion-label style="font-size: 10px">Paramètres</ion-label>
       </div>
     </div>
     <div class="d-flex ion-align-items-center card" style="padding: 10px">
@@ -64,6 +64,12 @@
       <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px;flex-direction: column;">
         <ion-icon size="large" color="primary" name="bag-outline"></ion-icon>
         <ion-label style="font-size: 10px">Commande en attente</ion-label>
+      </div>
+    </div>
+    <div class="d-flex ion-align-items-center card" style="padding: 10px">
+      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px;flex-direction: column;">
+        <ion-icon size="large" color="primary" name="storefront-outline"></ion-icon>
+        <ion-label style="font-size: 10px">Créer un magasin</ion-label>
       </div>
     </div>
   </div>

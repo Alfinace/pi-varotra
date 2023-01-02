@@ -1,11 +1,11 @@
-<ion-header class="ion-no-border" mode="md">
+<ion-header [translucent]="true" class="ion-no-border" mode="md">
   <ion-toolbar>
     <ion-icon class="ion-padding-start" size="large" slot="start" (click)="close()" name="chevron-back-outline">
     </ion-icon>
     <ion-title class="ion-text-center">Detail Produit</ion-title>
     <ion-buttons slot="secondary">
-      <ion-button>
-        <ion-icon new="10" slot="icon-only" name="cart-outline"></ion-icon>
+      <ion-button class="cart">
+        <ion-icon [id]="carts.length" slot="icon-only" name="cart-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

@@ -1,3 +1,4 @@
+import { ParamsModule } from './../../shared/components/modals/params/params.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +14,9 @@ import { SpaceClientPage } from './space-client.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    SpaceClientPageRoutingModule
+    SpaceClientPageRoutingModule,
+    ParamsModule
   ],
   declarations: [SpaceClientPage]
 })
-export class SpaceClientPageModule {}
+export class SpaceClientPageModule { }

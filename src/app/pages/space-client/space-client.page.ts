@@ -1,4 +1,6 @@
+import { ParamsComponent } from './../../shared/components/modals/params/params.component';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
@@ -10,7 +12,7 @@ Chart.register(...registerables);
 export class SpaceClientPage implements OnInit, AfterViewInit {
   @ViewChild('barCanvas') private barCanvas: ElementRef;
   barChart: any;
-  constructor() { }
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {
   }
@@ -49,4 +51,14 @@ export class SpaceClientPage implements OnInit, AfterViewInit {
     });
   }
 
+
+  async onOpenParams() {
+    const modal = await this.modalController.create({
+      component: ParamsComponent,
+      componentProps: { value: 123 }
+    });
+
+    await modal.present();
+
+  }
 }

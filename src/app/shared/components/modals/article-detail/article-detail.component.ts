@@ -1,5 +1,9 @@
 import { ModalController } from '@ionic/angular';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+import { Cart } from 'src/app/models/cart.model';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-article-detail',
@@ -8,13 +12,30 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 })
 export class ArticleDetailComponent implements OnInit {
   @ViewChild('btnAddCart') btnAddCart: ElementRef;
+  public carts: Cart[] = [];
+  private unsubscribe$: Subject<any> = new Subject<any>()
   constructor(
-    private modalController: ModalController) { }
+    private router: Router,
+    private cartService: CartService,
+    private modalController: ModalController) {
+    this.cartService.cartStateObservable.pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe((carts: Cart[]) => {
+      this.carts = carts
+    })
+  }
+  ngOnDestroy(): void {
+    this.unsubscribe$.next(0);
+    this.unsubscribe$.complete();
+  }
+
+  ngOnInit() {
+    this.cartService.getAllCart()
+  }
 
   slideOpts = {
     slidesPerView: 1,
   };
-  ngOnInit() { }
 
   public close() {
     this.modalController.dismiss();
