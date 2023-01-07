@@ -8,6 +8,7 @@ import { SwiperModule } from 'swiper/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 import { PubCardModule } from 'src/app/shared/components/widgets/pub-card/pub-card.module';
 import { ArticleModule } from 'src/app/shared/components/widgets/article/article.module';
+import { StoreCardModule } from 'src/app/shared/components/widgets/store-card/store-card.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ArticleModule } from 'src/app/shared/components/widgets/article/article
     SwiperModule,
     PubCardModule,
     NewCardModule,
-    ArticleModule
+    ArticleModule,
+    StoreCardModule
   ],
   declarations: [HomePage]
 })

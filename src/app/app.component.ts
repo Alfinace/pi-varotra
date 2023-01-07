@@ -1,3 +1,4 @@
+import { SessionService } from 'src/app/services/session.service';
 import { Component } from '@angular/core';
 import { AnimationController, Platform } from '@ionic/angular';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
@@ -9,7 +10,8 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {
+  constructor(private sessionService: SessionService) {
     defineCustomElements(window);
+    this.sessionService.getSessionStatus()
   }
 }

@@ -3,3 +3,8 @@ ion-item::part(native) {
     padding-right: 0;
   }
 }
+ion-item {
+  --padding-end: 0px;
+  --inner-padding-end: 0px;
+  // here other custom CSS from documentation
+}

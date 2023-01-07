@@ -20,24 +20,36 @@
       <ion-list class="param-list">
         <ion-item (click)="editProfile()">
           <ion-label>Editer le profile</ion-label>
-          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <ion-icon color="primary" slot="start" name="person-outline"></ion-icon>
+          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
-        <ion-item [routerLink]="['/home/tabs/profile/notif_settings']">
-          <ion-label> 🔔 Notifications </ion-label>
-          <ion-icon name="chevron-forward-outline"></ion-icon>
+        <ion-item (click)="editProfile()">
+          <ion-label>Portfeuille</ion-label>
+          <ion-icon color="primary" slot="start" name="wallet-outline"></ion-icon>
+          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
-        <ion-item>
-          <ion-label> 🚨 Sécurité </ion-label>
-          <ion-icon name="chevron-forward-outline"></ion-icon>
+        <ion-item (click)="editSocialNetwork()">
+          <ion-label>Réseaux sociaux</ion-label>
+          <ion-icon color="primary" slot="start" name="git-network-outline"></ion-icon>
+          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
-        <ion-item>
-          <ion-label> 🗣 Langue </ion-label>
+        <ion-item (click)="editProfile()">
+          <ion-label>Sécurité</ion-label>
+          <ion-icon color="primary" slot="start" name="lock-closed-outline"></ion-icon>
+          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+
+        <ion-item (click)="editProfile()">
+          <ion-label>Langue</ion-label>
           <span class="language">Français</span>
-          <ion-icon name="chevron-forward-outline"></ion-icon>
+          <ion-icon color="primary" slot="start" name="language-outline"></ion-icon>
+          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
-        <ion-item>
-          <ion-label> ❓ Centre d’aide </ion-label>
-          <ion-icon name="chevron-forward-outline"></ion-icon>
+
+        <ion-item (click)="editProfile()">
+          <ion-label>Centre d'aide</ion-label>
+          <ion-icon color="primary" slot="start" name="help-outline"></ion-icon>
+          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
       </ion-list>
     </div>

@@ -16,7 +16,7 @@ export class LocalstorageService {
 
   public getItem(key: string) {
     let item = localStorage.getItem(`${this.prefix}${key}`)
-    if (item) {
+    if (item && item !== 'undefined') {
       return JSON.parse(item);
     }
     return '';

@@ -3,6 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from 'src/app/services/http.service';
 import { Router } from '@angular/router';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
+import { PaymentService } from 'src/app/services/payment.service';
+import { UserService } from 'src/app/services/user.service';
+import { SessionService } from 'src/app/services/session.service';
+import { AuthResult } from 'src/app/models/auth-result';
+
 
 @Component({
   selector: 'app-login',
@@ -18,23 +24,47 @@ export class LoginPage implements OnInit {
   constructor(
     private toastService: ToastService,
     private http: HttpService,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
+    private sessionService: SessionService,
+    private localstorageService: LocalstorageService,
+    private paymentService: PaymentService,
   ) { }
 
   ngOnInit() {
   }
 
-  public login(): void {
+  public async login() {
     if (this.loginForm.valid) {
       this.isSubmited = true;
-      this.http.post('auth/login', this.loginForm.value).subscribe((res: any) => {
-        this.isSubmited = false;
-        this.toastService.show('success', 'Connexion réussie');
-      }, (err: any) => {
-        console.log(err);
-        this.toastService.show('dark', 'Email ou mot de passe incorrect');
-        this.isSubmited = false;
-      })
+      try {
+        this.paymentService.auth().then((authResult: AuthResult) => {
+          if (authResult.user) {
+            this.userService.login({ ...this.loginForm.value, ...authResult }).subscribe((res: any) => {
+              this.localstorageService.setItem('token', res.token);
+              this.sessionService.getSessionStatus();
+              this.isSubmited = false;
+              this.toastService.show('success', 'Connexion réussie');
+              this.router.navigate(['/client']);
+            }, (err: any) => {
+              console.log(err);
+              this.toastService.show('dark', 'Email ou mot de passe incorrect');
+              this.isSubmited = false;
+            })
+          } else {
+            this.toastService.show('dark', 'Erreur de connexion');
+            this.isSubmited = false;
+          }
+        }).catch((err: any) => {
+          alert(err)
+          this.toastService.show('dark', 'Erreur de connexion');
+          this.isSubmited = false;
+        })
+
+      } catch (error) {
+        console.log('error', error);
+
+      }
     }
   }
 

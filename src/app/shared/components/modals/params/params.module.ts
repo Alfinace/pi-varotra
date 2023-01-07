@@ -1,3 +1,4 @@
+import { SocialNetworkModule } from './../social-network/social-network.module';
 import { EditProfileModule } from './../edit-profile/edit-profile.module';
 import { ParamsComponent } from './params.component';
 import { RouterModule } from '@angular/router';
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     IonicModule,
     RouterModule,
-    EditProfileModule
+    EditProfileModule,
+    SocialNetworkModule
   ]
 })
 export class ParamsModule { }

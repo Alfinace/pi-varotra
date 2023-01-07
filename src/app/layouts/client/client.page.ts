@@ -1,3 +1,4 @@
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -6,6 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { Cart } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CartComponent } from 'src/app/shared/components/modals/cart/cart.component';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-client',
@@ -14,11 +16,27 @@ import { CartComponent } from 'src/app/shared/components/modals/cart/cart.compon
 })
 export class ClientPage implements OnInit, OnDestroy {
   public carts: Cart[] = [];
+  public isLogged: boolean = false;
   private unsubscribe$: Subject<any> = new Subject<any>()
   constructor(
     private router: Router,
     private cartService: CartService,
+    private sessionService: SessionService,
     private modalController: ModalController) {
+    this.sessionService.userInfo.subscribe((user: any) => {
+      if (user) {
+        this.isLogged = true;
+      } else {
+        this.isLogged = false;
+      }
+    })
+    this.sessionService.getInfoUser().subscribe((user: any) => {
+      if (user) {
+        this.isLogged = true;
+      } else {
+        this.isLogged = false;
+      }
+    })
     this.cartService.cartStateObservable.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe((carts: Cart[]) => {
@@ -35,7 +53,7 @@ export class ClientPage implements OnInit, OnDestroy {
   }
 
   public gotoLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['login'])
   }
 
   async onCart() {

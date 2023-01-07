@@ -11,9 +11,15 @@
     "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,

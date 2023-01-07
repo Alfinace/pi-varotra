@@ -2,21 +2,21 @@
   {
     "name": "Instagram",
     "value": "",
-    "icon": "/assets/social/instagram.png"
+    "icon": "/assets/icon/instagram.png"
   },
   {
     "name": "Facebook",
     "value": "",
-    "icon": "/assets/social/facebook.png"
+    "icon": "/assets/icon/facebook.png"
+  },
+  {
+    "name": "Telegram",
+    "value": "",
+    "icon": "/assets/icon/telegram.png"
   },
   {
     "name": "Twitter",
     "value": "",
-    "icon": "/assets/social/twitter.png"
-  },
-  {
-    "name": "telegram",
-    "value": "",
-    "icon": "/assets/social/.png"
+    "icon": "/assets/icon/twitter.png"
   }
 ]
