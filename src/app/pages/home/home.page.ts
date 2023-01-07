@@ -10,7 +10,7 @@ SwiperCore.use([Autoplay, Keyboard]);
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements AfterViewInit {
-
+  public loaded = false;
   public config: SwiperOptions = {
     slidesPerView: 'auto',
     spaceBetween: 30,

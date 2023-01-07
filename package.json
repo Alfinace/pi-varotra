@@ -28,6 +28,7 @@
     "@capacitor/status-bar": "4.1.1",
     "@ionic/angular": "^6.1.9",
     "@ionic/pwa-elements": "^3.1.1",
+    "@kolkov/angular-editor": "^3.0.0-beta.0",
     "@ngrx/store": "^15.1.0",
     "chart.js": "^4.1.1",
     "ionicons": "^6.0.3",

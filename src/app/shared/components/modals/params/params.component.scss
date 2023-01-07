@@ -3,3 +3,23 @@ ion-item::part(native) {
     padding-right: 0;
   }
 }
+ion-item {
+  --padding-end: 0px;
+  --inner-padding-end: 0px;
+  // here other custom CSS from documentation
+}
+
+.params-header {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  text-transform: capitalize;
+  .icon-edit {
+    position: absolute;
+    right: -30px;
+    bottom: 0;
+  }
+  .avatar {
+    position: relative;
+  }
+}

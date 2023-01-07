@@ -1,56 +1,33 @@
-<ion-header class="ion-no-border" mode="ios">
-  <ion-toolbar class="transparent-background" mode="ios">
-    <ion-buttons slot="start" (click)="modalController.dismiss()">
-      <ion-back-button  [color]="isEdit ? 'dark': 'light'" defaultHref="" mode="md"></ion-back-button>
-    </ion-buttons>
-    <ion-title class="ion-margin-start" size="large">
-      <h3>Réseaux sociaux</h3>
-    </ion-title>
+<ion-header [translucent]="true" class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-icon class="ion-padding-start" size="large" slot="start" (click)="close()" name="chevron-back-outline">
+    </ion-icon>
+    <ion-title class="ion-text-center" style="font-weight: 900">Réseaux sociaux</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<br>
+<ion-content class="ion-padding-horizontal">
   <ion-col class="parent-container">
     <div class="child-container min-h-screen m-t-20">
-      <ion-item lines="none">
-        <ion-img src="/assets/icon/search.png" slot="start" alt="" srcset=""></ion-img>
-        <ion-input
-          placeholder="Rechercher"
-          (ionInput)="onSearch($event)"
-          type="text"
-        >
-        </ion-input>
-      </ion-item>
       <form>
-        <div
-          *ngFor="let s of social; let i = index"
-          (click)="selectSocial(s)"
-          class="container-country"
-        >
-          <div
-            class="country-icon"
-            [ngClass]="{ 'border-selected': checkName(s) }"
-          >
-            <ion-img [src]="s.icon" alt=""></ion-img>
+        <div *ngFor="let s of social; let i = index" (click)="selectSocial(s)" class="container-country">
+          <div class="country-icon" [ngClass]="{ 'border-selected': checkName(s) }">
+            <ion-img slot="start" [src]="s.icon" alt=""></ion-img>
           </div>
-          <ion-item
-            class="country-name"
-            [ngClass]="{ 'border-selected': checkName(s) }"
-            lines="full"
-          >
-            <ion-input
-              type="text"
-              [placeholder]="s.name"
-              [value]="s.value"
-              (ionChange)="onChangeValue($event, i)"
-            >
+          <ion-item class="country-name" [ngClass]="{ 'border-selected': checkName(s) }">
+            <ion-input type="text" [placeholder]="s.name" [value]="s.value" (ionChange)="onChangeValue($event, i)">
             </ion-input>
           </ion-item>
         </div>
       </form>
-
-      <div [ngClass]="isEdit ? 'fixed-bottom-white': 'fixed-bottom'">
-        <ion-button  (click)="validateSocial()">Valider</ion-button>
-      </div>
+      <ion-row class="btn-row mt">
+        <ion-col size="12">
+          <button (click)="validateSocial()" class="ion-activatable ripple-parent custom-parent btn-primary">
+            <ion-label>Enregister</ion-label>
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+        </ion-col>
+      </ion-row>
     </div>
   </ion-col>
 </ion-content>

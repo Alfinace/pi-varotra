@@ -11,31 +11,34 @@
     <ion-label>
       Information personnelle
     </ion-label>
-    <div class="ion-justify-content-around d-flex ion-align-items-center  btn-save" (click)="toggle()">
-      <ng-container *ngIf="profileForm.disabled;else save">
-        <ion-icon slot="start" style="font-size:12px ;color: #1ddd66;" name="lock-closed-outline"></ion-icon>
-        <ion-label>Editer</ion-label>
-      </ng-container>
-      <ng-template #save>
-        <ion-icon slot="start" style="font-size:12px ;color: #1ddd66;" name="checkmark-outline"></ion-icon>
-        <ion-label>Enregister</ion-label>
-      </ng-template>
-    </div>
   </div>
   <br>
-  <form [formGroup]="profileForm">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="floating">Nom</ion-label>
-      <ion-input required formControlName="lastname" type="text"></ion-input>
+      <ion-input required formControlName="lastname" readonly type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Prénoms</ion-label>
-      <ion-input required formControlName="firstname" type="text"></ion-input>
+      <ion-input required formControlName="firstname" readonly type="text"></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label>Date de naissance </ion-label>
+      <input required formControlName="birthday" type="date">
+    </ion-item>
+
     <ion-item>
       <ion-label position="floating">Contact </ion-label>
       <ion-input required formControlName="contact" type="text"></ion-input>
     </ion-item>
+
+
+    <ion-item>
+      <ion-label position="floating">Ville</ion-label>
+      <ion-input required formControlName="city" type="text"></ion-input>
+    </ion-item>
+
 
     <ion-item>
       <ion-label position="floating">Addresse exact</ion-label>
@@ -46,12 +49,6 @@
       <ion-label position="floating">Code postal</ion-label>
       <ion-input required formControlName="postalCode" type="text"></ion-input>
     </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Clé public Pi network</ion-label>
-      <ion-input required formControlName="address" type="text"></ion-input>
-    </ion-item>
-
     <ion-item>
       <ion-label>Genre</ion-label>
       <ion-select required formControlName="gender" placeholder="Selectionner le genre">
@@ -59,6 +56,14 @@
         <ion-select-option value="female">Femme</ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-row class="btn-row mt">
+      <ion-col size="12">
+        <button type="submit" class="ion-activatable ripple-parent custom-parent btn-primary">
+          <ion-label>Mettre à jour</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </ion-col>
+    </ion-row>
   </form>
   <br>
   <br>
@@ -66,36 +71,60 @@
     <ion-label>
       Pièce d'identité
     </ion-label>
-    <div class="ion-justify-content-around d-flex ion-align-items-center  btn-save">
-      <ion-icon slot="start" style="font-size:12px ;color: #1ddd66;" name="checkmark-outline"></ion-icon>
-      <ion-label>Enregister</ion-label>
-    </div>
   </div>
   <br>
   <app-images [imgs]="imgs" #imageComponent (selectImageEvent)="getImageRecto($event)"></app-images>
   <ion-item lines="none">
     <label>Recto</label>
-    <button slot="end" ion-button (click)="imageComponent.selectImageSource()">Téléverser</button>
+    <button slot="end" class="btn-icon" ion-button (click)="!isUploaded('recto') && imageComponent.selectImageSource()">
+      <ion-icon name="cloud-upload-outline" *ngIf="!isUploaded('recto');else uploadedRecto" size="large"
+        color="primary"></ion-icon>
+      <ng-template #uploadedRecto>
+        <ion-icon name="cloud-done-outline" size="large" color="secondary"></ion-icon>
+      </ng-template>
+    </button>
   </ion-item>
-  <ng-container *ngIf="recto;else noimage1">
-    <ion-img [src]="recto"></ion-img>
+  <ng-container *ngIf="!isUploaded('recto')">
+    <ng-container *ngIf="recto;else noimage1">
+      <ion-img [src]="recto"></ion-img>
+    </ng-container>
+    <ng-template #noimage1>
+      <div class="d-flex ion-justify-content-center ion-align-items-center img-empty">
+        <span style="color:gray;font-size: 13px;">Selectionner image recto CIN</span>
+      </div>
+    </ng-template>
   </ng-container>
-  <ng-template #noimage1>
-    <div class="d-flex ion-justify-content-center ion-align-items-center img-empty">
-      <span style="color:gray;font-style:italic">Selectionner image recto CIN</span>
-    </div>
-  </ng-template>
   <app-images [imgs]="imgs" #imageComponent2 (selectImageEvent)="getImageVerso($event)"></app-images>
   <ion-item lines="none">
     <label>Verso</label>
-    <button slot="end" ion-button (click)="imageComponent2.selectImageSource()">Téléverser</button>
+    <button slot="end" class="btn-icon" ion-button
+      (click)="!isUploaded('verso') && imageComponent2.selectImageSource()">
+      <ion-icon name="cloud-upload-outline" *ngIf="!isUploaded('verso');else uploadedVerso" size="large"
+        color="primary"></ion-icon>
+      <ng-template #uploadedVerso>
+        <ion-icon name="cloud-done-outline" size="large" color="secondary"></ion-icon>
+      </ng-template>
+    </button>
   </ion-item>
-  <ng-container *ngIf="verso;else noimage2">
-    <ion-img [src]="verso"></ion-img>
+  <ng-container *ngIf="!isUploaded('verso')">
+    <ng-container *ngIf="verso;else noimage2">
+      <ion-img [src]="verso"></ion-img>
+    </ng-container>
+    <ng-template #noimage2>
+      <div class="d-flex ion-justify-content-center ion-align-items-center img-empty">
+        <span style="color:gray;font-size: 13px;">Selectionner image verso CIN</span>
+      </div>
+    </ng-template>
   </ng-container>
-  <ng-template #noimage2>
-    <div class="d-flex ion-justify-content-center ion-align-items-center img-empty">
-      <span style="color:gray;font-style:italic">Selectionner image verso CIN</span>
-    </div>
-  </ng-template>
+  <ion-row class="btn-row mt" *ngIf="!isUploaded('recto') || !isUploaded('verso')">
+    <ion-col size="12">
+      <button (click)="saveCIN()" class="ion-activatable ripple-parent custom-parent btn-primary">
+        <ion-label>Téleverser le photo CIN</ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </ion-col>
+  </ion-row>
+  <br>
+  <br>
+  <br>
 </ion-content>

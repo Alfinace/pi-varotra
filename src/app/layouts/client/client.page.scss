@@ -10,7 +10,7 @@ ion-title {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-ion-header ion-icon {
+ion-header ion-icon.marked {
   position: relative;
   &::after {
     content: attr(id);

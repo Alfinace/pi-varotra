@@ -30,7 +30,7 @@ export class BasicAuthInterceptor implements HttpInterceptor {
 	): Observable<HttpEvent<any>> {
 		// add authorization header with bearer auth credentials if available
 		const token: string =
-			this._localStorageService.getItem('token')
+			this._localStorageService.getItem('token') || '';
 		if (token) {
 			request = request.clone({
 				setHeaders: getOptions(token),

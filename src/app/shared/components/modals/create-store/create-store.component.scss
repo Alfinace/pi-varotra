@@ -1,0 +1,50 @@
+ion-slides {
+  height: 100%;
+}
+h1 {
+  margin-top: 0;
+}
+p {
+  margin: 0;
+}
+.flex-col {
+  flex-direction: column;
+  gap: 1px;
+  justify-content: start;
+}
+@media screen and (max-width: 499px) {
+  ion-slides {
+    height: 100%;
+  }
+  ion-slides {
+    height: 100%;
+  }
+  ion-content img {
+    width: auto;
+    height: 300px;
+    object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  ion-slides {
+    height: 100%;
+  }
+  ion-slides {
+    height: 100%;
+  }
+  ion-content img {
+    width: auto;
+    height: 90px;
+    object-fit: cover;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  ion-content img {
+    width: auto;
+    display: none;
+    height: 134px;
+    object-fit: cover;
+  }
+}

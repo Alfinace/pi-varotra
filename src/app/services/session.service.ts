@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
@@ -14,7 +15,7 @@ const jwt = new JwtHelperService();
 
 
 export class SessionService {
-  public user: User | undefined = {} as User;
+  public user: User | undefined;
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   private userInfoSubject = new ReplaySubject<any>();
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
@@ -26,28 +27,24 @@ export class SessionService {
     private localStorageService: LocalstorageService
   ) { }
 
-  getSessionStatus(): Observable<boolean> {
-    return Observable.create(async (observer: any) => {
-      try {
-        const token: string = this.localStorageService.getItem('token');
+  async getSessionStatus() {
+    try {
+      const token: string = this.localStorageService.getItem('token');
 
-        if (!token) {
-          this.logout();
-          observer.next(false);
-        } else {
-          await this.initSession(token);
-          observer.next(true);
-        }
-      } catch (e) {
-        observer.next(false);
+      if (!token) {
+        this.logout();
+      } else {
+        await this.initSession(token);
       }
-      observer.complete();
-    });
+    } catch (e) {
+      console.log();
 
+    }
   }
 
   async initSession(token: string): Promise<any> {
     this.localStorageService.setItem('token', token);
+
     try {
       // Check if token is expired
       if (jwt.isTokenExpired(token)) {
@@ -57,12 +54,18 @@ export class SessionService {
 
       const decodedToken = jwt.decodeToken(token);
       // Retrieve user data
-      if (!this.user || !this.user.id) {
-        let user = (await this.httpService.get(`/current-me`).toPromise()).user;
-        const autorisations: string[] = [];
-        // Set current user data into observable
-        this.setAuth(user);
+      if (!this.user) {
+        this.getInfoUser().subscribe((user: any) => {
+          if (user) {
+            this.setAuth(user);
+          }
+        }, (err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            this.logout();
+          }
+        });
       }
+
     } catch (e) {
       console.error(e);
     }
@@ -80,6 +83,8 @@ export class SessionService {
 
   setAuth(user: User): void {
     // Set current user
+    console.log(user);
+
     this.userInfoSubject.next(user)
     // Set isAuthenticated to true
     this.isAuthenticatedSubject.next(true);
@@ -88,12 +93,13 @@ export class SessionService {
   purgeAuth(): void {
     // Set current user to an empty object
     this.user = undefined;
+    this.userInfoSubject.next(undefined)
     // Set auth status to false
     this.isAuthenticatedSubject.next(false);
   }
 
   public getInfoUser() {
-    return this.httpService.get(`/current-me`)
+    return this.httpService.get(`current-me`)
   }
 
   updateInfoUser(user: any): void {
