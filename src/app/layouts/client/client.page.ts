@@ -1,3 +1,4 @@
+import { ThemeService } from './../../services/theme.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,11 +17,14 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class ClientPage implements OnInit, OnDestroy {
   public carts: Cart[] = [];
+  public theme: string = this.localstorageService.getItem('theme');;
   public isLogged: boolean = false;
   private unsubscribe$: Subject<any> = new Subject<any>()
   constructor(
     private router: Router,
     private cartService: CartService,
+    private themeService: ThemeService,
+    private localstorageService: LocalstorageService,
     private sessionService: SessionService,
     private modalController: ModalController) {
     this.sessionService.userInfo.subscribe((user: any) => {
@@ -64,5 +68,20 @@ export class ClientPage implements OnInit, OnDestroy {
 
     await modal.present();
 
+  }
+
+  swithTheme() {
+    let theme = this.localstorageService.getItem('theme')
+    console.log(theme);
+
+    if (theme === 'dark') {
+      this.themeService.setDarkTheme(false)
+      this.localstorageService.setItem('theme', 'light');
+      this.theme = 'light';
+    } else {
+      this.themeService.setDarkTheme(true)
+      this.localstorageService.setItem('theme', 'dark')
+      this.theme = 'dark  ';
+    }
   }
 }

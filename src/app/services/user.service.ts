@@ -36,4 +36,8 @@ export class UserService {
   saveCIN(value: any) {
     return this.http.post('user/image', { ...value });
   }
+
+  updatePassword(value: { password: string, oldPassword: string }) {
+    return this.http.put('user/update-password', { ...value });
+  }
 }

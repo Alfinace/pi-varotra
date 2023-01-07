@@ -2,11 +2,15 @@
 	<ion-toolbar>
 		<ion-buttons slot="secondary">
 			<ion-button>
-				<ion-icon id="0" slot="icon-only" name="notifications-outline"></ion-icon>
+				<ion-icon id="0" slot="icon-only" class="marked" name="notifications-outline"></ion-icon>
 			</ion-button>
 			<ion-button>
-				<ion-icon [id]="carts.length" slot="icon-only" name="cart-outline"></ion-icon>
+				<ion-icon [id]="carts.length" slot="icon-only" class="marked" name="cart-outline"></ion-icon>
 			</ion-button>
+			<!-- <ion-button (click)="swithTheme()">
+				<ion-icon slot="icon-only" [name]="theme !=='dark' ? 'sunny-outline':'contrast-outline'">
+				</ion-icon>
+			</ion-button> -->
 		</ion-buttons>
 		<ion-title>Pi-varotra</ion-title>
 	</ion-toolbar>
@@ -32,7 +36,7 @@
 			<ion-icon size="small" name="storefront-outline"></ion-icon>
 			<ion-label>Magasins</ion-label>
 		</ion-tab-button>
-		<ion-tab-button *ngIf="isLogged;else notLogged" size="small" tab="space-client">
+		<ion-tab-button *ngIf="!isLogged;else notLogged" size="small" tab="space-client">
 			<ion-icon name="apps-outline"></ion-icon>
 			<ion-label>Espace client</ion-label>
 		</ion-tab-button>

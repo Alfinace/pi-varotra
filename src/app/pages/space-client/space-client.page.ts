@@ -2,6 +2,7 @@ import { ParamsComponent } from './../../shared/components/modals/params/params.
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Chart, registerables } from 'chart.js';
+import { CreateStoreComponent } from 'src/app/shared/components/modals/create-store/create-store.component';
 Chart.register(...registerables);
 
 @Component({
@@ -60,5 +61,14 @@ export class SpaceClientPage implements OnInit, AfterViewInit {
 
     await modal.present();
 
+  }
+
+  async createStore() {
+    const modal = await this.modalController.create({
+      component: CreateStoreComponent,
+      componentProps: { value: 123 }
+    });
+
+    await modal.present();
   }
 }

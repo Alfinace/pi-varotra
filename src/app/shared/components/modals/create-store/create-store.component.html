@@ -1,0 +1,68 @@
+<ion-header [translucent]="true" class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-icon class="ion-padding-start" size="large" slot="start" (click)="close()" name="chevron-back-outline">
+    </ion-icon>
+    <ion-title class="ion-text-center" style="font-weight: 900">Création du magasin</ion-title>
+  </ion-toolbar>
+</ion-header>
+<br>
+<ion-content class="ion-padding-horizontal">
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
+      <h1 class="ion-text-start">Bienvenue sur votre futur mangasin</h1>
+      <div class="box-img">
+        <img [src]="'./assets/images/store.png'" />
+      </div>
+      <p>
+        Votre magasin est un espace virtuel qui vous permet de vendre vos produits et services en ligne.
+        Vous pouvez créer un magasin en quelques minutes et commencer à vendre en ligne.
+
+      </p>
+      <div></div>
+    </ion-slide>
+    <ion-slide>
+      <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
+        <h1 class="ion-text-start">Information necessaire</h1>
+        <p>
+          Veuillez remplir les informations necessaire pour la creation de votre magasin.
+          <br>
+        <div class="box-img">
+          <img [src]="'./assets/images/circle-store.png'" />
+        </div>
+        <form [formGroup]="storeForm" (ngSubmit)="onSubmit()">
+          <ion-item>
+            <ion-label position="floating">Npm du magasin</ion-label>
+            <ion-input required formControlName="name" readonly type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Address exact</ion-label>
+            <ion-input required formControlName="address" readonly type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Contact </ion-label>
+            <ion-input required formControlName="contact" type="text"></ion-input>
+          </ion-item>
+
+
+          <ion-item>
+            <ion-label position="floating">Ville</ion-label>
+            <ion-input required formControlName="city" type="text"></ion-input>
+          </ion-item>
+
+          <ion-row class="btn-row mt">
+            <ion-col size="12">
+              <button type="submit" class="ion-activatable ripple-parent custom-parent btn-primary">
+                <ion-label>Creer</ion-label>
+                <ion-ripple-effect></ion-ripple-effect>
+              </button>
+            </ion-col>
+          </ion-row>
+        </form>
+        <!-- <ion-img [src]="'./assets/images/img5.png'"></ion-img> -->
+      </ion-slide>
+    </ion-slide>
+    <!-- <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide> -->
+  </ion-slides>
+</ion-content>
