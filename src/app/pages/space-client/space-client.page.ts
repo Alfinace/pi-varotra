@@ -1,3 +1,4 @@
+import { SessionService } from './../../services/session.service';
 import { ParamsComponent } from './../../shared/components/modals/params/params.component';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
@@ -13,12 +14,23 @@ Chart.register(...registerables);
 export class SpaceClientPage implements OnInit, AfterViewInit {
   @ViewChild('barCanvas') private barCanvas: ElementRef;
   barChart: any;
-  constructor(private modalController: ModalController) { }
+  currentUser: any;
+  constructor(
+    private modalController: ModalController,
+    private sessionService: SessionService) { }
 
   ngOnInit() {
   }
   ngAfterViewInit() {
     this.barChartMethod();
+  }
+
+  ionViewWillEnter() {
+    this.sessionService.getInfoUser().subscribe((user: any) => {
+      if (user) {
+        this.currentUser = user
+      }
+    })
   }
 
   barChartMethod() {
@@ -56,7 +68,7 @@ export class SpaceClientPage implements OnInit, AfterViewInit {
   async onOpenParams() {
     const modal = await this.modalController.create({
       component: ParamsComponent,
-      componentProps: { value: 123 }
+      componentProps: { currentUser: this.currentUser }
     });
 
     await modal.present();

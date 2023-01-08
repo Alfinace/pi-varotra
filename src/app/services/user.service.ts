@@ -40,4 +40,7 @@ export class UserService {
   updatePassword(value: { password: string, oldPassword: string }) {
     return this.http.put('user/update-password', { ...value });
   }
+  createStore(value: any) {
+    return this.http.post('store', { ...value });
+  }
 }

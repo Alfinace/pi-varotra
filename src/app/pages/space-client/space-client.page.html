@@ -66,11 +66,24 @@
         <ion-label style="font-size: 10px">Commande en attente</ion-label>
       </div>
     </div>
-    <div class="d-flex ion-align-items-center card" (click)="createStore()" style="padding: 10px">
-      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px;flex-direction: column;">
-        <ion-icon size="large" color="primary" name="storefront-outline"></ion-icon>
-        <ion-label style="font-size: 10px">Créer un magasin</ion-label>
+
+    <ng-container *ngIf="!currentUser?.store;else createdStoreTemplate">
+      <div class="d-flex ion-align-items-center card" (click)="createStore()" style="padding: 10px">
+        <div class="d-flex ion-justify-content-between ion-align-items-center"
+          style="gap: 10px;flex-direction: column;">
+          <ion-icon size="large" color="primary" name="storefront-outline"></ion-icon>
+          <ion-label style="font-size: 10px">Créer un magasin</ion-label>
+        </div>
       </div>
-    </div>
+    </ng-container>
+    <ng-template #createdStoreTemplate>
+      <div class="d-flex ion-align-items-center card" style="padding: 10px">
+        <div class="d-flex ion-justify-content-between ion-align-items-center"
+          style="gap: 10px;flex-direction: column;">
+          <ion-icon size="large" color="primary" name="storefront-outline"></ion-icon>
+          <ion-label style="font-size: 10px">Mon magasin</ion-label>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </ion-content>

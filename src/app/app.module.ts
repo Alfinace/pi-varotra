@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { BasicAuthInterceptor } from './providers/auth.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +16,7 @@ import { BasicAuthInterceptor } from './providers/auth.interceptor';
     {
       mode: 'md',
     }
-  ), AppRoutingModule, NgOtpInputModule, HttpClientModule],
+  ), AppRoutingModule, NgOtpInputModule, HttpClientModule, BrowserAnimationsModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
