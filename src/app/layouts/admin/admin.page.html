@@ -1,9 +1,21 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>admin</ion-title>
+    <ion-title>Admin</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer opened class="example-sidenav" mode="side">
+      <p>Auto-resizing sidenav</p>
+      <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+      <button (click)="showFiller = !showFiller" mat-raised-button>
+        Toggle extra text
+      </button>
+    </mat-drawer>
 
+    <div class="example-sidenav-content">
+
+    </div>
+
+  </mat-drawer-container>
 </ion-content>

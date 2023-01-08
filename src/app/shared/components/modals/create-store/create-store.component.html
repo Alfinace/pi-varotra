@@ -1,13 +1,13 @@
 <ion-header [translucent]="true" class="ion-no-border" mode="md">
   <ion-toolbar>
-    <ion-icon class="ion-padding-start" size="large" slot="start" (click)="close()" name="chevron-back-outline">
+    <ion-icon class="ion-padding-start" size="large" slot="start" (click)="prev()" name="chevron-back-outline">
     </ion-icon>
     <ion-title class="ion-text-center" style="font-weight: 900">Création du magasin</ion-title>
   </ion-toolbar>
 </ion-header>
 <br>
 <ion-content class="ion-padding-horizontal">
-  <ion-slides pager="true" [options]="slideOpts">
+  <ion-slides #slider pager="true" [options]="slideOpts">
     <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
       <h1 class="ion-text-start">Bienvenue sur votre futur mangasin</h1>
       <div class="box-img">
@@ -18,51 +18,127 @@
         Vous pouvez créer un magasin en quelques minutes et commencer à vendre en ligne.
 
       </p>
-      <div></div>
+      <ion-row class="btn-row mt">
+        <ion-col size="12">
+          <button style="padding: 0 20px" (click)="next()"
+            class="ion-activatable ripple-parent custom-parent btn-primary">
+            <ion-label>Suivant </ion-label>
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+    <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
+      <h1 class="ion-text-start">Information necessaire</h1>
+      <p>
+        Veuillez remplir les informations necessaire pour la creation de votre magasin.
+        <br>
+      <div class="box-img">
+        <img [src]="'./assets/images/circle-store.png'" />
+      </div>
+      <form [formGroup]="storeForm">
+        <ion-item>
+          <ion-label position="floating">Nom du magasin</ion-label>
+          <ion-input required formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Address exact</ion-label>
+          <ion-input required formControlName="address" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Contact </ion-label>
+          <ion-input required formControlName="contact" type="text"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label position="floating">Ville</ion-label>
+          <ion-input required formControlName="city" type="text"></ion-input>
+        </ion-item>
+
+        <ion-row class="btn-row mt">
+          <ion-col size="12">
+            <button (click)="next()" [disabled]="storeForm.invalid"
+              class="ion-activatable ripple-parent custom-parent btn-primary">
+              <ion-label>Suivant</ion-label>
+              <ion-ripple-effect></ion-ripple-effect>
+            </button>
+          </ion-col>
+        </ion-row>
+      </form>
     </ion-slide>
     <ion-slide>
       <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
-        <h1 class="ion-text-start">Information necessaire</h1>
+        <h1 class="ion-text-start">Lirvaison</h1>
         <p>
-          Veuillez remplir les informations necessaire pour la creation de votre magasin.
-          <br>
+          Veuillez remplir les informations necessaire si votre magasin offre la livraison.
+
         <div class="box-img">
-          <img [src]="'./assets/images/circle-store.png'" />
+          <img [src]="'./assets/images/delivery.png'" />
         </div>
-        <form [formGroup]="storeForm" (ngSubmit)="onSubmit()">
-          <ion-item>
-            <ion-label position="floating">Npm du magasin</ion-label>
-            <ion-input required formControlName="name" readonly type="text"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Address exact</ion-label>
-            <ion-input required formControlName="address" readonly type="text"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Contact </ion-label>
-            <ion-input required formControlName="contact" type="text"></ion-input>
-          </ion-item>
+        <form [formGroup]="storeForm">
+          <div formArrayName="deliveries">
+            <div *ngFor=" let d of deliverieMode().controls; let i=index" [formGroupName]="i" class="box-flex">
 
-
-          <ion-item>
-            <ion-label position="floating">Ville</ion-label>
-            <ion-input required formControlName="city" type="text"></ion-input>
-          </ion-item>
-
-          <ion-row class="btn-row mt">
-            <ion-col size="12">
-              <button type="submit" class="ion-activatable ripple-parent custom-parent btn-primary">
-                <ion-label>Creer</ion-label>
-                <ion-ripple-effect></ion-ripple-effect>
-              </button>
-            </ion-col>
-          </ion-row>
+              <ion-item>
+                <ion-label position="floating">Distance en KM</ion-label>
+                <ion-input required formControlName="distance" placeholder="10" type="text"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Frais en <span style="font-family: Serif;"> π </span></ion-label>
+                <ion-input required formControlName="costs" placeholder="0.07" type="text"></ion-input>
+              </ion-item>
+              <ion-icon size="large" (click)="removeDeliverieMode(i)" color="danger" name="remove-circle-outline">
+              </ion-icon>
+            </div>
+          </div>
+          <div class="box-flex">
+            <ion-row class="btn-row mt" *ngIf="deliverieMode().length < 4">
+              <ion-col size="12">
+                <button type="submit" (click)="addDeliverieMode()" style="padding: 0 20px"
+                  class="ion-activatable ripple-parent custom-parent btn-primary">
+                  <ion-label>Ajouter une distance</ion-label>
+                  <ion-ripple-effect></ion-ripple-effect>
+                </button>
+              </ion-col>
+            </ion-row>
+            <ion-row class="btn-row mt">
+              <ion-col size="12">
+                <button type="submit" (click)="next()" style="padding: 0 20px"
+                  class="ion-activatable ripple-parent custom-parent btn-primary">
+                  <ion-label>Suivant</ion-label>
+                  <ion-ripple-effect></ion-ripple-effect>
+                </button>
+              </ion-col>
+            </ion-row>
+          </div>
+          <p>
+            Nous n'offrons pas la livraison pour le moment, passer à l'étape suivante
+            <a href="http://" (click)="next()">
+              passer à l'étape suivante
+            </a>
+          </p>
         </form>
-        <!-- <ion-img [src]="'./assets/images/img5.png'"></ion-img> -->
       </ion-slide>
     </ion-slide>
-    <!-- <ion-slide>
-      <h1>Slide 3</h1>
-    </ion-slide> -->
+    <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
+      <h1 class="ion-text-start">Création</h1>
+      <p>
+        Votre logo du magasin et soumession votre magasin pour la validation.
+
+        <app-images #imageComponent (selectImageEvent)="getImage($event)"></app-images>
+      <div class="box-img" [ngClass]="{'add': !preview}" (click)="imageComponent.selectImageSource()">
+        <img [src]=" preview ? preview :'./assets/images/store-open.png'" />
+      </div>
+      <ion-row class="btn-row mt">
+        <ion-col size="12">
+          <button style="padding: 0 20px" (click)="save()" [disabled]="storeForm.invalid"
+            class="ion-activatable ripple-parent custom-parent btn-primary">
+            <ion-label>Soumettre </ion-label>
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
   </ion-slides>
 </ion-content>

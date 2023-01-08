@@ -1,3 +1,4 @@
+import { AdminPage } from './layouts/admin/admin.page';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ClientPage } from './layouts/client/client.page';
@@ -15,7 +16,13 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./layouts/admin/admin.module').then(m => m.AdminPageModule)
+    component: AdminPage,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./layouts/admin/admin.module').then(m => m.AdminPageModule)
+      }
+    ]
   },
   {
     path: 'get-started',

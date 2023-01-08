@@ -36,7 +36,7 @@
 			<ion-icon size="small" name="storefront-outline"></ion-icon>
 			<ion-label>Magasins</ion-label>
 		</ion-tab-button>
-		<ion-tab-button *ngIf="!isLogged;else notLogged" size="small" tab="space-client">
+		<ion-tab-button *ngIf="isLogged;else notLogged" size="small" tab="space-client">
 			<ion-icon name="apps-outline"></ion-icon>
 			<ion-label>Espace client</ion-label>
 		</ion-tab-button>

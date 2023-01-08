@@ -1,6 +1,6 @@
 import { UserService } from 'src/app/services/user.service';
 import { IonModal, ModalController } from '@ionic/angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 import { SessionService } from 'src/app/services/session.service';
 import { SocialNetworkComponent } from '../social-network/social-network.component';
@@ -17,10 +17,11 @@ export class ParamsComponent implements OnInit {
   @ViewChild('wallet') modalWaller: IonModal;
   @ViewChild('security') modalSecurity: IonModal;
 
+  @Input() currentUser: any;
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   public publicKey: string;
   public updatePasswordForm: FormGroup;
-  public currentUser: any;
+
   public isSubmited = false;
   constructor(
     private modalController: ModalController,
@@ -29,15 +30,11 @@ export class ParamsComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder
   ) {
-    this.sessionService.getInfoUser().subscribe((user: any) => {
-      if (user) {
-        this.currentUser = user
-        this.publicKey = this.currentUser.publicKey;
-      }
-    })
+
   }
 
   ngOnInit() {
+    this.publicKey = this.currentUser.publicKey;
     this.updatePasswordForm = this.fb.group({
       password: ['', Validators.required],
       oldPassword: ['', Validators.required],

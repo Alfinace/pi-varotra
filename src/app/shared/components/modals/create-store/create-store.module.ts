@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { CreateStoreComponent } from './create-store.component';
+import { ImageModule } from '../../widgets/image/image.module';
 
 
 
@@ -12,7 +13,8 @@ import { CreateStoreComponent } from './create-store.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    IonicModule
+    IonicModule,
+    ImageModule
   ]
 })
 export class CreateStoreModule { }
