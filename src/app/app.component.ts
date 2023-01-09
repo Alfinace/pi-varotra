@@ -1,9 +1,9 @@
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { SessionService } from 'src/app/services/session.service';
-import { Component } from '@angular/core';
-import { AnimationController, Platform } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { ThemeService } from './services/theme.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 
 @Component({
@@ -11,9 +11,10 @@ import { ThemeService } from './services/theme.service';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private sessionService: SessionService,
     private localstorgaService: LocalstorageService,
+    private primengConfig: PrimeNGConfig,
     private themeService: ThemeService) {
     defineCustomElements(window);
     this.sessionService.getSessionStatus()
@@ -21,5 +22,8 @@ export class AppComponent {
     if (theme) {
       this.themeService.setDarkTheme(theme === 'dark')
     }
+  }
+  ngOnInit() {
+    this.primengConfig.ripple = true;
   }
 }
