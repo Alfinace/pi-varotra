@@ -61,3 +61,6 @@ ion-toolbar {
     var(--ion-color-secondary) 200%
   );
 }
+ion-toolbar, ion-header {
+  --max-height: 40px;
+ }

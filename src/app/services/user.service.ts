@@ -43,4 +43,8 @@ export class UserService {
   createStore(value: any) {
     return this.http.post('store', { ...value });
   }
+
+  getAllUsers(page: number, size: number) {
+    return this.http.get('user?page=' + page + '&size=' + size);
+  }
 }

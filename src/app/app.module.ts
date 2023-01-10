@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { BasicAuthInterceptor } from './providers/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     NgOtpInputModule,
     HttpClientModule,
+    ChartModule,
     BrowserAnimationsModule
   ],
   providers: [

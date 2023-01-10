@@ -1,0 +1,101 @@
+<ion-content class="ion-padding">
+  <h5 class=" ion-no-marginion-margin-bottom">Liste d'utilisateur</h5>
+  <div class="card">
+    <p-table #dt1 [value]="customers">
+      <!-- <ng-template pTemplate="caption">
+        <div class="p-d-flex">
+          <span class="p-input-icon-left p-ml-auto">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" placeholder="Recherche" />
+          </span>
+        </div>
+      </ng-template> -->
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            <div class="p-d-flex p-jc-between   ">
+              Nom complet
+            </div>
+          </th>
+          <th>
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Adresse
+            </div>
+          </th>
+          <th>
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Téléphone
+            </div>
+          </th>
+          <th>
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Email
+            </div>
+          </th>
+          <!-- <th>
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Date de naissance
+            </div>
+          </th> -->
+          <th>
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Status
+            </div>
+          </th>
+          <th style="width: 8rem">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Verified
+            </div>
+          </th>
+          <th style="width: 8rem">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Actions
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-customer>
+        <tr>
+          <td>
+            {{customer.lastname}}
+            {{customer.firstname}}
+          </td>
+          <td>
+            <span class="image-text">{{customer.address}} à {{customer.city}} </span>
+          </td>
+          <td>
+            <span class="image-text">{{customer.contact}}</span>
+          </td>
+          <td>
+            {{customer.email}}
+          </td>
+          <!-- <td>
+            {{customer.birthday | date: 'MM/dd/yyyy'}}
+          </td> -->
+          <td>
+            <span [class]="'customer-badge status-' + customer.status">{{!customer.blocked}}</span>
+          </td>
+          <td class="p-text-center">
+            <i class="pi"
+              [ngClass]="{'true-icon pi-check-circle': customer.verified, 'false-icon pi-times-circle': !customer.verified}"></i>
+          </td>
+          <td>
+            <div class="d-flex ion-justify-content-around">
+
+              <i class="pi pi-eye"></i>
+              <i class="pi pi-ban"></i>
+              <i class="pi pi-trash"></i>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">Aucune donnée.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-paginator [rows]="10" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
+  </div>
+
+</ion-content>
