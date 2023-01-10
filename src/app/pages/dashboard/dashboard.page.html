@@ -1,9 +1,103 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>dashboard</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
+	<div class="d-flex ion-justify-content-around mt-70">
+		<div class="d-flex ion-align-items-center card">
+			<div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px">
+				<ion-icon size="large" color="primary" name="reader-outline"></ion-icon>
+				<div>
+					<span class="text-primary">Commandes</span>
+					<p style="font-size: 25px" color="primary" class="ion-no-margin primary">
+						50
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="d-flex ion-align-items-center card">
+			<div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px">
+				<ion-icon size="large" color="primary" name="bookmark-outline"></ion-icon>
+				<div>
+					<span class="text-primary">Favoris</span>
+					<p style="font-size: 25px" color="primary" class="ion-no-margin primary">
+						10
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="d-flex ion-align-items-center card">
+			<div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px">
+				<ion-icon size="large" color="primary" name="reader-outline"></ion-icon>
+				<div>
+					<span class="text-primary">Commandes</span>
+					<p style="font-size: 25px" color="primary" class="ion-no-margin primary">
+						500
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<div class="d-flex ion-justify-content-center ion-wrap ion-margin-horizontal" style="gap: 20px">
+		<ion-card>
+			<p-chart width="1000px" height="400px" type=" bar" [data]="data" [options]="chartOptions">
+			</p-chart>
+		</ion-card>
+	</div>
+	<div style="display: flex;gap:10px" class="ion-justify-content-between">
+		<div>
+			<h5>Meilleur magasin actif</h5>
+			<p-table [value]="customers" [scrollable]="true" scrollHeight="400px">
+				<ng-template pTemplate="header">
+					<tr>
+						<th>Name</th>
+						<th>Country</th>
+						<th>Company</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-customer>
+					<tr>
+						<td>{{customer.name}}</td>
+						<td>{{customer.country.name}}</td>
+						<td>{{customer.company}}</td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</div>
+		<div>
+			<h5>Meilleur produit vendu</h5>
+			<p-table [value]="customers" [scrollable]="true" scrollHeight="400px">
+				<ng-template pTemplate="header">
+					<tr>
+						<th>Name</th>
+						<th>Country</th>
+						<th>Company</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-customer>
+					<tr>
+						<td>{{customer.name}}</td>
+						<td>{{customer.country.name}}</td>
+						<td>{{customer.company}}</td>
+					</tr>
+				</ng-template>
+			</p-table>
+		</div>
+	</div>
 
-<ion-content>
-
+	<h5>Dernière paiement</h5>
+	<p-table [value]="customers" [scrollable]="true" scrollHeight="400px">
+		<ng-template pTemplate="header">
+			<tr>
+				<th>Name</th>
+				<th>Country</th>
+				<th>Company</th>
+			</tr>
+		</ng-template>
+		<ng-template pTemplate="body" let-customer>
+			<tr>
+				<td>{{customer.name}}</td>
+				<td>{{customer.country.name}}</td>
+				<td>{{customer.company}}</td>
+			</tr>
+		</ng-template>
+	</p-table>
 </ion-content>

@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
 import { AdminPageRoutingModule } from './admin-routing.module';
-import { MatSidenavModule } from '@angular/material/sidenav';
-
 import { AdminPage } from './admin.page';
 import { DashboardPageModule } from 'src/app/pages/dashboard/dashboard.module';
+import { TieredMenuModule } from 'primeng/tieredmenu';
+import { MenuItem } from 'primeng/api';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -17,7 +16,8 @@ import { DashboardPageModule } from 'src/app/pages/dashboard/dashboard.module';
     IonicModule,
     AdminPageRoutingModule,
     DashboardPageModule,
-    MatSidenavModule
+    TieredMenuModule,
+    RouterModule
   ],
   declarations: [AdminPage]
 })
