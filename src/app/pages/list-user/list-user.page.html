@@ -19,12 +19,12 @@
           </th>
           <th>
             <div class="p-d-flex p-jc-between p-ai-center">
-              Adresse
+              Ville
             </div>
           </th>
           <th>
             <div class="p-d-flex p-jc-between p-ai-center">
-              Téléphone
+              Contact
             </div>
           </th>
           <th>
@@ -61,7 +61,7 @@
             {{customer.firstname}}
           </td>
           <td>
-            <span class="image-text">{{customer.address}} à {{customer.city}} </span>
+            <span class="image-text">{{customer.city}} </span>
           </td>
           <td>
             <span class="image-text">{{customer.contact}}</span>
@@ -82,7 +82,7 @@
           <td>
             <div class="d-flex ion-justify-content-around">
 
-              <i class="pi pi-eye"></i>
+              <i class="pi pi-eye" (click)="show(customer)"></i>
               <i class="pi pi-ban"></i>
               <i class="pi pi-trash"></i>
             </div>
