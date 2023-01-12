@@ -33,7 +33,7 @@ export class ListUserPage implements OnInit {
       data: {
         customer: customer
       },
-      width: '70%',
+      width: '75%',
       height: '100%',
       contentStyle: { "overflow": "auto" },
       baseZIndex: 10000,

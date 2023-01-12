@@ -7,6 +7,8 @@
 </ion-header>
 
 <ion-content class="ion-padding-horizontal">
-  <ion-img [src]="'/assets/images/pi_varotra.png'"></ion-img>
-  <app-sign-up-form (stepperEvent)="onChange($event)" [viewStep]="viewStep"></app-sign-up-form>
+  <div class="max-w-400">
+    <ion-img [src]="'/assets/images/pi_varotra.png'"></ion-img>
+    <app-sign-up-form (stepperEvent)="onChange($event)" [viewStep]="viewStep"></app-sign-up-form>
+  </div>
 </ion-content>

@@ -1,3 +1,4 @@
+import { StoreCardModule } from 'src/app/shared/components/widgets/store-card/store-card.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
     AdminPageRoutingModule,
     DashboardPageModule,
     TieredMenuModule,
-    RouterModule
+    RouterModule,
+    StoreCardModule
   ],
   declarations: [AdminPage]
 })

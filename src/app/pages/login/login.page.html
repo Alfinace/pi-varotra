@@ -6,7 +6,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <div class="ion-justify-content-center center">
+  <div class="ion-justify-content-center center max-w-400">
     <form [formGroup]="loginForm">
       <ion-img [src]="'/assets/images/pi_varotra.png'"></ion-img>
       <ion-row>
@@ -30,6 +30,17 @@
           <ion-item class="ion-no-padding">
             <ion-label position="floating">Mot de passe</ion-label>
             <ion-input required type="password" formControlName="password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-no-margin">
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>Type compte</ion-label>
+            <ion-select formControlName="type" placeholder="Select Pizza">
+              <ion-select-option value="simple">Simple</ion-select-option>
+              <ion-select-option value="admin">Responsable</ion-select-option>
+            </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>

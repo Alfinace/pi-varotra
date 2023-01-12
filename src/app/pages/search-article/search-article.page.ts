@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Article } from 'src/app/models/article.model';
 import { Filter } from 'src/app/models/filter.type';
+import { ArticleService } from 'src/app/services/article.service';
 import { FilterSortingComponent } from 'src/app/shared/components/modals/filter-sorting/filter-sorting.component';
 
 @Component({
@@ -11,7 +12,9 @@ import { FilterSortingComponent } from 'src/app/shared/components/modals/filter-
 })
 export class SearchArticlePage implements OnInit {
   public applyFilter: Filter;
-  constructor(private modalController: ModalController) { }
+  constructor(
+    private modalController: ModalController,
+    private articleService: ArticleService) { }
 
   ngOnInit() {
   }
@@ -178,6 +181,9 @@ export class SearchArticlePage implements OnInit {
     const data = await modal.onDidDismiss();
     if (data.data) {
       this.applyFilter = data.data
+      this.articleService.getAndFitlerArticles(this.applyFilter).subscribe((res: any) => {
+        this.articles = res;
+      })
     }
   }
 }

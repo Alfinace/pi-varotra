@@ -1,0 +1,108 @@
+<ion-content class="ion-padding">
+
+  <div class="d-flex ion-align-items-start">
+    <div class="card" style="width: 70%">
+      <h5 class=" ion-no-marginion-margin-bottom">Liste catégorie d'article</h5>
+      <p-table #dt1 [value]="categories">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>
+              <div class="p-d-flex p-jc-between   ">
+                Nom de categorié
+              </div>
+            </th>
+            <th>
+              <div class="p-d-flex p-jc-between p-ai-center">
+                Description
+              </div>
+            </th>
+            <th>
+              <div class="p-d-flex p-jc-between p-ai-center">
+                Nombre produits
+              </div>
+            </th>
+
+            <th style="width: 8rem">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                Actions
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-categorie>
+          <tr>
+            <td>
+              {{categorie.name}}
+            </td>
+            <td>
+              <span class="image-text">{{categorie.description ? categorie.description : 'N/A'}} </span>
+            </td>
+            <td>
+              <span class="image-text">{{categorie.articles.length}}</span>
+            </td>
+            <td>
+              <div class="d-flex ion-justify-content-around" style="width:100px">
+                <ion-icon name="create-outline" (click)="edit(categorie)"></ion-icon>
+                <ion-icon name="trash-outline"></ion-icon>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="7">Aucune donnée.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <p-paginator [rows]="rows" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+    <div style="width: 28%">
+      <h4 *ngIf="!editMode;else editTemplate">Ajout categorie</h4>
+      <ng-template #editTemplate>
+        <h4>Modification categorie</h4>
+      </ng-template>
+      <form [formGroup]="categorieForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">Nom de categorie</ion-label>
+          <ion-input required formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea formControlName="description"></ion-textarea>
+        </ion-item>
+        <ion-row class=" btn-row mt" *ngIf="!editMode;else btnEditTemplate">
+          <ion-col size="12">
+            <button type="submit" [disabled]="loading || categorieForm.invalid"
+              class="ion-activatable ripple-parent custom-parent btn-primary">
+              <ion-label *ngIf="!loading;else loadingTemplate">Ajouter</ion-label>
+              <ng-template #loadingTemplate>
+                <ion-spinner name="circular" color="light"></ion-spinner>
+              </ng-template>
+              <ion-ripple-effect></ion-ripple-effect>
+            </button>
+          </ion-col>
+        </ion-row>
+        <ng-template #btnEditTemplate>
+          <ion-row class=" btn-row mt">
+            <ion-col size="6">
+              <button (click)="reset()" class="ion-activatable ripple-parent custom-parent btn-warning">
+                Annuler
+                <ion-ripple-effect></ion-ripple-effect>
+              </button>
+            </ion-col>
+            <ion-col size="6">
+              <button (click)="updateCategorie()" [disabled]="loading || categorieForm.invalid"
+                class="ion-activatable ripple-parent custom-parent btn-primary">
+                <ion-label *ngIf="!loading;else loadingTemplate">Mettre à jour </ion-label>
+                <ng-template #loadingTemplate>
+                  <ion-spinner name="circular" color="light"></ion-spinner>
+                </ng-template>
+                <ion-ripple-effect></ion-ripple-effect>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+      </form>
+    </div>
+  </div>
+</ion-content>
