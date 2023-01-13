@@ -44,10 +44,6 @@ const routes: Routes = [
   {
     path: 'new',
     loadChildren: () => import('./pages/new/new.module').then(m => m.NewPageModule)
-  },
-  {
-    path: 'space-store',
-    loadChildren: () => import('./pages/space-store/space-store.module').then( m => m.SpaceStorePageModule)
   }
 ];
 

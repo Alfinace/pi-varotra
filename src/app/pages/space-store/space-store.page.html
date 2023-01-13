@@ -1,9 +1,133 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>space-store</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding-horizontal">
+  <div class="d-flex ion-justify-content-around mt-70">
+    <div class="d-flex ion-align-items-center card">
+      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px">
+        <ion-icon size="large" color="primary" name="reader-outline"></ion-icon>
+        <div>
+          <span class="text-primary">Total produit</span>
+          <p style="font-size: 25px" color="primary" class="ion-no-margin primary">
+            50
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex ion-align-items-center card">
+      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px">
+        <ion-icon size="large" color="primary" name="bookmark-outline"></ion-icon>
+        <div>
+          <span class="text-primary">Produits vendus</span>
+          <p style="font-size: 25px" color="primary" class="ion-no-margin primary">
+            10
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex ion-align-items-center card">
+      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px">
+        <ion-icon size="large" color="primary" name="reader-outline"></ion-icon>
+        <div>
+          <span class="text-primary">Commandes </span>
+          <p style="font-size: 25px" color="primary" class="ion-no-margin primary">
+            500
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="d-flex ion-justify-content-center ion-wrap ion-margin-horizontal" style="gap: 20px">
+    <div class="d-flex ion-align-items-center card" style="padding: 10px">
+      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px;flex-direction: column;">
+        <ion-icon size="large" color="primary" name="bag-handle-outline"></ion-icon>
+        <ion-label style="font-size: 10px">Mes produits</ion-label>
+      </div>
+    </div>
+    <div class="d-flex ion-align-items-center card" style="padding: 10px">
+      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px;flex-direction: column;">
+        <ion-icon size="large" color="primary" name="bag-check-outline"></ion-icon>
+        <ion-label style="font-size: 10px">Commandes</ion-label>
+      </div>
+    </div>
+    <div class="d-flex ion-align-items-center card" style="padding: 10px">
+      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px;flex-direction: column;">
+        <ion-icon size="large" color="primary" name="bag-outline"></ion-icon>
+        <ion-label style="font-size: 10px">Transactions</ion-label>
+      </div>
+    </div>
+  </div>
 
-<ion-content>
+  <div style="width: 100%">
+    <br>
+    <br>
+    <h3 class=" ion-no-marginion-margin-bottom ion-text-center">Liste produit</h3>
+    <p-table #dt1 [value]="produits">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            <div class="p-d-flex p-jc-between   ">
+              Nom produit
+            </div>
+          </th>
+          <th>
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Prix
+            </div>
+          </th>
+          <th>
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Stock
+            </div>
+          </th>
 
+          <th style="width: 8rem">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              status
+            </div>
+          </th>
+          <th style="width: 8rem">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              Actions
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-produit>
+        <tr>
+          <td>
+            {{produit.designation}}
+          </td>
+          <td>
+            <span class="image-text">{{produit.unitPrice}} </span>
+          </td>
+          <td>
+            <span class="image-text">{{produit.stock}}</span>
+          </td>
+          <td>
+            <span class="image-text">{{produit.status}}</span>
+          </td>
+          <td>
+            <div class="d-flex ion-justify-content-around" style="width:50px">
+              <ion-icon name="create-outline"></ion-icon>
+              <ion-icon name="trash-outline"></ion-icon>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">Aucune donnée.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-paginator [rows]="rows" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <ion-fab vertical="bottom" horizontal="end" (click)="addProduit()" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
