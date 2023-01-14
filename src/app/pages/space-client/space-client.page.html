@@ -77,7 +77,8 @@
       </div>
     </ng-container>
     <ng-template #createdStoreTemplate>
-      <div class="d-flex ion-align-items-center card" style="padding: 10px">
+      <div class="d-flex ion-align-items-center card" [routerLink]="['/client/space-client/store']"
+        style="padding: 10px">
         <div class="d-flex ion-justify-content-between ion-align-items-center"
           style="gap: 10px;flex-direction: column;">
           <ion-icon size="large" color="primary" name="storefront-outline"></ion-icon>

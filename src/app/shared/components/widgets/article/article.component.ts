@@ -29,7 +29,8 @@ export class ArticleComponent implements OnInit {
 
   public show() {
     this.modalController.create({
-      component: ArticleDetailComponent
+      component: ArticleDetailComponent,
+      componentProps: { article: this.article }
     }).then((modal) => {
       modal.present();
     });

@@ -6,7 +6,11 @@ import { SpaceClientPage } from './space-client.page';
 const routes: Routes = [
   {
     path: '',
-    component: SpaceClientPage
+    component: SpaceClientPage,
+  },
+  {
+    path: 'store',
+    loadChildren: () => import('../../pages/space-store/space-store.module').then(m => m.SpaceStorePageModule)
   }
 ];
 
@@ -14,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SpaceClientPageRoutingModule {}
+export class SpaceClientPageRoutingModule { }

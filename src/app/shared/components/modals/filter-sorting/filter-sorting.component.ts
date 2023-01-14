@@ -1,6 +1,8 @@
 import { ModalController } from '@ionic/angular';
 import { Component, Input, OnInit } from '@angular/core';
 import { Filter } from 'src/app/models/filter.type';
+import { Category } from 'src/app/models/categorie-model';
+import { CategorieService } from 'src/app/services/categorie.service';
 
 @Component({
   selector: 'app-filter-sorting',
@@ -12,134 +14,31 @@ export class FilterSortingComponent implements OnInit {
   public stateSorting: boolean = false;
   public stateFilter: boolean = true;
   @Input() filter: Filter;
-  public ville = [
-    'Antananarivo',
-    'Fianarantsoa',
-    'Toliara',
-    'Toamasina',
-    'Mahajanga',
-    'Tous',
-  ]
-  public categories = [
-    {
-      id: 1,
-      name: 'Categorie 1'
-    },
-    {
-      id: 2,
-      name: 'Categorie 2'
-    },
-    {
-      id: 3,
-      name: 'Categorie 3'
-    },
-    {
-      id: 4,
-      name: 'Categorie 4'
-    },
-    {
-      id: 5,
-      name: 'Categorie 5'
-    },
-    {
-      id: 7,
-      name: 'Categorie 7'
-    },
-    {
-      id: 8,
-      name: 'Categorie 8'
-    },
-    {
-      id: 9,
-      name: 'Categorie 9'
-    },
-    {
-      id: 10,
-      name: 'Categorie 10'
-    },
-    {
-      id: 11,
-      name: 'Categorie 11'
-    }, {
-      id: 12,
-      name: 'Categorie 12'
-    },
-    {
-      id: 13,
-      name: 'Categorie 13'
-    }
-    ,
-    {
-      id: 10,
-      name: 'Categorie 10'
-    },
-    {
-      id: 11,
-      name: 'Categorie 11'
-    }, {
-      id: 12,
-      name: 'Categorie 12'
-    },
-    {
-      id: 13,
-      name: 'Categorie 13'
-    },
-    {
-      id: 10,
-      name: 'Categorie 10'
-    },
-    {
-      id: 11,
-      name: 'Categorie 11'
-    }, {
-      id: 12,
-      name: 'Categorie 12'
-    },
-    {
-      id: 13,
-      name: 'Categorie 13'
-    },
-    {
-      id: 10,
-      name: 'Categorie 10'
-    },
-    {
-      id: 11,
-      name: 'Categorie 11'
-    }, {
-      id: 12,
-      name: 'Categorie 12'
-    },
-    {
-      id: 13,
-      name: 'Categorie 13'
-    },
-    {
-      id: 10,
-      name: 'Categorie 10'
-    },
-    {
-      id: 11,
-      name: 'Categorie 11'
-    }, {
-      id: 12,
-      name: 'Categorie 12'
-    },
-    {
-      id: 13,
-      name: 'Categorie 13'
-    }
-  ]
-  public defaultFilter: Filter = {
-    categories: [...this.categories.map(c => c.id)],
-    order: 'ASC',
-    orderBy: 'updatedAt',
-    range: { lower: 0, upper: 110 },
-    villes: ['Tous']
-  }
-  constructor(private modalController: ModalController) { }
+  public ville = []
+  public categories: Category[] = []
+  // public defaultFilter: Filter = {
+  //   categories: [...this.categories.map(c => c.id as number)],
+  //   order: 'ASC',
+  //   orderBy: 'updatedAt',
+  //   range: { lower: 0, upper: 110 },
+  //   villes: [...this.ville]
+  // }
 
+  constructor(private modalController: ModalController,
+    private categorieService: CategorieService) { }
   ngOnInit() {
+    this.categorieService.getAllCity().toPromise().then((res: any) => {
+      this.ville = res.map((c: { name: any; }) => c.name)
+      if (this.filter.villes.length === 0) {
+        this.filter.villes = [...this.ville]
+      }
+    })
+    this.categorieService.getCategories().toPromise().then((res: any) => {
+      this.categories = res.rows
+      if (this.filter.categories.length === 0) {
+        this.filter.categories = [...this.categories.map(c => c.id as number)]
+      }
+    })
     if (!this.filter) {
       this.onReset()
     }
@@ -167,7 +66,7 @@ export class FilterSortingComponent implements OnInit {
     if (this.filter.categories.length === this.categories.length) {
       this.filter.categories = []
     } else {
-      this.filter.categories = [... this.categories.map(c => c.id)]
+      this.filter.categories = [... this.categories.map(c => c.id as number)]
     }
 
   }
@@ -188,7 +87,7 @@ export class FilterSortingComponent implements OnInit {
 
   public onReset() {
     this.filter = {
-      categories: [...this.categories.map(c => c.id)],
+      categories: [...this.categories.map(c => c.id as number)],
       order: 'ASC',
       orderBy: 'updatedAt',
       range: { lower: 0, upper: 110 },
@@ -197,6 +96,11 @@ export class FilterSortingComponent implements OnInit {
   }
 
   public apply() {
+    if (this.filter.villes.length === 0) {
+      this.filter.villes = [...this.ville]
+    }
+    console.log(this.filter);
+
     this.modalController.dismiss(this.filter)
   }
 

@@ -41,7 +41,7 @@ export class UserService {
     return this.http.put('user/update-password', { ...value });
   }
   createStore(value: any) {
-    return this.http.post('store', { ...value });
+    return this.http.post('stores', { ...value });
   }
 
   getAllUsers(page: number, size: number) {

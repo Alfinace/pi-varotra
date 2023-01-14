@@ -95,7 +95,9 @@ export class CreateStoreComponent implements OnInit, AfterViewInit {
 
     this.userService.createStore({ ...this.storeForm.value, deliveries: JSON.stringify(this.storeForm.value.deliveries) }).subscribe((res) => {
       this.toastService.show('dark', 'Votre magasin a été créer avec succès');
-      this.close();
+      this.modalController.dismiss(true)
+    }, err => {
+      this.toastService.show('dark', 'Il y a une erreur');
     })
   }
   close() {

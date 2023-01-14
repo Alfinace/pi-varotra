@@ -35,6 +35,7 @@
     "ng-otp-input": "^1.8.5",
     "primeicons": "^6.0.1",
     "primeng": "^15.0.1",
+    "quill": "^1.3.7",
     "rxjs": "~7.5.0",
     "swiper": "^8.4.5",
     "tslib": "^2.3.0",

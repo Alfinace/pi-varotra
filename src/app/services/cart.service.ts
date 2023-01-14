@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
+
   private cartState$: BehaviorSubject<any> = new BehaviorSubject<any>([])
   public cartStateObservable = this.cartState$.asObservable()
   constructor(private localstorageService: LocalstorageService) { }
@@ -39,14 +40,16 @@ export class CartService {
     let carts = this.localstorageService.getItem('cart') as Array<Cart>;
     this.cartState$.next(carts)
   }
+
+  getAllCartData() {
+    return this.localstorageService.getItem('cart') as Array<Cart>;
+  }
+
   public removeCart(articleId: number) {
     let carts = this.localstorageService.getItem('cart') as Array<Cart>;
-    let i = carts.findIndex(c => c.articleId == articleId);
-    if (i > -1) {
-      carts = carts.splice(i, 1)
-      this.localstorageService.setItem('cart', carts);
-      this.cartState$.next(carts)
-    }
+    carts = carts.filter(c => c.articleId != articleId);
+    this.localstorageService.setItem('cart', carts);
+    this.cartState$.next(carts)
   }
 
   public removeAllCart() {

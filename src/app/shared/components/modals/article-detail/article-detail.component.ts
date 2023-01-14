@@ -1,5 +1,6 @@
+import { Article } from 'src/app/models/article.model';
 import { ModalController } from '@ionic/angular';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { Cart } from 'src/app/models/cart.model';
@@ -12,6 +13,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class ArticleDetailComponent implements OnInit {
   @ViewChild('btnAddCart') btnAddCart: ElementRef;
+  @Input() public article: Article;
   public carts: Cart[] = [];
   private unsubscribe$: Subject<any> = new Subject<any>()
   constructor(

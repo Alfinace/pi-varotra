@@ -1,0 +1,191 @@
+<ion-content>
+  <div style="margin: auto;border-radius:50%;width: 100px;overflow: hidden;">
+    <p-image [src]="customer.avatar" [preview]="customer.avatar" alt=" Image" width="150">
+      <ng-template pTemplate="indicator">
+        <ion-icon slot="start" name="eye"></ion-icon>
+      </ng-template>
+    </p-image>
+  </div>
+  <div class="d-flex" style="gap: 10px">
+    <div style="width: 48%;">
+      <h4>Information personnelle</h4>
+      <ion-list>
+        <ion-item>
+          <ion-icon color="primary" slot="start" size="small" name="person"></ion-icon>
+          <ion-label>Nom et prénoms:</ion-label>
+          <ion-text slot="end" color="primary">
+            <h6 *ngIf="customer.lastname && customer.firstname;else name">{{customer.lastname}} {{customer.firstname}}
+            </h6>
+            <ng-template #name>
+              N/A
+            </ng-template>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-icon color="primary" slot="start" size="small" name="person"></ion-icon>
+          <ion-label>Nom utilisateur (sur Pi network):</ion-label>
+          <ion-text slot="end" color="primary">
+            <h6>{{customer.username ?? 'N/A'}}</h6>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-icon color="primary" slot="start" size="small" name="mail"></ion-icon>
+          <ion-label>Adresse email:</ion-label>
+          <ion-text slot="end" color="primary">
+            <h6>{{customer.email}}</h6>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-icon color="primary" slot="start" size="small" name="call"></ion-icon>
+          <ion-label>Contact :</ion-label>
+          <ion-text slot="end" color="primary">
+            <h6>{{customer.contact ?? 'N/A'}}</h6>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-icon color="primary" slot="start" size="small" name="calendar"></ion-icon>
+          <ion-label>Date de naissance:</ion-label>
+          <ion-text slot="end" color="primary">
+            <h6 *ngIf="customer.birthday;else noBirthday">{{customer.birthday | date: 'dd/MM/yyyy'}}</h6>
+            <ng-template #noBirthday></ng-template>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-icon color="primary" slot="start" size="small" name="location"></ion-icon>
+          <ion-label>Adresse:</ion-label>
+          <ion-text slot="end" color="primary">
+            <h6 *ngIf="customer.address && customer.city;else addressValue">{{customer.address}} à {{customer.city}}
+            </h6>
+            <ng-template #addressValue>
+              N/A
+            </ng-template>
+          </ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon color="primary" slot="start" size="small" name="hand-right"></ion-icon>
+          <ion-label>Role:</ion-label>
+          <ion-text slot="end" color="primary">
+            <h6>{{customer.role}}</h6>
+          </ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-icon color="primary" slot="start" size="small" name="pulse"></ion-icon>
+          <ion-label> Status:</ion-label>
+          <ion-text slot="end" color="primary">
+            <h6 *ngIf="!customer.blocked;else templateStatus">Actif</h6>
+            <ng-template #templateStatus>
+              <h6 style="color: green">Bloqué</h6>
+            </ng-template>
+          </ion-text>
+        </ion-item>
+        <ion-list>
+          <ion-item-group>
+            <ion-item-divider>
+              <ion-label>
+                Liens reseaux sociaux
+              </ion-label>
+            </ion-item-divider>
+            <ion-item *ngFor="let s of customer.socialNetwork">
+              <ion-avatar slot="start">
+                <img [src]="s.icon" />
+              </ion-avatar>
+              <ion-label>
+                <a [href]="s.value" target="_blank">
+                  {{s.value}}
+                </a>
+              </ion-label>
+            </ion-item>
+          </ion-item-group>
+        </ion-list>
+      </ion-list>
+
+    </div>
+    <div style="width: 48%;">
+      <h4 class="ion-text-start" style="width: 100%">Piéce d'identité</h4>
+      <div style="gap: 20px;flex-direction: row;" class="d-flex ion-align-items-start ion-justify-content-start ">
+        <ng-container *ngIf="cin.length > 0;else noImage">
+          <p-image *ngFor="let item of cin" [src]="item.filename" [preview]="item.filename" alt=" Image" width="150">
+            <ng-template pTemplate="indicator">
+              <ion-icon slot="start" name="eye"></ion-icon>
+            </ng-template>
+          </p-image>
+        </ng-container>
+        <ng-template #noImage>
+          <div class="d-flex ion-align-items-center ion-justify-content-center"
+            style="border-radius: 5px; border: 1px dotted gray; width: 150px;height: 100px;">
+            <span style="font-size: 10px;font-style: italic">
+              Aucune image de CIN
+            </span>
+          </div>
+        </ng-template>
+      </div>
+      <div>
+        <h4>Information magasin</h4>
+        <ion-list>
+          <ion-item>
+            <ion-icon color="primary" slot="start" size="small" name="person"></ion-icon>
+            <ion-label>Nom du magasin:</ion-label>
+            <ion-text slot="end" color="primary">
+              <h6 *ngIf="customer?.store?.name;else name2">{{customer?.store?.name}}
+              </h6>
+              <ng-template #name2>
+                N/A
+              </ng-template>
+            </ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-icon color="primary" slot="start" size="small" name="person"></ion-icon>
+            <ion-label>Adresse:</ion-label>
+            <ion-text slot="end" color="primary">
+              <h6 *ngIf="customer?.store?.address && customer?.store?.city;else addressValue2">
+                {{customer?.store?.address}} à
+                {{customer?.store?.city}}
+              </h6>
+              <ng-template #addressValue2>
+                N/A
+              </ng-template>
+            </ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-icon color="primary" slot="start" size="small" name="call"></ion-icon>
+            <ion-label>Contact:</ion-label>
+            <ion-text slot="end" color="primary">
+              <h6>{{customer?.store?.contact}}</h6>
+            </ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-icon color="primary" slot="start" size="small" name="pulse"></ion-icon>
+            <ion-label> Status:</ion-label>
+            <ion-text slot="end" color="primary">
+              <h6 *ngIf="!customer.blocked;else templateStatus1">Actif</h6>
+              <ng-template #templateStatus1>
+                <h6 style="color: green">Bloqué</h6>
+              </ng-template>
+            </ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-icon color="primary" slot="start" size="small" name="calendar"></ion-icon>
+            <ion-label> Date de création:</ion-label>
+            <ion-text slot="end" color="primary">
+              <h6 *ngIf="customer?.store?.createdAt;else templateStatus2">
+                {{ customer?.store?.createdAt}}
+              </h6>
+              <ng-template #templateStatus2>
+                N/A
+              </ng-template>
+            </ion-text>
+          </ion-item>
+        </ion-list>
+        <ion-row class="btn-row mt">
+          <ion-col size="12">
+            <button class="ion-activatable ripple-parent custom-parent btn-primary">
+              <ion-label>Voir le magasin</ion-label>
+              <ion-ripple-effect></ion-ripple-effect>
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+</ion-content>

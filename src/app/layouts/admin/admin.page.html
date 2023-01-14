@@ -15,7 +15,7 @@
 					<ion-icon size="small" slot="start" color="light" name="people"></ion-icon>
 					<ion-label>Client</ion-label>
 				</ion-item>
-				<ion-item ion-button>
+				<ion-item ion-button [routerLink]="['/admin/stores']" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="storefront"></ion-icon>
 					<ion-label>Magasin</ion-label>
 				</ion-item>
@@ -24,8 +24,12 @@
 					<ion-label>Gestion nouveau</ion-label>
 				</ion-item>
 				<ion-item ion-button>
-					<ion-icon size="small" slot="start" color="light" name="color-palette"></ion-icon>
+					<ion-icon size="small" slot="start" color="light" name="ticket"></ion-icon>
 					<ion-label>Gestion article</ion-label>
+				</ion-item>
+				<ion-item ion-button [routerLink]="['/admin/categories']" routerLinkActive="router-link-active">
+					<ion-icon size="small" slot="start" color="light" name="color-palette"></ion-icon>
+					<ion-label>Gestion categorie</ion-label>
 				</ion-item>
 				<ion-item ion-button>
 					<ion-icon size="small" slot="start" color="light" name="megaphone"></ion-icon>

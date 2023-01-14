@@ -1,0 +1,76 @@
+<ion-header [translucent]="true" class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-icon class="ion-padding-start" size="large" slot="start" (click)="close()" name="chevron-back-outline">
+    </ion-icon>
+    <ion-title class="ion-text-center" style="font-weight: 900">Ajout produit</ion-title>
+  </ion-toolbar>
+</ion-header>
+<br>
+<ion-content class="ion-padding-horizontal">
+  <form [formGroup]="addProduitForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nom du produit</ion-label>
+      <ion-input required formControlName="designation" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Categorie</ion-label>
+      <ion-select required formControlName="categoryId" placeholder="Selectionner une categorie">
+        <ion-select-option *ngFor="let c of categories" [value]="c.id">
+          {{c.name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Stock </ion-label>
+      <ion-input required formControlName="stock" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Prix unitaire </ion-label>
+      <ion-input required formControlName="unitPrice" type="number"></ion-input>
+    </ion-item>
+    <!-- <ion-item> -->
+    <br>
+    <ion-label position="floating">Detail</ion-label>
+    <br>
+    <br>
+    <p-editor formControlName="detail" [style]="{'height':'200px'}"></p-editor>
+    <!-- </ion-item> -->
+    <br>
+    <ion-label>Images</ion-label>
+    <app-images #imageComponent (selectImageEvent)="getImage($event)"></app-images>
+
+    <div class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around"
+      style="gap: 10px;flex-wrap: wrap;">
+      <div *ngFor="let item of images" class="image-preview">
+        <img class="image-preview" [src]="item.preview" alt="" srcset="">
+      </div>
+      <!-- <ion-img  [src]="item.preview"></ion-img> -->
+      <div class="add-image  d-flex ion-align-items-center ion-justify-content-center"
+        (click)="imageComponent.selectImageSource()">
+        <ion-icon name="add"></ion-icon>
+      </div>
+    </div>
+
+    <ion-row class="btn-row mt">
+      <ion-col size="12">
+        <button type="submit" class="ion-activatable ripple-parent custom-parent btn-primary">
+          <ion-label>Ajouter</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+  <br>
+  <br>
+  <!-- <div class="ion-justify-content-between d-flex ion-align-items-center">
+    <ion-label>
+      Pièce d'identité
+    </ion-label>
+  </div> -->
+
+  <br>
+  <br>
+</ion-content>

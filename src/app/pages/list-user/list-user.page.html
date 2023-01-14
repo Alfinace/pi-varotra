@@ -2,14 +2,7 @@
   <h5 class=" ion-no-marginion-margin-bottom">Liste d'utilisateur</h5>
   <div class="card">
     <p-table #dt1 [value]="customers">
-      <!-- <ng-template pTemplate="caption">
-        <div class="p-d-flex">
-          <span class="p-input-icon-left p-ml-auto">
-            <i class="pi pi-search"></i>
-            <input pInputText type="text" placeholder="Recherche" />
-          </span>
-        </div>
-      </ng-template> -->
+
       <ng-template pTemplate="header">
         <tr>
           <th>
@@ -19,12 +12,12 @@
           </th>
           <th>
             <div class="p-d-flex p-jc-between p-ai-center">
-              Adresse
+              Ville
             </div>
           </th>
           <th>
             <div class="p-d-flex p-jc-between p-ai-center">
-              Téléphone
+              Contact
             </div>
           </th>
           <th>
@@ -61,7 +54,7 @@
             {{customer.firstname}}
           </td>
           <td>
-            <span class="image-text">{{customer.address}} à {{customer.city}} </span>
+            <span class="image-text">{{customer.city}} </span>
           </td>
           <td>
             <span class="image-text">{{customer.contact}}</span>
@@ -82,7 +75,7 @@
           <td>
             <div class="d-flex ion-justify-content-around">
 
-              <i class="pi pi-eye"></i>
+              <i class="pi pi-eye" (click)="show(customer)"></i>
               <i class="pi pi-ban"></i>
               <i class="pi pi-trash"></i>
             </div>

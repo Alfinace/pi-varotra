@@ -82,5 +82,9 @@ export class SpaceClientPage implements OnInit, AfterViewInit {
     });
 
     await modal.present();
+    const data = await modal.onDidDismiss();
+    if (data.data) {
+      this.ionViewWillEnter()
+    }
   }
 }

@@ -9,7 +9,7 @@
     </ion-searchbar>
     <br>
     <div class="d-flex ion-justify-content ion-wrap  ion-padding-top" style="row-gap: 15px">
-      <app-store-card *ngFor="let item of [1,1,1,1,1,1]"></app-store-card>
+      <app-store-card [store]="item" *ngFor="let item of stores"></app-store-card>
     </div>
   </div>
 </ion-content>

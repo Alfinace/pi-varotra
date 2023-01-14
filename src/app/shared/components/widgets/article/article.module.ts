@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ArticleComponent } from './article.component';
 import { IonicModule } from '@ionic/angular';
 import { ArticleDetailModule } from '../../modals/article-detail/article-detail.module';
+import { TruncatePipeModule } from 'src/app/pipes/truncate.pipe.module';
 
 
 
@@ -14,7 +15,8 @@ import { ArticleDetailModule } from '../../modals/article-detail/article-detail.
     CommonModule,
     IonicModule,
     RouterModule,
-    ArticleDetailModule
+    ArticleDetailModule,
+    TruncatePipeModule
   ]
 })
 export class ArticleModule { }

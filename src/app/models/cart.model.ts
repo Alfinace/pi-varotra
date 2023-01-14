@@ -2,5 +2,6 @@
 export interface Cart {
 	articleId: number,
 	userId: number,
-	quantity: number
+	quantity: number,
+	storeId?: number
 }

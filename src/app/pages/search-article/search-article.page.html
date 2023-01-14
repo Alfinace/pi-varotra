@@ -3,7 +3,10 @@
     <ion-searchbar color="light" class="ion-no-border ion-no-padding" show-clear-button="always"></ion-searchbar>
     <ion-icon size="large" (click)="openFilter()" slot="end" name="filter-outline"></ion-icon>
   </div>
-  <div style="display: flex; gap: 10px;" class="ion-justify-content-center ion-align-items-center ion-wrap">
+  <br>
+  <div style="display: flex; gap: 10px;" class="ion-justify-content-center  ion-wrap">
     <app-article [article]="item" *ngFor="let item of articles"></app-article>
   </div>
+  <br>
+  <br>
 </ion-content>
