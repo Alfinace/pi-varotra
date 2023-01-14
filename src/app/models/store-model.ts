@@ -9,7 +9,7 @@ export interface Store {
 	city?: string,
 	contact?: string,
 	status?: string,
-	images?: string,
 	userId?: number,
+	articles: Article[],
 	createdAt?: string
 }

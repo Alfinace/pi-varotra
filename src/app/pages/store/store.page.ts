@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-store',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./store.page.scss'],
 })
 export class StorePage implements OnInit {
-
-  constructor() { }
+  public stores = [];
+  constructor(private storeService: StoreService) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.storeService.getStores(0, 10).toPromise().then(res => {
+      this.stores = res.rows
+    }).catch(err => {
+      console.log(err);
+
+    })
   }
 
 }

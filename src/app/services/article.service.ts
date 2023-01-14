@@ -8,9 +8,14 @@ export class ArticleService {
 
   constructor(private http: HttpService) { }
 
-  public getArticles() {
-    return this.http.get('articles');
+  public getArticles(page: number, size: number) {
+    return this.http.get('articles?page=' + page + '&size=' + size);
   }
+
+  public getArticlesCurrentUser(page: number, size: number) {
+    return this.http.get('articles/current-user?page=' + page + '&size=' + size);
+  }
+
 
   public getArticle(id: number) {
     return this.http.get(`articles/${id}`);

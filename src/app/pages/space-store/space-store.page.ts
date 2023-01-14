@@ -1,6 +1,7 @@
-import { AddArticleComponent } from './../../shared/components/add-article/add-article.component';
+import { AddArticleComponent } from '../../shared/components/modals/add-article/add-article.component';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
   selector: 'app-space-store',
@@ -8,92 +9,20 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./space-store.page.scss'],
 })
 export class SpaceStorePage implements OnInit {
-  rows = 5;
+  rows = 8;
 
-  produits = [
-    {
-      id: 1,
-      designation: 'produit',
-      unitPrice: 0.1111,
-      stock: 100,
-      status: true,
-    },
-    {
-      id: 2,
-      designation: 'produit',
-      unitPrice: 0.1111,
-      stock: 100,
-      status: true,
-    },
-    {
-      id: 3,
-      designation: 'produit',
-      unitPrice: 0.1111,
-      stock: 100,
-      status: true,
-    },
-    {
-      id: 4,
-      designation: 'produit',
-      unitPrice: 0.1111,
-      stock: 100,
-      status: true,
-    },
-    // {
-    //   id: 5,
-    //   designation: 'produit',
-    //   unitPrice: 0.1111,
-    //   stock: 100,
-    //   status: true,
-    // },
-    // {
-    //   id: 7,
-    //   designation: 'produit',
-    //   unitPrice: 0.1111,
-    //   stock: 100,
-    //   status: true,
-    // },
-    // {
-    //   id: 7,
-    //   designation: 'produit',
-    //   unitPrice: 0.1111,
-    //   stock: 100,
-    //   status: true,
-    // },
-    {
-      id: 7,
-      designation: 'produit',
-      unitPrice: 0.1111,
-      stock: 100,
-      status: true,
-    },
-    {
-      id: 7,
-      designation: 'produit 74 malgaga',
-      unitPrice: 0.1111,
-      stock: 100,
-      status: true,
-    },
-    {
-      id: 7,
-      designation: 'produit',
-      unitPrice: 0.1111,
-      stock: 100,
-      status: true,
-    },
-    {
-      id: 7,
-      designation: 'produit',
-      unitPrice: 0.1111,
-      stock: 100,
-      status: true,
-    }
-  ]
-  totalRecords = this.produits.length;
+  produits: any = [];
+  totalRecords: number;
 
-  constructor(private modalController: ModalController) { }
+  constructor(
+    private modalController: ModalController,
+    private articleService: ArticleService) { }
 
   ngOnInit() {
+    this.articleService.getArticlesCurrentUser(0, 8).toPromise().then(res => {
+      this.produits = res.rows;
+      this.totalRecords = res.count;
+    })
   }
 
   public paginate(e: any) {

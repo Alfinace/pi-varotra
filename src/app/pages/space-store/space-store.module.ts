@@ -13,7 +13,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
-import { AddArticleModule } from 'src/app/shared/components/add-article/add-article.module';
+import { AddArticleModule } from 'src/app/shared/components/modals/add-article/add-article.module';
 
 @NgModule({
   imports: [

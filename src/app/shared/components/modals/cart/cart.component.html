@@ -1,3 +1,85 @@
-<p>
-  cart works!
-</p>
+<ion-header [translucent]="true" class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-icon class="ion-padding-start" size="large" slot="start" (click)="close()" name="chevron-back-outline">
+    </ion-icon>
+    <ion-title class="ion-text-center" style="font-weight: 900">Mes paniers({{paniers.length}}) </ion-title>
+  </ion-toolbar>
+</ion-header>
+<br>
+<ion-content class="ion-padding-horizontal">
+  <ng-container *ngIf="paniers;else templateCardEmpty">
+    <ion-item-group *ngFor="let p of paniers;let i = index">
+      <ion-item-divider>
+        <ion-label> Panier numero {{i}} </ion-label>
+      </ion-item-divider>
+      <ion-list *ngFor="let item of p;let j = index">
+        <ion-item-sliding>
+          <ion-item class="item-cart">
+            <div class=" d-flex ion-justify-content-between ion-margin-vertical" style="width: 100%">
+              <div class="d-flex ion-justify-content-start" style="gap: 10px">
+                <div class="image-preview">
+                  <img [src]="item.images[0].image" />
+                </div>
+                <div class="cart-image">
+                  <h5> {{item.designation}} </h5>
+                  <p style="display: flex;gap: 5px;align-items: flex-end;">
+                    <span style="font-family: Serif;font-size: 30px;" class="init">π</span>
+                    <span style="font-family: 'DM Sans Medium';font-size: 25px" class="price">
+                      {{item.unitPrice *item.quantity}}
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div style="display: flex;flex-direction: column; align-items: center;justify-content: space-around;">
+                <ion-icon size="large" class="pointer" (click)="updateQuantity(item,item.quantity+1,i,j)"
+                  color="primary" name="add-circle-outline">
+                </ion-icon>
+                <span style="font-size:28px">
+                  {{item.quantity}}
+                </span>
+                <ion-icon size="large" class="pointer" (click)="updateQuantity(item,item.quantity-1,i,j)" color="danger"
+                  name="remove-circle-outline"></ion-icon>
+              </div>
+            </div>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger" expandable>
+              <ion-icon slot="icon-only" (click)="removeCart(item.articleId, i, j)" name="trash"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+      <div *ngIf="p.length > 0">
+        <div class="ion-justify-content-between align-items-center d-flex">
+          <h3>
+            TOTAL :
+          </h3>
+          <h3>
+            π{{totalCmd(p)}}
+          </h3>
+        </div>
+        <ion-row class="btn-row mt">
+          <ion-col size="12">
+            <button class="ion-activatable ripple-parent custom-parent btn-primary">
+              <ng-container *ngIf="true;else templateLoading">
+                Commander
+              </ng-container>
+              <ng-template #templateLoading>
+                <ion-spinner name="circular" style="color:#FFF"></ion-spinner>
+              </ng-template>
+              <ion-ripple-effect></ion-ripple-effect>
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-item-group>
+  </ng-container>
+  <ng-template #templateCardEmpty>
+    <div class="cart-empty">
+      <img [src]="'./assets/images/cart-empty.png'" style="width: 200px;height:200px">
+      <ion-label color="primary">
+        Votre panier est vide.
+      </ion-label>
+    </div>
+  </ng-template>
+</ion-content>

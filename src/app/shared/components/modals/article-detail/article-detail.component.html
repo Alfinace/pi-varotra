@@ -15,20 +15,14 @@
   <br>
   <div style="height: 400px; border-radius: 20px; background-color: gainsboro;overflow: hidden;position: relative;">
     <ion-slides pager="true" [options]="slideOpts">
-      <ion-slide>
-        <img src="/assets/images/img1.png" alt="" srcset="">
-      </ion-slide>
-      <ion-slide>
-        <img src="/assets/images/img2.png" alt="" srcset="">
-      </ion-slide>
-      <ion-slide>
-        <img src="/assets/images/img2.jpg" alt="" srcset="">
+      <ion-slide *ngFor="let item of article.images">
+        <img [src]="item.image" alt="" srcset="">
       </ion-slide>
     </ion-slides>
   </div>
   <br>
   <h5 style="color: #000;font-size: xx-large;font-family: 'DM Sans Medium';">
-    TMA-2HD Wireless
+    {{article.designation}}
   </h5>
   <div style="display:flex; align-items: center; gap: 5px;justify-content: flex-start;">
     <label style="font-family: 'DM Sans Medium';">Prix :</label>
@@ -36,7 +30,7 @@
       π
     </span>
     <span style="font-family: 'DM Sans Medium';" class="price">
-      0.0001
+      {{article.unitPrice}}
     </span>
   </div>
   <div style="display:flex;border-bottom: 1px solid #c5c3c3;"
@@ -44,15 +38,12 @@
     <div style=" display: flex; align-items: center;gap: 20px;">
       <div style="display: flex; align-items: center;gap: 5px;">
         <ion-icon style="margin-bottom: 4px;font-size:large;" color="warning" name="star"></ion-icon>
-        <span style="font-size: 17px">40</span>
+        <span style="font-size: 17px">0</span>
       </div>
       <div style="font-size: 17px">
-        75 Reviews
+        0 Reviews
       </div>
     </div>
-    <!-- <ion-button class="" fill="clear">
-      <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
-    </ion-button> -->
   </div>
   <br>
   <ion-item lines="full">
@@ -70,11 +61,7 @@
     Description
   </h5>
   <ion-text style="color: #000" color="primary">
-    <span style="font-size:14px">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium nostrum assumenda suscipit quas itaque autem!
-      Exercitationem obcaecati quo nam placeat libero nesciunt illo vitae. Aut dignissimos omnis impedit quis ea?
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae enim vel accusantium harum blanditiis cumque
-      illum ex quo? Dolor fugiat cumque ipsum labore ipsa aperiam facere maiores ut aspernatur temporibus.
+    <span style="font-size:14px" [innerHTML]="article.detail">
     </span>
     <br>
   </ion-text>

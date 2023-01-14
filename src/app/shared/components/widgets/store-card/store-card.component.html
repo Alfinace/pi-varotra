@@ -1,23 +1,25 @@
 <div class="card">
   <div>
-    <ion-img style="margin: auto" [src]="'/assets/images/img2.png'"></ion-img>
+    <ion-img style="margin: auto" [src]="store.logo"></ion-img>
     <p class="ion-no-margin" style="font-family: 'DM Sans Medium';">
-      Computer store
+      {{store.name}}
     </p>
     <div class="d-flex ion-align-items-center ion-justify-content-start" style="gap: 5px">
       <ion-icon slot="start" name="location-outline"></ion-icon>
-      <label style="font-family: 'DM Sans Medium';"> Fianarantsoa</label>
+      <label style="font-family: 'DM Sans Medium';">
+        {{store.city}}
+      </label>
     </div>
   </div>
   <div style="display:flex" class="ion-justify-content-between ion-align-items-center ion-margin-vertical">
     <div class="d-flex ion-align-items-center" style="gap: 5px;">
       <ion-icon style="margin-bottom: 4px" color="warning" name="star"></ion-icon>
       <span style="font-size: 12px">
-        40
+        0
       </span>
     </div>
     <div style="font-size: 12px">
-      100 Produit
+      {{store?.articles?.length}} articles
     </div>
   </div>
   <ion-row class="btn-row mt">
