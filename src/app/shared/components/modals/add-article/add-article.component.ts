@@ -1,12 +1,13 @@
 import { ToastService } from 'src/app/services/toast.service';
 import { CategorieService } from 'src/app/services/categorie.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Category } from 'src/app/models/categorie-model';
 import { UploadService } from 'src/app/services/upload.service';
 import { ArticleService } from 'src/app/services/article.service';
 import { resolve } from 'dns';
+import { Article } from 'src/app/models/article.model';
 
 @Component({
   selector: 'app-add-article',
@@ -14,6 +15,7 @@ import { resolve } from 'dns';
   styleUrls: ['./add-article.component.scss'],
 })
 export class AddArticleComponent implements OnInit {
+  @Input() article: Article;
   public addProduitForm: FormGroup;
   public categories: Category[];
   public images: any[] = [];
@@ -24,6 +26,7 @@ export class AddArticleComponent implements OnInit {
     private articleService: ArticleService,
     private uploadService: UploadService,
     private toastService: ToastService,
+    private actionSheetController: ActionSheetController,
     private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -37,7 +40,21 @@ export class AddArticleComponent implements OnInit {
     })
     this.categorieService.getCategories().toPromise().then((categories: any) => {
       this.categories = categories.rows as Category[];
-      console.log(this.categories);
+      if (this.article) {
+        this.addProduitForm.patchValue({
+          designation: this.article.designation,
+          categoryId: this.article.categoryId,
+          stock: this.article.stock,
+          unitPrice: this.article.unitPrice,
+          detail: this.article.detail,
+        })
+      }
+      for (let i = 0; i < this.article.images.length; i++) {
+        this.images.push({
+          preview: this.article.images[i].image,
+        })
+
+      }
 
     })
   }
@@ -78,4 +95,34 @@ export class AddArticleComponent implements OnInit {
     this.images.push(event)
   }
 
+  public active1() {}
+
+  async active(item: any) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [{
+        text: 'Supprimer',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          console.log('Delete clicked');
+        }
+      }, {
+        text: 'Share',
+        icon: 'share',
+        handler: () => {
+          console.log('Share clicked');
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+
+    await actionSheet.present();
+  }
 }

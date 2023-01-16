@@ -2,6 +2,7 @@ import { AddArticleComponent } from '../../shared/components/modals/add-article/
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ArticleService } from 'src/app/services/article.service';
+import { Article } from 'src/app/models/article.model';
 
 @Component({
   selector: 'app-space-store',
@@ -33,6 +34,19 @@ export class SpaceStorePage implements OnInit {
     const modal = await this.modalController.create({
       component: AddArticleComponent,
       componentProps: { value: 123 }
+    });
+
+    await modal.present();
+
+    const data = await modal.onDidDismiss();
+    console.log(data)
+  }
+
+
+  public async updateProduit(article: Article) {
+    const modal = await this.modalController.create({
+      component: AddArticleComponent,
+      componentProps: { article }
     });
 
     await modal.present();

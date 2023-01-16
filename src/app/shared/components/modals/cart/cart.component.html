@@ -7,10 +7,10 @@
 </ion-header>
 <br>
 <ion-content class="ion-padding-horizontal">
-  <ng-container *ngIf="paniers;else templateCardEmpty">
+  <ng-container *ngIf="paniers.length > 0;else templateCardEmpty">
     <ion-item-group *ngFor="let p of paniers;let i = index">
       <ion-item-divider>
-        <ion-label> Panier numero {{i}} </ion-label>
+        <ion-label> Panier N° {{i+1}} </ion-label>
       </ion-item-divider>
       <ion-list *ngFor="let item of p;let j = index">
         <ion-item-sliding>

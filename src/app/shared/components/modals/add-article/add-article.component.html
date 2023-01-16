@@ -44,7 +44,8 @@
     <div class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around"
       style="gap: 10px;flex-wrap: wrap;">
       <div *ngFor="let item of images" class="image-preview">
-        <img class="image-preview" [src]="item.preview" alt="" srcset="">
+        <img class="image-preview" ion-long-press [interval]="1000" (longPressed)="active(item)" [src]="item.preview"
+          alt="" srcset="">
       </div>
       <!-- <ion-img  [src]="item.preview"></ion-img> -->
       <div class="add-image  d-flex ion-align-items-center ion-justify-content-center"
