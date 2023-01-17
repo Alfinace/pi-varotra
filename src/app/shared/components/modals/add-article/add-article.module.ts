@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from 'primeng/editor';
 import { ImageModule } from '../../widgets/image/image.module';
+import { LongPressModule } from 'ionic-long-press';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ImageModule } from '../../widgets/image/image.module';
   imports: [
     CommonModule,
     EditorModule,
+    LongPressModule,
     IonicModule,
     ReactiveFormsModule,
     ImageModule

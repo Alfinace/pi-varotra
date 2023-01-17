@@ -12,7 +12,7 @@ export interface Article {
 	updatedAt?: string;
 	rate?: number;
 	reviews?: number;
-	category?: any;
+	categoryId?: any;
 	images: any[];
 	owner?: User;
 }

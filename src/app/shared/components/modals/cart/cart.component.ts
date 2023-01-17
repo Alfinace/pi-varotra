@@ -80,10 +80,9 @@ export class CartComponent implements OnInit {
 
 
   public removeCart(articleId: number, fIndex: number, SIndex: number) {
-    console.log(articleId);
-
     this.cartService.removeCart(articleId)
-    this.paniers[fIndex].splice(SIndex, 1)
+    this.paniers[fIndex].splice(SIndex, 1);
+    this.paniers = this.paniers.filter(p => p.length > 0)
   }
 
 
