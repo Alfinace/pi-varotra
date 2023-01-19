@@ -16,6 +16,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ImageUserModule } from './image-user/image-user.module';
 import { StoreModule } from './store/store.module';
 import { CityModule } from './city/city.module';
+import { NouveauModule } from './nouveau/nouveau.module';
 require('dotenv').config();
 
 @Module({
@@ -42,7 +43,8 @@ require('dotenv').config();
     AuthModule,
     StoreModule,
     PaymentModule,
-    CityModule
+    CityModule,
+    NouveauModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -11,7 +11,10 @@ export class StoreCardComponent implements OnInit {
   @Input() store: Store;
   constructor(private router: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.store);
+
+  }
 
   public onViewDetail() {
     this.router.navigate(['client', 'store-detail', 6])

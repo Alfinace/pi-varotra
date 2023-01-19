@@ -104,16 +104,16 @@ export class UserController {
         }
       })
     }
-    this.userService
+    return this.userService
       .update(+user.userId, updateUserDto)
-      .then((res) => {
-        this.userService.findOne(+user.userId).then((res) => {
-          return response.json({ ...res, avatar: process.env.BASE_URL_IMAGE + res.avatar });
-        })
-      })
-      .catch((error) => {
-        return response.status(400).json({ ...error });
-      });
+    // .then((data) => {
+    //   this.userService.findOne(+user.userId).then((res) => {
+    //     return response.json({ ...res, avatar: process.env.BASE_URL_IMAGE + res.avatar });
+    //   })
+    // })
+    // .catch((error) => {
+    //   return response.status(400).json({ ...error });
+    // });
   }
 
   @Delete(':id')

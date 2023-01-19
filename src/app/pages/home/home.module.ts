@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { PubCardModule } from 'src/app/shared/components/widgets/pub-card/pub-card.module';
 import { ArticleModule } from 'src/app/shared/components/widgets/article/article.module';
 import { StoreCardModule } from 'src/app/shared/components/widgets/store-card/store-card.module';
+import { NewDetailModule } from 'src/app/shared/components/modals/new-detail/new-detail.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { StoreCardModule } from 'src/app/shared/components/widgets/store-card/st
     SwiperModule,
     PubCardModule,
     NewCardModule,
+    NewDetailModule,
     ArticleModule,
     StoreCardModule
   ],

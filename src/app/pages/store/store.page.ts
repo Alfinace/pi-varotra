@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from 'src/app/models/store-model';
 import { StoreService } from 'src/app/services/store.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { StoreService } from 'src/app/services/store.service';
   styleUrls: ['./store.page.scss'],
 })
 export class StorePage implements OnInit {
-  public stores = [];
+  public stores: Store[] = [];
   constructor(private storeService: StoreService) { }
 
   ngOnInit() {

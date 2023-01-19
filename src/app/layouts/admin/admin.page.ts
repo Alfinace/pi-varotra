@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPage implements OnInit {
   showFiller = false;
+  showMenu: boolean;
   constructor() { }
 
   ngOnInit() {
+  }
+
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
   }
 
 }

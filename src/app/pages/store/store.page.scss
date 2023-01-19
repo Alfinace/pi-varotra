@@ -1,14 +1,21 @@
-.bg-gray {
-  background-color: #fafafa;
-}
-app-store-card {
-  width: 48%;
-}
+@media screen and (min-width: 0px) {
+  .width-card {
+    width: 48%;
+  }
+  .bg-gray {
+    background-color: #fafafa;
+  }
 
-ion-searchbar {
-  --border-radius: 18px;
-  --box-shadow: none;
+  ion-searchbar {
+    --border-radius: 18px;
+    --box-shadow: none;
+  }
+  h3 {
+    margin-bottom: 5px;
+  }
 }
-h3 {
-  margin-bottom: 5px;
+@media screen and (min-width: 768px) {
+  .width-card {
+    width: 30%;
+  }
 }

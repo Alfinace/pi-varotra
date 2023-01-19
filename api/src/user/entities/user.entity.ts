@@ -1,3 +1,4 @@
+import { Nouveau } from './../../nouveau/entities/nouveau.entity';
 import { Article } from 'src/article/entities/article.entity';
 import {
   Table,
@@ -19,6 +20,9 @@ export class User extends Model {
     allowNull: true,
   })
   username: string;
+
+  @HasMany(() => Nouveau)
+  nouveaux: Nouveau[];
 
   @Column
   avatar: string;

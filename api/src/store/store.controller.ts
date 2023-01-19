@@ -34,7 +34,8 @@ export class StoreController {
     }
 
     stores.rows = stores.rows.map((store) => {
-      store.logo = store.logo ? process.env.BASE_URL_IMAGE + store.logo : '';
+      console.log(store);
+      store.logo = (store.logo && store.logo !== 'none') ? process.env.BASE_URL_IMAGE + store.logo : null;
       store.user.avatar = process.env.BASE_URL_IMAGE + store.user.avatar;
       store.user.socialNetwork = JSON.parse(store.user.socialNetwork);
       return store;

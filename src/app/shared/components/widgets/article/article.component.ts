@@ -37,7 +37,7 @@ export class ArticleComponent implements OnInit {
   }
 
   public addPanier(articleId: any) {
-    this.cartService.addCart({ articleId, quantity: 1, userId: 2 })
+    this.cartService.addCart({ articleId, quantity: 1 })
   }
 
   checkedArticleAddedToCart() {

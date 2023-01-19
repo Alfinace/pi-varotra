@@ -3,6 +3,7 @@ import { ArticleDetailComponent } from './article-detail.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SwiperModule } from 'swiper/angular';
+import { ArticleModule } from 'src/app/shared/components/widgets/article/article.module';
 
 
 
@@ -12,7 +13,8 @@ import { SwiperModule } from 'swiper/angular';
   imports: [
     CommonModule,
     IonicModule,
-    SwiperModule
+    SwiperModule,
+    // ArticleModule
   ]
 })
 export class ArticleDetailModule { }

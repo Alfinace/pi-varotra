@@ -1,3 +1,4 @@
+import { Nouveau } from './../nouveau/entities/nouveau.entity';
 import { Order } from './../order/entities/order.entity';
 import { ImageArticle } from 'src/image-article/entities/image-article.entity';
 import { Category } from 'src/category/entities/category.entity';
@@ -31,10 +32,11 @@ export const databaseProviders = [
         ImageUser,
         Payment,
         Store,
-        City
+        City,
+        Nouveau
       ]);
       await sequelize.sync({
-        // alter: true,
+        alter: true,
       });
       return sequelize;
     },
