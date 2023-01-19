@@ -5,6 +5,7 @@ export interface New {
 	title: string;
 	detail: string;
 	image?: string;
+	subtitle: string;
 	createdAt?: string;
 	updatedAt?: string;
 	author?: User;

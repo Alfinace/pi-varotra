@@ -1,6 +1,10 @@
 <div class="card">
   <div>
-    <ion-img style="margin: auto" [src]="store.logo"></ion-img>
+    <img style="
+        margin: auto;
+    height: 130px;
+    display: block;
+    " [src]="store!.logo" onerror="this.onerror=null; this.src='./assets/images/shopping.png'">
     <p class="ion-no-margin" style="font-family: 'DM Sans Medium';">
       {{store.name}}
     </p>

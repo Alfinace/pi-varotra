@@ -1,16 +1,16 @@
-<div class="bordered" class="d-flex ion-justify-content-between ion-align-items-center">
+<div class="b-bottom d-flex ion-justify-content-between ion-align-items-center" (click)="openNew()">
   <div style="width:70%">
     <h4 style="" class=" text-medium ion-no-margin ion-margin-bottom">
-      {{new.title}}
+      {{_new.title}}
     </h4>
     <p style="color: gray">
-      {{new!.detail | truncate:59}}
+      {{_new.subtitle | truncate:59}}
     </p>
     <p>
-      {{new.updatedAt}}
+      {{_new.updatedAt | date:'dd/mm/yyyy H:s'}}
     </p>
   </div>
   <div class="img-round">
-    <img [src]="new.image" alt="" srcset="">
+    <img [src]="_new.image" onerror="this.onerror=null; this.src='./assets/images/shopping.png'" alt="" srcset="">
   </div>
 </div>

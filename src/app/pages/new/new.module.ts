@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { NewPageRoutingModule } from './new-routing.module';
 
 import { NewPage } from './new.page';
+import { NewDetailModule } from 'src/app/shared/components/modals/new-detail/new-detail.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { NewPage } from './new.page';
     FormsModule,
     IonicModule,
     NewPageRoutingModule,
-    NewCardModule
+    NewCardModule,
+    NewDetailModule
   ],
   declarations: [NewPage]
 })

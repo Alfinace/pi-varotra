@@ -40,7 +40,7 @@ export class Article extends Model {
 
   @Column({ field: 'unit_price', type: DataType.DECIMAL, allowNull: false })
   unitPrice: number;
-  @Column
+  @Column({ type: DataType.TEXT })
   detail: string;
 
   @Column({ type: DataType.BOOLEAN, defaultValue: false })

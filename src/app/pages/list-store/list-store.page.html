@@ -1,6 +1,6 @@
 <ion-content class="ion-padding">
   <h5 class=" ion-no-marginion-margin-bottom">Liste magasin enregister</h5>
   <div class="d-flex ion-justify-content-start" style="flex-wrap: wrap;gap: 10px;">
-    <app-store-card *ngFor="let store of stores"></app-store-card>
+    <app-store-card *ngFor="let store of stores" [store]="store"></app-store-card>
   </div>
 </ion-content>

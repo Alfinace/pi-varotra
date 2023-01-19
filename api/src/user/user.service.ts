@@ -84,9 +84,11 @@ export class UserService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
+    console.log(updateUserDto);
+
     return this.userRepository.update(
       { ...updateUserDto },
-      { where: {}, returning: true },
+      { where: { id }, returning: true },
     );
   }
 

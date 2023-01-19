@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { Cart } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
+import { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-article-detail',
@@ -14,8 +15,17 @@ import { CartService } from 'src/app/services/cart.service';
 export class ArticleDetailComponent implements OnInit {
   @ViewChild('btnAddCart') btnAddCart: ElementRef;
   @Input() public article: Article;
+  public articles: Article[] = [];;
   public carts: Cart[] = [];
   private unsubscribe$: Subject<any> = new Subject<any>()
+  public configP: SwiperOptions = {
+    slidesPerView: 2,
+    spaceBetween: 10,
+    navigation: false,
+    pagination: { clickable: true },
+    speed: 1000,
+    scrollbar: { draggable: true },
+  };
   constructor(
     private router: Router,
     private cartService: CartService,
@@ -31,6 +41,7 @@ export class ArticleDetailComponent implements OnInit {
     this.unsubscribe$.complete();
   }
 
+
   ngOnInit() {
     this.cartService.getAllCart()
   }
@@ -44,23 +55,34 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   public logScrollStart() {
-    // this.btnAddCart.nativeElement.setAttribute('class', 'fixed-row btn-row mt');
-    // this.btnAddCart.nativeElement.style.opacity = '1';
+
   }
   public logScrolling(event: any) {
-    if (event.detail.scrollTop > 100) {
-      this.btnAddCart.nativeElement.setAttribute('class', 'fixed-row btn-row mt');
-    } else {
-      this.btnAddCart.nativeElement.setAttribute('class', 'btn-row mt');
+    if (this.btnAddCart) {
+      if (event.detail.scrollTop > 100) {
+        this.btnAddCart.nativeElement.setAttribute('class', 'fixed-row btn-row mt');
+      } else {
+        this.btnAddCart.nativeElement.setAttribute('class', 'btn-row mt');
+      }
+      this.btnAddCart.nativeElement.style.opacity = (event.detail.scrollTop / 500).toString();
     }
-    this.btnAddCart.nativeElement.style.opacity = (event.detail.scrollTop / 500).toString();
-
-    // }
-    // this.btnAddCart.nativeElement.setAttribute('class', 'fixed-row btn-row mt');
   }
 
   public logScrollEnd() {
-    // this.btnAddCart.nativeElement.setAttribute('class', 'btn-row mt');
-    // this.btnAddCart.nativeElement.style.opacity = '1';
+
+  }
+
+  checkedArticleAddedToCart() {
+    if (this.carts.length > 0) {
+      let i = this.carts.findIndex(c => c.articleId == this.article.id);
+      return i > -1
+    }
+    return false
+  }
+
+  onAddCart(articleId: number) {
+    this.cartService.addCart({
+      articleId: articleId, quantity: 1,
+    })
   }
 }

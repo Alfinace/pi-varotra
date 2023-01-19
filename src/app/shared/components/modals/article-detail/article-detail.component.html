@@ -51,8 +51,12 @@
       <img [src]="'/assets/images/img3.jpg'" />
     </ion-avatar>
     <ion-text class="ion-margin-bottom" color="primary">
-      <h4 class="text-black">Shop Larson Electronic</h4>
-      <ion-label class="text-black" style="font-size:15px">Official store</ion-label>
+      <h4 class="text-black">
+        {{article.store!.name}}
+      </h4>
+      <ion-label class="text-black" style="font-size:15px">
+        {{article.store!.address}} à {{article.store!.city}}
+      </ion-label>
     </ion-text>
     <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
   </ion-item>
@@ -100,10 +104,21 @@
     </ion-text>
   </ion-item>
   <br>
-  <div #btnAddCart class="box-btn-row">
+  <div class=" d-flex ion-justify-content-between  ion-align-items-center">
+    <h3>Produits récommandés</h3>
+    <a href="http://">Voir plus</a>
+  </div>
+  <br>
+  <swiper [config]="configP">
+    <ng-template *ngFor="let item of articles" swiperSlide>
+      <!-- <app-article [article]="item"></app-article> -->
+    </ng-template>
+  </swiper>
+  <br>
+  <div #btnAddCart class="box-btn-row" *ngIf="!checkedArticleAddedToCart();">
     <ion-row class="btn-row mt">
       <ion-col size="12">
-        <button class="ion-activatable ripple-parent custom-parent btn-primary">
+        <button class="ion-activatable ripple-parent custom-parent btn-primary" (click)="onAddCart(article.id)">
           <ion-label>Ajouter du panier</ion-label>
           <ion-ripple-effect></ion-ripple-effect>
         </button>
