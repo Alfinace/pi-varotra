@@ -1,8 +1,7 @@
 <div class="card" *ngIf="article">
 	<!-- {{article!.images[0]}} -->
 	<div style="width: 100%;height: 159px">
-		<ion-img (click)="show()" *ngIf="article?.images?.length" style="margin: auto"
-			[src]="article!.images[0].image ?? ''">
+		<ion-img (click)="show()" *ngIf="article.images.length" style="margin: auto" [src]="article!.images[0].image ?? ''">
 		</ion-img>
 	</div>
 	<div (click)="show()">
@@ -20,7 +19,7 @@
 			<div class="d-flex ion-align-items-center ion-justify-content-start " style="gap: 5px;margin-top: 5px;">
 				<ion-icon slot="start" name="location-outline"></ion-icon>
 				<span>
-					{{article?.store?.city}}
+					{{article.store.city}}
 				</span>
 			</div>
 		</div>
