@@ -8,8 +8,8 @@
 # You can see what browsers were selected by your queries by running:
 #   npx browserslist
 
-Chrome >=60
-Firefox >=63
+Chrome >=99
+Firefox >=99
 Edge >=79
 Safari >=13
 iOS >=13
