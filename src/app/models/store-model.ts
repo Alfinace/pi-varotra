@@ -5,8 +5,8 @@ export interface Store {
 	id?: number;
 	name?: string;
 	logo?: string;
-	address?: string;
-	city?: string,
+	address: string;
+	city: string,
 	contact?: string,
 	status?: string,
 	userId?: number,
