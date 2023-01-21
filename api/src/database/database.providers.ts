@@ -10,6 +10,8 @@ import { ImageUser } from 'src/image-user/entities/image-user.entity';
 import { Payment } from 'src/payment/entities/payment.entity';
 import { Store } from 'src/store/entities/store.entity';
 import { City } from 'src/city/entities/city.entity';
+import { Pub } from 'src/pubs/entities/pub.entity';
+import { Rate } from 'src/rates/entities/rate.entity';
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
@@ -33,7 +35,9 @@ export const databaseProviders = [
         Payment,
         Store,
         City,
-        Nouveau
+        Nouveau,
+        Rate,
+        Pub,
       ]);
       await sequelize.sync({
         // alter: true,

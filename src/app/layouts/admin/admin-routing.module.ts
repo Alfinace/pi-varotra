@@ -7,6 +7,11 @@ const routes: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full'
+  }
+  ,
+  {
+    path: 'list-pub',
+    loadChildren: () => import('../../pages/list-pub/list-pub.module').then(m => m.ListPubPageModule)
   },
   {
     path: 'list-article',
@@ -31,6 +36,10 @@ const routes: Routes = [
   {
     path: 'categories',
     loadChildren: () => import('../../pages/list-categorie/list-categorie.module').then(m => m.ListCategoriePageModule)
+  },
+  {
+    path: 'admin-map',
+    loadChildren: () => import('../../pages/admin-map/admin-map.module').then(m => m.AdminMapPageModule)
   }
 ];
 
