@@ -6,8 +6,8 @@
       </ng-template>
     </p-image>
   </div>
-  <div class="d-flex" style="gap: 10px">
-    <div style="width: 48%;">
+  <div class="d-flex" style="gap: 10px;flex-wrap: wrap;">
+    <div class="block">
       <h4>Information personnelle</h4>
       <ion-list>
         <ion-item>
@@ -101,7 +101,7 @@
       </ion-list>
 
     </div>
-    <div style="width: 48%;">
+    <div class="block">
       <h4 class="ion-text-start" style="width: 100%">Piéce d'identité</h4>
       <div style="gap: 20px;flex-direction: row;" class="d-flex ion-align-items-start ion-justify-content-start ">
         <ng-container *ngIf="cin.length > 0;else noImage">

@@ -38,12 +38,7 @@ export class CategoryController {
   @Get()
   async findAll(@Query('size') limit: number, @Query('page') offset: number) {
     console.log(limit, offset);
-    if (limit && offset && limit > -1 && offset > -1) {
-
-      var stores = await this.categoryService.findAll((offset + 1) * limit - limit, limit);
-    } else {
-      var stores = await this.categoryService.findAll();
-    }
+    var stores = await this.categoryService.findAll((offset + 1) * limit - limit, limit);
 
     // stores.rows = stores.rows.map((user) => {
     //   user.socialNetwork = JSON.parse(user.socialNetwork);

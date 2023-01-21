@@ -13,6 +13,7 @@ import { MessageService } from 'primeng/api';
 })
 export class ListCategoriePage implements OnInit {
   categories: any;
+  display: boolean = false;
   totalRecords: number;
   rows: number = 8;
   loading: boolean;
@@ -54,6 +55,7 @@ export class ListCategoriePage implements OnInit {
       this.categorieForm.reset();
       this.categories.unshift({ ...res, articles: [] });
       this.loading = false;
+      this.display = false;
       this.toastService.show('success', 'Ajout effectuée avec succès')
     }, (err: any) => {
 
@@ -63,10 +65,9 @@ export class ListCategoriePage implements OnInit {
   }
 
   edit(categorie: any) {
-    console.log(categorie);
-
     this.categorieForm.patchValue(categorie);
     this.editMode = true;
+    this.display = true;
   }
 
   updateCategorie() {
@@ -75,12 +76,11 @@ export class ListCategoriePage implements OnInit {
       this.editMode = false;
       this.loading = false;
       let i = this.categories.findIndex((c: any) => c.id == this.categorieForm.value.id);
-      console.log(i);
-
       if (i >= 0) {
         this.categories[i] = { ...this.categories[i], ...this.categorieForm.value };
       }
       this.toastService.show('success', 'Modification effectuée avec succès')
+      this.display = false;
       this.categorieForm.reset();
     }, (err: any) => {
       this.loading = false;

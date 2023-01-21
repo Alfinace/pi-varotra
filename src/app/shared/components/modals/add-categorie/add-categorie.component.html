@@ -1,0 +1,48 @@
+<div class="card">
+  <!-- <h4 *ngIf="!editMode;else editTemplate">Ajout categorie</h4> -->
+  <ng-template #editTemplate>
+    <h4>Modification categorie</h4>
+  </ng-template>
+  <form [formGroup]="categorieForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nom de categorie</ion-label>
+      <ion-input required formControlName="name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea formControlName="description"></ion-textarea>
+    </ion-item>
+    <ion-row class=" btn-row mt" *ngIf="!editMode;else btnEditTemplate">
+      <ion-col size="12">
+        <button type="submit" [disabled]="loading || categorieForm.invalid"
+          class="ion-activatable ripple-parent custom-parent btn-primary">
+          <ion-label *ngIf="!loading;else loadingTemplate">Ajouter</ion-label>
+          <ng-template #loadingTemplate>
+            <ion-spinner name="circular" color="light"></ion-spinner>
+          </ng-template>
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ng-template #btnEditTemplate>
+      <ion-row class=" btn-row mt">
+        <ion-col size="6">
+          <button (click)="reset()" class="ion-activatable ripple-parent custom-parent btn-warning">
+            Annuler
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+        </ion-col>
+        <ion-col size="6">
+          <button (click)="updateCategorie()" [disabled]="loading || categorieForm.invalid"
+            class="ion-activatable ripple-parent custom-parent btn-primary">
+            <ion-label *ngIf="!loading;else loadingTemplate">Mettre à jour </ion-label>
+            <ng-template #loadingTemplate>
+              <ion-spinner name="circular" color="light"></ion-spinner>
+            </ng-template>
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ng-template>
+  </form>
+</div>

@@ -1,9 +1,5 @@
-import { EditProfileModule } from './../../shared/components/modals/edit-profile/edit-profile.module';
-import { CartModule } from './../../shared/components/modals/cart/cart.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
 import { TableModule } from 'primeng/table';
 import { MenuModule } from 'primeng/menu';
@@ -18,7 +14,6 @@ import { DetailUserInfoModule } from 'src/app/shared/components/modals/detail-us
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     DynamicDialogModule,
     IonicModule,
     MenuModule,

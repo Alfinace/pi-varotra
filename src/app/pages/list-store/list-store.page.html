@@ -1,6 +1,25 @@
 <ion-content class="ion-padding">
   <h5 class=" ion-no-marginion-margin-bottom">Liste magasin enregister</h5>
-  <div class="d-flex ion-justify-content-start" style="flex-wrap: wrap;gap: 10px;">
-    <app-store-card *ngFor="let store of stores" [store]="store"></app-store-card>
+  <div class="d-flex ion-justify-content-center" style="flex-wrap: wrap;gap: 10px;">
+    <ng-container *ngIf="!loading && stores.length > 0;else loadingTemplate">
+      <app-store-card *ngFor="let store of stores" [store]="store"></app-store-card>
+    </ng-container>
+    <ng-template #loadingTemplate>
+      <div class="skeleton-template" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]">
+        <p-skeleton width="180px" height="140px"></p-skeleton>
+        <div style="width: 100%">
+          <p-skeleton width="170px" styleClass="mb-2"></p-skeleton>
+        </div>
+        <div style="width: 100%">
+          <p-skeleton width="150px" styleClass="mb-2"></p-skeleton>
+        </div>
+        <div style="width: 100%" class="d-flex ion-justify-content-between">
+          <p-skeleton width="20px" styleClass="mb-2"></p-skeleton>
+          <p-skeleton width="50px" styleClass="mb-2"></p-skeleton>
+        </div>
+        <p-skeleton width="180px" height="40px" borderRadius="30px" styleClass="mb-2"></p-skeleton>
+
+      </div>
+    </ng-template>
   </div>
 </ion-content>

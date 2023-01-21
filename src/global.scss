@@ -286,3 +286,16 @@ button[disabled] {
 app-article {
   box-shadow: 0px 1px 3px #a855f757;
 }
+
+th,
+td,
+.p-datatable-customers
+  .p-datatable-gridlines
+  .p-paginator
+  .p-paginator-pages
+  .p-paginator-page {
+  font-size: 12px;
+}
+.text-upper {
+  text-transform: uppercase;
+}

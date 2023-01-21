@@ -2,6 +2,7 @@ import { StoreCardModule } from './../../shared/components/widgets/store-card/st
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SkeletonModule } from 'primeng/skeleton';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -14,6 +15,7 @@ import { ListStorePage } from './list-store.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    SkeletonModule,
     StoreCardModule,
     ListStorePageRoutingModule
   ],

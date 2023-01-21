@@ -37,13 +37,13 @@
 	<br>
 	<br>
 	<div class="d-flex ion-justify-content-center ion-wrap ion-margin-horizontal" style="gap: 20px">
-		<ion-card>
-			<p-chart width="1000px" height="400px" type=" bar" [data]="data" [options]="chartOptions">
+		<ion-card style="overflow: auto">
+			<p-chart width="100vw" height="400px" type=" bar" [data]="data" [options]="chartOptions">
 			</p-chart>
 		</ion-card>
 	</div>
-	<div style="display: flex;gap:10px" class="ion-justify-content-between">
-		<div>
+	<div class="t-flex">
+		<div class="table-container">
 			<h5>Meilleur magasin actif</h5>
 			<p-table [value]="customers" [scrollable]="true" scrollHeight="400px">
 				<ng-template pTemplate="header">
@@ -62,7 +62,7 @@
 				</ng-template>
 			</p-table>
 		</div>
-		<div>
+		<div class="table-container">
 			<h5>Meilleur produit vendu</h5>
 			<p-table [value]="customers" [scrollable]="true" scrollHeight="400px">
 				<ng-template pTemplate="header">
