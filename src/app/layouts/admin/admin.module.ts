@@ -9,6 +9,7 @@ import { DashboardPageModule } from 'src/app/pages/dashboard/dashboard.module';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { MenuItem } from 'primeng/api';
 import { RouterModule } from '@angular/router';
+import { DataViewModule } from 'primeng/dataview';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
     IonicModule,
     AdminPageRoutingModule,
     DashboardPageModule,
+    DataViewModule,
     TieredMenuModule,
     RouterModule,
     StoreCardModule

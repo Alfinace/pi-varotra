@@ -23,6 +23,7 @@ export class CategoryService {
       limit,
       offset,
       order: [['name', 'ASC']],
+      distinct: true,
     });
   }
 

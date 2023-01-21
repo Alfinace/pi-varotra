@@ -6,6 +6,7 @@ import { UpdateArticleDto } from './dto/update-article.dto';
 import { User } from 'src/user/entities/user.entity';
 import { Op } from 'sequelize';
 import { Store } from 'src/store/entities/store.entity';
+import { Category } from 'src/category/entities/category.entity';
 
 @Injectable()
 export class ArticleService {
@@ -37,6 +38,7 @@ export class ArticleService {
     return this.articleRepository.findAndCountAll({
       limit,
       offset,
+      distinct: true,
       include: [
         {
           model: ImageArticle,
@@ -45,18 +47,23 @@ export class ArticleService {
         {
           model: Store,
           as: 'store'
-        }
+        },
+        {
+          model: Category,
+          as: 'category',
+        },
       ],
     });
   }
 
   findAllWithFilter(filter, offset: number, limit: number) {
-    this.articleRepository.findAndCountAll({
+    return this.articleRepository.findAndCountAll({
       where: {
         categoryId: { [Op.in]: [filter.categorie] },
         unitPrice: { [Op.between]: [filter.range.lower, filter.range.upper] },
       },
       limit,
+      distinct: true,
       offset,
       include: [{ all: true }],
       order: [[filter.updatedAt, filter.order]],
@@ -69,6 +76,7 @@ export class ArticleService {
       include: [ImageArticle],
       limit,
       offset,
+      distinct: true,
       order: [['id', 'ASC']]
     });
   }
