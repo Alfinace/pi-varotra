@@ -9,6 +9,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'list-article',
+    loadChildren: () => import('../../pages/list-article/list-article.module').then(m => m.ListArticlePageModule)
+  },
+  {
     path: 'news',
     loadChildren: () => import('../../pages/list-new/list-new.module').then(m => m.ListNewPageModule)
   },

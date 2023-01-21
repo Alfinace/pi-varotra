@@ -48,6 +48,7 @@ export class UserService {
         // },
         // { model: ImageUser, as: 'images' }
       ],
+      distinct: true,
       attributes: {
         exclude: [
           'password',

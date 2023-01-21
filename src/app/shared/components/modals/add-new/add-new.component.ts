@@ -33,7 +33,7 @@ export class AddNewComponent implements OnInit {
       subtitle: ['', Validators.required],
       detail: ['', Validators.required],
     });
-    this.editMode = this.config.data.editMode;
+    this.editMode = this.config.data._new.editMode;
     this.newForm.patchValue({ ...this.config.data._new });
   }
 
@@ -41,8 +41,8 @@ export class AddNewComponent implements OnInit {
     this.loading = true;
     if (await this.uploadImage(this.image)) {
       this.newService.addNew(this.newForm.value).toPromise().then((res: any) => {
+        this.ref.close({ ...res });
         this.newForm.reset();
-        // this._news.unshift({ ...res, articles: [] });
         this.loading = false;
         this.toastService.show('success', 'Ajout effectuée avec succès')
       }, (err: any) => {
@@ -60,12 +60,7 @@ export class AddNewComponent implements OnInit {
       this.newService.updateNew(this.newForm.value.id, this.newForm.value).toPromise().then((res: any) => {
         this.editMode = false;
         this.loading = false;
-        // let i = this._news.findIndex((c: any) => c.id == this.newForm.value.id);
-        // console.log(i);
-
-        // if (i >= 0) {
-        // this._news[i] = { ...this._news[i], ...this.newForm.value };
-        // }
+        this.ref.close({ ...this.newForm.value });
         this.toastService.show('success', 'Modification effectuée avec succès')
         this.newForm.reset();
       }, (err: any) => {

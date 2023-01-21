@@ -2,7 +2,10 @@
 
   <div class="d-flex ion-align-items-start">
     <div class="card">
-      <h5 class=" ion-no-marginion-margin-bottom">Nouveau publié</h5>
+      <div class="d-flex ion-justify-content-between">
+        <h5 class=" ion-no-marginion-margin-bottom">Nouveau publié</h5>
+        <ion-button (click)="add()" color="primary" fill="outline">Ajouter</ion-button>
+      </div>
       <p-table #dt1 [value]="_news">
         <ng-template pTemplate="header">
           <tr>

@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start" (click)="close()">
-      <ion-icon name="chevron-back-outline"></ion-icon>
+      <ion-icon size="large" name="chevron-back-outline"></ion-icon>
     </ion-buttons>
-    <ion-title slot="secondary">
+    <ion-title slot="primary">
       {{_new.title}}
     </ion-title>
   </ion-toolbar>
@@ -12,7 +12,7 @@
   <div class="ion-padding-horizontal mt-70">
     <h5>{{_new.subtitle}}</h5>
     <img [src]="_new.image" onerror="this.onerror=null; this.src='./assets/images/shopping.png'" alt="" srcset="">
-    <p>{{_new.updatedAt | date:'dd/mm/yyyy H:s'}}</p>
+    <p>{{_new.updatedAt | date:'dd/MM/yyyy H:s'}}</p>
     <div [innerHTML]="_new.detail"></div>
   </div>
 </ion-content>

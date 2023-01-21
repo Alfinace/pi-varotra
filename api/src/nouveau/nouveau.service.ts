@@ -16,6 +16,7 @@ export class NouveauService {
   findAll(offset: number, limit: number) {
     return this.nouveauRepository.findAndCountAll({
       offset,
+      distinct: true,
       limit,
       order: [
         ['createdAt', 'DESC']

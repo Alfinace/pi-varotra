@@ -13,7 +13,7 @@
 				</ion-item>
 				<ion-item ion-button [routerLink]="['/admin/users']" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="people"></ion-icon>
-					<ion-label>Client</ion-label>
+					<ion-label>Utilisateur</ion-label>
 				</ion-item>
 				<ion-item ion-button [routerLink]="['/admin/stores']" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="storefront"></ion-icon>
@@ -23,7 +23,7 @@
 					<ion-icon size="small" slot="start" color="light" name="shield-checkmark"></ion-icon>
 					<ion-label>Gestion nouveau</ion-label>
 				</ion-item>
-				<ion-item ion-button>
+				<ion-item ion-button [routerLink]="['/admin/list-article']" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="ticket"></ion-icon>
 					<ion-label>Gestion article</ion-label>
 				</ion-item>

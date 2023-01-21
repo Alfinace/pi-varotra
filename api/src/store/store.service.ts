@@ -30,6 +30,7 @@ export class StoreService {
       ],
       limit,
       offset,
+      distinct: true,
     });
   }
 
