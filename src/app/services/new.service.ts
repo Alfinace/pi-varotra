@@ -28,4 +28,5 @@ export class NewService {
     return this.http.delete(`news/${id}`);
   }
 
+
 }

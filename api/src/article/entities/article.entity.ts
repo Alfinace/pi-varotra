@@ -12,6 +12,7 @@ import {
 import { Category } from 'src/category/entities/category.entity';
 import { ImageArticle } from 'src/image-article/entities/image-article.entity';
 import { Store } from 'src/store/entities/store.entity';
+import { Rate } from 'src/rates/entities/rate.entity';
 
 @Table({ tableName: 'articles' })
 export class Article extends Model {
@@ -28,6 +29,9 @@ export class Article extends Model {
 
   @BelongsTo(() => Store)
   store: Store;
+
+  @HasMany(() => Rate)
+  rates: Rate[];
 
   @HasMany(() => ImageArticle)
   images: ImageArticle[];

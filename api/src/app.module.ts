@@ -17,6 +17,8 @@ import { ImageUserModule } from './image-user/image-user.module';
 import { StoreModule } from './store/store.module';
 import { CityModule } from './city/city.module';
 import { NouveauModule } from './nouveau/nouveau.module';
+import { PubsModule } from './pubs/pubs.module';
+import { RatesModule } from './rates/rates.module';
 require('dotenv').config();
 
 @Module({
@@ -26,7 +28,7 @@ require('dotenv').config();
     }),
     MulterModule.registerAsync({
       useFactory: () => ({
-        dest: './upload',
+        dest: './uploads',
       }),
     }),
     ServeStaticModule.forRoot({
@@ -44,7 +46,9 @@ require('dotenv').config();
     StoreModule,
     PaymentModule,
     CityModule,
-    NouveauModule
+    NouveauModule,
+    PubsModule,
+    RatesModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,0 +1,116 @@
+<ion-content class="ion-padding">
+
+  <div class="d-flex ion-align-items-start">
+    <div class="card" style="width: 100%">
+      <div class="d-flex ion-justify-content-between">
+        <h5 class=" ion-no-marginion-margin-bottom">Publicité</h5>
+        <ion-button (click)="add()" color="primary" fill="outline">Ajouter</ion-button>
+      </div>
+      <p-table #dt1 [value]="pubs">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>
+              <div class="p-d-flex p-jc-between ">
+                Image
+              </div>
+            </th>
+            <th>
+              <div class="p-d-flex p-jc-between ">
+                Lien
+              </div>
+            </th>
+            <th style="width: 8rem">
+              <div class="p-d-flex p-jc-between p-ai-center">
+                Actions
+              </div>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pub>
+          <tr>
+            <td>
+              <ion-img [src]="pub.image"></ion-img>
+            </td>
+            <td>
+              {{pub.lien ?? 'N/A'}}
+            </td>
+            <td>
+              <div class="d-flex ion-justify-content-around" style="width:100px">
+                <ion-icon name="create-outline" style="cursor:pointer" (click)="edit(pub)"></ion-icon>
+                <!-- <ion-icon name="trash-outline" style="cursor:pointer" (click)="confirmDelete(_new)"></ion-icon> -->
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="7">Aucune donnée.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <p-paginator [rows]="rows" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+
+  </div>
+
+  <p-dialog [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+      <h4 *ngIf="!editMode;else editTemplate">Ajout pub</h4>
+      <ng-template #editTemplate>
+        <h4>Modification pub</h4>
+      </ng-template>
+    </ng-template>
+    <div style="width:100%">
+      <form [formGroup]="pubForm" (ngSubmit)="onSubmit()">
+        <ion-item lines="none">
+          <ion-label>Source image(png ou jpeg) </ion-label>
+        </ion-item>
+        <app-images #imageComponent (selectImageEvent)="getImage($event)"></app-images>
+        <div class="box-img" [ngClass]="{'add': !preview}" (click)="imageComponent.selectImageSource()">
+          <ion-item button>
+            <ion-label>Selectionner image</ion-label>
+          </ion-item>
+          <div *ngIf="image && image.preview">
+            <ion-img style="width: 100%;height:100px" [src]="image.preview"></ion-img>
+          </div>
+        </div>
+        <ion-item>
+          <ion-label position="floating">Lien</ion-label>
+          <ion-input formControlName="lien" type="url"></ion-input>
+        </ion-item>
+        <ion-row class=" btn-row mt" *ngIf="!editMode;else btnEditTemplate">
+          <ion-col size="12">
+            <button type="submit" [disabled]="loading || pubForm.invalid"
+              class="ion-activatable ripple-parent custom-parent btn-primary">
+              <ion-label *ngIf="!loading;else loadingTemplate">Ajouter</ion-label>
+              <ng-template #loadingTemplate>
+                <ion-spinner name="circular" color="light"></ion-spinner>
+              </ng-template>
+              <ion-ripple-effect></ion-ripple-effect>
+            </button>
+          </ion-col>
+        </ion-row>
+        <ng-template #btnEditTemplate>
+          <ion-row class=" btn-row mt">
+            <ion-col size="6">
+              <button (click)="reset()" class="ion-activatable ripple-parent custom-parent btn-warning">
+                Annuler
+                <ion-ripple-effect></ion-ripple-effect>
+              </button>
+            </ion-col>
+            <ion-col size="6">
+              <button (click)="updatepub()" [disabled]="loading || pubForm.invalid"
+                class="ion-activatable ripple-parent custom-parent btn-primary">
+                <ion-label *ngIf="!loading;else loadingTemplate">Mettre à jour </ion-label>
+                <ng-template #loadingTemplate>
+                  <ion-spinner name="circular" color="light"></ion-spinner>
+                </ng-template>
+                <ion-ripple-effect></ion-ripple-effect>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+      </form>
+    </div>
+  </p-dialog>
+</ion-content>
