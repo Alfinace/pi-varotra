@@ -8,6 +8,7 @@ import { UploadService } from 'src/app/services/upload.service';
 import { log } from 'console';
 import { AlertController } from '@ionic/angular';
 import { AddNewComponent } from 'src/app/shared/components/modals/add-new/add-new.component';
+import { New } from 'src/app/models/new.model';
 
 @Component({
   selector: 'app-list-new',
@@ -36,7 +37,7 @@ export class ListNewPage implements OnInit {
 
   edit(_new: any) {
     this.ref = this.dialogService.open(AddNewComponent, {
-      // header: 'Publier une nouvelle',
+      header: 'Modification de la nouvelle',
       data: {
         _new: {
           ..._new,
@@ -53,6 +54,14 @@ export class ListNewPage implements OnInit {
       draggable: true,
       transitionOptions: '400ms cubic-bezier(0.25, 0.8, 0.25, 1)',
     });
+    this.ref.onClose.subscribe((_new: New) => {
+      let i = this._news.findIndex((c: any) => c.id == _new.id);
+
+      if (i >= 0) {
+        this._news[i] = { ...this._news[i], ..._new };
+      }
+    }
+    );
   }
 
   ionViewWillEnter() {
@@ -76,6 +85,13 @@ export class ListNewPage implements OnInit {
       // showHeader: false,
       draggable: true,
       transitionOptions: '400ms cubic-bezier(0.25, 0.8, 0.25, 1)',
+    });
+    this.ref.onClose.subscribe((_new: New) => {
+      if (_new) {
+        console.log(_new);
+
+        this._news.unshift(_new);
+      }
     });
   }
 

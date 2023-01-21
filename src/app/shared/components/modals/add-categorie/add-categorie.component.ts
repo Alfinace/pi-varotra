@@ -36,7 +36,7 @@ export class AddCategorieComponent implements OnInit {
     this.loading = true;
     this.categorieService.createCategorie(this.categorieForm.value).toPromise().then((res: any) => {
       this.categorieForm.reset();
-      // this.categories.unshift({ ...res, articles: [] });
+      this.ref.close({ ...res, articles: [] });
       this.loading = false;
       this.toastService.show('success', 'Ajout effectuée avec succès')
     }, (err: any) => {
@@ -52,12 +52,7 @@ export class AddCategorieComponent implements OnInit {
     this.categorieService.updateCategorie(this.categorieForm.value.id, this.categorieForm.value).toPromise().then((res: any) => {
       this.editMode = false;
       this.loading = false;
-      // let i = this.categories.findIndex((c: any) => c.id == this.categorieForm.value.id);
-      // console.log(i);
-
-      // if (i >= 0) {
-      //   this.categories[i] = { ...this.categories[i], ...this.categorieForm.value };
-      // }
+      this.ref.close({ ...this.categorieForm.value });
       this.toastService.show('success', 'Modification effectuée avec succès')
       this.categorieForm.reset();
     }, (err: any) => {
