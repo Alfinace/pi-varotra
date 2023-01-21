@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { DialogModule } from 'primeng/dialog';
 import { IonicModule } from '@ionic/angular';
 
 import { ListCategoriePageRoutingModule } from './list-categorie-routing.module';
@@ -14,6 +14,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
+import { AddCategorieModule } from 'src/app/shared/components/modals/add-categorie/add-categorie.module';
 
 @NgModule({
   imports: [
@@ -28,6 +29,8 @@ import { ToastModule } from 'primeng/toast';
     ReactiveFormsModule,
     ToastModule,
     TableModule,
+    AddCategorieModule,
+    DialogModule,
     ListCategoriePageRoutingModule
   ],
   declarations: [ListCategoriePage]

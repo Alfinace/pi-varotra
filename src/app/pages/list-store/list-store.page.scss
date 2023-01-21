@@ -1,3 +1,12 @@
 app-store-card {
   width: 200px;
 }
+.skeleton-template {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 1px 3px rgb(0 0 0 / 5%);
+  border-radius: 5px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 5px;
+}

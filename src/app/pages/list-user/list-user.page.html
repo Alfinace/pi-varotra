@@ -6,42 +6,42 @@
       <ng-template pTemplate="header">
         <tr>
           <th>
-            <div class="p-d-flex p-jc-between   ">
+            <div class="p-d-flex p-jc-between text-upper   ">
               Nom complet
             </div>
           </th>
           <th>
-            <div class="p-d-flex p-jc-between p-ai-center">
+            <div class="p-d-flex p-jc-between text-upper p-ai-center">
               Ville
             </div>
           </th>
           <th>
-            <div class="p-d-flex p-jc-between p-ai-center">
+            <div class="p-d-flex p-jc-between text-upper p-ai-center">
               Contact
             </div>
           </th>
           <th>
-            <div class="p-d-flex p-jc-between p-ai-center">
+            <div class="p-d-flex p-jc-between text-upper p-ai-center">
               Email
             </div>
           </th>
-          <!-- <th>
-            <div class="p-d-flex p-jc-between p-ai-center">
-              Date de naissance
-            </div>
-          </th> -->
           <th>
-            <div class="p-d-flex p-jc-between p-ai-center">
+            <div class="p-d-flex p-jc-between text-upper p-ai-center">
+              ROLE
+            </div>
+          </th>
+          <!-- <th>
+            <div class="p-d-flex p-jc-between text-upper p-ai-center">
               Status
             </div>
           </th>
           <th style="width: 8rem">
-            <div class="p-d-flex p-jc-between p-ai-center">
+            <div class="p-d-flex p-jc-between text-upper p-ai-center">
               Verified
             </div>
-          </th>
+          </th> -->
           <th style="width: 8rem">
-            <div class="p-d-flex p-jc-between p-ai-center">
+            <div class="p-d-flex p-jc-between text-upper p-ai-center">
               Actions
             </div>
           </th>
@@ -62,22 +62,15 @@
           <td>
             {{customer.email}}
           </td>
-          <!-- <td>
-            {{customer.birthday | date: 'MM/dd/yyyy'}}
-          </td> -->
           <td>
-            <span [class]="'customer-badge status-' + customer.status">{{!customer.blocked}}</span>
+            {{customer.role}}
           </td>
-          <td class="p-text-center">
-            <i class="pi"
-              [ngClass]="{'true-icon pi-check-circle': customer.verified, 'false-icon pi-times-circle': !customer.verified}"></i>
-          </td>
+
           <td>
-            <div class="d-flex ion-justify-content-around">
+            <div class="d-flex ion-justify-content-around" style="gap: 20px">
 
               <i class="pi pi-eye" (click)="show(customer)"></i>
               <i class="pi pi-ban"></i>
-              <i class="pi pi-trash"></i>
             </div>
           </td>
         </tr>

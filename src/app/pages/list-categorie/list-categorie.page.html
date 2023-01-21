@@ -1,8 +1,11 @@
 <ion-content class="ion-padding">
 
   <div class="d-flex ion-align-items-start">
-    <div class="card" style="width: 70%">
-      <h5 class=" ion-no-marginion-margin-bottom">Liste catégorie d'article</h5>
+    <div class="card" style="width:100%">
+      <div class="d-flex ion-justify-content-between">
+        <h5 class=" ion-no-marginion-margin-bottom">Liste catégorie d'article</h5>
+        <ion-button (click)="display = true" color="primary" fill="outline">Ajouter</ion-button>
+      </div>
       <p-table #dt1 [value]="categories">
         <ng-template pTemplate="header">
           <tr>
@@ -56,11 +59,16 @@
       </p-table>
       <p-paginator [rows]="rows" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
     </div>
-    <div style="width: 28%">
+  </div>
+
+  <p-dialog [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
       <h4 *ngIf="!editMode;else editTemplate">Ajout categorie</h4>
       <ng-template #editTemplate>
         <h4>Modification categorie</h4>
       </ng-template>
+    </ng-template>
+    <div style="width:100%">
       <form [formGroup]="categorieForm" (ngSubmit)="onSubmit()">
         <ion-item>
           <ion-label position="floating">Nom de categorie</ion-label>
@@ -104,5 +112,5 @@
         </ng-template>
       </form>
     </div>
-  </div>
+  </p-dialog>
 </ion-content>

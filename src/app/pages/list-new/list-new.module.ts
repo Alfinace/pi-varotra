@@ -14,6 +14,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { EditorModule } from 'primeng/editor';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { AddNewModule } from 'src/app/shared/components/modals/add-new/add-new.module';
 
 @NgModule({
   imports: [
@@ -21,12 +23,12 @@ import { EditorModule } from 'primeng/editor';
     FormsModule,
     IonicModule,
     SliderModule,
+    DynamicDialogModule,
     PaginatorModule,
     InputTextModule,
     ProgressBarModule,
     TableModule,
-    EditorModule,
-    ReactiveFormsModule,
+    AddNewModule,
     ListNewPageRoutingModule
   ],
   declarations: [ListNewPage]

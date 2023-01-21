@@ -17,12 +17,17 @@ export class StoreController {
   @UseGuards(JwtAuthGuard)
   async create(@Body() createStoreDto: CreateStoreDto,
     @User() user) {
-    await this.cityService.findOne(createStoreDto.city).then(async (city) => {
-      if (!city) {
-        await this.cityService.create({ name: createStoreDto.city });
-      }
-    })
-    return this.storeService.create({ ...createStoreDto, userId: user.userId });
+    try {
+      await this.cityService.findOne(createStoreDto.city).then(async (city) => {
+        if (!city) {
+          await this.cityService.create({ name: createStoreDto.city });
+        }
+      })
+      return this.storeService.create({ ...createStoreDto, userId: user.userId });
+    } catch (error) {
+      // throw new Http
+
+    }
   }
 
   @Get()

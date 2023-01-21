@@ -11,7 +11,7 @@ import { User } from 'src/user/entities/user.entity';
 export class Store extends Model {
 
 	@ForeignKey(() => User)
-	@Column({ field: 'user_id' })
+	@Column({ field: 'user_id', unique: true})
 	userId: number;
 
 	@HasMany(() => Article, { foreignKey: 'storeId' })

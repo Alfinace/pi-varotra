@@ -1,8 +1,21 @@
-ion-label,
-ion-text,
-h6 {
-  font-size: 12px;
+@media screen and (min-width: 0px) {
+  .block {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  ion-label,
+  ion-text,
+  h6 {
+    font-size: 12px;
+  }
+  .p-image-preview {
+    transform: scale(0.5);
+  }
 }
-.p-image-preview {
-  transform: scale(0.5);
+
+@media screen and (min-width: 1000px) {
+  .block {
+    width: 48%;
+  }
 }

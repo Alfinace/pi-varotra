@@ -1,7 +1,7 @@
 <ion-content class="ion-padding">
 
   <div class="d-flex ion-align-items-start">
-    <div class="card" style="width: 48%">
+    <div class="card">
       <h5 class=" ion-no-marginion-margin-bottom">Nouveau publié</h5>
       <p-table #dt1 [value]="_news">
         <ng-template pTemplate="header">
@@ -47,62 +47,6 @@
       </p-table>
       <p-paginator [rows]="rows" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
     </div>
-    <div style="width: 48%">
-      <h4 *ngIf="!editMode;else editTemplate">Ajouter nouvelle</h4>
-      <ng-template #editTemplate>
-        <h4>Modification nouvelle</h4>
-      </ng-template>
-      <form [formGroup]="newForm" (ngSubmit)="onSubmit()">
-        <ion-item>
-          <ion-label position="floating">Titre</ion-label>
-          <ion-input required formControlName="title" type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Sous titre</ion-label>
-          <ion-textarea required formControlName="subtitle"></ion-textarea>
-        </ion-item>
-        <ion-item>
-          <!-- <ion-label position="floating">Photo</ion-label> -->
-          <input type="file" (change)="selectImage($event)">
-        </ion-item>
-        <br>
-        <ion-label position="floating">Detail</ion-label>
-        <br>
-        <br>
-        <p-editor formControlName="detail" [style]="{'min-height':'140px'}"></p-editor>
-        <ion-row class=" btn-row mt" *ngIf="!editMode;else btnEditTemplate">
-          <ion-col size="12">
-            <button type="submit" [disabled]="loading || newForm.invalid"
-              class="ion-activatable ripple-parent custom-parent btn-primary">
-              <ion-label *ngIf="!loading;else loadingTemplate">Ajouter</ion-label>
-              <ng-template #loadingTemplate>
-                <ion-spinner name="circular" color="light"></ion-spinner>
-              </ng-template>
-              <ion-ripple-effect></ion-ripple-effect>
-            </button>
-          </ion-col>
-        </ion-row>
-        <ng-template #btnEditTemplate>
-          <ion-row class=" btn-row mt">
-            <ion-col size="6">
-              <button (click)="reset()" class="ion-activatable ripple-parent custom-parent btn-warning">
-                Annuler
-                <ion-ripple-effect></ion-ripple-effect>
-              </button>
-            </ion-col>
-            <ion-col size="6">
-              <button (click)="updateNew()" [disabled]="loading || newForm.invalid"
-                class="ion-activatable ripple-parent custom-parent btn-primary">
-                <ion-label *ngIf="!loading;else loadingTemplate">Mettre à jour </ion-label>
-                <ng-template #loadingTemplate>
-                  <ion-spinner name="circular" color="light"></ion-spinner>
-                </ng-template>
-                <ion-ripple-effect></ion-ripple-effect>
-              </button>
-            </ion-col>
-          </ion-row>
-        </ng-template>
-      </form>
-    </div>
+
   </div>
 </ion-content>

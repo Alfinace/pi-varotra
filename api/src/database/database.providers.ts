@@ -36,7 +36,7 @@ export const databaseProviders = [
         Nouveau
       ]);
       await sequelize.sync({
-        alter: true,
+        // alter: true,
       });
       return sequelize;
     },
