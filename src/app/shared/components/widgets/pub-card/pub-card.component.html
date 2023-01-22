@@ -1,8 +1,10 @@
-<ion-card class="flex">
+<ion-card class="flex" [ngStyle]="{'background-image': 'url('+pub.image+')'}">
   <div class="child">
     <span class="title">
       Ongkir Selama PPKM!
     </span>
-    <h5>Periode Mei - Agustus 2021</h5>
+    <h5>
+      {{pub.createdAt | date: 'dd/MM/yyyy'}}
+    </h5>
   </div>
 </ion-card>

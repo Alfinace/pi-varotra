@@ -1,4 +1,4 @@
-<div class="card" *ngIf="article">
+<div class="card" *ngIf="article;else noArticleTemplate">
 	<!-- {{article!.images[0]}} -->
 	<div style="width: 100%;height: 159px">
 		<ion-img (click)="show()" *ngIf="article.images.length" style="margin: auto" [src]="article!.images[0].image ?? ''">
@@ -44,3 +44,31 @@
 		</ng-template>
 	</div>
 </div>
+<ng-template #noArticleTemplate>
+	<div class="card">
+		<div style="width: 100%;height: 159px">
+			<ion-skeleton-text [animated]="true" style="width: 100%;height: 159px"></ion-skeleton-text>
+		</div>
+		<br>
+		<div>
+			<div class="ion-margin-horizontal">
+				<p class="ion-no-margin" style="font-family: 'DM Sans Medium';">
+					<ion-skeleton-text [animated]="true" style="width: 80%;height: 15px;"></ion-skeleton-text>
+				</p>
+				<div class="d-flex ion-align-items-center ion-justify-content-start" style="gap: 5px">
+					<ion-skeleton-text [animated]="true" style="width: 20%;height: 15px;"></ion-skeleton-text>
+					<ion-skeleton-text [animated]="true" style="width: 30%;height: 15px;"></ion-skeleton-text>
+				</div>
+				<div class="d-flex ion-align-items-center ion-justify-content-start "
+					style="gap: 5px;margin-top: 5px;height: 15px;">
+					<ion-skeleton-text [animated]="true" style="width: 50%;height: 15px;"></ion-skeleton-text>
+				</div>
+			</div>
+		</div>
+		<div style="display:flex;padding: 10px;" class="ion-justify-content-between ion-align-items-center">
+			<ion-skeleton-text [animated]="true" style="width: 10%;height: 15px;"></ion-skeleton-text>
+			<ion-skeleton-text [animated]="true" style="width: 30%;height: 15px;"></ion-skeleton-text>
+			<ion-skeleton-text [animated]="true" style="width: 20%;height: 20px"></ion-skeleton-text>
+		</div>
+	</div>
+</ng-template>

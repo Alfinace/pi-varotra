@@ -30,7 +30,10 @@ export class PubsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} pub`;
+    return this.pubRepository.findOne({
+      where: { id },
+    }
+    );
   }
 
   update(id: number, updatePubDto: UpdatePubDto) {
