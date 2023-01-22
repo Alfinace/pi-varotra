@@ -6,13 +6,11 @@ export interface Article {
 	designation: string;
 	detail?: string;
 	unitPrice?: number;
-	store?: Store;
-	stock?: number;
+	store: Store;
+	stock: number;
 	createdAt?: string;
 	updatedAt?: string;
-	rate?: number;
-	reviews?: number;
+	rate?: any;
 	categoryId?: any;
 	images: any[];
-	owner?: User;
 }

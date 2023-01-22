@@ -1,5 +1,4 @@
 <div class="card" *ngIf="article;else noArticleTemplate">
-	<!-- {{article!.images[0]}} -->
 	<div style="width: 100%;height: 159px">
 		<ion-img (click)="show()" *ngIf="article.images.length" style="margin: auto" [src]="article!.images[0].image ?? ''">
 		</ion-img>
@@ -32,7 +31,7 @@
 			</span>
 		</div>
 		<div style="font-size: 12px">
-			{{article!.reviews}} Reviews
+			{{article!.rate}} Reviews
 		</div>
 		<ion-button *ngIf="!checkedArticleAddedToCart(); else templateCart" (click)="addPanier(article!.id)" fill="clear">
 			<ion-icon slot="icon-only" name="cart-outline"></ion-icon>

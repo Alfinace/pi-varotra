@@ -18,6 +18,8 @@ export class HomePage implements OnInit, AfterViewInit {
   public _news: any[] = [];
   public loadedPub = false;
   public loadedNew = false;
+  loadedArticle: boolean = false;
+  loadedStore: boolean = false;
   public pubs = []
   public loadedCategorie = false;
   public config: SwiperOptions = {
@@ -53,8 +55,6 @@ export class HomePage implements OnInit, AfterViewInit {
   @ViewChild('swiperComponent') swiperComponent: SwiperComponent;
   categories: any;
   stores: any[];
-  loadedArticle: boolean;
-  loadedStore: boolean;
 
   constructor(
     private categoryService: CategorieService,
@@ -64,31 +64,7 @@ export class HomePage implements OnInit, AfterViewInit {
     private storeService: StoreService
   ) { }
   ngOnInit() {
-    this.categoryService.getCategories().subscribe((res: any) => {
-      this.categories = res.rows;
-      this.loadedCategorie = true;
 
-    });
-
-    this.articleService.getArticles(0, 10).subscribe((res: any) => {
-      this.articles = res.rows;
-      this.loadedArticle = true;
-    });
-
-    this.storeService.getStores(0, 10).subscribe((res: any) => {
-      this.stores = res.rows as any[];
-      this.loadedStore = true;
-    })
-
-    this.newService.getNews(0, 5).subscribe((res: any) => {
-      this._news = res.rows;
-      this.loadedNew = true;
-    });
-
-    this.pubService.getPubs(0, 10).subscribe((res: any) => {
-      this.pubs = res.rows;
-      this.loadedPub = true;
-    });
   }
 
   public doRefresh(event: any) {
@@ -105,5 +81,29 @@ export class HomePage implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.swiperComponent.swiperRef.autoplay.running = true;
+    this.categoryService.getCategories().toPromise().then((res: any) => {
+      this.categories = res.rows;
+      this.loadedCategorie = true;
+    });
+
+    this.articleService.getArticles(0, 10).toPromise().then((res: any) => {
+      this.articles = res.rows;
+      this.loadedArticle = true;
+    });
+
+    this.storeService.getStores(0, 10).toPromise().then((res: any) => {
+      this.stores = res.rows as any[];
+      this.loadedStore = true;
+    })
+
+    this.newService.getNews(0, 5).toPromise().then((res: any) => {
+      this._news = res.rows;
+      this.loadedNew = true;
+    });
+
+    this.pubService.getPubs(0, 10).toPromise().then((res: any) => {
+      this.pubs = res.rows;
+      this.loadedPub = true;
+    });
   }
 }
