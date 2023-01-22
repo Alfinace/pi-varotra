@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-pub-card',
@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pub-card.component.scss'],
 })
 export class PubCardComponent implements OnInit {
-
+  @Input() pub: any;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

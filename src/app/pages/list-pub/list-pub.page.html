@@ -32,12 +32,12 @@
               <ion-img [src]="pub.image"></ion-img>
             </td>
             <td>
-              {{pub.lien ?? 'N/A'}}
+              {{pub.link ?? 'N/A'}}
             </td>
             <td>
               <div class="d-flex ion-justify-content-around" style="width:100px">
                 <ion-icon name="create-outline" style="cursor:pointer" (click)="edit(pub)"></ion-icon>
-                <!-- <ion-icon name="trash-outline" style="cursor:pointer" (click)="confirmDelete(_new)"></ion-icon> -->
+                <ion-icon name="trash-outline" style="cursor:pointer" (click)="confirmDelete(pub)"></ion-icon>
               </div>
             </td>
           </tr>
@@ -76,7 +76,7 @@
         </div>
         <ion-item>
           <ion-label position="floating">Lien</ion-label>
-          <ion-input formControlName="lien" type="url"></ion-input>
+          <ion-input formControlName="link" type="url"></ion-input>
         </ion-item>
         <ion-row class=" btn-row mt" *ngIf="!editMode;else btnEditTemplate">
           <ion-col size="12">

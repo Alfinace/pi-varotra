@@ -22,10 +22,11 @@ function generateFilename(file, len, prefix = '') {
   for (let i = 0; i < len; i++) {
     output += char.charAt(Math.floor(Math.random() * char.length));
   }
+
   if (file.mimetype === 'image/png') {
     extension = '.png'
   } else {
     extension = '.jpg'
   }
-  return `${output}${Date.now()}${extname(file.originalname)}${extension}`;
+  return `${output}${Date.now()}${extension}`;
 }

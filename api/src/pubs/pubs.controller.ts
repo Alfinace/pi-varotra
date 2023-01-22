@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException } from '@nestjs/common';
 import { PubsService } from './pubs.service';
 import { CreatePubDto } from './dto/create-pub.dto';
 import { UpdatePubDto } from './dto/update-pub.dto';
@@ -8,13 +8,28 @@ export class PubsController {
   constructor(private readonly pubsService: PubsService) { }
 
   @Post()
-  create(@Body() createPubDto: CreatePubDto) {
-    return this.pubsService.create(createPubDto);
+  async create(@Body() createPubDto: CreatePubDto) {
+    try {
+      var pub = await this.pubsService.create(createPubDto);
+      if (pub) {
+        var pub = await this.pubsService.findOne(pub.id);
+        pub.image = pub.image ? process.env.BASE_URL_IMAGE + pub.image : '';
+        return pub;
+      }
+    } catch (error) {
+      throw new HttpException(error, 500);
+
+    }
   }
 
   @Get()
-  findAll() {
-    return this.pubsService.findAll(0, 8);
+  async findAll() {
+    var pubs = await this.pubsService.findAll(0, 8);
+    pubs.rows = pubs.rows.map(pub => {
+      pub.image = pub.image ? process.env.BASE_URL_IMAGE + pub.image : '';
+      return pub;
+    });
+    return pubs;
   }
 
   @Get(':id')

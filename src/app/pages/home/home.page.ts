@@ -7,6 +7,7 @@ import SwiperCore, { SwiperOptions, Autoplay, Keyboard } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { ArticleService } from 'src/app/services/article.service';
 import { StoreService } from 'src/app/services/store.service';
+import { PubService } from 'src/app/services/pub.service';
 SwiperCore.use([Autoplay, Keyboard]);
 @Component({
   selector: 'app-home',
@@ -14,10 +15,10 @@ SwiperCore.use([Autoplay, Keyboard]);
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, AfterViewInit {
-  public loaded = false;
   public _news: any[] = [];
   public loadedPub = false;
-  public pub = []
+  public loadedNew = false;
+  public pubs = []
   public loadedCategorie = false;
   public config: SwiperOptions = {
     slidesPerView: 'auto',
@@ -52,29 +53,42 @@ export class HomePage implements OnInit, AfterViewInit {
   @ViewChild('swiperComponent') swiperComponent: SwiperComponent;
   categories: any;
   stores: any[];
+  loadedArticle: boolean;
+  loadedStore: boolean;
 
   constructor(
     private categoryService: CategorieService,
     private articleService: ArticleService,
     private newService: NewService,
+    private pubService: PubService,
     private storeService: StoreService
   ) { }
-  async ngOnInit(): Promise<void> {
-    this.categories = (await this.categoryService.getCategories().toPromise()).rows;
-    this.loadedCategorie = true;
+  ngOnInit() {
+    this.categoryService.getCategories().subscribe((res: any) => {
+      this.categories = res.rows;
+      this.loadedCategorie = true;
+
+    });
+
     this.articleService.getArticles(0, 10).subscribe((res: any) => {
       this.articles = res.rows;
-      this.loaded = true;
+      this.loadedArticle = true;
     });
 
     this.storeService.getStores(0, 10).subscribe((res: any) => {
       this.stores = res.rows as any[];
+      this.loadedStore = true;
     })
 
     this.newService.getNews(0, 5).subscribe((res: any) => {
       this._news = res.rows;
-    }
-    );
+      this.loadedNew = true;
+    });
+
+    this.pubService.getPubs(0, 10).subscribe((res: any) => {
+      this.pubs = res.rows;
+      this.loadedPub = true;
+    });
   }
 
   public doRefresh(event: any) {

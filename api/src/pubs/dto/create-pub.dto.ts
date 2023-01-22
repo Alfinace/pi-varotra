@@ -6,5 +6,5 @@ export class CreatePubDto {
 	image: string;
 
 	@IsOptional()
-	lien: string;
+	link: string;
 }
