@@ -9,12 +9,23 @@ export class RatesService {
     @Inject('RATE_REPOSITORY')
     private rateRepository: typeof Rate,
   ) { }
-  create(createRateDto: CreateRateDto) {
+  create(createRateDto: any) {
     return this.rateRepository.create({ ...createRateDto });
   }
 
-  findAll() {
-    // return this.rateRepository.find
+  findAll(id: number) {
+    return this.rateRepository.findAll(
+      {
+        where: {
+          articleId: id
+        },
+        include: [
+          {
+            all: true,
+          }
+        ]
+      }
+    );
   }
 
   findOne(id: number) {

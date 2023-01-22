@@ -46,23 +46,21 @@
         <a href="http://">Voir plus</a>
       </div>
       <br>
+      <!-- <swiper [config]="configP"> -->
+      <div class=" d-flex ion-justify-content-between  ion-align-items-center ion-wrap" style="gap:15px ;">
+        <app-article style=" width: 48%;display: block;" *ngFor="let item of articles" [article]="item">
+        </app-article>
+      </div>
+      <!-- </swiper> -->
+      <br>
+
+      <!-- <br>
       <swiper [config]="configP">
         <ng-template *ngFor="let item of articles" swiperSlide>
           <app-article [article]="item"></app-article>
         </ng-template>
       </swiper>
-      <br>
-      <!-- <div class=" d-flex ion-justify-content-between  ion-align-items-center">
-          <h3>Top Rated</h3>
-          <a href="http://">Voir plus</a>
-        </div> -->
-      <br>
-      <swiper [config]="configP">
-        <ng-template *ngFor="let item of articles" swiperSlide>
-          <app-article [article]="item"></app-article>
-        </ng-template>
-      </swiper>
-      <br>
+      <br> -->
       <div class=" d-flex ion-justify-content-between  ion-align-items-center">
         <h3>Produit special</h3>
         <a href="http://">Voir plus</a>

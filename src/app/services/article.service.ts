@@ -8,14 +8,21 @@ export class ArticleService {
 
   constructor(private http: HttpService) { }
 
-  public getArticles(page: number, size: number) {
-    return this.http.get('articles?page=' + page + '&size=' + size);
+  public rateArticle(data: any) {
+    return this.http.post(`rates`, data);
+  }
+
+  public getArticles(page: number, size: number, cagetoryId?: number) {
+    return this.http.get('articles?page=' + page + '&size=' + size + '&cagetoryId=' + cagetoryId);
   }
 
   public getArticlesCurrentUser(page: number, size: number) {
     return this.http.get('articles/current-user?page=' + page + '&size=' + size);
   }
 
+  public getRateArticle(id: number) {
+    return this.http.get(`rates/${id}/article`);
+  }
 
   public getArticle(id: number) {
     return this.http.get(`articles/${id}`);
