@@ -32,7 +32,6 @@ export class ArticleController {
   @Roles(Role.USER, Role.ADMIN)
   @UseGuards(JwtAuthGuard, RoleGuard)
   async create(@Body() createArticleDto: CreateArticleDto, @User() user) {
-    console.log(user);
 
     return this.articleService.create({
       ...createArticleDto,
@@ -110,27 +109,30 @@ export class ArticleController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch('update/:id')
   async update(
     @Param('id') id: string,
-    @Body() updateArticleDto: UpdateArticleDto,
+    @Body() updateArticleDto: any,
     @User() user,
     @Res() response: Response,
   ) {
-    try {
-      let article = await this.articleService.findOne(+id);
-      if (article) {
-        if (article.get('owner') !== user.userId) {
-          throw new ForbiddenException("You don't have permission");
-        }
-        return response
-          .status(200)
-          .json(await this.articleService.update(+id, updateArticleDto));
+    console.log(user);
+
+    // try {
+    let article = await this.articleService.findOne(+id);
+    if (article) {
+      if (article.storeId !== user.storeId) {
+        throw new ForbiddenException("You don't have permission");
       }
-      throw new HttpException('Aricle not found', 404);
-    } catch (error) {
-      throw new HttpException("Can't update article", 500);
+      return response
+        .status(200)
+        .json(await this.articleService.update(+id, updateArticleDto));
     }
+    throw new HttpException('Aricle not found', 404);
+    // } catch (error) {
+    //   throw new HttpException(error, 500);
+    // }
   }
 
   @Delete(':id')

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ArticleService } from 'src/app/services/article.service';
 import { Article } from 'src/app/models/article.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-space-store',
@@ -12,7 +13,7 @@ import { Article } from 'src/app/models/article.model';
 export class SpaceStorePage implements OnInit {
   rows = 8;
 
-  produits: any = [];
+  produits: Article[] = [];
   totalRecords: number;
 
   constructor(
@@ -33,7 +34,6 @@ export class SpaceStorePage implements OnInit {
   public async addProduit() {
     const modal = await this.modalController.create({
       component: AddArticleComponent,
-      componentProps: { value: 123 }
     });
 
     await modal.present();
@@ -51,7 +51,20 @@ export class SpaceStorePage implements OnInit {
 
     await modal.present();
 
-    const data = await modal.onDidDismiss();
-    console.log(data)
+    let data = (await modal.onDidDismiss());
+    let ar = data.data as Article;
+    if (!ar) return;
+    console.log(data);
+
+    if (data.role === 'update') {
+      this.produits = this.produits.map((produit: Article) => {
+        if (produit.id === ar.id) {
+          return ar;
+        }
+        return produit;
+      })
+    } else {
+      this.produits.push(ar);
+    }
   }
 }
