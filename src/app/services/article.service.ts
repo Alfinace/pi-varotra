@@ -33,7 +33,7 @@ export class ArticleService {
   }
 
   public updateArticle(id: number, article: any) {
-    return this.http.put(`articles/${id}`, article);
+    return this.http.put(`articles/update/${id}`, article);
   }
 
   public deleteArticle(id: number) {

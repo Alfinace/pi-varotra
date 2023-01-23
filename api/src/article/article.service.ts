@@ -87,11 +87,26 @@ export class ArticleService {
     });
   }
 
-  update(id: number, article: UpdateArticleDto | any) {
+  async update(id: number, article: UpdateArticleDto | any) {
+    for (let index = 0; index < article.imageIdDeleted.length; index++) {
+      const element = article.imageIdDeleted[index];
+      this.imageArticleRepository.destroy({ where: { id: element } });
+    }
+    console.log(article);
+
+    if (article.images.length > 0) {
+      await this.imageArticleRepository.bulkCreate(
+        article.images.map(
+          (image) => ({ articleId: id, image: image }),
+          { returning: true },
+        ),
+      );
+    }
     return this.articleRepository.update(article, {
       where: { id },
       limit: 1,
     });
+
   }
 
   archive(id: number) {
