@@ -7,38 +7,42 @@
 		</ion-header>
 		<ion-content class=" sidebar ion-padding">
 			<ion-list>
-				<ion-item ion-button [routerLink]="['/admin/dashboard']" routerLinkActive="router-link-active">
+				<ion-item ion-button (click)="navigateTo('/admin/dashboard')" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="cellular"></ion-icon>
 					<ion-label>Tableau de bord</ion-label>
 				</ion-item>
-				<ion-item ion-button [routerLink]="['/admin/users']" routerLinkActive="router-link-active">
+				<ion-item ion-button (click)="navigateTo('/admin/users')" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="people"></ion-icon>
 					<ion-label>Utilisateur</ion-label>
 				</ion-item>
-				<ion-item ion-button [routerLink]="['/admin/stores']" routerLinkActive="router-link-active">
+				<ion-item ion-button (click)="navigateTo('/admin/stores')" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="storefront"></ion-icon>
 					<ion-label>Magasin</ion-label>
 				</ion-item>
-				<ion-item ion-button [routerLink]="['/admin/news']" routerLinkActive="router-link-active">
+				<ion-item ion-button (click)="navigateTo('/admin/news')" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="shield-checkmark"></ion-icon>
 					<ion-label>Gestion nouveau</ion-label>
 				</ion-item>
-				<ion-item ion-button [routerLink]="['/admin/list-article']" routerLinkActive="router-link-active">
+				<ion-item ion-button (click)="navigateTo('/admin/list-article')" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="ticket"></ion-icon>
 					<ion-label>Gestion article</ion-label>
 				</ion-item>
-				<ion-item ion-button [routerLink]="['/admin/categories']" routerLinkActive="router-link-active">
+				<ion-item ion-button (click)="navigateTo('/admin/categories')" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="color-palette"></ion-icon>
 					<ion-label>Gestion categorie</ion-label>
 				</ion-item>
-				<ion-item ion-button [routerLink]="['/admin/list-pub']" routerLinkActive="router-link-active">
+				<ion-item ion-button (click)="navigateTo('/admin/list-pub')" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="megaphone"></ion-icon>
 					<ion-label>Gestion publicité</ion-label>
 				</ion-item>
 
-				<ion-item ion-button [routerLink]="['/admin/admin-map']" routerLinkActive="router-link-active">
+				<ion-item ion-button (click)="navigateTo('/admin/admin-map')" routerLinkActive="router-link-active">
 					<ion-icon size="small" slot="start" color="light" name="map-outline"></ion-icon>
-					<ion-label>Visieulle sur la carte</ion-label>
+					<ion-label>Carte</ion-label>
+				</ion-item>
+				<ion-item ion-button (click)="navigateTo('/client')">
+					<ion-icon size="small" slot="start" color="light" name="return-up-back-outline"></ion-icon>
+					<ion-label>Retour sur le site</ion-label>
 				</ion-item>
 			</ion-list>
 		</ion-content>

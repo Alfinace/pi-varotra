@@ -1,5 +1,5 @@
 import { UserService } from 'src/app/services/user.service';
-import { IonModal, ModalController } from '@ionic/angular';
+import { AlertController, IonModal, ModalController } from '@ionic/angular';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
 import { SessionService } from 'src/app/services/session.service';
@@ -27,6 +27,7 @@ export class ParamsComponent implements OnInit {
     private modalController: ModalController,
     private uploadService: UploadService,
     private sessionService: SessionService,
+    private alertController: AlertController,
     private userService: UserService,
     private fb: FormBuilder
   ) {
@@ -116,5 +117,28 @@ export class ParamsComponent implements OnInit {
       }
       )
     })
+  }
+
+  async onLogout() {
+    const alert = await this.alertController.create({
+      header: 'Déconnexion!',
+      message: 'Voulez-vous vous déconnecter ?',
+      buttons: [
+        {
+          text: 'NON',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        }, {
+          text: 'OUI',
+          handler: () => {
+            this.sessionService.logout()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

@@ -36,6 +36,9 @@ export class ArticleService {
       limit = 10;
     }
     return this.articleRepository.findAndCountAll({
+      where: {
+        archived: false
+      },
       limit,
       offset,
       distinct: true,
@@ -60,6 +63,7 @@ export class ArticleService {
     return this.articleRepository.findAndCountAll({
       where: {
         categoryId: { [Op.in]: [filter.categorie] },
+        archived: false,
         unitPrice: { [Op.between]: [filter.range.lower, filter.range.upper] },
       },
       limit,
@@ -72,8 +76,17 @@ export class ArticleService {
 
   findAllByStore(storeId, offset: number, limit: number) {
     return this.articleRepository.findAndCountAll({
-      where: { storeId },
-      include: [ImageArticle],
+      where: { storeId, archived: false },
+      include: [ImageArticle,
+        {
+          model: Store,
+          as: 'store',
+          include: [{
+            model: User,
+            as: 'user',
+            attributes: ['address', 'avatar', 'contact', 'firstname', 'lastname', 'socialNetwork']
+          }],
+        }],
       limit,
       offset,
       distinct: true,
@@ -82,7 +95,8 @@ export class ArticleService {
   }
 
   findOne(id: number) {
-    return this.articleRepository.findByPk(id, {
+    return this.articleRepository.findOne({
+      where: { id, archived: false },
       include: [ImageArticle, Store],
     });
   }
@@ -110,7 +124,7 @@ export class ArticleService {
   }
 
   archive(id: number) {
-    return this.articleRepository.update({ deleted: true }, { where: { id } });
+    return this.articleRepository.update({ archived: true }, { where: { id } });
   }
 
   approve(id: number) {

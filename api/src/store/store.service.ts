@@ -35,7 +35,16 @@ export class StoreService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} store`;
+    return this.storeRepository.findByPk(id, {
+      include: [
+        { all: true },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['address', 'avatar', 'contact', 'firstname', 'lastname', 'socialNetwork']
+        }
+      ],
+    })
   }
 
   update(id: number, updateStoreDto: UpdateStoreDto) {

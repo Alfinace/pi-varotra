@@ -37,7 +37,7 @@ export class ArticleService {
   }
 
   public deleteArticle(id: number) {
-    return this.http.delete(`articles/${id}`);
+    return this.http.delete(`articles/delete/${id}`);
   }
 
   public getAndFitlerArticles(filter: any) {

@@ -12,11 +12,10 @@ export class StoreCardComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    console.log(this.store);
 
   }
 
   public onViewDetail() {
-    this.router.navigate(['client', 'store-detail', 6])
+    this.router.navigate(['client', 'store-detail', this.store.id])
   }
 }

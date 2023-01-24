@@ -12,6 +12,7 @@ export interface User {
 	rate?: number;
 	reviews?: number;
 	category?: any;
+	socialNetwork?: any[],
 	images?: any;
 	owner?: any;
 	contact?: string;
