@@ -24,3 +24,17 @@ th,
 td {
   font-size: 12px;
 }
+
+.btn-action {
+  padding: 5px 10px;
+  font-size: 10px;
+  border-radius: 3px;
+}
+.warning {
+  border: 1px solid var(--ion-color-secondary);
+  color: var(--ion-color-secondary);
+}
+.primary2 {
+  border: 1px solid var(--ion-color-primary);
+  color: var(--ion-color-primary);
+}

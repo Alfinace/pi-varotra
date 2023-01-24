@@ -63,6 +63,7 @@ export class AdminMapPage implements OnInit {
     // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     //   attribution: 'Map Test'
     // }).addTo(this.map);
+
     navigator.geolocation.getCurrentPosition((position) => {
       this.coordonnes = position.coords;
       this.map = L.map("map", {

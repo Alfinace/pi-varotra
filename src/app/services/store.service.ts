@@ -12,4 +12,11 @@ export class StoreService {
     return this.http.get('stores?page=' + page + '&size=' + size)
   }
 
+  getStoreOne(id: number) {
+    return this.http.get('stores/' + id)
+  }
+
+  getArticlesByStore(id: number, page: number, size: number) {
+    return this.http.get('articles/store/' + id + '?page=' + page + '&size=' + size)
+  }
 }

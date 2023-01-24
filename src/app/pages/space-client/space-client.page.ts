@@ -15,6 +15,7 @@ export class SpaceClientPage implements OnInit, AfterViewInit {
   @ViewChild('barCanvas') private barCanvas: ElementRef;
   barChart: any;
   currentUser: any;
+  loading: boolean = true;
   constructor(
     private modalController: ModalController,
     private sessionService: SessionService) { }
@@ -22,14 +23,19 @@ export class SpaceClientPage implements OnInit, AfterViewInit {
   ngOnInit() {
   }
   ngAfterViewInit() {
-    this.barChartMethod();
+    // this.barChartMethod();
   }
 
   ionViewWillEnter() {
+    this.loading = true
     this.sessionService.getInfoUser().subscribe((user: any) => {
       if (user) {
-        this.currentUser = user
+        this.currentUser = user;
+        this.loading = false
       }
+    }, (error) => {
+      console.log(error);
+      this.loading = false
     })
   }
 

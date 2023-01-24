@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -8,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class AdminPage implements OnInit {
   showFiller = false;
   showMenu: boolean;
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+
   }
 
 
@@ -18,4 +22,8 @@ export class AdminPage implements OnInit {
     this.showMenu = !this.showMenu;
   }
 
+  navigateTo(path: string) {
+    this.toggleMenu()
+    this.router.navigate([path])
+  }
 }

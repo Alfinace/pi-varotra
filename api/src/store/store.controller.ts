@@ -39,10 +39,10 @@ export class StoreController {
     }
 
     stores.rows = stores.rows.map((store) => {
-      console.log(store);
       store.logo = (store.logo && store.logo !== 'none') ? process.env.BASE_URL_IMAGE + store.logo : null;
       store.user.avatar = process.env.BASE_URL_IMAGE + store.user.avatar;
       store.user.socialNetwork = JSON.parse(store.user.socialNetwork);
+      store.articles = store.articles.filter(a => !a.archived)
       return store;
     })
 
@@ -50,8 +50,13 @@ export class StoreController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.storeService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    let store = await this.storeService.findOne(+id);
+    store.logo = (store.logo && store.logo !== 'none') ? process.env.BASE_URL_IMAGE + store.logo : null;
+    store.user.avatar = process.env.BASE_URL_IMAGE + store.user.avatar;
+    store.user.socialNetwork = JSON.parse(store.user.socialNetwork);
+    store.articles = store.articles.filter(a => !a.archived)
+    return store
   }
 
   @Patch(':id')

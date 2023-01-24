@@ -77,10 +77,30 @@ export class ArticleController {
     }
   }
 
-  @Get('user')
-  findAllByStore(@Query('size') limit: number, @Query('page') offset: number, @User() user) {
+  // @Get('user')
+  // @UseGuards(JwtAuthGuard)
+  // findAllByStore(@Query('size') limit: number, @Query('page') offset: number, @User() user) {
+  //   try {
+  //     return this.articleService.findAllByStore(user.storeId, offset, limit);
+  //   } catch (error) {
+  //     throw new HttpException("Can't get articles", 500);
+  //   }
+  // }
+
+  @Get('store/:id')
+  async findAllByStore(@Query('size') limit: number, @Query('page') offset: number, @Param('id') id: string) {
     try {
-      return this.articleService.findAllByStore(user.storeId, offset, limit);
+      let articles = await this.articleService.findAllByStore(id, offset, limit);
+      articles.rows = articles.rows.map((article) => {
+        article.images = article.images.map(i => {
+          i.image = process.env.BASE_URL_IMAGE + i.image;
+          return i
+        })
+        article.store.user.socialNetwork = JSON.parse(article.store.user.socialNetwork);
+        article.store.logo = (article.store.logo && article.store.logo !== 'none') ? process.env.BASE_URL_IMAGE + article.store.logo : null;
+        return article;
+      })
+      return articles;
     } catch (error) {
       throw new HttpException("Can't get articles", 500);
     }
@@ -99,6 +119,7 @@ export class ArticleController {
   async findOne(@Param('id') id: string) {
     try {
       var article = await this.articleService.findOne(+id);
+      if (!article) throw new HttpException('Article not found', 404)
       article.images = article.images.map(i => {
         i.image = process.env.BASE_URL_IMAGE + i.image;
         return i
@@ -135,30 +156,30 @@ export class ArticleController {
     // }
   }
 
-  @Delete(':id')
-  @Roles(Role.USER)
-  @UseGuards(JwtAuthGuard, RoleGuard)
-  async remove(
-    @Param('id') id: string,
-    @User() user,
-    @Res() response: Response,
-  ) {
-    try {
-      let article = await this.articleService.findOne(+id);
-      if (article) {
-        if (article.get('owner') !== user.userId) {
-          throw new ForbiddenException("You don't have permission");
-        }
-        return response.status(200).json(await this.articleService.remove(+id));
-      }
-      throw new HttpException('Aricle not found', 404);
-    } catch (error) {
-      throw new HttpException("Can't delete article", 500);
-    }
-  }
+  // @Delete(':id')
+  // @Roles(Role.USER)
+  // @UseGuards(JwtAuthGuard, RoleGuard)
+  // async remove(
+  //   @Param('id') id: string,
+  //   @User() user,
+  //   @Res() response: Response,
+  // ) {
+  //   try {
+  //     let article = await this.articleService.findOne(+id);
+  //     if (article) {
+  //       if (article.get('owner') !== user.userId) {
+  //         throw new ForbiddenException("You don't have permission");
+  //       }
+  //       return response.status(200).json(await this.articleService.remove(+id));
+  //     }
+  //     throw new HttpException('Aricle not found', 404);
+  //   } catch (error) {
+  //     throw new HttpException("Can't delete article", 500);
+  //   }
+  // }
 
-  @Patch('archive/:id')
-  @Roles(Role.USER)
+  @Delete('delete/:id')
+  @Roles(Role.USER, Role.CONTROLLER, Role.SUPER_ADMIN, Role.ADMIN)
   @UseGuards(JwtAuthGuard, RoleGuard)
   async archive(
     @Param('id') id: number,
@@ -168,12 +189,15 @@ export class ArticleController {
     try {
       let article = await this.articleService.findOne(+id);
       if (article) {
-        if (article.get('owner') !== user.userId) {
+        console.log(article);
+        console.log(user);
+
+        if (article.storeId !== user.storeId) {
           throw new ForbiddenException("You don't have permission");
         }
         return response
           .status(200)
-          .json(await this.articleService.update(+id, { archived: true }));
+          .json(await this.articleService.archive(+id));
       }
       throw new HttpException('Aricle not found', 404);
     } catch (error) {

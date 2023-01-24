@@ -12,6 +12,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartComponent implements OnInit {
   public paniers: any[] = []
+  public loading: boolean = true;
   constructor(
     private modalController: ModalController,
     private cartService: CartService,
@@ -41,19 +42,22 @@ export class CartComponent implements OnInit {
       let cart = carts[i];
       let promise = new Promise((resolve, reject) => {
         this.articleService.getArticle(cart.articleId).toPromise().then(c => {
-          if (c) {
+          if (!c.archived) {
             cart = { ...cart, ...c }
             resolve(cart)
           } else {
+            this.cartService.removeCart(cart.articleId)
             resolve(null)
           }
         }).catch(err => {
-          reject(null)
+          this.cartService.removeCart(cart.articleId)
+          resolve(null)
         })
       })
       promiseArray.push(promise)
     }
     let data = await Promise.all(promiseArray) as Cart[]
+    data = data.filter(d => d != null)
     for (let i = 0; i < data.length; i++) {
       const p = data[i];
       let key = p.storeId?.toString()
@@ -66,6 +70,7 @@ export class CartComponent implements OnInit {
     }
     let pToArray = Object.entries(panierObject);
     pToArray.forEach(([key, value]) => this.paniers.push(value));
+    this.loading = false;
   }
 
 

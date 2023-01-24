@@ -10,6 +10,7 @@ export interface Store {
 	contact?: string,
 	status?: string,
 	userId?: number,
+	user: User,
 	articles: Article[],
 	createdAt?: string
 }

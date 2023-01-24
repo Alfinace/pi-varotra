@@ -78,13 +78,7 @@
               Stock
             </div>
           </th>
-
-          <th style="width: 8rem">
-            <div class="p-d-flex p-jc-between p-ai-center">
-              status
-            </div>
-          </th>
-          <th style="width: 8rem">
+          <th>
             <div class="p-d-flex p-jc-between p-ai-center">
               Actions
             </div>
@@ -103,12 +97,9 @@
             <span class="image-text">{{produit.stock}}</span>
           </td>
           <td>
-            <span class="image-text">{{produit.status}}</span>
-          </td>
-          <td>
-            <div class="d-flex ion-justify-content-around" style="width:50px">
-              <ion-icon (click)="updateProduit(produit)" name="create-outline"></ion-icon>
-              <ion-icon name="trash-outline"></ion-icon>
+            <div class="d-flex ion-justify-content-around" style="gap:15px">
+              <span class="warning btn-action" (click)="updateProduit(produit)"> Modifier</span>
+              <span class="primary2 btn-action" (click)="deleteProduit(produit)"> Supprimer</span>
             </div>
           </td>
         </tr>
