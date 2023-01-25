@@ -1,0 +1,61 @@
+<ion-content class="ion-padding">
+  <br>
+  <br>
+  <h3 class="ion-text-center">Paiement</h3>
+  <p-steps [model]="items" [styleClass]="'stepper'" [activeIndex]="stepper"></p-steps>
+  <br>
+  <br>
+  <ion-slides mode="ios" pager="true" #slider [options]="slideOpts">
+    <ion-slide>
+      <div class="d-flex-col">
+        <ion-item class="item-cart" *ngFor="let item of paniers">
+          <div class=" d-flex ion-justify-content-between ion-margin-vertical" style="width: 100%">
+            <div class="d-flex ion-justify-content-start" style="gap: 10px">
+              <div class="image-preview">
+                <img [src]="item.images[0].image" />
+              </div>
+              <div class="cart-image">
+                <h5> {{item.designation}} </h5>
+                <p style="display: flex;gap: 5px;align-items: flex-end;">
+                  <span style="font-family: Serif;font-size: 20px;" class="init">π</span>
+                  <span style="font-family: 'DM Sans Medium';font-size: 15px" class="price">
+                    {{item.unitPrice *item.quantity}}
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div
+              style="display: flex;flex-direction: row; align-items: center;justify-content: space-around;gap: 30px;">
+              <span style="font-size:20px;min-width: 50px;text-align: center;">
+                {{item.quantity}}
+              </span>
+            </div>
+          </div>
+        </ion-item>
+        <br>
+        <br>
+        <ion-row class="btn-row mt">
+          <ion-col size="12">
+            <button class="ion-activatable ripple-parent custom-parent btn-primary">
+              <div style="display: flex; gap: 10px" class="ion-align-items-center">
+                <span class="custom-child">Suivant</span>
+                <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
+              </div>
+              <ion-ripple-effect></ion-ripple-effect>
+            </button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <h1>
+        Not implemented yet
+      </h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>
+        Not implemented yet
+      </h1>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

@@ -23,22 +23,23 @@
                 <div class="cart-image">
                   <h5> {{item.designation}} </h5>
                   <p style="display: flex;gap: 5px;align-items: flex-end;">
-                    <span style="font-family: Serif;font-size: 30px;" class="init">π</span>
-                    <span style="font-family: 'DM Sans Medium';font-size: 25px" class="price">
+                    <span style="font-family: Serif;font-size: 20px;" class="init">π</span>
+                    <span style="font-family: 'DM Sans Medium';font-size: 15px" class="price">
                       {{item.unitPrice *item.quantity}}
                     </span>
                   </p>
                 </div>
               </div>
-              <div style="display: flex;flex-direction: column; align-items: center;justify-content: space-around;">
-                <ion-icon size="large" class="pointer" (click)="updateQuantity(item,item.quantity+1,i,j)"
-                  color="primary" name="add-circle-outline">
+              <div
+                style="display: flex;flex-direction: row; align-items: center;justify-content: space-around;gap: 30px;">
+                <ion-icon size="small" class="pointer" (click)="updateQuantity(item,item.quantity+1,i,j)"
+                  color="primary" name="add-outline">
                 </ion-icon>
-                <span style="font-size:15px">
+                <span style="font-size:20px;min-width: 50px;text-align: center;">
                   {{item.quantity}}
                 </span>
-                <ion-icon size="large" class="pointer" (click)="updateQuantity(item,item.quantity-1,i,j)" color="danger"
-                  name="remove-circle-outline"></ion-icon>
+                <ion-icon size="small" class="pointer" (click)="updateQuantity(item,item.quantity-1,i,j)" color="danger"
+                  name="remove-outline"></ion-icon>
               </div>
             </div>
           </ion-item>
@@ -60,9 +61,9 @@
         </div>
         <ion-row class="btn-row mt">
           <ion-col size="12">
-            <button class="ion-activatable ripple-parent custom-parent btn-primary">
+            <button (click)="checkout(i+1)" class="ion-activatable ripple-parent custom-parent btn-primary">
               <ng-container *ngIf="true;else templateLoading">
-                Commander
+                Passer le commande
               </ng-container>
               <ng-template #templateLoading>
                 <ion-spinner name="circular" style="color:#FFF"></ion-spinner>

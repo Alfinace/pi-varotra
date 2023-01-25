@@ -46,6 +46,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/new/new.module').then(m => m.NewPageModule)
   }
 
+
 ];
 
 @NgModule({
