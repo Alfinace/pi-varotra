@@ -77,7 +77,7 @@ export class ListNewPage implements OnInit {
   add() {
     this.ref = this.dialogService.open(AddNewComponent, {
       header: 'Publier une nouvelle',
-      width: '50%',
+      width: '90%',
       height: '100%',
       contentStyle: { "overflow": "auto" },
       baseZIndex: 10000,

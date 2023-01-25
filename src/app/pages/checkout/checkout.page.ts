@@ -1,30 +1,56 @@
-import { LocalstorageService } from 'src/app/services/localstorage.service';
-import { Component, OnInit } from '@angular/core';
-import { ArticleService } from 'src/app/services/article.service';
-import { ModalController } from '@ionic/angular';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IonSlides, ModalController } from '@ionic/angular';
 import { Cart } from 'src/app/models/cart.model';
+import { ArticleService } from 'src/app/services/article.service';
 import { CartService } from 'src/app/services/cart.service';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss'],
+  selector: 'app-checkout',
+  templateUrl: './checkout.page.html',
+  styleUrls: ['./checkout.page.scss'],
 })
-export class CartComponent implements OnInit {
+export class CheckoutPage implements OnInit, AfterViewInit {
+
   public paniers: any[] = []
+  public id: number;
+  public stepper: number = 0;
   public loading: boolean = true;
+  items: any[];
   constructor(
     private modalController: ModalController,
-    private router: Router,
     private cartService: CartService,
+    private route: ActivatedRoute,
+    private router: Router,
     private articleService: ArticleService) { }
-
+  @ViewChild('slider') slider: IonSlides;
+  public slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  }
   async ngOnInit() {
-    var carts = this.cartService.getAllCartData()
-    this.mappingData(carts)
+    this.route.params.subscribe(params => {
+      if (parseInt(params['id']) > 0) {
+        this.id = parseInt(params['id']) - 1;
+        var carts = this.cartService.getAllCartData()
+        this.mappingData(carts)
+      } else {
+        this.router.navigate(['client/space-client'])
+      }
+      this.items = [
+        { label: 'Mon commande' },
+        { label: 'Information de livraison' },
+        { label: 'Paiment' }
+      ];
+    });
   }
 
+  ngAfterViewInit(): void {
+    this.slider.ionSlideDidChange.subscribe(async () => {
+      this.stepper = await this.slider.getActiveIndex();
+    });
+
+  }
 
   close() {
     this.modalController.dismiss()
@@ -40,6 +66,10 @@ export class CartComponent implements OnInit {
   async mappingData(carts: Cart[],) {
     var panierObject = {}
     var promiseArray: any[] = []
+    if (carts.length == 0) {
+      this.router.navigate(['client/space-client']);
+      return
+    }
     for (let i = 0; i < carts.length; i++) {
       let cart = carts[i];
       let promise = new Promise((resolve, reject) => {
@@ -62,6 +92,7 @@ export class CartComponent implements OnInit {
     data = data.filter(d => d != null)
     for (let i = 0; i < data.length; i++) {
       const p = data[i];
+
       let key = p.storeId?.toString()
       if (!panierObject.hasOwnProperty(`${key}`)) {
         panierObject = {
@@ -71,7 +102,10 @@ export class CartComponent implements OnInit {
       }
     }
     let pToArray = Object.entries(panierObject);
-    pToArray.forEach(([key, value]) => this.paniers.push(value));
+    this.paniers.push(pToArray[this.id][1]);
+    this.paniers = this.paniers[0]
+    console.log(this.paniers);
+
     this.loading = false;
   }
 
@@ -92,9 +126,21 @@ export class CartComponent implements OnInit {
     this.paniers = this.paniers.filter(p => p.length > 0)
   }
 
-  checkout(i: number) {
-    this.router.navigate(['/client/space-client/checkout', i])
-    this.modalController.dismiss()
+  async next() {
+    this.slider.lockSwipes(false);
+    this.slider.slideNext();
+    this.stepper = await this.slider.getActiveIndex();
+    this.slider.lockSwipes(true);
+  }
+
+  async prev() {
+    if (await this.slider.getActiveIndex() == 0) {
+      this.close();
+    }
+    this.slider.lockSwipes(false);
+    this.slider.slidePrev();
+    this.stepper = await this.slider.getActiveIndex();
+    this.slider.lockSwipes(true);
   }
 
 }

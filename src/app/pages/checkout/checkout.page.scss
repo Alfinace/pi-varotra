@@ -1,3 +1,22 @@
+:host ::ng-deep .stepper {
+  .p-steps-title {
+    font-size: 10px;
+  }
+  .p-steps-current {
+    .p-steps-title {
+      color: var(--ion-color-primary) !important;
+    }
+    .p-steps-number {
+      background-color: var(--ion-color-primary) !important;
+      color: #fff;
+    }
+  }
+}
+
+ion-slides {
+  height: calc(100% - 157px);
+}
+
 .cart-empty {
   height: 100%;
   display: flex;
@@ -33,4 +52,15 @@ ion-item {
 .item-cart {
   box-shadow: -1px 6px 7px 0px #f5f4f4;
   border-radius: 10px;
+}
+.d-flex-col {
+  width: 100%;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+.custom-child {
+  font-size: 18px;
 }
