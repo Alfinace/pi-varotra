@@ -93,7 +93,7 @@ export class CartComponent implements OnInit {
   }
 
   checkout(i: number) {
-    this.router.navigate(['/client/space-client/checkout', i])
+    this.router.navigate(['/checkout', i])
     this.modalController.dismiss()
   }
 

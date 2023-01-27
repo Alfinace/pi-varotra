@@ -1,5 +1,6 @@
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+  <ion-refresher style="top: 58px" slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60"
+    pullMax="120">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ng-container
@@ -150,27 +151,21 @@
       <br>
       <br>
     </div>
+    <div class="ion-margin-vertical ion-padding-start">
+      <ion-skeleton-text [animated]="true" style="width: 100px;height: 20px;"></ion-skeleton-text>
+    </div>
     <div class="ion-padding-horizontal d-flex flex-col">
-      <div class=" d-flex ion-justify-content-between ion-align-items-center">
-        <ion-skeleton-text [animated]="true" style="width: 70px;height: 20px;"></ion-skeleton-text>
-      </div>
-      <div class="d-flex ion-justify-content-between ion-align-items-center">
-        <div>
+      <div class="d-flex ion-justify-content-between ion-align-items-center" *ngFor="let item of [1,1,1]">
+        <div class="d-flex flex-col" style="width: 70%;gap: 10px;">
           <ion-skeleton-text [animated]="true" style="width: 30%;height: 20px;"></ion-skeleton-text>
-          <ion-skeleton-text [animated]="true" style="width:80%;height: 20px;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="true" style="width:100%;height: 15px;"></ion-skeleton-text>
         </div>
-        <ion-thumbnail slot="start">
-          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-        </ion-thumbnail>
+        <ion-skeleton-text [animated]="true" style="width: 70px;height: 70px;"></ion-skeleton-text>
       </div>
-      <ion-row class="btn-row mt">
-        <ion-col size="12">
-          <button [routerLink]="['/client/new']" class="ion-activatable ripple-parent custom-parent btn-primary">
-            <ion-label>Voir plus</ion-label>
-            <ion-ripple-effect></ion-ripple-effect>
-          </button>
-        </ion-col>
-      </ion-row>
+      <br>
+      <ion-skeleton-text [animated]="true" style="width: 100%;height: 50px;"></ion-skeleton-text>
+      <br>
+      <br>
     </div>
   </ng-template>
 </ion-content>

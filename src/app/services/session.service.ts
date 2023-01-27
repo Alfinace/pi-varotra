@@ -30,15 +30,15 @@ export class SessionService {
   async getSessionStatus() {
     try {
       const token: string = this.localStorageService.getItem('token');
-
       if (!token) {
         this.logout();
+        return false;
       } else {
-        await this.initSession(token);
+        let d = await this.initSession(token);
+        return true;
       }
     } catch (e) {
-      console.log();
-
+      return false;
     }
   }
 
