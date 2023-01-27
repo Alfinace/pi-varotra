@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Cart } from 'src/app/models/cart.model';
@@ -10,8 +11,8 @@ import { CartService } from 'src/app/services/cart.service';
   templateUrl: './checkout.page.html',
   styleUrls: ['./checkout.page.scss'],
 })
-export class CheckoutPage implements OnInit, AfterViewInit {
-
+export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
+  public paymentForm: FormGroup
   public paniers: any[] = []
   public id: number;
   public stepper: number = 0;
@@ -19,6 +20,7 @@ export class CheckoutPage implements OnInit, AfterViewInit {
   items: any[];
   constructor(
     private modalController: ModalController,
+    private fb: FormBuilder,
     private cartService: CartService,
     private route: ActivatedRoute,
     private router: Router,
@@ -29,7 +31,16 @@ export class CheckoutPage implements OnInit, AfterViewInit {
     speed: 400
   }
   async ngOnInit() {
+
+    this.paymentForm = this.fb.group({
+      panier: ['', Validators.required],
+      address: [''],
+      fullname: [''],
+      city: [''],
+      contact: [''],
+    })
     this.route.params.subscribe(params => {
+      this.paniers = []
       if (parseInt(params['id']) > 0) {
         this.id = parseInt(params['id']) - 1;
         var carts = this.cartService.getAllCartData()
@@ -42,7 +53,13 @@ export class CheckoutPage implements OnInit, AfterViewInit {
         { label: 'Information de livraison' },
         { label: 'Paiment' }
       ];
+      console.log(this.paymentForm.value);
+
     });
+  }
+
+  ngOnDestroy(): void {
+    // this.route.params.e
   }
 
   ngAfterViewInit(): void {
@@ -105,6 +122,10 @@ export class CheckoutPage implements OnInit, AfterViewInit {
     this.paniers.push(pToArray[this.id][1]);
     this.paniers = this.paniers[0]
     console.log(this.paniers);
+    this.paymentForm.patchValue({
+      panier: [...this.paniers]
+    })
+    console.log(this.paymentForm.value);
 
     this.loading = false;
   }

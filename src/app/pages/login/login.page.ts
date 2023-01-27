@@ -2,7 +2,7 @@ import { ToastService } from './../../services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from 'src/app/services/http.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { UserService } from 'src/app/services/user.service';
@@ -22,17 +22,20 @@ export class LoginPage implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     type: new FormControl('simple'),
   });
+  reditectTo: string | null;
   constructor(
     private toastService: ToastService,
     private http: HttpService,
     private router: Router,
     private userService: UserService,
     private sessionService: SessionService,
+    private route: ActivatedRoute,
     private localstorageService: LocalstorageService,
     private paymentService: PaymentService,
   ) { }
 
   ngOnInit() {
+    this.reditectTo = this.route.snapshot.queryParams.redirectTo || null;
   }
 
   public async login() {
@@ -47,7 +50,7 @@ export class LoginPage implements OnInit {
                 this.sessionService.getSessionStatus();
                 this.isSubmited = false;
                 this.toastService.show('success', 'Connexion réussie');
-                this.router.navigate(['/client']);
+                this.router.navigate([this.reditectTo || '/client']);
               }, (err: any) => {
                 console.log(err);
                 this.toastService.show('dark', 'Email ou mot de passe incorrect');
@@ -73,7 +76,7 @@ export class LoginPage implements OnInit {
           this.sessionService.getSessionStatus();
           this.isSubmited = false;
           this.toastService.show('success', 'Connexion réussie');
-          this.router.navigate(['/admin']);
+          this.router.navigate([this.reditectTo || '/client']);
         }
           , (err: any) => {
             console.log(err);

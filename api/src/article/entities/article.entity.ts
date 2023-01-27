@@ -42,7 +42,7 @@ export class Article extends Model {
   @Column({ type: DataType.INTEGER })
   stock: number;
 
-  @Column({ field: 'unit_price', type: DataType.DECIMAL, allowNull: false })
+  @Column({ field: 'unit_price', type: DataType.DOUBLE, allowNull: false })
   unitPrice: number;
   @Column({ type: DataType.TEXT })
   detail: string;

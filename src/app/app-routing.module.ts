@@ -2,6 +2,7 @@ import { AdminPage } from './layouts/admin/admin.page';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ClientPage } from './layouts/client/client.page';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate: [AuthGuard],
     component: AdminPage,
     children: [
       {
@@ -23,6 +25,11 @@ const routes: Routes = [
         loadChildren: () => import('./layouts/admin/admin.module').then(m => m.AdminPageModule)
       }
     ]
+  },
+  {
+    path: 'checkout/:id',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/checkout/checkout.module').then(m => m.CheckoutPageModule)
   },
   {
     path: 'get-started',

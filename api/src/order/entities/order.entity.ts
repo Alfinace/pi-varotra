@@ -32,8 +32,8 @@ export class Order extends Model {
   @Column({ type: DataType.DECIMAL, field: 'total_amount' })
   totalAmount: number;
 
-  @Column({ type: DataType.DATE, field: 'created_at' })
-  delivered?: Date;
+  @Column({ type: DataType.DATE, field: 'delivered' })
+  delivered?: string;
 
   @Column({ type: DataType.DATE, field: 'created_at' })
   createdAt?: Date;

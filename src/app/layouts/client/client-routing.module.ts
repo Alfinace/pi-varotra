@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'space-client',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../../pages/space-client/space-client.module').then(m => m.SpaceClientPageModule)
   }
 ];

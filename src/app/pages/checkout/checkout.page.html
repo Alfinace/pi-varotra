@@ -1,7 +1,18 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/client/home']" routerLinkActive="router-link-active">
+        <ion-icon slot="start" name="chevron-back-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <h3 class="ion-text-center">Paiement</h3>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content class="ion-padding">
   <br>
   <br>
-  <h3 class="ion-text-center">Paiement</h3>
   <p-steps [model]="items" [styleClass]="'stepper'" [activeIndex]="stepper"></p-steps>
   <br>
   <br>
@@ -48,9 +59,37 @@
       </div>
     </ion-slide>
     <ion-slide>
-      <h1>
-        Not implemented yet
-      </h1>
+      <div class="d-flex-col">
+        <form [formGroup]="paymentForm">
+          <ion-item>
+            <ion-label position="floating">Nom et prémon</ion-label>
+            <ion-input required formControlName="fullname" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Address de livraison</ion-label>
+            <ion-input required formControlName="contact" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Contact rapide</ion-label>
+            <ion-input required formControlName="address" type="text" placeholder="03488...."></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Ville</ion-label>
+            <ion-input required formControlName="city" type="text"></ion-input>
+          </ion-item>
+          <ion-row class="btn-row mt">
+            <ion-col size="12">
+              <button [disabled]="paymentForm.invalid" class="ion-activatable ripple-parent custom-parent btn-primary">
+                <div style="display: flex; gap: 10px" class="ion-align-items-center">
+                  <span class="custom-child">Suivant</span>
+                  <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
+                </div>
+                <ion-ripple-effect></ion-ripple-effect>
+              </button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </div>
     </ion-slide>
     <ion-slide>
       <h1>

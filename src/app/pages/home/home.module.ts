@@ -10,6 +10,7 @@ import { PubCardModule } from 'src/app/shared/components/widgets/pub-card/pub-ca
 import { ArticleModule } from 'src/app/shared/components/widgets/article/article.module';
 import { StoreCardModule } from 'src/app/shared/components/widgets/store-card/store-card.module';
 import { NewDetailModule } from 'src/app/shared/components/modals/new-detail/new-detail.module';
+import { CartModule } from 'src/app/shared/components/modals/cart/cart.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { NewDetailModule } from 'src/app/shared/components/modals/new-detail/new
     IonicModule,
     HomePageRoutingModule,
     SwiperModule,
+    CartModule,
     PubCardModule,
     NewCardModule,
     NewDetailModule,

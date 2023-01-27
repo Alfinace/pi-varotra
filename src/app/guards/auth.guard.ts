@@ -23,17 +23,24 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> {
+  ): Promise<boolean> {
     return this._sessionService
       .getSessionStatus()
-      .pipe(take(1), map((x) => {
+      .then((x) => {
         if (!x) {
-          this._router.navigate(['/login'])
+          var url = '';
+          console.log(window.location.hostname);
+          for (let index = 0; index < route.url.length; index++) {
+            const element = route.url[index];
+            url += '/' + element.path;
+          }
+          console.log(url);
+
+          this._router.navigateByUrl('/login?redirectTo=' + url);
           return false;
         } else {
-          return true
+          return true;
         }
       })
-      );
   }
 }

@@ -8,6 +8,9 @@ import { SwiperComponent } from 'swiper/angular';
 import { ArticleService } from 'src/app/services/article.service';
 import { StoreService } from 'src/app/services/store.service';
 import { PubService } from 'src/app/services/pub.service';
+import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { CartComponent } from 'src/app/shared/components/modals/cart/cart.component';
 SwiperCore.use([Autoplay, Keyboard]);
 @Component({
   selector: 'app-home',
@@ -60,17 +63,28 @@ export class HomePage implements OnInit, AfterViewInit {
     private categoryService: CategorieService,
     private articleService: ArticleService,
     private newService: NewService,
+    private route: ActivatedRoute,
+    private modalController: ModalController,
     private pubService: PubService,
     private storeService: StoreService
   ) { }
   ngOnInit() {
 
   }
+  // ionViewWillEnter() {
+  //   this.route.params.subscribe(async params => {
+  //     if (params['state'] === 'cart') {
+  //       const modal = await this.modalController.create({
+  //         component: CartComponent,
+  //         componentProps: { value: 123 }
+  //       });
 
+  //       await modal.present();
+  //     }
+  //   });
+  // }
   public doRefresh(event: any) {
-    setTimeout(() => {
-      event.target.complete();
-    }, 5000);
+    this.fetchData(event)
   }
 
   onSwiper(swiper: any) {
@@ -81,29 +95,36 @@ export class HomePage implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.swiperComponent.swiperRef.autoplay.running = true;
-    this.categoryService.getCategories().toPromise().then((res: any) => {
-      this.categories = res.rows;
-      this.loadedCategorie = true;
-    });
+    this.fetchData()
+  }
 
-    this.articleService.getArticles(0, 10).toPromise().then((res: any) => {
-      this.articles = res.rows;
-      this.loadedArticle = true;
-    });
-
-    this.storeService.getStores(0, 10).toPromise().then((res: any) => {
-      this.stores = res.rows as any[];
-      this.loadedStore = true;
-    })
-
-    this.newService.getNews(0, 5).toPromise().then((res: any) => {
-      this._news = res.rows;
-      this.loadedNew = true;
-    });
-
+  fetchData(e?: any) {
     this.pubService.getPubs(0, 10).toPromise().then((res: any) => {
       this.pubs = res.rows;
       this.loadedPub = true;
-    });
+      this.categoryService.getCategories().toPromise().then((res: any) => {
+        this.categories = res.rows;
+        this.loadedCategorie = true;
+        this.articleService.getArticles(0, 10).toPromise().then((res: any) => {
+          this.articles = res.rows;
+          this.loadedArticle = true;
+          this.storeService.getStores(0, 10).toPromise().then((res: any) => {
+            this.stores = res.rows as any[];
+            this.loadedStore = true;
+            this.newService.getNews(0, 5).toPromise().then((res: any) => {
+              this._news = res.rows;
+              this.loadedNew = true;
+              if (e) {
+                e.target.complete();
+              }
+            });
+          })
+        });
+      });
+    })
+
+
+
+
   }
 }
