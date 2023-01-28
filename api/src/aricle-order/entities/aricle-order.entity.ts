@@ -22,7 +22,7 @@ export class ArticleOrder extends Model {
   orderId: number;
 
   @Column({ type: DataType.INTEGER })
-  quantite: number;
+  quantity: number;
 
   @Column({ type: DataType.DOUBLE })
   unitPrice: number;

@@ -7,7 +7,7 @@ import { Article } from 'src/article/entities/article.entity';
 import { User } from 'src/user/entities/user.entity';
 import { ArticleOrder } from 'src/aricle-order/entities/aricle-order.entity';
 import { ImageUser } from 'src/image-user/entities/image-user.entity';
-import { Payment } from 'src/payment/entities/payment.entity';
+import { PaymentU2A } from 'src/payment-u2-a/entities/payment-u2-a.entity';
 import { Store } from 'src/store/entities/store.entity';
 import { City } from 'src/city/entities/city.entity';
 import { Pub } from 'src/pubs/entities/pub.entity';
@@ -32,7 +32,7 @@ export const databaseProviders = [
         Order,
         ArticleOrder,
         ImageUser,
-        Payment,
+        PaymentU2A,
         Store,
         City,
         Nouveau,
@@ -40,7 +40,7 @@ export const databaseProviders = [
         Pub,
       ]);
       await sequelize.sync({
-        // alter: true,
+        alter: true,
       });
       return sequelize;
     },

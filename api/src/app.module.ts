@@ -1,4 +1,4 @@
-import { PaymentModule } from './payment/payment.module';
+import { PaymentU2AModule } from './payment-u2-a/payment-u2-a.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -19,6 +19,7 @@ import { CityModule } from './city/city.module';
 import { NouveauModule } from './nouveau/nouveau.module';
 import { PubsModule } from './pubs/pubs.module';
 import { RatesModule } from './rates/rates.module';
+import { PayementA2UModule } from './payement-a2-u/payement-a2-u.module';
 require('dotenv').config();
 
 @Module({
@@ -44,11 +45,12 @@ require('dotenv').config();
     ImageUserModule,
     AuthModule,
     StoreModule,
-    PaymentModule,
+    PaymentU2AModule,
     CityModule,
     NouveauModule,
     PubsModule,
-    RatesModule
+    RatesModule,
+    PayementA2UModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -4,13 +4,13 @@ import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { where } from 'sequelize';
-import { PaymentService } from 'src/payment/payment.service';
+import { PaymentU2AService } from 'src/payment-u2-a/payment-u2-a.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
-    private paymentService: PaymentService,
+    private paymentService: PaymentU2AService,
     private jwtService: JwtService,
   ) { }
 

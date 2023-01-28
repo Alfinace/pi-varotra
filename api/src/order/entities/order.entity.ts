@@ -10,8 +10,9 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 import { ArticleOrder } from 'src/aricle-order/entities/aricle-order.entity';
-import { Payment } from 'src/payment/entities/payment.entity';
+import { PaymentU2A } from 'src/payment-u2-a/entities/payment-u2-a.entity';
 import { User } from 'src/user/entities/user.entity';
+import { Store } from 'src/store/entities/store.entity';
 
 @Table({ updatedAt: false, tableName: 'orders' })
 export class Order extends Model {
@@ -19,21 +20,32 @@ export class Order extends Model {
   @Column({ field: 'user_id' })
   userId: number;
 
+  @ForeignKey(() => Store)
+  @Column({ field: 'store_id' })
+  storeId: number;
+
+  @BelongsTo(() => Store)
+  store: Store;
+
   @BelongsToMany(() => Article, () => ArticleOrder)
   articles: Article[];
 
-  @ForeignKey(() => Payment)
+  @ForeignKey(() => PaymentU2A)
   @Column({ field: 'payment_id' })
   paymentId: number;
 
-  @HasOne(() => Payment)
-  payment: Payment;
+  @HasOne(() => PaymentU2A)
+  payment: PaymentU2A;
 
   @Column({ type: DataType.DECIMAL, field: 'total_amount' })
   totalAmount: number;
 
   @Column({ type: DataType.DATE, field: 'delivered' })
   delivered?: string;
+
+  @Column({ field: 'deliverie_info' })
+  deliverieInfo?: string;
+
 
   @Column({ type: DataType.DATE, field: 'created_at' })
   createdAt?: Date;

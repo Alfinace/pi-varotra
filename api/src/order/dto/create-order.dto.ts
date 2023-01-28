@@ -1,9 +1,13 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateOrderDto {
   @IsNotEmpty()
-  totalAmonut: number;
+  totalAmount: number;
+
+  @IsOptional()
+  deliverieInfo: string;
+
 
   @IsNotEmpty()
-  articles: { id: number; quantite: number; unitPrice: number }[];
+  articles: { id: number; quantity: number; unitPrice: number, storeId: number, designation: string }[];
 }

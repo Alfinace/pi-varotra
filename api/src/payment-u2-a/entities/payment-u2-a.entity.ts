@@ -11,16 +11,19 @@ import {
 } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'payments',
+  tableName: 'payments_u_2_a',
   updatedAt: false,
 })
-export class Payment extends Model {
+export class PaymentU2A extends Model {
   @ForeignKey(() => Order)
   @Column({ field: 'order_id' })
   orderId: number;
 
   @BelongsTo(() => Order)
   order: Order;
+
+  @Column({ field: 'uid' })
+  uid: string;
 
   @ForeignKey(() => User)
   @Column({ field: 'user_id' })
@@ -29,7 +32,7 @@ export class Payment extends Model {
   @BelongsTo(() => User)
   user: User;
 
-  @Column({ type: DataType.STRING, field: 'pi_payement_id' })
+  @Column({ type: DataType.STRING, field: 'pi_payment_id' })
   piPaymentId: string;
 
   @Column({ type: DataType.STRING })

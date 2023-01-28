@@ -9,7 +9,7 @@ import {
   IsEmail,
   HasOne,
 } from 'sequelize-typescript';
-import { Payment } from 'src/payment/entities/payment.entity';
+import { PaymentU2A } from 'src/payment-u2-a/entities/payment-u2-a.entity';
 import { ImageUser } from 'src/image-user/entities/image-user.entity';
 import { Store } from 'src/store/entities/store.entity';
 
@@ -27,7 +27,7 @@ export class User extends Model {
   @Column
   avatar: string;
 
-  @Column({ field: 'uid', unique: true })
+  @Column({ field: 'uid' })
   uid: string;
 
   @Column({ field: 'access_token' })
@@ -58,8 +58,8 @@ export class User extends Model {
   @Column
   contact: string;
 
-  @Column({ field: 'public_key', unique: true })
-  publicKey: string;
+  // @Column({ field: 'public_key' })
+  // publicKey: string;
 
   @Column({ type: DataType.DATEONLY, allowNull: true })
   birthday?: Date;
@@ -107,8 +107,8 @@ export class User extends Model {
   @HasMany(() => ImageUser, { foreignKey: 'userId' })
   images: ImageUser[];
 
-  @HasMany(() => Payment, { foreignKey: 'userId' })
-  payments: Payment[];
+  @HasMany(() => PaymentU2A, { foreignKey: 'userId' })
+  payments: PaymentU2A[];
 
   @Column({ type: DataType.DATE, field: 'created_at' })
   createdAt?: Date;

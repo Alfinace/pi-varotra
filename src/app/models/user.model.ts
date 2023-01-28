@@ -16,7 +16,7 @@ export interface User {
 	images?: any;
 	owner?: any;
 	contact?: string;
-	publicKey?: string;
+	// publicKey?: string;
 	birthday?: string;
 	role?: string;
 	address?: string;
