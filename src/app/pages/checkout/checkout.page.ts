@@ -3,8 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonSlides, ModalController } from '@ionic/angular';
 import { Cart } from 'src/app/models/cart.model';
+import { Order } from 'src/app/models/order.model';
+import { User } from 'src/app/models/user.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { CartService } from 'src/app/services/cart.service';
+import { PaymentService } from 'src/app/services/payment.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,25 +17,43 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
   public paymentForm: FormGroup
+  public totalAmount: number = 0;
   public paniers: any[] = []
   public id: number;
   public stepper: number = 0;
   public loading: boolean = true;
   items: any[];
+  user: User;
   constructor(
     private modalController: ModalController,
     private fb: FormBuilder,
     private cartService: CartService,
+    private paimentService: PaymentService,
+    private sessionService: SessionService,
     private route: ActivatedRoute,
     private router: Router,
-    private articleService: ArticleService) { }
-  @ViewChild('slider') slider: IonSlides;
-  public slideOpts = {
-    initialSlide: 0,
-    speed: 400
-  }
-  async ngOnInit() {
+    private articleService: ArticleService) {
+    this.sessionService.getInfoUser().subscribe(user => {
+      console.log(user);
 
+      if (user) {
+        this.user = user
+      }
+    })
+  }
+  @ViewChild('slider') slider: IonSlides;
+  public slideOpts = {};
+
+  get f() {
+    return this.paymentForm.value
+  }
+
+
+  async ngOnInit() {
+    this.slideOpts = {
+      initialSlide: 0,
+      speed: 400
+    }
     this.paymentForm = this.fb.group({
       panier: ['', Validators.required],
       address: [''],
@@ -63,6 +85,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    this.slider.lockSwipes(true);
     this.slider.ionSlideDidChange.subscribe(async () => {
       this.stepper = await this.slider.getActiveIndex();
     });
@@ -105,11 +128,10 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
       })
       promiseArray.push(promise)
     }
-    let data = await Promise.all(promiseArray) as Cart[]
+    let data = await Promise.all(promiseArray) as any[]
     data = data.filter(d => d != null)
     for (let i = 0; i < data.length; i++) {
       const p = data[i];
-
       let key = p.storeId?.toString()
       if (!panierObject.hasOwnProperty(`${key}`)) {
         panierObject = {
@@ -121,7 +143,10 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     let pToArray = Object.entries(panierObject);
     this.paniers.push(pToArray[this.id][1]);
     this.paniers = this.paniers[0]
-    console.log(this.paniers);
+    for (let i = 0; i < this.paniers.length; i++) {
+      const p = this.paniers[i];
+      this.totalAmount += p.quantity * p.unitPrice
+    }
     this.paymentForm.patchValue({
       panier: [...this.paniers]
     })
@@ -164,4 +189,46 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     this.slider.lockSwipes(true);
   }
 
+  async onStartProcessPayment() {
+    const { panier } = this.paymentForm.value
+    let data = { ...this.paymentForm.value }
+    delete data.panier;
+    console.log(this.paymentForm);
+
+    let order: Order = {
+      totalAmount: this.totalAmount,
+      articles: panier.map((p: any) => {
+        return {
+          id: p.articleId,
+          quantity: p.quantity,
+          unitPrice: p.unitPrice,
+          storeId: p.storeId,
+          designation: p.designation
+        }
+      }),
+      deliverieInfo: JSON.stringify(data)
+    }
+    const newOrder = await this.paimentService.addOrder(order).toPromise();
+    let orderId: number = newOrder.dataValues.id;
+    var itemIds: number[] = []
+    var memo = ''
+    for (let i = 0; i < newOrder.articles.length; i++) {
+      const item = newOrder.articles[i];
+      itemIds.push(item.id);
+      memo += ` ${item.designation},`
+    }
+    memo += `#${orderId}`
+    console.log(
+      {
+        amount: newOrder.dataValues.totalAmount,
+        memo,
+        metadata: { orderId, itemIds }
+      }
+    );
+    this.paimentService.createPayment({
+      amount: newOrder.dataValues.totalAmount,
+      memo,
+      metadata: { orderId, itemIds }
+    })
+  }
 }

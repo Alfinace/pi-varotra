@@ -1,4 +1,4 @@
-import { PaymentModule } from './../payment/payment.module';
+import { PaymentU2AModule } from '../payment-u2-a/payment-u2-a.module';
 import { UserService } from './../user/user.service';
 import { jwtConstants } from './constants';
 import { forwardRef, Global, Module } from '@nestjs/common';
@@ -13,11 +13,11 @@ import { JwtStrategy } from './jwt.strategy';
 @Module({
   imports: [
     UserModule,
-    PaymentModule,
+    PaymentU2AModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '1h' },
+      signOptions: { expiresIn: '366d' },
     })
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],

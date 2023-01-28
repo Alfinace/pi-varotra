@@ -1,6 +1,7 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Length, Model, Table } from 'sequelize-typescript';
 import { Article } from 'src/article/entities/article.entity';
 import { ImageUser } from 'src/image-user/entities/image-user.entity';
+import { Order } from 'src/order/entities/order.entity';
 import { User } from 'src/user/entities/user.entity';
 
 
@@ -11,11 +12,14 @@ import { User } from 'src/user/entities/user.entity';
 export class Store extends Model {
 
 	@ForeignKey(() => User)
-	@Column({ field: 'user_id', unique: true})
+	@Column({ field: 'user_id', unique: true })
 	userId: number;
 
 	@HasMany(() => Article, { foreignKey: 'storeId' })
 	articles: Article[];
+
+	@HasMany(() => Order, { foreignKey: 'storeId' })
+	orders: Order[];
 
 	@HasMany(() => ImageUser, 'storeId')
 	images: ImageUser[];

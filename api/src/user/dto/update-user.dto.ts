@@ -23,6 +23,6 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   postalCode: string;
   @IsOptional()
   socialNetwork: string;
-  @IsOptional()
-  publicKey: string;
+  // @IsOptional()
+  // publicKey: string;
 }

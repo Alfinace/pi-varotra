@@ -20,7 +20,7 @@ import { Response } from 'express';
 import { AppService } from './app.service';
 import { storage } from './config/storage-config';
 import { templateSendCodeConfirm } from './config/templates/confirm-email';
-import { PaymentService } from './payment/payment.service';
+import { PaymentU2AService } from './payment-u2-a/payment-u2-a.service';
 import { User } from './auth/user.decorator';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 require('dotenv').config()
@@ -30,7 +30,7 @@ export class AppController {
     private readonly appService: AppService,
     private userService: UserService,
     private authService: AuthService,
-    private paymentService: PaymentService,
+    private paymentService: PaymentU2AService,
   ) { }
 
   @Get()

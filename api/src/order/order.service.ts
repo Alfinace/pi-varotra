@@ -11,25 +11,30 @@ export class OrderService {
     private orderRepository: typeof Order,
     @Inject('ARTICLE_ORDER_REPOSITORY')
     private articleOrderRepository: typeof ArticleOrder,
-  ) {}
+  ) { }
 
-  async create(createOrderDto: CreateOrderDto) {
+  async create(createOrderDto: CreateOrderDto, userId) {
     const newOrder = await this.orderRepository.create({
       ...createOrderDto,
+      storeId: createOrderDto.articles[0].storeId,
+      userId
     });
     const orderArticles = await this.articleOrderRepository.bulkCreate(
       createOrderDto.articles.map(
         (article) => ({
-          order_id: newOrder.id,
-          article_id: article.id,
-          quantite: article.quantite,
+          orderId: newOrder.id,
+          articleId: article.id,
+          quantity: article.quantity,
           unitPrice: article.unitPrice,
         }),
         { returning: true },
       ),
     );
+    let articles = createOrderDto.articles.map((a: any, i: number) => {
+      return { ...orderArticles[i].dataValues, designation: a.designation }
+    })
 
-    return { ...newOrder, articles: orderArticles };
+    return { ...newOrder, articles };
   }
 
   findAll() {
@@ -40,8 +45,8 @@ export class OrderService {
     return `This action returns a #${id} order`;
   }
 
-  update(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
+  update(id: number, data) {
+    return this.orderRepository.update(data, { where: { id } });
   }
 
   remove(id: number) {

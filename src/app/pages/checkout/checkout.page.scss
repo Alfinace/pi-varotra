@@ -11,10 +11,13 @@
       color: #fff;
     }
   }
+  .p-menuitem-link {
+    margin-top: -5px;
+  }
 }
 
 ion-slides {
-  height: calc(100% - 157px);
+  height: calc(100% - 57px);
 }
 
 .cart-empty {

@@ -7,6 +7,7 @@ import { SocialNetworkComponent } from '../social-network/social-network.compone
 import { OverlayEventDetail } from '@ionic/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-params',
@@ -14,12 +15,12 @@ import { UploadService } from 'src/app/services/upload.service';
   styleUrls: ['./params.component.scss'],
 })
 export class ParamsComponent implements OnInit {
-  @ViewChild('wallet') modalWaller: IonModal;
+  // @ViewChild('wallet') modalWaller: IonModal;
   @ViewChild('security') modalSecurity: IonModal;
 
   @Input() currentUser: any;
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
-  public publicKey: string;
+  // public publicKey: string;
   public updatePasswordForm: FormGroup;
 
   public isSubmited = false;
@@ -28,6 +29,7 @@ export class ParamsComponent implements OnInit {
     private uploadService: UploadService,
     private sessionService: SessionService,
     private alertController: AlertController,
+    private router: Router,
     private userService: UserService,
     private fb: FormBuilder
   ) {
@@ -35,7 +37,7 @@ export class ParamsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.publicKey = this.currentUser.publicKey;
+    // this.publicKey = this.currentUser.publicKey;
     this.updatePasswordForm = this.fb.group({
       password: ['', Validators.required],
       oldPassword: ['', Validators.required],
@@ -66,20 +68,20 @@ export class ParamsComponent implements OnInit {
 
 
 
-  cancel() {
-    this.modalWaller.dismiss(null, 'cancel');
-  }
+  // cancel() {
+  //   this.modalWaller.dismiss(null, 'cancel');
+  // }
 
   cancel2() {
     this.modalSecurity.dismiss(null, 'cancel');
   }
 
-  save() {
-    this.userService.updateUser({ publicKey: this.publicKey }).subscribe((res: any) => {
-      this.sessionService.updateInfoUser({ ...this.currentUser, publicKey: this.publicKey });
-      this.modalWaller.dismiss(this.publicKey, 'confirm');
-    })
-  }
+  // save() {
+  //   this.userService.updateUser({ publicKey: this.publicKey }).subscribe((res: any) => {
+  //     this.sessionService.updateInfoUser({ ...this.currentUser, publicKey: this.publicKey });
+  //     this.modalWaller.dismiss(this.publicKey, 'confirm');
+  //   })
+  // }
 
   save2() {
     if (this.updatePasswordForm.invalid) {
@@ -134,6 +136,8 @@ export class ParamsComponent implements OnInit {
           text: 'OUI',
           handler: () => {
             this.sessionService.logout()
+            this.router.navigate(['/client']);
+            this.modalController.dismiss();
           }
         }
       ]
