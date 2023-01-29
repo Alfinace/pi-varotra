@@ -1,0 +1,198 @@
+<ion-header [translucent]="true" class="ion-no-border" mode="md">
+  <ion-toolbar>
+    <ion-icon class="ion-padding-start" size="large" slot="start" (click)="close()" name="chevron-back-outline">
+    </ion-icon>
+    <ion-title class="ion-text-center">Detail Produit</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button class="cart" (click)="onCart()">
+        <ion-icon [id]="carts.length" slot="icon-only" name="cart-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="article && article.images" class="ion-padding-horizontal" [scrollEvents]="true"
+  (ionScrollStart)="logScrollStart()" (ionScroll)="logScrolling($event)" (ionScrollEnd)="logScrollEnd()">
+  <br>
+  <div style="height: 400px; border-radius: 20px; background-color: gainsboro;overflow: hidden;position: relative;">
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide *ngFor="let item of article.images">
+        <img [src]="item!.image" alt="" srcset="">
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <br>
+  <h5 style="color: #000;font-size: xx-large;font-family: 'DM Sans Medium';">
+    {{article.designation}}
+  </h5>
+  <div style="display:flex; align-items: center; gap: 5px;justify-content: flex-start;">
+    <label style="font-family: 'DM Sans Medium';">Prix :</label>
+    <span style="font-family: Serif" class="init">
+      π
+    </span>
+    <span style="font-family: 'DM Sans Medium';" class="price">
+      {{article.unitPrice}}
+    </span>
+  </div>
+  <div style="display:flex;border-bottom: 1px solid #c5c3c3;"
+    class=" ion-justify-content-between ion-align-items-center ion-padding-bottom ion-margin-vertical">
+    <div style=" display: flex; align-items: center;gap: 20px;">
+      <div style="display: flex; align-items: center;gap: 5px;">
+        <ion-icon style="margin-bottom: 4px;font-size:large;" color="warning" name="star"></ion-icon>
+        <span style="font-size: 17px">0</span>
+      </div>
+      <div style="font-size: 17px">
+        {{rates.length}} Avis
+      </div>
+    </div>
+  </div>
+  <br>
+  <ion-item lines="full">
+    <ion-avatar slot="start">
+      <img [src]="'/assets/images/img3.jpg'" />
+    </ion-avatar>
+    <ion-text class="ion-margin-bottom" color="primary">
+      <h4 class="text-black">
+        {{article.store!.name}}
+      </h4>
+      <ion-label class="text-black" style="font-size:15px">
+        {{article.store!.address}} à {{article.store!.city}}
+      </ion-label>
+    </ion-text>
+    <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+  </ion-item>
+  <br>
+  <h5 style="color: #000;font-size: x-large;font-family: 'DM Sans Medium';">
+    Description
+  </h5>
+  <ion-text style="color: #000" color="primary">
+    <span style="font-size:14px" [innerHTML]="article.detail">
+    </span>
+    <br>
+  </ion-text>
+  <br>
+  <div class="ion-justify-content-between" style="display:flex">
+    <h4 style="font-size:20px;color: #000">Avis ({{rates.length}})</h4>
+    <div style="display: flex; align-items: center;gap: 5px;">
+      <ion-icon style="margin-bottom: 4px;font-size:large;" color="warning" name="star"></ion-icon>
+      <span style="font-size: 17px">
+        {{rates.length}}
+      </span>
+    </div>
+  </div>
+  <br>
+  <br>
+  <ion-item class="reviews" lines="full" *ngFor="let item of rates">
+    <ion-avatar slot="start">
+      <img [src]="item.user.avatar" />
+    </ion-avatar>
+    <ion-text class="ion-margin-bottom" color="primary" style="width:100%">
+      <div style="display:flex" class="ion-justify-content-between ion-align-items-center ion-margin-top">
+        <h4 style="font-size:25px;color: #000" class="ion-no-margin">
+          {{item.user.username}}
+        </h4>
+        <ion-note>
+          {{item.createdAt | date: 'dd/MM/yyyy'}}
+        </ion-note>
+      </div>
+      <div style="display:flex; gap: 3px;font-size: 15px">
+        <ion-icon slot="start" color="{{item.rate > 0 ? 'warning': ''}}"
+          name="{{item.rate > 0 ? 'star': 'star-outline'}}">
+        </ion-icon>
+        <ion-icon slot="start" color="{{item.rate > 1 ? 'warning': ''}}"
+          name="{{item.rate > 1 ? 'star': 'star-outline'}}">
+        </ion-icon>
+        <ion-icon slot="start" color="{{item.rate > 2 ? 'warning': ''}}"
+          name="{{item.rate > 2 ? 'star': 'star-outline'}}">
+        </ion-icon>
+        <ion-icon slot="start" color="{{item.rate > 3 ? 'warning': ''}}"
+          name="{{item.rate > 3 ? 'star': 'star-outline'}}">
+        </ion-icon>
+        <ion-icon slot="start" color="{{item.rate > 4 ? 'warning': ''}}"
+          name="{{item.rate > 4 ? 'star': 'star-outline'}}">
+        </ion-icon>
+      </div>
+      <p style="font-size:15px;color: #000">
+        {{
+        item.comment
+        }}
+      </p>
+    </ion-text>
+  </ion-item>
+  <br>
+  <div *ngIf="currentUser && !commented">
+    <form [formGroup]="rateForm">
+      <ion-row class=" mt">
+        <ion-col size="9">
+          <ion-item>
+            <ion-textarea formControlName="comment" placeholder="Commentaire ici..."></ion-textarea>
+          </ion-item>
+        </ion-col>
+        <ion-col size="3">
+          <button (click)="onOpenModal()" class="ion-activatable ripple-parent custom-parent btn-warning">
+            <ion-label>Soumettre</ion-label>
+            <ion-ripple-effect></ion-ripple-effect>
+          </button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+  <div class=" d-flex ion-justify-content-between  ion-align-items-center">
+    <h3>Produits récommandés</h3>
+    <a href="http://">Voir plus</a>
+  </div>
+  <br>
+  <swiper [config]="configP">
+    <ng-template *ngFor="let item of articles" swiperSlide>
+
+      <app-article [article]="item">
+      </app-article>
+    </ng-template>
+  </swiper>
+  <br>
+  <div #btnAddCart class="box-btn-row" *ngIf="!checkedArticleAddedToCart();">
+    <ion-row class="btn-row mt">
+      <ion-col size="12">
+        <button class="ion-activatable ripple-parent custom-parent btn-primary" (click)="addCart(article.id)">
+          <ion-label>Ajouter du panier</ion-label>
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <br>
+  <ion-modal mode="md" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]" [isOpen]="isOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Note </ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <br>
+        <div class="d-flex  ion-justify-content-center" style="gap: 25px">
+          <ion-icon slot="start" color="{{rate > 0 ? 'warning': ''}}" name="{{rate > 0 ? 'star': 'star-outline'}}"
+            (click)="setRate(1)" size="large"></ion-icon>
+          <ion-icon slot="start" color="{{rate > 1 ? 'warning': ''}}" name="{{rate > 1 ? 'star': 'star-outline'}}"
+            (click)="setRate(2)" size="large"></ion-icon>
+          <ion-icon slot="start" color="{{rate > 2 ? 'warning': ''}}" name="{{rate > 2 ? 'star': 'star-outline'}}"
+            (click)="setRate(3)" size="large"></ion-icon>
+          <ion-icon slot="start" color="{{rate > 3 ? 'warning': ''}}" name="{{rate > 3 ? 'star': 'star-outline'}}"
+            (click)="setRate(4)" size="large"></ion-icon>
+          <ion-icon slot="start" color="{{rate > 4 ? 'warning': ''}}" name="{{rate > 4 ? 'star': 'star-outline'}}"
+            (click)="setRate(5)" size="large"></ion-icon>
+        </div>
+        <br>
+        <br>
+        <ion-row class="btn-row mt">
+          <ion-col size="12">
+            <button class="ion-activatable ripple-parent custom-parent btn-primary" (click)="onSubmit()">
+              <ion-label>Envoyer</ion-label>
+              <ion-ripple-effect></ion-ripple-effect>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

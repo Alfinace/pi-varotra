@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Article } from 'src/app/models/article.model';
 import { Cart } from 'src/app/models/cart.model';
@@ -15,6 +16,7 @@ export class ArticleComponent implements OnInit {
   public carts: Cart[] = [];
   constructor(
     private modalController: ModalController,
+    public router: Router,
     private cartService: CartService) { }
 
   ngOnInit() {
@@ -28,12 +30,13 @@ export class ArticleComponent implements OnInit {
   }
 
   public show() {
-    this.modalController.create({
-      component: ArticleDetailComponent,
-      componentProps: { article: this.article }
-    }).then((modal) => {
-      modal.present();
-    });
+    this.router.navigate(['/detail-article', this.article.slug]);
+    // this.modalController.create({
+    //   component: ArticleDetailComponent,
+    //   componentProps: { article: this.article }
+    // }).then((modal) => {
+    //   modal.present();
+    // });
   }
 
   public addPanier(articleId: any) {

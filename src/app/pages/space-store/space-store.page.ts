@@ -42,7 +42,8 @@ export class SpaceStorePage implements OnInit {
     await modal.present();
 
     const data = await modal.onDidDismiss();
-    console.log(data)
+    if (!data.data) return;
+    this.produits.unshift(data.data as Article);
   }
 
 
