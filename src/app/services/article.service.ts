@@ -28,6 +28,10 @@ export class ArticleService {
     return this.http.get(`articles/${id}`);
   }
 
+  public getArticleBySlug(slug: string) {
+    return this.http.get(`articles/slug/${slug}`);
+  }
+
   public createArticle(article: any) {
     return this.http.post('articles', article);
   }

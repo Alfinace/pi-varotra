@@ -33,6 +33,9 @@ export class Article extends Model {
   @HasMany(() => Rate)
   rates: Rate[];
 
+  @Column({ allowNull: false, unique: true })
+  slug: string;
+
   @HasMany(() => ImageArticle)
   images: ImageArticle[];
 

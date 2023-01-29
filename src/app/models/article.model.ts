@@ -8,6 +8,7 @@ export interface Article {
 	unitPrice?: number;
 	store: Store;
 	stock: number;
+	slug: string;
 	createdAt?: string;
 	updatedAt?: string;
 	rate?: any;

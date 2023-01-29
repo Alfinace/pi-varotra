@@ -51,9 +51,11 @@ const routes: Routes = [
   {
     path: 'new',
     loadChildren: () => import('./pages/new/new.module').then(m => m.NewPageModule)
+  },
+  {
+    path: 'detail-article/:slug',
+    loadChildren: () => import('./pages/detail-article/detail-article.module').then(m => m.DetailArticlePageModule)
   }
-
-
 ];
 
 @NgModule({

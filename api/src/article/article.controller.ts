@@ -130,6 +130,21 @@ export class ArticleController {
     }
   }
 
+  @Get('/slug/:slug')
+  async findOneBySlug(@Param('slug') slug: string) {
+    try {
+      var article = await this.articleService.findOneBySlug(slug);
+      if (!article) throw new HttpException('Article not found', 404)
+      article.images = article.images.map(i => {
+        i.image = process.env.BASE_URL_IMAGE + i.image;
+        return i
+      })
+      return article;
+    } catch (error) {
+      throw new HttpException("Can't get articles", 500);
+    }
+  }
+
   @UseGuards(JwtAuthGuard)
   @Patch('update/:id')
   async update(
