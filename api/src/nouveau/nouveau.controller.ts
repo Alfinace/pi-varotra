@@ -14,17 +14,17 @@ export class NouveauController {
 
   @Get()
   async findAll(@Query('size') limit: number, @Query('page') offset: number) {
-    try {
-      var nouveaux = await this.nouveauService.findAll(offset, limit);
-      nouveaux.rows = nouveaux.rows.map((nouveau) => {
-        nouveau.image = process.env.BASE_URL_IMAGE + nouveau.image;
-        return nouveau;
-      }
-      )
-      return nouveaux
-    } catch (error) {
-      throw new HttpException("Can't get nouveaux", 400);
+    // try {
+    var nouveaux = await this.nouveauService.findAll(offset, limit);
+    nouveaux.rows = nouveaux.rows.map((nouveau) => {
+      nouveau.image = process.env.BASE_URL_IMAGE + nouveau.image;
+      return nouveau;
     }
+    )
+    return nouveaux
+    // } catch (error) {
+    //   throw new HttpException("Can't get nouveaux", 400);
+    // }
   }
 
   @Get(':id')
