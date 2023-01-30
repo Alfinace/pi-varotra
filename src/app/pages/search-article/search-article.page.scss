@@ -5,3 +5,10 @@ ion-searchbar {
 app-article {
   width: 48%;
 }
+.empty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

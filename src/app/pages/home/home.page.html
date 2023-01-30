@@ -20,7 +20,7 @@
       <br>
       <swiper [config]="catConfig">
         <ng-template *ngFor="let item of categories" swiperSlide>
-          <div class="b-cat">
+          <div class="b-cat" (click)="goToArticles(item.id)">
             <div class="text-center">
               {{item.name}}
             </div>
@@ -31,8 +31,8 @@
     </div>
     <div class=" bg-white-around ion-padding-horizontal">
       <div class=" d-flex ion-justify-content-between  ion-align-items-center">
-        <h3>Meilleur magasin</h3>
-        <a href="http://">Voir plus</a>
+        <h3>Magasins</h3>
+        <a href="#" [routerLink]="['/client/store']" routerLinkActive="router-link-active">Voir plus</a>
       </div>
       <br>
       <swiper [config]="configP">
@@ -44,7 +44,7 @@
 
       <div class=" d-flex ion-justify-content-between  ion-align-items-center">
         <h3>Nouveau produit</h3>
-        <a href="http://">Voir plus</a>
+        <a [routerLink]="['/client/search']">Voir plus</a>
       </div>
       <br>
       <!-- <swiper [config]="configP"> -->
@@ -64,7 +64,7 @@
       <br> -->
       <div class=" d-flex ion-justify-content-between  ion-align-items-center">
         <h3>Produit special</h3>
-        <a href="http://">Voir plus</a>
+        <a href="#" [routerLink]="['/client/search']">Voir plus</a>
       </div>
       <br>
       <swiper [config]="configP">

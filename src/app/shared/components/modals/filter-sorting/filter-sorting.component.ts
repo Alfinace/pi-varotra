@@ -27,6 +27,8 @@ export class FilterSortingComponent implements OnInit {
   constructor(private modalController: ModalController,
     private categorieService: CategorieService) { }
   ngOnInit() {
+    console.log(this.filter);
+
     this.categorieService.getAllCity().toPromise().then((res: any) => {
       this.ville = res.map((c: { name: any; }) => c.name)
       if (this.filter.villes.length === 0) {
@@ -55,9 +57,9 @@ export class FilterSortingComponent implements OnInit {
 
     let index = this.filter.categories.findIndex(c => c === id);
     if (index > -1) {
-      this.filter.categories.splice(index, 1);
+      this.filter?.categories.splice(index, 1);
     } else {
-      this.filter.categories.push(id);
+      this.filter?.categories.push(id);
     }
 
   }

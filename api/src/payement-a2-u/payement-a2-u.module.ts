@@ -1,9 +1,12 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
-import { PayementA2UService } from './payement-a2-u.service';
-import { PayementA2UController } from './payement-a2-u.controller';
+import { DatabaseModule } from 'src/database/database.module';
+import { PaymentA2UService } from './payement-a2-u.service';
+import { paymentA2UProviders } from './payment-a2-u.providers';
 
 @Module({
-  controllers: [PayementA2UController],
-  providers: [PayementA2UService]
+  imports: [DatabaseModule, HttpModule],
+  providers: [PaymentA2UService, ...paymentA2UProviders],
+  exports: [PaymentA2UService],
 })
-export class PayementA2UModule {}
+export class PayementA2UModule { }

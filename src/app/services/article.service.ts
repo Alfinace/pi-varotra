@@ -12,8 +12,8 @@ export class ArticleService {
     return this.http.post(`rates`, data);
   }
 
-  public getArticles(page: number, size: number, cagetoryId?: number) {
-    return this.http.get('articles?page=' + page + '&size=' + size + '&cagetoryId=' + cagetoryId);
+  public getArticles(page: number, size: number, categoryId?: number) {
+    return this.http.get('articles?page=' + page + '&size=' + size + '&categoryId=' + categoryId);
   }
 
   public getArticlesCurrentUser(page: number, size: number) {
@@ -27,6 +27,11 @@ export class ArticleService {
   public getArticle(id: number) {
     return this.http.get(`articles/${id}`);
   }
+
+  // public getArticleByCategory(categorieId: number) {
+  //   return this.http.get(`articles/category/${categorieId}`);
+  // }
+
 
   public getArticleBySlug(slug: string) {
     return this.http.get(`articles/slug/${slug}`);

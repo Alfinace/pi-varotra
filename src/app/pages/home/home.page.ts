@@ -8,7 +8,7 @@ import { SwiperComponent } from 'swiper/angular';
 import { ArticleService } from 'src/app/services/article.service';
 import { StoreService } from 'src/app/services/store.service';
 import { PubService } from 'src/app/services/pub.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CartComponent } from 'src/app/shared/components/modals/cart/cart.component';
 SwiperCore.use([Autoplay, Keyboard]);
@@ -65,6 +65,7 @@ export class HomePage implements OnInit, AfterViewInit {
     private newService: NewService,
     private route: ActivatedRoute,
     private modalController: ModalController,
+    private router: Router,
     private pubService: PubService,
     private storeService: StoreService
   ) { }
@@ -86,6 +87,14 @@ export class HomePage implements OnInit, AfterViewInit {
   public doRefresh(event: any) {
     this.fetchData(event)
   }
+
+  goToArticles(id: number) {
+    this.router.navigate(
+      ['/client/search'],
+      { queryParams: { categoryId: id } }
+    );
+  }
+
 
   onSwiper(swiper: any) {
   }

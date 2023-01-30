@@ -44,8 +44,8 @@
             </div>
           </ion-item>
           <ion-item-options>
-            <ion-item-option color="danger" expandable>
-              <ion-icon slot="icon-only" (click)="removeCart(item.articleId, i, j)" name="trash"></ion-icon>
+            <ion-item-option color="danger" (click)="removeCart(item.articleId, i, j)" expandable>
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
             </ion-item-option>
           </ion-item-options>
         </ion-item-sliding>

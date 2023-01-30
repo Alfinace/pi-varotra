@@ -87,8 +87,8 @@ export class DetailArticlePage implements OnInit {
           this.currentUser = res
         })
         this.cartService.getAllCart()
-        this.articleService.getArticles(0, 10).subscribe((res: any) => {
-          this.articles = res.rows
+        this.articleService.getArticles(0, 10, this.article.categoryId).subscribe((res: any) => {
+          this.articles = res.rows.filter((a: any) => a.id != this.article.id)
         })
 
         this.articleService.getRateArticle(this.article.id).subscribe((res: any) => {
@@ -127,9 +127,6 @@ export class DetailArticlePage implements OnInit {
   }
 
   checkedArticleAddedToCart() {
-    if (this.currentUser && this.currentUser.id == this.article.store.userId) {
-      return false
-    }
     if (this.carts.length > 0) {
       let i = this.carts.findIndex(c => c.articleId == this.article.id);
       return i > -1
@@ -141,6 +138,7 @@ export class DetailArticlePage implements OnInit {
     this.cartService.addCart({
       articleId: articleId, quantity: 1,
     })
+    this.checkedArticleAddedToCart()
   }
 
   public show(article: any) {

@@ -40,9 +40,11 @@ export class ArticleController {
   }
 
   @Get()
-  async findAll(@Query('size') limit: number, @Query('page') offset: number) {
+  async findAll(@Query('size') limit: number, @Query('page') offset: number, @Query('categoryId') categoryId: number) {
     try {
-      var articles = await this.articleService.findAll(offset, limit);
+      console.log(categoryId);
+
+      var articles = isNaN(categoryId) ? await this.articleService.findAll(offset, limit) : await this.articleService.findAllByCategory(categoryId, offset, limit);
       articles.rows = articles.rows.map((article) => {
         article.images = article.images.map(i => {
           i.image = process.env.BASE_URL_IMAGE + i.image;
@@ -105,6 +107,8 @@ export class ArticleController {
       throw new HttpException("Can't get articles", 500);
     }
   }
+
+
 
   @Post('filter')
   findAllWith(@Body() filter: any, @Query('size') limit: number, @Query('page') offset: number) {

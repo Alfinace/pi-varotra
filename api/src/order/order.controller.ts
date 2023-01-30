@@ -7,12 +7,14 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RoleGuard } from 'src/auth/role.guard';
 import { PaymentU2AService } from 'src/payment-u2-a/payment-u2-a.service';
 import { Response } from 'express';
+import { PaymentA2UService } from 'src/payement-a2-u/payement-a2-u.service';
 
 @Controller('orders')
 export class OrderController {
   constructor(
     private readonly orderService: OrderService,
-    private readonly paymentService: PaymentU2AService) { }
+    private readonly paymentU2AService: PaymentU2AService,
+    private readonly paymentA2UService: PaymentA2UService) { }
 
   @Post()
   @UseGuards(JwtAuthGuard, RoleGuard)
@@ -47,8 +49,8 @@ export class OrderController {
   async approve(@Body('paymentId') paymentId: string, @User() user: any, @Res() res: Response) {
     console.log('paymentId', paymentId);
 
-    await this.paymentService.approvePayment(paymentId).toPromise()
-    let currentPayment = await this.paymentService.getInfoPayment(paymentId).toPromise()
+    await this.paymentU2AService.approvePayment(paymentId).toPromise()
+    let currentPayment = await this.paymentU2AService.getInfoPayment(paymentId).toPromise()
     console.log(currentPayment);
 
     console.log(
@@ -62,13 +64,16 @@ export class OrderController {
       }
     );
 
-    let newPayment = await this.paymentService.create({
+    let newPayment = await this.paymentU2AService.create({
       piPaymentId: paymentId,
       txid: null,
       paid: false,
       cancelled: false,
       userId: user.userId,
       orderId: currentPayment.data.metadata.orderId,
+      metadata: JSON.stringify(currentPayment.data.metadata),
+      amount: currentPayment.data.amount,
+      uid: user.uid
     })
     await this.orderService.update(currentPayment.data.metadata.orderId, { paymentId: newPayment.id })
     return res.status(200).json({ message: `Approved the payment ${paymentId}` });
@@ -77,15 +82,28 @@ export class OrderController {
   @Post('/payments/complete')
   @UseGuards(JwtAuthGuard, RoleGuard)
   async complete(@Body('paymentId') paymentId: string, @Body('txid') txid: string, @Res() res: Response) {
-    this.paymentService.update(paymentId, { txid, paid: true })
-    await this.paymentService.completePayment(paymentId, txid).toPromise()
-    return res.status(200).json({ message: `Complete the payment ${paymentId}` });
+    await this.paymentU2AService.completePayment(paymentId, txid).toPromise()
+    this.paymentU2AService.update(paymentId, { txid, paid: true })
+    //get payment info user to app
+    let payment = await this.paymentU2AService.getPaymentU2A(paymentId)
+    if (!payment) {
+      return res.status(404).json({ message: `Not found payment ${paymentId}` });
+    }
+    let paymentA2U = this.paymentA2UService.create({
+      memo: payment.memo,
+      metadata: payment.metadata,
+      amount: payment.amount,
+      uid: payment.uid,
+      orderId: payment.orderId,
+    })
+
+    return res.status(200).json({ message: `Complete the payment ${paymentId}`, payment: paymentA2U });
   }
 
   @Post('/payments/cancelled_payment')
   @UseGuards(JwtAuthGuard, RoleGuard)
   async cancel(@Body('paymentId') paymentId: string, @Body('txid') txid: string, @Res() res: Response) {
-    this.paymentService.update(paymentId, { cancelled: true })
+    this.paymentU2AService.update(paymentId, { cancelled: true })
     return res.status(200).json({ message: `Complete the payment ${paymentId}` });
   }
 }

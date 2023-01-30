@@ -11,7 +11,7 @@ import {
 } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'payments_u_2_a',
+  tableName: 'payments_u2a',
   updatedAt: false,
 })
 export class PaymentU2A extends Model {
@@ -24,6 +24,16 @@ export class PaymentU2A extends Model {
 
   @Column({ field: 'uid' })
   uid: string;
+
+  @Column({ field: 'memo' })
+  memo: string;
+
+  @Column({ field: 'amount', type: DataType.DOUBLE })
+  amount: number;
+
+  @Column({ field: 'metadata' })
+  metadata: string;
+
 
   @ForeignKey(() => User)
   @Column({ field: 'user_id' })

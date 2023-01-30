@@ -16,6 +16,6 @@ export class StoreCardComponent implements OnInit {
   }
 
   public onViewDetail() {
-    this.router.navigate(['client', 'store-detail', this.store.id])
+    this.router.navigate(['client', 'store', 'store-detail', this.store.id])
   }
 }
