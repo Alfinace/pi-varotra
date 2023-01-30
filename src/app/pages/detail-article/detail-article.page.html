@@ -13,7 +13,7 @@
 <ion-content *ngIf="article && article.images" class="ion-padding-horizontal" [scrollEvents]="true"
   (ionScrollStart)="logScrollStart()" (ionScroll)="logScrolling($event)" (ionScrollEnd)="logScrollEnd()">
   <br>
-  <div style="height: 400px; border-radius: 20px; background-color: gainsboro;overflow: hidden;position: relative;">
+  <div style="height: 300px; border-radius: 20px; background-color: gainsboro;overflow: hidden;position: relative;">
     <ion-slides pager="true" [options]="slideOpts">
       <ion-slide *ngFor="let item of article.images">
         <img [src]="item!.image" alt="" srcset="">
@@ -21,7 +21,7 @@
     </ion-slides>
   </div>
   <br>
-  <h5 style="color: #000;font-size: xx-large;font-family: 'DM Sans Medium';">
+  <h5 style="color: #000;font-family: 'DM Sans Medium';">
     {{article.designation}}
   </h5>
   <div style="display:flex; align-items: center; gap: 5px;justify-content: flex-start;">
@@ -51,35 +51,22 @@
       <img [src]="'/assets/images/img3.jpg'" />
     </ion-avatar>
     <ion-text class="ion-margin-bottom" color="primary">
-      <h4 class="text-black">
+      <h5 class="text-black">
         {{article.store!.name}}
-      </h4>
+      </h5>
       <ion-label class="text-black" style="font-size:15px">
         {{article.store!.address}} à {{article.store!.city}}
       </ion-label>
     </ion-text>
     <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
   </ion-item>
-  <br>
-  <h5 style="color: #000;font-size: x-large;font-family: 'DM Sans Medium';">
+  <h5 style="color: #000;font-size: small;font-family: 'DM Sans Medium';">
     Description
   </h5>
   <ion-text style="color: #000" color="primary">
     <span style="font-size:14px" [innerHTML]="article.detail">
     </span>
-    <br>
   </ion-text>
-  <br>
-  <div class="ion-justify-content-between" style="display:flex">
-    <h4 style="font-size:20px;color: #000">Avis ({{rates.length}})</h4>
-    <div style="display: flex; align-items: center;gap: 5px;">
-      <ion-icon style="margin-bottom: 4px;font-size:large;" color="warning" name="star"></ion-icon>
-      <span style="font-size: 17px">
-        {{rates.length}}
-      </span>
-    </div>
-  </div>
-  <br>
   <br>
   <ion-item class="reviews" lines="full" *ngFor="let item of rates">
     <ion-avatar slot="start">
@@ -118,7 +105,6 @@
       </p>
     </ion-text>
   </ion-item>
-  <br>
   <div *ngIf="currentUser && !commented">
     <form [formGroup]="rateForm">
       <ion-row class=" mt">
@@ -160,7 +146,7 @@
     </ion-row>
   </div>
   <br>
-  <ion-modal mode="md" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]" [isOpen]="isOpen">
+  <ion-modal mode="md" [initialBreakpoint]="0.40" [breakpoints]="[0, 0.25, 0.5, 0.75]" [isOpen]="isOpen">
     <ng-template>
       <ion-header>
         <ion-toolbar>

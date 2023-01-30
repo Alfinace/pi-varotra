@@ -6,7 +6,12 @@ import { StorePage } from './store.page';
 const routes: Routes = [
   {
     path: '',
-    component: StorePage
+    component: StorePage,
+  }
+  ,
+  {
+    path: 'store-detail/:id',
+    loadChildren: () => import('../../pages/store-detail/store-detail.module').then(m => m.StoreDetailPageModule)
   }
 ];
 
@@ -14,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class StorePageRoutingModule {}
+export class StorePageRoutingModule { }

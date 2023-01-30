@@ -112,6 +112,26 @@ export class ArticleService {
     });
   }
 
+  findAllByCategory(categoryId, offset: number, limit: number) {
+    return this.articleRepository.findAndCountAll({
+      where: { categoryId, archived: false },
+      include: [ImageArticle,
+        {
+          model: Store,
+          as: 'store',
+          include: [{
+            model: User,
+            as: 'user',
+            attributes: ['address', 'avatar', 'contact', 'firstname', 'lastname', 'socialNetwork']
+          }],
+        }],
+      limit,
+      offset,
+      distinct: true,
+      order: [['id', 'ASC']]
+    });
+  }
+
   findOne(id: number) {
     return this.articleRepository.findOne({
       where: { id, archived: false },

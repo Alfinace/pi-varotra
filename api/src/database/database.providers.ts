@@ -12,6 +12,7 @@ import { Store } from 'src/store/entities/store.entity';
 import { City } from 'src/city/entities/city.entity';
 import { Pub } from 'src/pubs/entities/pub.entity';
 import { Rate } from 'src/rates/entities/rate.entity';
+import { PayementA2U } from 'src/payement-a2-u/entities/payement-a2-u.entity';
 export const databaseProviders = [
   {
     provide: 'SEQUELIZE',
@@ -33,6 +34,7 @@ export const databaseProviders = [
         ArticleOrder,
         ImageUser,
         PaymentU2A,
+        PayementA2U,
         Store,
         City,
         Nouveau,
@@ -40,7 +42,7 @@ export const databaseProviders = [
         Pub,
       ]);
       await sequelize.sync({
-        alter: true,
+        // alter: true,
       });
       return sequelize;
     },

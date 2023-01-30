@@ -1,12 +1,27 @@
-<ion-content class="ion-padding-horizontal">
-  <div class="mt-70 d-flex ion-justify-content-between ion-align-items-center" style=" gap: 10px">
-    <ion-searchbar color="light" class="ion-no-border ion-no-padding" show-clear-button="always"></ion-searchbar>
-    <ion-icon size="large" (click)="openFilter()" slot="end" name="filter-outline"></ion-icon>
-  </div>
-  <br>
-  <div style="display: flex; gap: 10px;" class="ion-justify-content-center  ion-wrap">
-    <app-article [article]="item" *ngFor="let item of articles"></app-article>
-  </div>
+<ion-content class="ion-padding-horizontal" *ngIf="articles">
+  <ng-container *ngIf="!loading &&  articles.length > 0 ;else templateLoadingEmpty">
+    <div class="mt-70 d-flex ion-justify-content-between ion-align-items-center" style=" gap: 10px">
+      <ion-searchbar color="light" class="ion-no-border ion-no-padding" show-clear-button="always"></ion-searchbar>
+      <ion-icon size="large" (click)="openFilter()" slot="end" name="filter-outline"></ion-icon>
+    </div>
+    <br>
+    <div style="display: flex; gap: 10px;" class="ion-justify-content-center  ion-wrap">
+      <app-article [article]="item" *ngFor="let item of articles"></app-article>
+    </div>
+  </ng-container>
+  <ng-template #templateLoadingEmpty>
+    <div class="empty">
+      <ng-container *ngIf="loading;else templateEmpty">
+        <ion-spinner size="large" name="circular"></ion-spinner>
+      </ng-container>
+      <ng-template #templateEmpty>
+        <img [src]="'./assets/images/cart-empty.png'" style="width: 200px;height:200px">
+        <ion-label color="primary">
+          Votre panier est vide.
+        </ion-label>
+      </ng-template>
+    </div>
+  </ng-template>
   <br>
   <br>
 </ion-content>

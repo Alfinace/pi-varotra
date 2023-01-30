@@ -2,15 +2,18 @@ import { catchError, map, Observable } from 'rxjs';
 import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { PaymentU2A } from './entities/payment-u2-a.entity';
+import PiNetwork from "pi-backend";
 
 @Injectable()
 export class PaymentU2AService {
-
+  private pi;
   constructor(
     @Inject('PAYMENTU2A_REPOSITORY')
     private paymentRepository: typeof PaymentU2A,
     private readonly httpService: HttpService,
-  ) { }
+  ) {
+
+  }
   create(data) {
     return this.paymentRepository.create(data);
   }
@@ -18,13 +21,17 @@ export class PaymentU2AService {
   // USER TO APP payment Pi Network
 
   update(paymentId: any, data) {
-    this.paymentRepository.update(data, { where: { piPaymentId: paymentId } });
+    return this.paymentRepository.update(data, { where: { piPaymentId: paymentId } });
+  }
+
+  getPaymentU2A(paymentId) {
+    return this.paymentRepository.findOne({ where: { piPaymentId: paymentId } });
   }
 
   //Part implementation  payment Pi Network
   getInfoPayment(paymentId) {
     return this.httpService.get(
-      `https://api.minepi.com/v2/payments/${paymentId}`,
+      `${process.env.API_URL_MINEPI}/payments/${paymentId}`,
       {
         headers: {
           Authorization: `Key ${process.env.API_KEY_MINEPI}`,
@@ -45,7 +52,7 @@ export class PaymentU2AService {
 
   approvePayment(paymentId): Observable<any> {
     return this.httpService.post(
-      `https://api.minepi.com/v2/payments/${paymentId}/approve`,
+      `${process.env.API_URL_MINEPI}/v2/payments/${paymentId}/approve`,
       {},
       {
         headers: {
@@ -66,7 +73,7 @@ export class PaymentU2AService {
 
   completePayment(paymentId, txid): Observable<any> {
     return this.httpService.post(
-      `https://api.minepi.com/v2/payments/${paymentId}/complete`,
+      `${process.env.API_URL_MINEPI}/payments/${paymentId}/complete`,
       { txid },
       {
         headers: {
@@ -87,7 +94,7 @@ export class PaymentU2AService {
 
   getMyInfo(accessToken: string): Observable<any> {
     return this.httpService.get(
-      `https://api.minepi.com/v2/me`,
+      `${process.env.API_URL_MINEPI}/me`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
