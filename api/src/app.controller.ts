@@ -2,6 +2,7 @@ import { orderProviders } from './order/order.providers';
 import { UserService } from 'src/user/user.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { AuthService } from './auth/auth.service';
+import { faker } from '@faker-js/faker';
 import {
   Body,
   Controller,
@@ -23,6 +24,8 @@ import { templateSendCodeConfirm } from './config/templates/confirm-email';
 import { PaymentU2AService } from './payment-u2-a/payment-u2-a.service';
 import { User } from './auth/user.decorator';
 import { LocalAuthGuard } from './auth/local-auth.guard';
+import { StoreService } from './store/store.service';
+import { ArticleService } from './article/article.service';
 require('dotenv').config()
 @Controller()
 export class AppController {
@@ -30,6 +33,8 @@ export class AppController {
     private readonly appService: AppService,
     private userService: UserService,
     private authService: AuthService,
+    private articleService: ArticleService,
+    private storeService: StoreService,
     private paymentService: PaymentU2AService,
   ) { }
 
@@ -138,5 +143,26 @@ export class AppController {
     })
   }
 
-
+  @Get('fake-user')
+  async addFakeArticle() {
+    let users = await this.userService.findAll();
+    users.rows.forEach(async (user) => {
+      for (let i = 0; i < 50; i++) {
+        await this.articleService.create({
+          storeId: user.store.id,
+          designation: faker.commerce.productName(),
+          detail: faker.commerce.productDescription(),
+          unitPrice: parseFloat(faker.commerce.price()),
+          images: [
+            faker.image.image(),
+            faker.image.image(),
+            faker.image.image(),
+            faker.image.image(),
+          ],
+          categoryId: faker.helpers.arrayElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]) as number,
+          stock: 10
+        });
+      }
+    });
+  }
 }

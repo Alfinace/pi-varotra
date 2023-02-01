@@ -49,7 +49,7 @@ export class ArticleService {
     return this.http.delete(`articles/delete/${id}`);
   }
 
-  public getAndFitlerArticles(filter: any) {
-    return this.http.post('articles/filter', filter);
+  public getAndFitlerArticles(filter: any, page: number, size: number) {
+    return this.http.post('articles/filter?page=' + page + '&size=' + size, filter);
   }
 }

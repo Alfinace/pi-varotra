@@ -14,11 +14,22 @@ import { FilterSortingComponent } from 'src/app/shared/components/modals/filter-
   styleUrls: ['./search-article.page.scss'],
 })
 export class SearchArticlePage implements OnInit {
-  public applyFilter: Filter;
+  public applyFilter: Filter = {
+    "categories": [],
+    "order": "ASC",
+    "orderBy": "updatedAt",
+    "range": {
+      "lower": 0,
+      "upper": 10000
+    },
+    "villes": [
+      "Tous"
+    ]
+  };
   unsubscribe = new Subject()
   articles: any;
   totalCount = 0;
-  page = 1;
+  page = 0;
   pageSize = 8
   categoryId: any;
   loading: boolean;
@@ -36,11 +47,11 @@ export class SearchArticlePage implements OnInit {
       takeUntil(this.unsubscribe)
     ).subscribe((params) => {
       if (params.categoryId) {
-        this.categoryId = params.categoryId
+        this.categoryId = parseInt(params.categoryId)
         this.articleService.getArticles(0, 8, this.categoryId).toPromise().then(res => {
           this.articles = res.rows
           this.totalCount = res.count
-          console.log(this.totalCount);
+          this.applyFilter.categories = [this.categoryId as number]
           this.loading = false;
         })
       } else {
@@ -48,6 +59,8 @@ export class SearchArticlePage implements OnInit {
           this.articles = res.rows
           this.totalCount = res.count,
             console.log(this.totalCount);
+          this.applyFilter.categories = [];
+          this.categoryId = null;
           this.loading = false;
         })
       }
@@ -62,8 +75,6 @@ export class SearchArticlePage implements OnInit {
 
 
   async openFilter() {
-    console.log(this.applyFilter);
-
     const modal = await this.modalController.create({
       component: FilterSortingComponent,
       componentProps: { filter: this.applyFilter },
@@ -79,10 +90,28 @@ export class SearchArticlePage implements OnInit {
 
     const data = await modal.onDidDismiss();
     if (data.data) {
+      this.loading = true;
       this.applyFilter = data.data
-      this.articleService.getAndFitlerArticles(this.applyFilter).subscribe((res: any) => {
-        this.articles = res;
+      this.articleService.getAndFitlerArticles(this.applyFilter, 0, 10).subscribe((res: any) => {
+        this.articles = res.rows;
+        this.totalCount = res.count;
+        this.loading = false;
+
       })
     }
+  }
+
+  loadData(event: any) {
+    if (this.articles.length >= this.totalCount) {
+      return
+    }
+    this.page++;
+    this.articleService.getAndFitlerArticles(this.applyFilter, this.page, this.pageSize).toPromise().then(res => {
+      this.articles.push(...res.rows)
+      event.target.complete();
+      if (this.articles.length === res.count) {
+        event.target.disabled = true;
+      }
+    })
   }
 }

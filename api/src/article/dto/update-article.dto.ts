@@ -19,5 +19,5 @@ export class UpdateArticleDto extends PartialType(CreateArticleDto) {
   unitPrice: number;
 
   @ApiProperty()
-  detail: number;
+  detail: string;
 }

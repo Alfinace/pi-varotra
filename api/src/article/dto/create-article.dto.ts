@@ -32,5 +32,5 @@ export class CreateArticleDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  detail: number;
+  detail: string;
 }

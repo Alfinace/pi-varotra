@@ -111,12 +111,29 @@ export class ArticleController {
 
 
   @Post('filter')
-  findAllWith(@Body() filter: any, @Query('size') limit: number, @Query('page') offset: number) {
-    try {
-      return this.articleService.findAllWithFilter(filter, offset, limit);
-    } catch (error) {
-      throw new HttpException("Can't get articles", 500);
+  async findAllWith(@Body() filter: any, @Query('size') limit: number, @Query('page') offset: number) {
+    // try {
+    if (offset !== 0) {
+      offset = offset * limit;
     }
+    let articles = await this.articleService.findAllWithFilter(filter, offset, limit);
+    articles.rows = articles.rows.map((article) => {
+      if (article.images.length > 0) {
+        article.images = article?.images.map(i => {
+          i.image = process.env.BASE_URL_IMAGE + i.image;
+          return i
+        })
+      }
+      if (article?.store?.user?.socialNetwork) {
+        article.store.user.socialNetwork = JSON.parse(article.store.user.socialNetwork);
+      }
+      article.store.logo = (article.store.logo && article.store.logo !== 'none') ? process.env.BASE_URL_IMAGE + article.store.logo : null;
+      return article;
+    })
+    return articles;
+    // } catch (error) {
+    //   throw new HttpException("Can't get articles", 500);
+    // }
   }
 
   @Get(':id')

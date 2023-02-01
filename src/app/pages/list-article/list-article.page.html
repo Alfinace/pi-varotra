@@ -34,7 +34,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-customer>
         <tr>
-          <td class="d-flex">
+          <td class="d-flex" *ngIf="customer.images[0]">
             <span class="image-text">
               <ion-img style="width: 50px;height: 50px;" [src]="customer.images[0].image"></ion-img>
             </span>
@@ -67,7 +67,7 @@
         </tr>
       </ng-template>
     </p-table>
-    <p-paginator [rows]="10" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
+    <p-paginator [rows]="5" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
   </div>
 
 </ion-content>

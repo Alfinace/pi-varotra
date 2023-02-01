@@ -8,5 +8,6 @@ import { imageArticleProviders } from 'src/image-article/image-article.providers
   imports: [DatabaseModule],
   controllers: [ArticleController],
   providers: [ArticleService, ...articleProviders, ...imageArticleProviders],
+  exports: [ArticleService]
 })
 export class ArticleModule { }
