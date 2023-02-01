@@ -78,17 +78,23 @@ export class ArticleService {
   }
 
   findAllWithFilter(filter, offset: number, limit: number) {
+    let condition = {
+      categoryId: { [Op.in]: [...filter.categories] },
+      archived: false,
+      unitPrice: { [Op.between]: [filter.range.lower, filter.range.upper] },
+    }
+    if (filter.categories.length === 0) {
+      delete condition.categoryId;
+    }
     return this.articleRepository.findAndCountAll({
       where: {
-        categoryId: { [Op.in]: [filter.categorie] },
-        archived: false,
-        unitPrice: { [Op.between]: [filter.range.lower, filter.range.upper] },
+        ...condition
       },
       limit,
-      distinct: true,
       offset,
+      distinct: true,
       include: [{ all: true }],
-      order: [[filter.updatedAt, filter.order]],
+      order: [[filter.orderBy, filter.order]],
     })
   }
 

@@ -18,7 +18,7 @@
     <div class="d-flex" style="flex-direction: column;gap: 10px;">
       <ion-label>Interval de prix : <strong color="warning">{{filter.range.lower}} - {{filter.range.upper}} </strong>
       </ion-label>
-      <ion-range class="ion-no-padding" min="0" max="1000" dualKnobs="true" pin="true" snaps="true" step="1"
+      <ion-range class="ion-no-padding" min="0" max="10000" dualKnobs="true" pin="true" snaps="true" step="1"
         ticks="true" [value]="{lower: filter.range.lower, upper: filter.range.upper}" color="primary"
         (ionChange)="rangeChange($event)">
         <ion-icon size="small" slot="start" name="arrow-down-outline"></ion-icon>

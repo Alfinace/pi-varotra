@@ -93,7 +93,10 @@ export class ListUserPage implements OnInit {
 
   paginate(event: any) {
     console.log(event);
-
+    this.userService.getAllUsers(event.page, event.rows).toPromise().then((res: any) => {
+      this.customers = res.rows;
+      this.totalRecords = res.count;
+    });
     //event.first = Index of the first record
     //event.rows = Number of rows to display in new page
     //event.page = Index of the new page

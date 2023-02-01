@@ -49,12 +49,7 @@ export class UserController {
 
   @Get()
   async findAll(@Query('size') limit: number, @Query('page') offset: number) {
-    if (limit && offset) {
-      var users = await this.userService.findAll(limit, offset);
-    } else {
-      var users = await this.userService.findAll();
-    }
-
+    var users = await this.userService.findAll(offset, limit);
     users.rows = users.rows.map((user) => {
       user.socialNetwork = JSON.parse(user.socialNetwork);
       user.avatar = process.env.BASE_URL_IMAGE + user.avatar;

@@ -10,7 +10,7 @@ import { ArticleService } from 'src/app/services/article.service';
 export class ListArticlePage implements OnInit {
   public articles: Article[] = [];
   totalRecords: any;
-  rows: number = 10;
+  rows: number = 5;
   loading: boolean = true;
   constructor(private articleService: ArticleService) { }
 

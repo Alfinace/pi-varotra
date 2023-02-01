@@ -37,8 +37,16 @@ export class UserService {
     return await this.userRepository.create(payload);
   }
 
+  async createFakeUser(createUserDto: any) {
+    const saltOrRounds = 10;
+    const hashed = await bcrypt.hash(createUserDto.password, saltOrRounds);
+    return this.userRepository.create({ ...createUserDto, password: hashed });
+  }
+
 
   findAll(offset: number = 0, limit: number = 10) {
+    console.log(offset, limit);
+
     return this.userRepository.findAndCountAll({
       include: [
         { all: true }

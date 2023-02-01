@@ -14,8 +14,7 @@ export class StoreService {
     @Inject('CITY_REPOSITORY')
     private readonly cityRepository: typeof City,) { }
   create(createStoreDto: CreateStoreDto) {
-
-    this.storeRepository.create({ ...createStoreDto });
+    return this.storeRepository.create({ ...createStoreDto });
   }
 
   findAll(offset: number = 0, limit: number = 10) {

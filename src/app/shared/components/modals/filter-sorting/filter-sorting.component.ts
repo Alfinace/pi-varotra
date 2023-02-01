@@ -10,7 +10,7 @@ import { CategorieService } from 'src/app/services/categorie.service';
   styleUrls: ['./filter-sorting.component.scss'],
 })
 export class FilterSortingComponent implements OnInit {
-  public price = { lower: 0, upper: 110 };
+  public price = { lower: 0, upper: 10000 };
   public stateSorting: boolean = false;
   public stateFilter: boolean = true;
   @Input() filter: Filter;

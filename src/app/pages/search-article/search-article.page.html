@@ -1,9 +1,9 @@
 <ion-content class="ion-padding-horizontal" *ngIf="articles">
+  <div class="mt-70 d-flex ion-justify-content-between ion-align-items-center" style=" gap: 10px">
+    <ion-searchbar color="light" class="ion-no-border ion-no-padding" show-clear-button="always"></ion-searchbar>
+    <ion-icon size="large" (click)="openFilter()" slot="end" name="filter-outline"></ion-icon>
+  </div>
   <ng-container *ngIf="!loading &&  articles.length > 0 ;else templateLoadingEmpty">
-    <div class="mt-70 d-flex ion-justify-content-between ion-align-items-center" style=" gap: 10px">
-      <ion-searchbar color="light" class="ion-no-border ion-no-padding" show-clear-button="always"></ion-searchbar>
-      <ion-icon size="large" (click)="openFilter()" slot="end" name="filter-outline"></ion-icon>
-    </div>
     <br>
     <div style="display: flex; gap: 10px;" class="ion-justify-content-center  ion-wrap">
       <app-article [article]="item" *ngFor="let item of articles"></app-article>
@@ -15,13 +15,16 @@
         <ion-spinner size="large" name="circular"></ion-spinner>
       </ng-container>
       <ng-template #templateEmpty>
-        <img [src]="'./assets/images/cart-empty.png'" style="width: 200px;height:200px">
-        <ion-label color="primary">
-          Votre panier est vide.
+        <ion-label color="secondary">
+          Aucun article trouvé
         </ion-label>
       </ng-template>
     </div>
   </ng-template>
   <br>
   <br>
+  <ion-infinite-scroll threshold="5%" position="bottom" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="" loadingText="Chargement...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
