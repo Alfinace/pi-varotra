@@ -3,5 +3,6 @@ export interface Filter {
 	villes: string[],
 	order: string,
 	orderBy: string,
+	keyWord?: string,
 	categories: number[]
 }

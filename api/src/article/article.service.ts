@@ -78,11 +78,30 @@ export class ArticleService {
   }
 
   findAllWithFilter(filter, offset: number, limit: number) {
-    let condition = {
+    var condition: any = {
       categoryId: { [Op.in]: [...filter.categories] },
       archived: false,
       unitPrice: { [Op.between]: [filter.range.lower, filter.range.upper] },
     }
+    if (filter.keyWord.trim() !== '') {
+      condition = {
+        ...condition,
+        designation: { [Op.like]: `%${filter.keyWord}%` }
+      }
+    }
+    let conditionStore = {
+      model: Store,
+      as: 'store',
+      where: {
+        city: { [Op.in]: [...filter.villes] },
+
+      }
+    }
+    if (filter.villes.length === 1 && filter.villes[0] === 'Tous') {
+      delete conditionStore.where.city;
+    }
+    console.log(conditionStore);
+
     if (filter.categories.length === 0) {
       delete condition.categoryId;
     }
@@ -93,7 +112,22 @@ export class ArticleService {
       limit,
       offset,
       distinct: true,
-      include: [{ all: true }],
+      include: [{
+        all: true
+      },
+        conditionStore,
+      {
+        model: Category,
+        as: 'category',
+        // where: {
+        //   [Op.or]: [{
+        //     name: { [Op.like]: `%${filter.keyWord}%` }
+        //   }
+        //   ]
+
+        // }
+      }
+      ],
       order: [[filter.orderBy, filter.order]],
     })
   }
@@ -114,7 +148,7 @@ export class ArticleService {
       limit,
       offset,
       distinct: true,
-      order: [['id', 'ASC']]
+      order: [['id', 'DESC']]
     });
   }
 
@@ -134,7 +168,7 @@ export class ArticleService {
       limit,
       offset,
       distinct: true,
-      order: [['id', 'ASC']]
+      order: [['id', 'DESC']]
     });
   }
 
