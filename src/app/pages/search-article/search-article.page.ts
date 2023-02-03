@@ -14,9 +14,10 @@ import { FilterSortingComponent } from 'src/app/shared/components/modals/filter-
   styleUrls: ['./search-article.page.scss'],
 })
 export class SearchArticlePage implements OnInit {
+  public keyWord = '';
   public applyFilter: Filter = {
     "categories": [],
-    "order": "ASC",
+    "order": "DESC",
     "orderBy": "updatedAt",
     "range": {
       "lower": 0,
@@ -24,7 +25,8 @@ export class SearchArticlePage implements OnInit {
     },
     "villes": [
       "Tous"
-    ]
+    ],
+    keyWord: ''
   };
   unsubscribe = new Subject()
   articles: any;
@@ -90,9 +92,10 @@ export class SearchArticlePage implements OnInit {
 
     const data = await modal.onDidDismiss();
     if (data.data) {
+      this.page = 0;
       this.loading = true;
       this.applyFilter = data.data
-      this.articleService.getAndFitlerArticles(this.applyFilter, 0, 10).subscribe((res: any) => {
+      this.articleService.getAndFitlerArticles(this.applyFilter, this.page, 10).subscribe((res: any) => {
         this.articles = res.rows;
         this.totalCount = res.count;
         this.loading = false;
@@ -102,9 +105,6 @@ export class SearchArticlePage implements OnInit {
   }
 
   loadData(event: any) {
-    if (this.articles.length >= this.totalCount) {
-      return
-    }
     this.page++;
     this.articleService.getAndFitlerArticles(this.applyFilter, this.page, this.pageSize).toPromise().then(res => {
       this.articles.push(...res.rows)
@@ -112,6 +112,17 @@ export class SearchArticlePage implements OnInit {
       if (this.articles.length === res.count) {
         event.target.disabled = true;
       }
+    })
+  }
+
+  search() {
+    this.page = 0;
+    this.loading = true;
+    this.applyFilter.keyWord = this.keyWord
+    this.articleService.getAndFitlerArticles(this.applyFilter, this.page, 10).subscribe((res: any) => {
+      this.articles = res.rows;
+      this.totalCount = res.count;
+      this.loading = false;
     })
   }
 }

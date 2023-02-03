@@ -12,3 +12,33 @@ app-article {
   justify-content: center;
   align-items: center;
 }
+.b-cat {
+  min-width: 98px;
+  font-size: 10px;
+  padding: 14px;
+  border-radius: 30px;
+  color: white;
+  background-color: var(--ion-color-primary);
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  .box {
+    background: #e4f3ea;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.search {
+  gap: 10px;
+  position: fixed;
+  top: -16px;
+  width: 94%;
+  background: white;
+  z-index: 100;
+  padding: 10px 7px;
+}

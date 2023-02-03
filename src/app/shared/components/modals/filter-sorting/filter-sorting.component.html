@@ -36,7 +36,8 @@
     <div class="d-flex" style="flex-direction: column;gap: 10px;">
       <div class="d-flex ion-justify-content-between ion-align-items-center" style="flex-direction: row;gap: 10px;">
         <h4>Catégories</h4>
-        <ion-label (click)="selectAllCategorie()">Selectionner tous</ion-label>
+        <ion-label (click)="selectAllCategorie()">{{filter.categories.length == categories.length ? 'Désélectionner'
+          :'Sélectionner'}} tous</ion-label>
       </div>
       <br>
       <div class="container-category">

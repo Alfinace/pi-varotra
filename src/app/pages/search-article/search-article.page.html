@@ -1,11 +1,17 @@
 <ion-content class="ion-padding-horizontal" *ngIf="articles">
-  <div class="mt-70 d-flex ion-justify-content-between ion-align-items-center" style=" gap: 10px">
-    <ion-searchbar color="light" class="ion-no-border ion-no-padding" show-clear-button="always"></ion-searchbar>
+  <div class="mt-70 search d-flex ion-justify-content-between ion-align-items-center" style=" gap: 10px">
+    <ion-searchbar [(ngModel)]="keyWord" color="light" class="ion-no-border ion-no-padding" show-clear-button="always">
+    </ion-searchbar>
+    <div class="b-cat" (click)="search()">
+      <div class="text-center">
+        Recherche
+      </div>
+    </div>
     <ion-icon size="large" (click)="openFilter()" slot="end" name="filter-outline"></ion-icon>
   </div>
   <ng-container *ngIf="!loading &&  articles.length > 0 ;else templateLoadingEmpty">
     <br>
-    <div style="display: flex; gap: 10px;" class="ion-justify-content-center  ion-wrap">
+    <div style="display: flex; gap: 10px;margin-top: 100px;" class="ion-justify-content-center  ion-wrap">
       <app-article [article]="item" *ngFor="let item of articles"></app-article>
     </div>
   </ng-container>
@@ -23,7 +29,7 @@
   </ng-template>
   <br>
   <br>
-  <ion-infinite-scroll threshold="5%" position="bottom" (ionInfinite)="loadData($event)">
+  <ion-infinite-scroll threshold="15%" position="bottom" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content loadingSpinner="" loadingText="Chargement...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
