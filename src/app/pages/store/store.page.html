@@ -2,7 +2,7 @@
   <div class="ion-padding-horizontal mt-70">
     <div class=" d-flex ion-justify-content-between ion-align-items-center">
       <h3>Magasins</h3>
-      <ion-icon size="large" slot="end" name="filter-outline"></ion-icon>
+      <!-- <ion-icon size="large" slot="end" name="filter-outline"></ion-icon> -->
     </div>
     <br>
     <ion-searchbar color="light" class="ion-no-border  ion-no-padding" show-clear-button="always">
@@ -12,4 +12,8 @@
       <app-store-card class="width-card" [store]="item" *ngFor="let item of stores"></app-store-card>
     </div>
   </div>
+  <ion-infinite-scroll threshold="15%" position="bottom" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="" loadingText="Chargement...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

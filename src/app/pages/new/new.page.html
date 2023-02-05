@@ -1,6 +1,29 @@
 <ion-content>
   <div class="ion-padding-horizontal mt-70">
     <h3>Nouveau</h3>
-    <app-new-card [_new]="_new" *ngFor="let _new of news"></app-new-card>
+    <ng-container *ngIf="!loading && news.length > 0; else notLoaded">
+      <app-new-card [_new]="_new" *ngFor="let _new of news"></app-new-card>
+    </ng-container>
+    <ng-template #notLoaded>
+      <ng-container *ngIf="!loading; else empty">
+        <ion-skeleton-text [animated]="true" style="width: 30%;height: 20px;"></ion-skeleton-text>
+        <div class="d-flex ion-justify-content-between ion-align-items-center" *ngFor="let item of [1,1,1]">
+          <div class="d-flex flex-col" style="width: 70%;gap: 10px;">
+            <ion-skeleton-text [animated]="true" style="width: 30%;height: 20px;"></ion-skeleton-text>
+            <ion-skeleton-text [animated]="true" style="width:100%;height: 15px;"></ion-skeleton-text>
+          </div>
+          <ion-skeleton-text [animated]="true" style="width: 70px;height: 70px;"></ion-skeleton-text>
+        </div>
+      </ng-container>
+      <ng-template #empty>
+        <ion-text color="secondary">
+          <h1>Aucune nouvelle oublié</h1>
+        </ion-text>
+      </ng-template>
+    </ng-template>
   </div>
+  <ion-infinite-scroll threshold="25%" [disabled]="true" position="bottom" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingText="Chargement...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

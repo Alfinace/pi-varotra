@@ -46,7 +46,8 @@
     </div>
   </div>
   <br>
-  <ion-item lines="full">
+  <ion-item lines="full" [routerLink]="['/client/store/store-detail/', article.store!.id]"
+    routerLinkActive="router-link-active">
     <ion-avatar slot="start">
       <img [src]="'/assets/images/img3.jpg'" />
     </ion-avatar>
