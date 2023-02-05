@@ -17,7 +17,7 @@ export class StoreService {
     return this.storeRepository.create({ ...createStoreDto });
   }
 
-  findAll(offset: number = 0, limit: number = 10) {
+  findAll(offset: number, limit: number) {
     return this.storeRepository.findAndCountAll({
       include: [
         { all: true },

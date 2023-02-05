@@ -42,8 +42,9 @@ export class ArticleController {
   @Get()
   async findAll(@Query('size') limit: number, @Query('page') offset: number, @Query('categoryId') categoryId: number) {
     try {
-      console.log(categoryId);
-
+      if (offset !== 0) {
+        offset = offset * limit;
+      }
       var articles = isNaN(categoryId) ? await this.articleService.findAll(offset, limit) : await this.articleService.findAllByCategory(categoryId, offset, limit);
       articles.rows = articles.rows.map((article) => {
         article.images = article.images.map(i => {
@@ -63,6 +64,9 @@ export class ArticleController {
   @UseGuards(JwtAuthGuard)
   async findAllCurrentUser(@Query('size') limit: number, @Query('page') offset: number, @User() user) {
     try {
+      if (offset !== 0) {
+        offset = offset * limit;
+      }
       var articles = await this.articleService.findAllByStore(user.storeId, offset, limit);
       articles.rows = articles.rows.map((article) => {
         console.log(article);
@@ -92,6 +96,9 @@ export class ArticleController {
   @Get('store/:id')
   async findAllByStore(@Query('size') limit: number, @Query('page') offset: number, @Param('id') id: string) {
     try {
+      if (offset !== 0) {
+        offset = offset * limit;
+      }
       let articles = await this.articleService.findAllByStore(id, offset, limit);
       articles.rows = articles.rows.map((article) => {
         article.images = article.images.map(i => {

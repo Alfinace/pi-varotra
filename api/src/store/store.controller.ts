@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query, HttpException, HttpStatus } from '@nestjs/common';
 import { StoreService } from './store.service';
 import { CreateStoreDto } from './dto/create-store.dto';
 import { UpdateStoreDto } from './dto/update-store.dto';
@@ -32,21 +32,26 @@ export class StoreController {
 
   @Get()
   async findAll(@Query('size') limit: number, @Query('page') offset: number) {
-    if (limit && offset) {
-      var stores = await this.storeService.findAll(limit, offset);
-    } else {
-      var stores = await this.storeService.findAll();
+    try {
+      if (offset !== 0) {
+        offset = offset * limit;
+      }
+      // offset = isNaN(offset) ? offset : 0;
+      // limit = isNaN(limit) ? limit : 10;
+      var stores = await this.storeService.findAll(offset, limit);
+      stores.rows = stores.rows.map((store) => {
+        store.logo = (store.logo && store.logo !== 'none') ? process.env.BASE_URL_IMAGE + store.logo : null;
+        store.user.avatar = process.env.BASE_URL_IMAGE + store.user.avatar;
+        store.user.socialNetwork = JSON.parse(store.user.socialNetwork);
+        store.articles = store.articles.filter(a => !a.archived)
+        return store;
+      })
+
+      return stores;
+    } catch (error) {
+      console.log(error)
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
-
-    stores.rows = stores.rows.map((store) => {
-      store.logo = (store.logo && store.logo !== 'none') ? process.env.BASE_URL_IMAGE + store.logo : null;
-      store.user.avatar = process.env.BASE_URL_IMAGE + store.user.avatar;
-      store.user.socialNetwork = JSON.parse(store.user.socialNetwork);
-      store.articles = store.articles.filter(a => !a.archived)
-      return store;
-    })
-
-    return stores;
   }
 
   @Get(':id')
