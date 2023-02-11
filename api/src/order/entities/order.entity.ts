@@ -27,6 +27,10 @@ export class Order extends Model {
   @BelongsTo(() => Store)
   store: Store;
 
+
+  @BelongsTo(() => User)
+  user: User;
+
   @BelongsToMany(() => Article, () => ArticleOrder)
   articles: Article[];
 
@@ -37,7 +41,7 @@ export class Order extends Model {
   @HasOne(() => PaymentU2A)
   payment: PaymentU2A;
 
-  @Column({ type: DataType.DECIMAL, field: 'total_amount' })
+  @Column({ type: DataType.DOUBLE, field: 'total_amount' })
   totalAmount: number;
 
   @Column({ type: DataType.DATE, field: 'delivered' })

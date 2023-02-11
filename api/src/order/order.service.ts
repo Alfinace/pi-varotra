@@ -3,6 +3,8 @@ import { Order } from 'src/order/entities/order.entity';
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
+import { User } from 'src/user/entities/user.entity';
+import { Article } from 'src/article/entities/article.entity';
 
 @Injectable()
 export class OrderService {
@@ -37,8 +39,29 @@ export class OrderService {
     return { ...newOrder, articles };
   }
 
-  findAll() {
-    return `This action returns all order`;
+  findByStore(storeId: number, limit: number, offset: number) {
+    return this.orderRepository.findAndCountAll({
+      where: {
+        storeId
+      },
+      include: [
+        {
+          model: Article,
+          as: 'articles',
+        },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['id', 'firstName', 'lastName', 'email', 'address', 'contact', 'city']
+        }
+      ],
+      order: [
+        ['createdAt', 'DESC']
+      ],
+      limit,
+      offset,
+      nest: true
+    });
   }
 
   findOne(id: number) {

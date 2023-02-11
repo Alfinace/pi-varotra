@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: SpaceStorePage
+  },  {
+    path: 'order',
+    loadChildren: () => import('./order/order.module').then( m => m.OrderPageModule)
   }
+
 ];
 
 @NgModule({

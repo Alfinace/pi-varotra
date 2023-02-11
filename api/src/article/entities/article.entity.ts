@@ -8,11 +8,14 @@ import {
   HasMany,
   BelongsTo,
   AfterCreate,
+  BelongsToMany,
 } from 'sequelize-typescript';
 import { Category } from 'src/category/entities/category.entity';
 import { ImageArticle } from 'src/image-article/entities/image-article.entity';
 import { Store } from 'src/store/entities/store.entity';
 import { Rate } from 'src/rates/entities/rate.entity';
+import { ArticleOrder } from 'src/aricle-order/entities/aricle-order.entity';
+import { Order } from 'src/order/entities/order.entity';
 
 @Table({ tableName: 'articles' })
 export class Article extends Model {
@@ -29,6 +32,9 @@ export class Article extends Model {
 
   @BelongsTo(() => Store)
   store: Store;
+
+  @BelongsToMany(() => Order, () => ArticleOrder)
+  orders: Order[];
 
   @HasMany(() => Rate)
   rates: Rate[];

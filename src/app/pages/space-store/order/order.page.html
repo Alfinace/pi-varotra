@@ -1,0 +1,79 @@
+<ion-content>
+  <div>
+    <br>
+    <br>
+    <h3 class=" ion-no-marginion-margin-bottom ion-text-center">Liste de commande</h3>
+    <p-table #dt1 [value]="orders">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            <div class="p-d-flex p-jc-between  text-upper p-ai-center   ">
+              N° CMD
+            </div>
+          </th>
+          <th>
+            <div class="p-d-flex p-jc-between  text-upper p-ai-center p-ai-center">
+              Nbr d'article
+            </div>
+          </th>
+          <th>
+            <div class="p-d-flex p-jc-between  text-upper p-ai-center p-ai-center">
+              Prix total
+            </div>
+          </th>
+          <th>
+            <div class="p-d-flex p-jc-between  text-upper p-ai-center p-ai-center">
+              Paiement
+            </div>
+          </th>
+          <th>
+            <div class="p-d-flex p-jc-between  text-upper p-ai-center p-ai-center">
+              Date
+            </div>
+          </th>
+          <th>
+            <div class="p-d-flex p-jc-between  text-upper p-ai-center p-ai-center">
+              Action
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-order>
+        <tr>
+          <td>
+            {{order.id}}
+          </td>
+          <td>
+            <span class="image-text">
+              {{order.articles.length}}
+            </span>
+          </td>
+          <td>
+            <span class="image-text">{{order.totalAmount}}pi</span>
+          </td>
+          <td style="min-width: 100px">
+            <span class="image-text">
+              <ion-chip style="font-size:10px" color="warning">En attente</ion-chip>
+            </span>
+          </td>
+          <td>
+            <span class="image-text">
+              {{order.createdAt | date:'dd-MM-yyyy HH:mm'}}
+            </span>
+          </td>
+          <td>
+            <div class="d-flex ion-justify-content-around" style="gap:15px">
+              <span class="primary2 btn-action" (click)="showOrder(order)"> Voir detail</span>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">Aucune donnée.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
+  </div>
+</ion-content>

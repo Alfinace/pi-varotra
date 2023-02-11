@@ -16,6 +16,7 @@ export class SpaceStorePage implements OnInit {
 
   produits: Article[] = [];
   totalRecords: number;
+  orders: any[] = [];
 
   constructor(
     private modalController: ModalController,
@@ -28,10 +29,16 @@ export class SpaceStorePage implements OnInit {
       this.produits = res.rows;
       this.totalRecords = res.count;
     })
+    this.articleService.getCmd(0, 8).toPromise().then(res => {
+      this.orders = res.rows;
+    })
   }
 
   public paginate(e: any) {
-
+    this.articleService.getArticlesCurrentUser(e.page, e.rows).toPromise().then(res => {
+      this.produits = res.rows;
+      this.totalRecords = res.count;
+    })
   }
 
   public async addProduit() {
