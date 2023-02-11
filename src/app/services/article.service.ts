@@ -52,4 +52,8 @@ export class ArticleService {
   public getAndFitlerArticles(filter: any, page: number, size: number) {
     return this.http.post('articles/filter?page=' + page + '&size=' + size, filter);
   }
+
+  public getCmd(page: number, size: number) {
+    return this.http.get(`orders?page=${page}&size=${size}`);
+  }
 }

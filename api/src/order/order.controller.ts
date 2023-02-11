@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Res, HttpException, Query } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
@@ -24,8 +24,23 @@ export class OrderController {
 
   @Get()
   @UseGuards(JwtAuthGuard, RoleGuard)
-  findAll() {
-    return this.orderService.findAll();
+  async findAll(@User() user, @Query('size') limit: number, @Query('page') offset: number) {
+    try {
+      if (offset !== 0) {
+        offset = offset * limit;
+      }
+      var orders = await this.orderService.findByStore(user.storeId, limit, offset);
+      orders.rows = orders.rows.map(order => {
+        order.deliverieInfo = JSON.parse(order.deliverieInfo) || null;
+        order.articles = order.articles.map((article: any) => {
+          return { ...article.ArticleOrder.dataValues, article: article };
+        })
+        return order;
+      })
+      return orders;
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
   @Get(':id')
@@ -47,22 +62,16 @@ export class OrderController {
   @Post('/payments/approve')
   @UseGuards(JwtAuthGuard, RoleGuard)
   async approve(@Body('paymentId') paymentId: string, @User() user: any, @Res() res: Response) {
-    console.log('paymentId', paymentId);
-
     await this.paymentU2AService.approvePayment(paymentId).toPromise()
     let currentPayment = await this.paymentU2AService.getInfoPayment(paymentId).toPromise()
-    console.log(currentPayment);
-
-    console.log(
-      {
-        piPaymentId: paymentId,
-        txid: null,
-        paid: false,
-        cancelled: false,
-        userId: user.userId,
-        orderId: currentPayment.data.metadata.orderId,
-      }
-    );
+    console.log({
+      piPaymentId: paymentId,
+      txid: null,
+      paid: false,
+      cancelled: false,
+      userId: user.userId,
+      orderId: currentPayment.data.metadata.orderId,
+    });
 
     let newPayment = await this.paymentU2AService.create({
       piPaymentId: paymentId,

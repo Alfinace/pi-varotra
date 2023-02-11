@@ -17,6 +17,7 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
   public paymentForm: FormGroup
+  public statusPayment = 0;
   public totalAmount: number = 0;
   public paniers: any[] = []
   public id: number;
@@ -34,8 +35,6 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private articleService: ArticleService) {
     this.sessionService.getInfoUser().subscribe(user => {
-      console.log(user);
-
       if (user) {
         this.user = user
       }
@@ -193,8 +192,6 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     const { panier } = this.paymentForm.value
     let data = { ...this.paymentForm.value }
     delete data.panier;
-    console.log(this.paymentForm);
-
     let order: Order = {
       totalAmount: this.totalAmount,
       articles: panier.map((p: any) => {
@@ -206,9 +203,10 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
           designation: p.designation
         }
       }),
-      deliverieInfo: JSON.stringify(data)
     }
+    this.statusPayment = 1
     const newOrder = await this.paimentService.addOrder(order).toPromise();
+    this.statusPayment = 2
     let orderId: number = newOrder.dataValues.id;
     var itemIds: number[] = []
     var memo = ''

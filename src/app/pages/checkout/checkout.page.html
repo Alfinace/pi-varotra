@@ -196,10 +196,24 @@
         </ion-list>
         <ion-row class="btn-row mt">
           <ion-col size="12">
-            <button (click)="onStartProcessPayment()" class="ion-activatable ripple-parent custom-parent btn-primary">
+            <button (click)="onStartProcessPayment()" [disabled]="statusPayment > 0"
+              class="ion-activatable ripple-parent custom-parent btn-primary">
               <div style="display: flex; gap: 10px" class="ion-align-items-center">
-                <span class="custom-child">Soumettre le commande && paiement</span>
-                <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
+                <div [ngSwitch]="statusPayment">
+                  <div *ngSwitchCase="0">
+                    <span class="custom-child">Lancer le paiement</span>
+                  </div>
+                  <div *ngSwitchCase="1" style="display: flex; gap:10px; align-items: center;">
+                    <span class="custom-child">Enregistrement du commande </span>
+                    <ion-spinner color="light" name="circular"></ion-spinner>
+                  </div>
+                  <div *ngSwitchCase="2" style="display: flex; gap:10px;align-items: center;">
+                    <span class="custom-child">Transaction en cours</span>
+                    <ion-spinner color="light" name="circular"></ion-spinner>
+                  </div>
+
+                  <div *ngSwitchDefault>output2</div>
+                </div>
               </div>
               <ion-ripple-effect></ion-ripple-effect>
             </button>
