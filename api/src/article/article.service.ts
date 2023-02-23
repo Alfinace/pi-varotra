@@ -142,7 +142,6 @@ export class ArticleService {
           include: [{
             model: User,
             as: 'user',
-            attributes: ['address', 'avatar', 'contact', 'firstname', 'lastname', 'socialNetwork']
           }],
         }],
       limit,
@@ -162,7 +161,6 @@ export class ArticleService {
           include: [{
             model: User,
             as: 'user',
-            attributes: ['address', 'avatar', 'contact', 'firstname', 'lastname', 'socialNetwork']
           }],
         }],
       limit,

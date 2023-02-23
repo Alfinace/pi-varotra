@@ -22,7 +22,6 @@ export class RatesController {
   async findAll(@Query('page') page: number, @Query('size') size: number, @Param('id') id: number) {
     let rates = await this.ratesService.findAll(id);
     rates.map((rate) => {
-      rate.user.password = undefined;
       rate.user.avatar = process.env.BASE_URL_IMAGE + rate.user.avatar;
       return rate;
     });

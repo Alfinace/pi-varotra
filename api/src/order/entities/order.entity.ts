@@ -39,7 +39,7 @@ export class Order extends Model {
   paymentId: number;
 
   @HasOne(() => PaymentU2A)
-  payment: PaymentU2A;
+  paymentU2A: PaymentU2A;
 
   @Column({ type: DataType.DOUBLE, field: 'total_amount' })
   totalAmount: number;

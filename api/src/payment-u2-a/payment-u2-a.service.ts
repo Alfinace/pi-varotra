@@ -1,8 +1,7 @@
 import { catchError, map, Observable } from 'rxjs';
-import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
+import { ForbiddenException, HttpException, Inject, Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { PaymentU2A } from './entities/payment-u2-a.entity';
-import PiNetwork from "pi-backend";
 
 @Injectable()
 export class PaymentU2AService {
@@ -31,7 +30,7 @@ export class PaymentU2AService {
   //Part implementation  payment Pi Network
   getInfoPayment(paymentId) {
     return this.httpService.get(
-      `${process.env.API_URL_MINEPI}/payments/${paymentId}`,
+      `${process.env.API_URL_MINEPI}/v2/payments/${paymentId}`,
       {
         headers: {
           Authorization: `Key ${process.env.API_KEY_MINEPI}`,
@@ -66,14 +65,14 @@ export class PaymentU2AService {
     )
       .pipe(
         catchError((err) => {
-          throw new ForbiddenException(err);
+          throw new HttpException(err, 404);
         }),
       );
   }
 
   completePayment(paymentId, txid): Observable<any> {
     return this.httpService.post(
-      `${process.env.API_URL_MINEPI}/payments/${paymentId}/complete`,
+      `${process.env.API_URL_MINEPI}/v2/payments/${paymentId}/complete`,
       { txid },
       {
         headers: {
@@ -94,7 +93,7 @@ export class PaymentU2AService {
 
   getMyInfo(accessToken: string): Observable<any> {
     return this.httpService.get(
-      `${process.env.API_URL_MINEPI}/me`,
+      `${process.env.API_URL_MINEPI}/v2/me`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,

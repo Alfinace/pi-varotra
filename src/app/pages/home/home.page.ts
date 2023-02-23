@@ -51,7 +51,7 @@ export class HomePage implements OnInit, AfterViewInit {
     scrollbar: { draggable: true },
   };
 
-  public catConfig: SwiperOptions = { ...this.config, slidesPerView: 4, spaceBetween: 10, loop: false };
+  public catConfig: SwiperOptions = { ...this.config, slidesPerView: 3, spaceBetween: 10, loop: false };
 
 
   public articles: Article[] = []

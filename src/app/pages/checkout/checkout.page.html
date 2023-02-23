@@ -15,7 +15,7 @@
   <ion-slides mode="md" pager="false" #slider [options]="slideOpts">
     <ion-slide>
       <div class="d-flex-col">
-        <div style="max-height: 500px;overflow: scroll;">
+        <div style="max-height: 450px;overflow: scroll;">
           <ion-item class="item-cart" *ngFor="let item of paniers">
             <div class=" d-flex ion-justify-content-between ion-margin-vertical" style="width: 100%">
               <div class="d-flex ion-justify-content-start" style="gap: 10px">
@@ -23,7 +23,7 @@
                   <img [src]="item?.images[0]?.image" />
                 </div>
                 <div class="cart-image">
-                  <h5> {{item.designation}} </h5>
+                  <h6> {{item.designation}} </h6>
                   <p style="display: flex;gap: 5px;align-items: flex-end;">
                     <span style="font-family: Serif;font-size: 20px;" class="init">π</span>
                     <span style="font-family: 'DM Sans Medium';font-size: 15px" class="price">
@@ -62,9 +62,9 @@
     <ion-slide>
       <div class="d-flex-col">
         <br>
-        <h5>
+        <h6>
           Veuillez renseigner votre information de livraison en remplissant la formulaire ci-dessus.
-        </h5>
+        </h6>
         <form [formGroup]="paymentForm">
           <ion-item>
             <ion-label position="floating">Nom et prémon</ion-label>
@@ -72,12 +72,12 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">Address de livraison</ion-label>
-            <ion-input required formControlName="contact" type="text"></ion-input>
+            <ion-input required formControlName="address" type="text"></ion-input>
           </ion-item>
-          <ion-item>
+          <!-- <ion-item>
             <ion-label position="floating">Contact rapide</ion-label>
-            <ion-input required formControlName="address" type="text" placeholder="03488...."></ion-input>
-          </ion-item>
+            <ion-input required formControlName="contact" type="text" placeholder="03488...."></ion-input>
+          </ion-item> -->
           <ion-item>
             <ion-label position="floating">Ville</ion-label>
             <ion-input required formControlName="city" type="text"></ion-input>
@@ -103,122 +103,118 @@
       </div>
     </ion-slide>
     <ion-slide>
-      <div class="d-flex-col" *ngIf="user">
-        <h4>Information de paiement et de livraison</h4>
-        <ion-list *ngIf="f.panier[0]">
-          <ion-item-group>
-            <ion-item-divider>
-              <ion-label>
-                Magasin
-              </ion-label>
-            </ion-item-divider>
-            <ion-item>
-              <ion-icon color="primary" slot="start" size="small" name="business"></ion-icon>
-              <ion-label>Magasin</ion-label>
-              <ion-text slot="end" color="primary">
-                <h6 *ngIf="f.panier">
-                  {{f.panier[0]?.store?.name}}
-                </h6>
-              </ion-text>
-            </ion-item>
-            <ion-item>
-              <ion-icon color="primary" slot="start" size="small" name="mail"></ion-icon>
-              <ion-label>Siége:</ion-label>
-              <ion-text slot="end" color="primary">
-                <h6> {{f.panier[0].store?.address}} à {{f.panier[0].store?.city}}</h6>
-              </ion-text>
-            </ion-item>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item-divider>
-              <ion-label>
-                Votre infomration
-              </ion-label>
-            </ion-item-divider>
-            <ion-item>
-              <ion-icon color="primary" slot="start" size="small" name="person"></ion-icon>
-              <ion-label>Client</ion-label>
-              <ion-text slot="end" color="primary">
-                <h6 *ngIf="f.fullname.length;else name">
-                  {{f.fullname}}
-                </h6>
-                <ng-template #name>
-                  {{user.firstname}}
-                </ng-template>
-              </ion-text>
-            </ion-item>
-            <ion-item>
-              <ion-icon color="primary" slot="start" size="small" name="mail"></ion-icon>
-              <ion-label>Adresse de livraison:</ion-label>
-              <ion-text slot="end" color="primary">
-                <h6>{{f.address != '' ? f.address : 'N/A'}}</h6>
-              </ion-text>
-            </ion-item>
-            <ion-item>
-              <ion-icon color="primary" slot="start" size="small" name="call"></ion-icon>
-              <ion-label>Contact rapide :</ion-label>
-              <ion-text slot="end" color="primary">
-                <h6>{{f.contact != '' ? f.contact : user.contact}}</h6>
-              </ion-text>
-            </ion-item>
-            <ion-item>
-              <ion-icon color="primary" slot="start" size="small" name="location"></ion-icon>
-              <ion-label>Ville:</ion-label>
-              <ion-text slot="end" color="primary">
-                <h6>{{f.city != '' ? f.city : user.city}}</h6>
-              </ion-text>
-            </ion-item>
-          </ion-item-group>
-          <ion-item-group>
-            <ion-item-divider>
-              <ion-label>
-                Paiement
-              </ion-label>
-            </ion-item-divider>
-            <ion-item>
-              <ion-icon color="primary" slot="start" size="small" name="bag-check"></ion-icon>
-              <ion-label>Articles achétés:</ion-label>
-              <ion-text slot="end" color="primary">
-                <span *ngFor="let item of paniers">
-                  {{item.designation}},
-                </span>
-              </ion-text>
-            </ion-item>
-            <ion-item>
-              <ion-icon color="primary" slot="start" size="small" name="cash"></ion-icon>
-              <ion-label>Montant total à payer:</ion-label>
-              <ion-text slot="end" color="primary">
-                <span style="font-family: Serif;font-size: 20px;">π</span>
-                {{totalAmount}}
-              </ion-text>
-            </ion-item>
-          </ion-item-group>
-        </ion-list>
-        <ion-row class="btn-row mt">
-          <ion-col size="12">
-            <button (click)="onStartProcessPayment()" [disabled]="statusPayment > 0"
-              class="ion-activatable ripple-parent custom-parent btn-primary">
-              <div style="display: flex; gap: 10px" class="ion-align-items-center">
-                <div [ngSwitch]="statusPayment">
-                  <div *ngSwitchCase="0">
-                    <span class="custom-child">Lancer le paiement</span>
+      <div style="width: 100%">
+        <div class="d-flex-col" style="max-height: 500px;overflow: scroll;" *ngIf="user">
+          <h6>Merci de verifier l'information de paiement et de livraison</h6>
+          <ion-list *ngIf="f.panier[0]">
+            <ion-item-group>
+              <ion-item-divider>
+                <ion-label>
+                  Magasin
+                </ion-label>
+              </ion-item-divider>
+              <ion-item>
+                <ion-icon color="primary" slot="start" size="small" name="business"></ion-icon>
+                <ion-label>Magasin</ion-label>
+                <ion-text slot="end" color="primary">
+                  <h6 *ngIf="f.panier">
+                    {{f.panier[0]?.store?.name}}
+                  </h6>
+                </ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-icon color="primary" slot="start" size="small" name="mail"></ion-icon>
+                <ion-label>Siége:</ion-label>
+                <ion-text slot="end" color="primary">
+                  <h6> {{f.panier[0].store?.address}} à {{f.panier[0].store?.city}}</h6>
+                </ion-text>
+              </ion-item>
+            </ion-item-group>
+            <ion-item-group>
+              <ion-item-divider>
+                <ion-label>
+                  Votre infomration
+                </ion-label>
+              </ion-item-divider>
+              <!-- <ion-item>
+                <ion-icon color="primary" slot="start" size="small" name="person"></ion-icon>
+                <ion-label>Client</ion-label>
+                <ion-text slot="end" color="primary">
+                  <h6 *ngIf="f.fullname.length;else name">
+                    {{f.fullname}}
+                  </h6>
+                  <ng-template #name>
+                    {{user.firstname}}
+                  </ng-template>
+                </ion-text>
+              <!-- </ion-item> -->
+              <ion-item>
+                <ion-icon color="primary" slot="start" size="small" name="mail"></ion-icon>
+                <ion-label>Adresse de livraison:</ion-label>
+                <ion-text slot="end" color="primary">
+                  <h6>{{f.address != '' ? f.address : 'N/A'}}</h6>
+                </ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-icon color="primary" slot="start" size="small" name="location"></ion-icon>
+                <ion-label>Ville:</ion-label>
+                <ion-text slot="end" color="primary">
+                  <h6>{{f.city != '' ? f.city : user.city}}</h6>
+                </ion-text>
+              </ion-item>
+            </ion-item-group>
+            <ion-item-group>
+              <ion-item-divider>
+                <ion-label>
+                  Paiement
+                </ion-label>
+              </ion-item-divider>
+              <ion-item>
+                <ion-icon color="primary" slot="start" size="small" name="bag-check"></ion-icon>
+                <ion-label>Articles achétés:</ion-label>
+                <ion-text slot="end" color="primary">
+                  <span *ngFor="let item of paniers">
+                    {{item.designation}},
+                  </span>
+                </ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-icon color="primary" slot="start" size="small" name="cash"></ion-icon>
+                <ion-label>Montant total à payer:</ion-label>
+                <ion-text slot="end" color="primary">
+                  <span style="font-family: Serif;font-size: 20px;">π</span>
+                  {{totalAmount}}
+                </ion-text>
+              </ion-item>
+            </ion-item-group>
+          </ion-list>
+          <ion-row class="btn-row mt">
+            <ion-col size="12">
+              <button (click)="onStartProcessPayment()" [disabled]="statusPayment > 0"
+                class="ion-activatable ripple-parent custom-parent btn-primary">
+                <div style="display: flex; gap: 10px" class="ion-align-items-center">
+                  <div [ngSwitch]="statusPayment">
+                    <div *ngSwitchCase="0">
+                      <span class="custom-child">Lancer le paiement</span>
+                    </div>
+                    <div *ngSwitchCase="1" style="display: flex; gap:10px; align-items: center;">
+                      <span class="custom-child">Enregistrement du commande </span>
+                      <ion-spinner color="light" name="circular"></ion-spinner>
+                    </div>
+                    <div *ngSwitchCase="2" style="display: flex; gap:10px;align-items: center;">
+                      <span class="custom-child">Transaction en cours</span>
+                      <ion-spinner color="light" name="circular"></ion-spinner>
+                    </div>
+                    <div *ngSwitchDefault>
+                      <span class="custom-child">OK</span>
+                    </div>
                   </div>
-                  <div *ngSwitchCase="1" style="display: flex; gap:10px; align-items: center;">
-                    <span class="custom-child">Enregistrement du commande </span>
-                    <ion-spinner color="light" name="circular"></ion-spinner>
-                  </div>
-                  <div *ngSwitchCase="2" style="display: flex; gap:10px;align-items: center;">
-                    <span class="custom-child">Transaction en cours</span>
-                    <ion-spinner color="light" name="circular"></ion-spinner>
-                  </div>
-
-                  <div *ngSwitchDefault>output2</div>
                 </div>
-              </div>
-              <ion-ripple-effect></ion-ripple-effect>
-            </button>
-          </ion-col>
-        </ion-row>
+                <ion-ripple-effect></ion-ripple-effect>
+              </button>
+            </ion-col>
+          </ion-row>
+        </div>
       </div>
     </ion-slide>
   </ion-slides>

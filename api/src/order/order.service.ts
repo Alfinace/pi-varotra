@@ -5,6 +5,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { User } from 'src/user/entities/user.entity';
 import { Article } from 'src/article/entities/article.entity';
+import { PaymentU2A } from 'src/payment-u2-a/entities/payment-u2-a.entity';
 
 @Injectable()
 export class OrderService {
@@ -50,9 +51,13 @@ export class OrderService {
           as: 'articles',
         },
         {
+          model: PaymentU2A,
+          as: 'paymentU2A'
+        },
+        {
           model: User,
           as: 'user',
-          attributes: ['id', 'firstName', 'lastName', 'email', 'address', 'contact', 'city']
+          attributes: ['id']
         }
       ],
       order: [

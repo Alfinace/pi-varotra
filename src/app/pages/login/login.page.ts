@@ -39,53 +39,53 @@ export class LoginPage implements OnInit {
   }
 
   public async login() {
-    if (this.loginForm.valid) {
-      this.isSubmited = true;
-      if (this.loginForm.value.type === 'simple') {
-        try {
-          this.paymentService.auth().then((authResult: AuthResult) => {
-            if (authResult.user) {
-              this.userService.login({ ...this.loginForm.value, ...authResult }).subscribe((res: any) => {
-                this.localstorageService.setItem('token', res.token);
-                this.sessionService.getSessionStatus();
-                this.isSubmited = false;
-                this.toastService.show('success', 'Connexion réussie');
-                this.router.navigate([this.reditectTo || '/client']);
-              }, (err: any) => {
-                console.log(err);
-                this.toastService.show('dark', 'Email ou mot de passe incorrect');
-                this.isSubmited = false;
-              })
-            } else {
-              this.toastService.show('dark', 'Erreur de connexion');
-              this.isSubmited = false;
-            }
-          }).catch((err: any) => {
-            alert(err)
-            this.toastService.show('dark', 'Erreur de connexion');
+    // if (this.loginForm.valid) {
+    this.isSubmited = true;
+    // if (this.loginForm.value.type === 'simple') {
+    try {
+      this.paymentService.auth().then((authResult: AuthResult) => {
+        if (authResult.user) {
+          this.userService.login({ ...this.loginForm.value, ...authResult }).subscribe((res: any) => {
+            this.localstorageService.setItem('token', res.token);
+            this.sessionService.getSessionStatus();
             this.isSubmited = false;
-          })
-
-        } catch (error) {
-          console.log('error', error);
-
-        }
-      } else {
-        this.userService.login({ ...this.loginForm.value }).subscribe((res: any) => {
-          this.localstorageService.setItem('token', res.token);
-          this.sessionService.getSessionStatus();
-          this.isSubmited = false;
-          this.toastService.show('success', 'Connexion réussie');
-          this.router.navigate([this.reditectTo || '/client']);
-        }
-          , (err: any) => {
+            this.toastService.show('success', 'Connexion réussie');
+            this.router.navigate([this.reditectTo || '/client']);
+          }, (err: any) => {
             console.log(err);
             this.toastService.show('dark', 'Email ou mot de passe incorrect');
             this.isSubmited = false;
-          }
-        )
-      }
+          })
+        } else {
+          this.toastService.show('dark', 'Erreur de connexion');
+          this.isSubmited = false;
+        }
+      }).catch((err: any) => {
+        alert(err)
+        this.toastService.show('dark', 'Erreur de connexion');
+        this.isSubmited = false;
+      })
+
+    } catch (error) {
+      console.log('error', error);
+
     }
+    // } else {
+    //   this.userService.login({ ...this.loginForm.value }).subscribe((res: any) => {
+    //     this.localstorageService.setItem('token', res.token);
+    //     this.sessionService.getSessionStatus();
+    //     this.isSubmited = false;
+    //     this.toastService.show('success', 'Connexion réussie');
+    //     this.router.navigate([this.reditectTo || '/client']);
+    //   }
+    //     , (err: any) => {
+    //       console.log(err);
+    //       this.toastService.show('dark', 'Email ou mot de passe incorrect');
+    //       this.isSubmited = false;
+    //     }
+    //   )
+    // }
+    // }
   }
 
   public backHome(): void {

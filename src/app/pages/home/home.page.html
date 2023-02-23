@@ -48,10 +48,16 @@
       </div>
       <br>
       <!-- <swiper [config]="configP"> -->
-      <div class=" d-flex ion-justify-content-between  ion-align-items-center ion-wrap" style="gap:15px ;">
-        <app-article style=" width: 48%;display: block;" *ngFor="let item of articles" [article]="item">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="6" *ngFor="let item of articles">
+            <app-article style="display: block;" [article]="item"></app-article>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- <div class=" d-flex ion-justify-content-between  ion-align-items-center ion-wrap" style="gap:15px ;">
         </app-article>
-      </div>
+      </div> -->
       <!-- </swiper> -->
       <br>
 

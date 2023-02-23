@@ -9,6 +9,7 @@ import { ArticleService } from 'src/app/services/article.service';
 import { CartService } from 'src/app/services/cart.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { SessionService } from 'src/app/services/session.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-checkout',
@@ -31,6 +32,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     private cartService: CartService,
     private paimentService: PaymentService,
     private sessionService: SessionService,
+    private toastService: ToastService,
     private route: ActivatedRoute,
     private router: Router,
     private articleService: ArticleService) {
@@ -38,6 +40,20 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
       if (user) {
         this.user = user
       }
+    })
+    this.paimentService.statePayement$.subscribe(state => {
+      if (!state) return;
+      if (state.status == 'success') {
+        this.statusPayment = 1;
+        this.toastService.show('success', 'Paiement effectué avec succès')
+        this.cartService.removeAllCart()
+        this.router.navigate(['client/space-client'])
+      } else if (state.status == 'cancelled') {
+        this.toastService.show('danger', 'Paiement annulé')
+      } else {
+        this.toastService.show('danger', 'Erreur lors du paiement')
+      }
+      this.statusPayment = 0;
     })
   }
   @ViewChild('slider') slider: IonSlides;
@@ -223,7 +239,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
         metadata: { orderId, itemIds }
       }
     );
-    this.paimentService.createPayment({
+    await this.paimentService.createPayment({
       amount: newOrder.dataValues.totalAmount,
       memo,
       metadata: { orderId, itemIds }

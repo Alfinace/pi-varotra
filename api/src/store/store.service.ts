@@ -24,7 +24,6 @@ export class StoreService {
         {
           model: User,
           as: 'user',
-          attributes: ['address', 'avatar', 'contact', 'firstname', 'lastname', 'socialNetwork']
         }
       ],
       limit,
@@ -40,7 +39,6 @@ export class StoreService {
         {
           model: User,
           as: 'user',
-          attributes: ['address', 'avatar', 'contact', 'firstname', 'lastname', 'socialNetwork']
         }
       ],
     })

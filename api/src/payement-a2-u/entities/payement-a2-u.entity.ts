@@ -7,7 +7,7 @@ export class PayementA2U extends Model {
 	@Column({ field: "uid" })
 	uid: string;
 
-	@Column({ field: "amount" })
+	@Column({ field: "amount", type: "DOUBLE" })
 	amount: number;
 
 	@ForeignKey(() => Order)

@@ -16,7 +16,9 @@ export class PaymentA2UService {
   ) {
     const apiKey = process.env.API_KEY_MINEPI;
     const walletPrivatedSeed = process.env.WALLET_PRIVATE_SEED;
-    this.pi = new PiNetwork(apiKey, walletPrivatedSeed);
+    this.pi = new PiNetwork(apiKey, walletPrivatedSeed, {
+      baseUrl: process.env.API_URL_MINEPi,
+    });
   }
   create(data: any) {
     return new Promise((resolve, reject) => {
@@ -39,6 +41,10 @@ export class PaymentA2UService {
         } else {
           resolve('Create payment failed')
         }
+      }).catch(err => {
+        console.log(err);
+
+        reject(err)
       })
     });
   }

@@ -43,6 +43,7 @@ export const databaseProviders = [
       ]);
       await sequelize.sync({
         // alter: true,
+        // force: true,
       });
       return sequelize;
     },

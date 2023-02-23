@@ -63,8 +63,6 @@ export class CreateStoreComponent implements OnInit, AfterViewInit {
       this.toastService.show('dark', 'Verifiez remplir les champs');
       return;
     }
-    console.log(this.storeForm.value);
-
     this.slider.lockSwipes(false);
     this.slider.slideNext();
     this.slider.lockSwipes(true);
