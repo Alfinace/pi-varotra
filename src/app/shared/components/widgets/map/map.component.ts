@@ -98,7 +98,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     });
     this._markerService.makePubMarkers(this.makersLayer, this.store);
     if (this.user) {
-      console.log(this.user);
+      
 
       L.marker([this.user.position[0], this.user.position[1]], { icon: redIcon })
         .addTo(this.map)
@@ -113,7 +113,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     this.map.setView(latLngs, 8);
   }
   ngAfterViewInit(): void {
-    console.log('after');
+    
 
     // if(this.map){
     //   this.map.off();
@@ -122,7 +122,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
     this.initMap()
   }
   ngOnDestroy(): void {
-    console.log('destroy');
+    
 
     if (this.map) {
       this.map.off();
@@ -132,7 +132,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
 
 
   ngOnInit(): void {
-    console.log('init');
+    
     // this.publicationService.datapub.subscribe(
     //   (res: any) => {
     //     if (res) {
@@ -152,7 +152,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         if (data.pub._materiel) {
           var a = L.marker(data.coordonne)
             .on("click", () => {
-              console.log(this.findPos(document.getElementById(data.pub._id)));
+              
               window.scroll(0, this.findPos(document.getElementById(data.pub._id)) + 250);
             })
             .addTo(markers)
@@ -161,7 +161,7 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy
         } else {
           var a = L.marker(data.coordonne)
             .on("click", () => {
-              console.log(this.findPos(document.getElementById(data.pub._id)));
+              
               window.scroll(0, this.findPos(document.getElementById(data.pub._id)) + 250);
             })
             .addTo(markers)

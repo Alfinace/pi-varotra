@@ -2,14 +2,14 @@ import { Animation, AnimationController } from "@ionic/angular";
 
 export const enterAnimation = (baseEl: HTMLElement, opts?: any): Animation => {
 	const DURATION = 300;
-	console.log('opts', opts);
+	
 
 	const animationCtrl = new AnimationController();
 
 	if (opts.direction === 'forward') {
-		console.log('direction - ', opts.direction);
-		console.log('opts.enteringEl', opts.enteringEl);
-		console.log('opts.leavingEl', opts.leavingEl);
+		
+		
+		
 
 		return animationCtrl
 			.create()
@@ -17,7 +17,7 @@ export const enterAnimation = (baseEl: HTMLElement, opts?: any): Animation => {
 			.duration(DURATION)
 			.fromTo('transform', 'translateX(400px)', 'translateX(0px)');
 	} else {
-		console.log('direction - ', opts.direction);
+		
 		const rootAnimation = animationCtrl
 			.create()
 			.addElement(opts.enteringEl)

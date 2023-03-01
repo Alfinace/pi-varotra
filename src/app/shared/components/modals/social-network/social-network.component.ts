@@ -50,9 +50,9 @@ export class SocialNetworkComponent implements OnInit, OnDestroy {
     }
   }
   public validateSocial() {
-    console.log(this.selectedSocial);
+    
     this.userService.updateUser({ socialNetwork: JSON.stringify(this.selectedSocial) }).subscribe((res: any) => {
-      console.log(res);
+      
       this.modalController.dismiss(this.selectedSocial);
     })
 

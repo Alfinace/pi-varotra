@@ -27,7 +27,7 @@ export class FilterSortingComponent implements OnInit {
   constructor(private modalController: ModalController,
     private categorieService: CategorieService) { }
   ngOnInit() {
-    console.log(this.filter);
+    
 
     this.categorieService.getAllCity().toPromise().then((res: any) => {
       this.ville = res.map((c: { name: any; }) => c.name)
@@ -101,7 +101,7 @@ export class FilterSortingComponent implements OnInit {
     if (this.filter.villes.length === 0) {
       this.filter.villes = [...this.ville]
     }
-    console.log(this.filter);
+    
 
     this.modalController.dismiss(this.filter)
   }

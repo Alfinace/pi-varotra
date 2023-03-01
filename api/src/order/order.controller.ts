@@ -64,14 +64,7 @@ export class OrderController {
   async approve(@Body('paymentId') paymentId: string, @User() user: any, @Res() res: Response) {
     await this.paymentU2AService.approvePayment(paymentId).toPromise()
     let currentPayment = await this.paymentU2AService.getInfoPayment(paymentId).toPromise()
-    console.log({
-      piPaymentId: paymentId,
-      txid: null,
-      paid: false,
-      cancelled: false,
-      userId: user.userId,
-      orderId: currentPayment.data.metadata.orderId,
-    });
+    
 
     let newPayment = await this.paymentU2AService.create({
       piPaymentId: paymentId,

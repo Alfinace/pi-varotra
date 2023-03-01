@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
                 this.toastService.show('success', 'Connexion réussie');
                 this.router.navigate([this.reditectTo || '/client']);
               }, (err: any) => {
-                console.log(err);
+                
                 this.toastService.show('dark', 'Email ou mot de passe incorrect');
                 this.isSubmited = false;
               })
@@ -79,7 +79,7 @@ export class LoginPage implements OnInit {
           this.router.navigate([this.reditectTo || '/client']);
         }
           , (err: any) => {
-            console.log(err);
+            
             this.toastService.show('dark', 'Email ou mot de passe incorrect');
             this.isSubmited = false;
           }

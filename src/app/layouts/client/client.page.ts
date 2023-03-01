@@ -72,7 +72,7 @@ export class ClientPage implements OnInit, OnDestroy {
 
   swithTheme() {
     let theme = this.localstorageService.getItem('theme')
-    console.log(theme);
+    
 
     if (theme === 'dark') {
       this.themeService.setDarkTheme(false)

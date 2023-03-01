@@ -52,7 +52,7 @@ export class ListUserPage implements OnInit {
 
   ionViewWillEnter() {
     this.userService.getAllUsers(0, 10).toPromise().then((res: any) => {
-      console.log(res);
+      
       this.customers = res.rows;
       this.totalRecords = res.count;
     });
@@ -92,7 +92,7 @@ export class ListUserPage implements OnInit {
   }
 
   paginate(event: any) {
-    console.log(event);
+    
     this.userService.getAllUsers(event.page, event.rows).toPromise().then((res: any) => {
       this.customers = res.rows;
       this.totalRecords = res.count;

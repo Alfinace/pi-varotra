@@ -100,7 +100,7 @@ export class ArticleService {
     if (filter.villes.length === 1 && filter.villes[0] === 'Tous') {
       delete conditionStore.where.city;
     }
-    console.log(conditionStore);
+    
 
     if (filter.categories.length === 0) {
       delete condition.categoryId;
@@ -191,7 +191,7 @@ export class ArticleService {
       const element = article.imageIdDeleted[index];
       this.imageArticleRepository.destroy({ where: { id: element } });
     }
-    console.log(article);
+    
 
     if (article.images.length > 0) {
       await this.imageArticleRepository.bulkCreate(

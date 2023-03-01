@@ -13,7 +13,7 @@ export class RatesController {
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createRateDto: CreateRateDto, @User() user) {
-    console.log(user);
+    
 
     return this.ratesService.create({ ...createRateDto, userId: user.userId });
   }

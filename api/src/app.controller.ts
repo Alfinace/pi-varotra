@@ -67,7 +67,7 @@ export class AppController {
         response.status(400).json(err)
       })
     }).catch(err => {
-      console.log(err);
+      
 
       response.status(400).json(err?.original?.code)
     })
@@ -88,7 +88,7 @@ export class AppController {
       })
       response.status(200).json({ message: 'Email envoyé avec succès' })
     }).catch(err => {
-      console.log(err);
+      
       response.status(400).json(err?.original?.code)
     })
   }
