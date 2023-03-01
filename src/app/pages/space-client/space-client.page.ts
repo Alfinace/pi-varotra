@@ -34,7 +34,7 @@ export class SpaceClientPage implements OnInit, AfterViewInit {
         this.loading = false
       }
     }, (error) => {
-      console.log(error);
+      
       this.loading = false
     })
   }

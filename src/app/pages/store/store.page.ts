@@ -23,7 +23,7 @@ export class StorePage implements OnInit {
       this.stores = res.rows
       this.count = res.count;
     }).catch(err => {
-      console.log(err);
+      
 
     })
   }
@@ -42,7 +42,7 @@ export class StorePage implements OnInit {
         event.target.disabled = true;
       }
     }).catch(err => {
-      console.log(err);
+      
 
     })
   }

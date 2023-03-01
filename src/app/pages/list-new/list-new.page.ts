@@ -68,7 +68,7 @@ export class ListNewPage implements OnInit {
     this.rows = 8;
     this.newService.getNews(0, this.rows).toPromise().then((res: any) => {
       this._news = res.rows;
-      console.log(this._news);
+      
 
       this.totalRecords = res.count;
     });
@@ -88,7 +88,7 @@ export class ListNewPage implements OnInit {
     });
     this.ref.onClose.subscribe((_new: New) => {
       if (_new) {
-        console.log(_new);
+        
 
         this._news.unshift(_new);
       }

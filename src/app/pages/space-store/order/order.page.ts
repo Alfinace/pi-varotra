@@ -27,7 +27,7 @@ export class OrderPage implements OnInit {
   }
 
   paginate(e: any) {
-    console.log(e);
+    
   }
 
   async showOrder(order: any) {

@@ -29,7 +29,7 @@ export class StoreDetailPage implements OnInit {
     })
     this.storeService.getArticlesByStore(id, 0, 10).toPromise().then(res => {
       this.articles = res.rows
-      console.log(res);
+      
 
     })
   }

@@ -69,7 +69,7 @@ export class ArticleController {
       }
       var articles = await this.articleService.findAllByStore(user.storeId, offset, limit);
       articles.rows = articles.rows.map((article) => {
-        console.log(article);
+        
 
         article.images = article.images.map(i => {
           i.image = process.env.BASE_URL_IMAGE + i.image;
@@ -181,7 +181,7 @@ export class ArticleController {
     @User() user,
     @Res() response: Response,
   ) {
-    console.log(user);
+    
 
     // try {
     let article = await this.articleService.findOne(+id);
@@ -232,8 +232,8 @@ export class ArticleController {
     try {
       let article = await this.articleService.findOne(+id);
       if (article) {
-        console.log(article);
-        console.log(user);
+        
+        
 
         if (article.storeId !== user.storeId) {
           throw new ForbiddenException("You don't have permission");

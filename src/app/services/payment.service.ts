@@ -49,30 +49,30 @@ export class PaymentService {
   }
 
   public onReadyForServerApproval(paymentId: string) {
-    console.log("Ready Approval", paymentId);
+    
     this.http.post('orders/payments/approve', { paymentId }).toPromise().then((res: any) => {
-      console.log('Response', res);
+      
     });
   }
 
   public onReadyForServerCompletion(paymentId: string, txid: string) {
-    console.log("Ready Completion", paymentId, txid);
+    
     this.http.post('orders/payments/complete', { paymentId, txid }).toPromise().then((res: any) => {
-      console.log('Response', res);
+      
     });;
   }
 
   public onCancel(paymentId: string) {
-    console.log("Annullé", paymentId);
+    
     this.http.post('orders/payments/cancelled_payment', { paymentId }).toPromise().then((res: any) => {
-      console.log('Response', res);
+      
     });;
   }
 
   public onError(error: Error, payment?: PaymentDTO) {
-    console.log("onError", error);
+    
     if (payment) {
-      console.log(payment);
+      
       // handle the error accordingly
     }
   }

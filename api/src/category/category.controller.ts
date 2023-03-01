@@ -37,7 +37,7 @@ export class CategoryController {
 
   @Get()
   async findAll(@Query('size') limit: number, @Query('page') offset: number) {
-    console.log(limit, offset);
+    
     if (limit > -1 && offset > -1) {
       var stores = await this.categoryService.findAll((offset + 1) * limit - limit, limit);
     } else {

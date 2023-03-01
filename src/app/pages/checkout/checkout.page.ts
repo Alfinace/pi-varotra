@@ -74,7 +74,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
         { label: 'Information de livraison' },
         { label: 'Paiment' }
       ];
-      console.log(this.paymentForm.value);
+      
 
     });
   }
@@ -149,7 +149,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     this.paymentForm.patchValue({
       panier: [...this.paniers]
     })
-    console.log(this.paymentForm.value);
+    
 
     this.loading = false;
   }
@@ -216,13 +216,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
       memo += ` ${item.designation},`
     }
     memo += `#${orderId}`
-    console.log(
-      {
-        amount: newOrder.dataValues.totalAmount,
-        memo,
-        metadata: { orderId, itemIds }
-      }
-    );
+    
     this.paimentService.createPayment({
       amount: newOrder.dataValues.totalAmount,
       memo,

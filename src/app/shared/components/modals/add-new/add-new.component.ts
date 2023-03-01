@@ -92,7 +92,7 @@ export class AddNewComponent implements OnInit {
   }
 
   selectImage(e: any) {
-    console.log(e.target.files[0]);
+    
 
     this.image = e.target.files[0];
   }

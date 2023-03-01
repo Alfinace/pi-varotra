@@ -21,13 +21,13 @@ export class CreateEmailComponent implements OnInit, OnDestroy {
     private userService: UserService) { }
 
   ngOnInit() {
-    console.log(this.signUpForm.valid);
+    
   }
 
   get f() { return this.signUpForm.controls; }
 
   public next() {
-    console.log(this.signUpForm);
+    
     if (this.checkbox.checked && this.signUpForm.valid) {
       this.isSubmited = true;
       this.userService.sendEmail(this.signUpForm.value.email).subscribe((res: any) => {

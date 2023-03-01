@@ -75,7 +75,7 @@ export class AddArticleComponent implements OnInit {
           this.toastService.show('dark', 'Produit a été modifié')
           this.submitted = false;
         }).catch(err => {
-          console.log(err);
+          
           this.submitted = false;
         })
       }
@@ -88,7 +88,7 @@ export class AddArticleComponent implements OnInit {
           this.toastService.show('dark', 'Nouveau article a été ajouté')
           this.submitted = false;
         }).catch(err => {
-          console.log(err);
+          
           this.submitted = false;
         })
       }
@@ -156,7 +156,7 @@ export class AddArticleComponent implements OnInit {
         icon: 'close',
         role: 'cancel',
         handler: () => {
-          console.log('Cancel clicked');
+          
         }
       }]
     });
