@@ -10,17 +10,12 @@
     <ion-list style="width:100%">
       <ion-item>
         <ion-icon color="primary" slot="start" size="small" name="person"></ion-icon>
-        <ion-label>Nom et prénoms:</ion-label>
+        <ion-label>Nom Client:</ion-label>
         <ion-text slot="end" color="primary">
-          <ng-container *ngIf="order.user.lastName && order.user.firstName;else name">{{order.user.lastName}}
-            {{order.user.firstName}}
-          </ng-container>
-          <ng-template #name>
-            N/A
-          </ng-template>
+          {{order.user.username}}
         </ion-text>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-icon color="primary" slot="start" size="small" name="mail"></ion-icon>
         <ion-label>Adresse email:</ion-label>
         <ion-text slot="end" color="primary">
@@ -33,7 +28,7 @@
         <ion-text slot="end" color="primary">
           {{order.user.contact ?? 'N/A'}}
         </ion-text>
-      </ion-item>
+      </ion-item> -->
       <ion-item>
         <ion-icon color="primary" slot="start" size="small" name="location"></ion-icon>
         <ion-label>Adresse:</ion-label>
@@ -50,16 +45,16 @@
         <ion-icon color="primary" slot="start" size="small" name="pulse"></ion-icon>
         <ion-label> Status paiment:</ion-label>
         <ion-text slot="end" color="warning">
-          <ion-chip color="warning" size="small">
-            <ion-label>En attente</ion-label>
-            <ion-icon name="alert-circle-sharp"></ion-icon>
+          <ion-chip *ngIf="!order.paymentId" color="warning" size="small">
+            <ion-label>Non payé</ion-label>
           </ion-chip>
-          <ng-template #templateStatus>
-            <ion-chip color="primary" size="small">
-              <ion-label>Succès</ion-label>
-              <ion-icon name="close-circle"></ion-icon>
-            </ion-chip>
-          </ng-template>
+          <ion-chip *ngIf="order.paymentU2A && order.paymentU2A.paid " color="success" size="small">
+            <ion-label>Complete</ion-label>
+          </ion-chip>
+          <ion-chip *ngIf="order.paymentU2A && !order.paymentU2A.paid && !order.paymentU2A.cancelled" color="danger"
+            size="small">
+            <ion-label>Annulé</ion-label>
+          </ion-chip>
         </ion-text>
       </ion-item>
     </ion-list>

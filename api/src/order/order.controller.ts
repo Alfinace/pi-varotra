@@ -64,15 +64,6 @@ export class OrderController {
   async approve(@Body('paymentId') paymentId: string, @User() user: any, @Res() res: Response) {
     await this.paymentU2AService.approvePayment(paymentId).toPromise()
     let currentPayment = await this.paymentU2AService.getInfoPayment(paymentId).toPromise()
-    console.log({
-      piPaymentId: paymentId,
-      txid: null,
-      paid: false,
-      cancelled: false,
-      userId: user.userId,
-      orderId: currentPayment.data.metadata.orderId,
-    });
-
     let newPayment = await this.paymentU2AService.create({
       piPaymentId: paymentId,
       txid: null,
@@ -80,6 +71,7 @@ export class OrderController {
       cancelled: false,
       userId: user.userId,
       orderId: currentPayment.data.metadata.orderId,
+      memo: currentPayment.data.memo,
       metadata: JSON.stringify(currentPayment.data.metadata),
       amount: currentPayment.data.amount,
       uid: user.uid
@@ -98,15 +90,23 @@ export class OrderController {
     if (!payment) {
       return res.status(404).json({ message: `Not found payment ${paymentId}` });
     }
-    let paymentA2U = this.paymentA2UService.create({
+    console.log({
+      memo: payment.memo,
+      metadata: payment.metadata,
+      amount: payment.amount,
+      uid: payment.uid,
+      orderId: payment.orderId,
+    });
+
+    let paymentA2U = await this.paymentA2UService.create({
       memo: payment.memo,
       metadata: payment.metadata,
       amount: payment.amount,
       uid: payment.uid,
       orderId: payment.orderId,
     })
-
-    return res.status(200).json({ message: `Complete the payment ${paymentId}`, payment: paymentA2U });
+    let final = await this.orderService.updateStock(payment.orderId)
+    return res.status(200).json({ message: `Complete the payment ${paymentId}`, payment: paymentA2U, final });
   }
 
   @Post('/payments/cancelled_payment')

@@ -53,7 +53,18 @@
           </td>
           <td style="min-width: 100px">
             <span class="image-text">
-              <ion-chip style="font-size:10px" color="warning">En attente</ion-chip>
+              <ion-chip style="font-size:10px" *ngIf="!order.paymentId" color="warning" size="small">
+                <ion-label>Non payé</ion-label>
+              </ion-chip>
+              <ion-chip style="font-size:10px" *ngIf="order.paymentU2A && order.paymentU2A.paid " color="success"
+                size="small">
+                <ion-label>Complete</ion-label>
+              </ion-chip>
+              <ion-chip style="font-size:10px"
+                *ngIf="order.paymentU2A && !order.paymentU2A.paid && !order.paymentU2A.cancelled" color="danger"
+                size="small">
+                <ion-label>Annulé</ion-label>
+              </ion-chip>
             </span>
           </td>
           <td>

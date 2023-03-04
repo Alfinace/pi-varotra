@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonSlides, ModalController } from '@ionic/angular';
+import { Subject, takeUntil } from 'rxjs';
 import { Cart } from 'src/app/models/cart.model';
 import { Order } from 'src/app/models/order.model';
 import { User } from 'src/app/models/user.model';
@@ -9,6 +10,7 @@ import { ArticleService } from 'src/app/services/article.service';
 import { CartService } from 'src/app/services/cart.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { SessionService } from 'src/app/services/session.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-checkout',
@@ -31,6 +33,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     private cartService: CartService,
     private paimentService: PaymentService,
     private sessionService: SessionService,
+    private toastService: ToastService,
     private route: ActivatedRoute,
     private router: Router,
     private articleService: ArticleService) {
@@ -40,13 +43,35 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
       }
     })
   }
+
   @ViewChild('slider') slider: IonSlides;
   public slideOpts = {};
 
   get f() {
     return this.paymentForm.value
   }
+  private unsubscribe$ = new Subject<void>();
+  ionViewWillEnter() {
+    this.loading = true;
+    this.paimentService.statePayement$.pipe(takeUntil(this.unsubscribe$)).subscribe(state => {
+      if (!state && this.loading) return;
+      // if (state.status == 'success') {
+      //   this.statusPayment = 1;
+      //   this.toastService.show('success', 'Paiement effectué avec succès')
 
+      // } else if (state.status == 'cancelled') {
+      //   this.toastService.show('danger', 'Paiement annulé')
+      // } else {
+      //   this.toastService.show('danger', 'Erreur lors du paiement')
+      // }
+      this.statusPayment = 0;
+    })
+  }
+
+  ionViewWillleave() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
   async ngOnInit() {
     this.slideOpts = {
@@ -223,7 +248,8 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
         metadata: { orderId, itemIds }
       }
     );
-    this.paimentService.createPayment({
+    this.loading = false;
+    await this.paimentService.createPayment({
       amount: newOrder.dataValues.totalAmount,
       memo,
       metadata: { orderId, itemIds }

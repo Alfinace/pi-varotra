@@ -17,7 +17,7 @@
           <p class="ion-no-margin">Connectez-vous à votre compte</p>
         </ion-col>
       </ion-row>
-      <ion-row class="ion-no-margin">
+      <!-- <ion-row class="ion-no-margin">
         <ion-col size="12">
           <ion-item class="ion-no-padding">
             <ion-label position="floating">Adresse email</ion-label>
@@ -49,13 +49,13 @@
           <ion-checkbox slot="start" mode="md"></ion-checkbox>
           <ion-label>Souviens-moi</ion-label>
         </ion-item>
-      </ion-row>
+      </ion-row> -->
       <ion-row class="btn-row mt">
         <ion-col size="12">
           <button [disabled]="isSubmited" (click)="login()"
             class="ion-activatable ripple-parent custom-parent btn-primary">
             <ng-container *ngIf="!isSubmited;else templateLoading">
-              Se connecter
+              Se connecter pi network
             </ng-container>
             <ng-template #templateLoading>
               <ion-spinner name="circular" style="color:#FFF"></ion-spinner>
@@ -65,14 +65,14 @@
         </ion-col>
       </ion-row>
     </form>
-    <ion-item lines="none">
+    <!-- <ion-item lines="none">
       <ion-label slot="end">
         Mot de passe oublié?
       </ion-label>
-    </ion-item>
+    </ion-item> -->
     <br>
     <br>
-    <ion-row class="normal-size w-full">
+    <!-- <ion-row class="normal-size w-full">
       <ion-col size="12">
         <div class="ion-justify-content-center gap-1x">
           <span>Vous n'avez pas du compte?</span>
@@ -81,6 +81,6 @@
           </a>
         </div>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </div>
 </ion-content>

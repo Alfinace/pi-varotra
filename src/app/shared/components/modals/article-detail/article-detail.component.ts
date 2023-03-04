@@ -27,7 +27,7 @@ export class ArticleDetailComponent implements OnInit {
   public carts: Cart[] = [];
   private unsubscribe$: Subject<any> = new Subject<any>()
   public configP: SwiperOptions = {
-    slidesPerView: 2,
+    slidesPerView: 2.1,
     spaceBetween: 10,
     navigation: false,
     pagination: { clickable: true },

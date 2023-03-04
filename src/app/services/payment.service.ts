@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 import { PaymentDTO } from '../models/payment.dto.model';
 import { AuthResult } from '../models/auth-result';
 import { Order } from '../models/order.model';
+import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { CartService } from './cart.service';
+import { ToastService } from './toast.service';
 
 type PaymentData = {
   amount: number,
@@ -14,9 +18,16 @@ type PaymentData = {
   providedIn: 'root'
 })
 export class PaymentService {
+  private statePayement: BehaviorSubject<any> = new BehaviorSubject(null);
+  public statePayement$ = this.statePayement.asObservable();
   private Pi: any = window.Pi;
-  private scopes: string[] = ['username', 'payments'];
-  constructor(private http: HttpService) { }
+  private scopes: string[] = ['username', 'payments', 'wallet_address'];
+  constructor(
+    private http: HttpService,
+    private router: Router,
+    private toastService: ToastService,
+    private cartService: CartService
+  ) { }
 
   public auth(): Promise<any> {
     return this.Pi.authenticate(this.scopes, this.onIncompletePaymentFound)
@@ -32,48 +43,53 @@ export class PaymentService {
    */
   public async createPayment(data: PaymentData) {
     await this.auth();
-    const payment = await this.Pi.createPayment(data, {
-      onReadyForServerApproval: (paymentId: any) => {
-        this.onReadyForServerApproval(paymentId);
-      },
-      onReadyForServerCompletion: (paymentId: string, txid: string) => {
-        this.onReadyForServerCompletion(paymentId, txid);
-      },
-      onCancel: (paymentId: string) => {
-        this.onCancel(paymentId);
-      },
-      onError: (error: Error, payment: PaymentDTO | undefined) => {
-        this.onError(error, payment);
-      },
+    return new Promise(async (resolve, reject) => {
+      const payment = await this.Pi.createPayment(data, {
+        onReadyForServerApproval: (paymentId: any) => {
+          this.onReadyForServerApproval(paymentId);
+        },
+        onReadyForServerCompletion: (paymentId: string, txid: string) => {
+          this.onReadyForServerCompletion(paymentId, txid);
+          this.cartService.removeAllCart()
+          this.router.navigate(['client/space-client'])
+          this.toastService.show('success', 'Paiement effectué avec succès')
+
+        },
+        onCancel: (paymentId: string) => {
+          this.onCancel(paymentId);
+          this.toastService.show('danger', 'Paiement annulé')
+        },
+        onError: (error: Error, payment: PaymentDTO | undefined) => {
+          this.onError(error, payment);
+          this.toastService.show('danger', 'Erreur lors du paiement')
+
+        },
+      });
+      return payment;
     });
   }
 
   public onReadyForServerApproval(paymentId: string) {
-    console.log("Ready Approval", paymentId);
     this.http.post('orders/payments/approve', { paymentId }).toPromise().then((res: any) => {
       console.log('Response', res);
     });
   }
 
   public onReadyForServerCompletion(paymentId: string, txid: string) {
-    console.log("Ready Completion", paymentId, txid);
     this.http.post('orders/payments/complete', { paymentId, txid }).toPromise().then((res: any) => {
       console.log('Response', res);
-    });;
+    });
   }
 
   public onCancel(paymentId: string) {
-    console.log("Annullé", paymentId);
     this.http.post('orders/payments/cancelled_payment', { paymentId }).toPromise().then((res: any) => {
-      console.log('Response', res);
-    });;
+    });
   }
 
   public onError(error: Error, payment?: PaymentDTO) {
     console.log("onError", error);
     if (payment) {
       console.log(payment);
-      // handle the error accordingly
     }
   }
 

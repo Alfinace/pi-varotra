@@ -14,37 +14,33 @@ export class AuthService {
     private jwtService: JwtService,
   ) { }
 
-  async validateUser(email: string, password: string): Promise<any> {
+  async validateUser(uid: string): Promise<any> {
 
-    const user = await this.userService.findByEmail(email);
-    if (user && (await bcrypt.compare(password, user.password))) {
-      const { password, ...result } = user;
-      return result;
+    const user = await this.userService.findByArgs({ uid });
+    if (user) {
+      return user;
     }
     return null;
   }
 
   async login(auth: any) {
-
-    if (auth.type === 'admin') {
-      const user = await this.userService.findByEmail(auth.email);
-      if (!user || user.role === 'USER') {
-        return null;
-      }
-      return {
-        token: this.jwtService.sign({ storeId: user?.store?.id, userId: user.id, email: user.email, role: user.role, username: user.username, uid: user.uid }),
-      };
-    }
     try {
       // Verify the user's access token with the /me endpoint:
       const me = await this.paymentService.getMyInfo(auth.accessToken);
     } catch (err) {
       return null;
     }
-    await this.userService.updateUidAccessToken(auth.email, { uid: auth.user.uid, username: auth.user.username, accessToken: auth.accessToken });
-    const user = await this.userService.findByEmail(auth.email);
+    console.log(auth);
+
+    let user_ = await this.userService.findByArgs({ uid: auth.user.uid });
+    if (!user_) {
+      await this.userService.createUserByAccessPi({ username: auth.user.username, uid: auth.user.uid, accessToken: auth.accessToken });
+    } else {
+      await this.userService.updateByUid(auth.user.uid, { uid: auth.user.uid, username: auth.user.username, accessToken: auth.accessToken });
+    }
+    const user = await this.userService.findByArgs({ uid: auth.user.uid });
     return {
-      token: this.jwtService.sign({ storeId: user?.store?.id, userId: user.id, email: user.email, role: user.role, username: user.username, uid: user.uid }),
+      token: this.jwtService.sign({ storeId: user?.store?.id, userId: user.id, role: user.role, username: user.username, uid: user.uid }),
     };
   }
 }

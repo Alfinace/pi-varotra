@@ -5,6 +5,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { User } from 'src/user/entities/user.entity';
 import { Article } from 'src/article/entities/article.entity';
+import { PaymentU2A } from 'src/payment-u2-a/entities/payment-u2-a.entity';
 
 @Injectable()
 export class OrderService {
@@ -13,6 +14,8 @@ export class OrderService {
     private orderRepository: typeof Order,
     @Inject('ARTICLE_ORDER_REPOSITORY')
     private articleOrderRepository: typeof ArticleOrder,
+    @Inject('ARTICLE_REPOSITORY')
+    private articleRepository: typeof Article,
   ) { }
 
   async create(createOrderDto: CreateOrderDto, userId) {
@@ -50,9 +53,13 @@ export class OrderService {
           as: 'articles',
         },
         {
+          model: PaymentU2A,
+          as: 'paymentU2A'
+        },
+        {
           model: User,
           as: 'user',
-          attributes: ['id', 'firstName', 'lastName', 'email', 'address', 'contact', 'city']
+          attributes: ['id']
         }
       ],
       order: [
@@ -75,4 +82,32 @@ export class OrderService {
   remove(id: number) {
     return `This action removes a #${id} order`;
   }
+
+  async updateStock(orderId: number) {
+    let orders = await this.articleOrderRepository.findAll({
+      where: {
+        orderId
+      },
+      include: [
+        {
+          model: Article,
+          as: 'article',
+        }
+      ]
+    })
+    var promiseArray = []
+    for (let i = 0; i < orders.length; i++) {
+      const element = orders[i];
+      let p = this.articleRepository.update({
+        stock: element.article.stock - element.quantity
+      }, {
+        where: {
+          id: element.article.id
+        }
+      })
+      promiseArray.push(p)
+    }
+    return await Promise.all(promiseArray)
+  }
+
 }

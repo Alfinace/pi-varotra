@@ -53,25 +53,25 @@ export class AppController {
   }
 
 
-  @Post('send-email')
-  sendCode(@Body() body: any, @Res() response: Response) {
-    var code = Math.floor(1000 + Math.random() * 9000);
-    this.userService.createEmail({ email: body.email, confirmCodeEmail: code }).then(res => {
-      this.appService.sendEmail({
-        to: body.email,
-        subject: 'Code de vérification email',
-        html: templateSendCodeConfirm(code),
-      }).then(res => {
-        response.status(200).json({ message: 'Email envoyé avec succès' })
-      }).catch(err => {
-        response.status(400).json(err)
-      })
-    }).catch(err => {
-      console.log(err);
+  // @Post('send-email')
+  // sendCode(@Body() body: any, @Res() response: Response) {
+  //   var code = Math.floor(1000 + Math.random() * 9000);
+  //   this.userService.createEmail({ email: body.email, confirmCodeEmail: code }).then(res => {
+  //     this.appService.sendEmail({
+  //       to: body.email,
+  //       subject: 'Code de vérification email',
+  //       html: templateSendCodeConfirm(code),
+  //     }).then(res => {
+  //       response.status(200).json({ message: 'Email envoyé avec succès' })
+  //     }).catch(err => {
+  //       response.status(400).json(err)
+  //     })
+  //   }).catch(err => {
+  //     console.log(err);
 
-      response.status(400).json(err?.original?.code)
-    })
-  }
+  //     response.status(400).json(err?.original?.code)
+  //   })
+  // }
 
   @Post('resend-code')
   resendCode(@Body() body: any, @Res() response: Response) {
@@ -93,18 +93,18 @@ export class AppController {
     })
   }
 
-  @Post('confirm-email')
-  confirmEmail(@Body() body: any, @Res() response: Response) {
-    this.userService.confirmEmail(body.email, parseInt(body.code)).then(res => {
-      response.status(200).json({ message: 'Email confirmé avec succès' })
-    }).catch(err => {
-      response.status(400).json(err)
-    })
-  }
+  // @Post('confirm-email')
+  // confirmEmail(@Body() body: any, @Res() response: Response) {
+  //   this.userService.confirmEmail(body.email, parseInt(body.code)).then(res => {
+  //     response.status(200).json({ message: 'Email confirmé avec succès' })
+  //   }).catch(err => {
+  //     response.status(400).json(err)
+  //   })
+  // }
 
-  @UseGuards(AuthGuard('local'))
+  // @UseGuards(AuthGuard('local'))
   @Post('auth/login')
-  async login(@Res() response: Response, @Body() auth: { accessToken: string, user: { uid: string, username: string }, email: string, password: string, type: string }) {
+  async login(@Res() response: Response, @Body() auth: { accessToken: string, user: { uid: string, username: string } }) {
     return this.authService.login(auth).then(res => {
       if (res) {
         return response.json(res);
@@ -112,7 +112,9 @@ export class AppController {
         throw new UnauthorizedException()
       }
     }).catch(err => {
-      throw new UnauthorizedException()
+      // throw new UnauthorizedException()
+      console.log(err);
+
     }
     )
   }
@@ -130,7 +132,6 @@ export class AppController {
           exist: true
         };
       });
-      user.socialNetwork = user.socialNetwork ? JSON.parse(user.socialNetwork) : [];
       if (user.avatar) {
         user.avatar = process.env.BASE_URL_IMAGE + user.avatar;
       }
@@ -143,26 +144,26 @@ export class AppController {
     })
   }
 
-  @Get('fake-user')
-  async addFakeArticle() {
-    let users = await this.userService.findAll();
-    users.rows.forEach(async (user) => {
-      for (let i = 0; i < 50; i++) {
-        await this.articleService.create({
-          storeId: user.store.id,
-          designation: faker.commerce.productName(),
-          detail: faker.commerce.productDescription(),
-          unitPrice: parseFloat(faker.commerce.price()),
-          images: [
-            faker.image.image(),
-            faker.image.image(),
-            faker.image.image(),
-            faker.image.image(),
-          ],
-          categoryId: faker.helpers.arrayElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]) as number,
-          stock: 10
-        });
-      }
-    });
-  }
+  // @Get('fake-user')
+  // async addFakeArticle() {
+  //   let users = await this.userService.findAll();
+  //   users.rows.forEach(async (user) => {
+  //     for (let i = 0; i < 50; i++) {
+  //       await this.articleService.create({
+  //         storeId: user.store.id,
+  //         designation: faker.commerce.productName(),
+  //         detail: faker.commerce.productDescription(),
+  //         unitPrice: parseFloat(faker.commerce.price()),
+  //         images: [
+  //           faker.image.image(),
+  //           faker.image.image(),
+  //           faker.image.image(),
+  //           faker.image.image(),
+  //         ],
+  //         categoryId: faker.helpers.arrayElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]) as number,
+  //         stock: 10
+  //       });
+  //     }
+  //   });
+  // }
 }

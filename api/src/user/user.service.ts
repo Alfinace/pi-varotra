@@ -123,33 +123,33 @@ export class UserService {
     );
   }
 
-  updateUidAccessToken(email: string, data: any) {
+  updateUidAccessToken(uid: string, data: any) {
     return this.userRepository.update(
       { ...data },
-      { where: { email }, returning: true },
+      { where: { uid }, returning: true },
     );
   }
 
-  async confirmEmail(email: string, code: number) {
-    try {
-      let user = await this.userRepository.findOne({ where: { email }, attributes: ['verifiedEmail', 'confirmCodeEmail'] });
-      if (!user) {
-        return Promise.reject('User not found');
-      } else {
-        if (user.verifiedEmail) {
-          return Promise.reject('User already verified');
-        } else {
-          if (user.confirmCodeEmail === code) {
-            return this.userRepository.update({ verifiedEmail: true, confirmCodeEmail: null }, { where: { email }, returning: true });
-          } else {
-            return Promise.reject('Code not valid');
-          }
-        }
-      }
-    } catch (error) {
-      throw new HttpException(error, 500);
-    }
-  }
+  // async confirmEmail(email: string, code: number) {
+  //   try {
+  //     let user = await this.userRepository.findOne({ where: { email }, attributes: ['verifiedEmail', 'confirmCodeEmail'] });
+  //     if (!user) {
+  //       return Promise.reject('User not found');
+  //     } else {
+  //       if (user.verifiedEmail) {
+  //         return Promise.reject('User already verified');
+  //       } else {
+  //         if (user.confirmCodeEmail === code) {
+  //           return this.userRepository.update({ verifiedEmail: true, confirmCodeEmail: null }, { where: { email }, returning: true });
+  //         } else {
+  //           return Promise.reject('Code not valid');
+  //         }
+  //       }
+  //     }
+  //   } catch (error) {
+  //     throw new HttpException(error, 500);
+  //   }
+  // }
 
   remove(id: number) {
     return this.userRepository.destroy({ where: { id } });

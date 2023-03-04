@@ -51,7 +51,7 @@ export class UserController {
   async findAll(@Query('size') limit: number, @Query('page') offset: number) {
     var users = await this.userService.findAll(offset, limit);
     users.rows = users.rows.map((user) => {
-      user.socialNetwork = JSON.parse(user.socialNetwork);
+      // user.socialNetwork = JSON.parse(user.socialNetwork);
       user.avatar = process.env.BASE_URL_IMAGE + user.avatar;
       user.images.map((image) => {
         image.filename = process.env.BASE_URL_IMAGE + image.filename;
@@ -135,24 +135,24 @@ export class UserController {
       });
   }
 
-  @Patch('update-password')
-  @UseGuards(JwtAuthGuard)
-  updatePassword(@Body() body: any, @Res() response: Response, @User() user,) {
-    this.userService.findOne(+user.userId).then(async (res) => {
-      if (res && (await bcrypt.compare(body.oldPassword, res.password))) {
-        let hashed = await bcrypt.hash(body.password, 10);
-        return this.userService
-          .updateByuserId(+user.userId, { password: hashed })
-          .then((res) => {
-            return response.json({ ...res });
-          })
-          .catch((error) => {
-            return response.status(400).json({ ...error });
-          });
+  // @Patch('update-password')
+  // @UseGuards(JwtAuthGuard)
+  // updatePassword(@Body() body: any, @Res() response: Response, @User() user,) {
+  //   this.userService.findOne(+user.userId).then(async (res) => {
+  //     if (res && (await bcrypt.compare(body.oldPassword, res.password))) {
+  //       let hashed = await bcrypt.hash(body.password, 10);
+  //       return this.userService
+  //         .updateByuserId(+user.userId, { password: hashed })
+  //         .then((res) => {
+  //           return response.json({ ...res });
+  //         })
+  //         .catch((error) => {
+  //           return response.status(400).json({ ...error });
+  //         });
 
-      } else {
-        return response.status(400).json({ error: 'Ancien mot de passe incorrect' });
-      }
-    });
-  }
+  //     } else {
+  //       return response.status(400).json({ error: 'Ancien mot de passe incorrect' });
+  //     }
+  //   });
+  // }
 }

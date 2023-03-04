@@ -32,6 +32,7 @@ export class ArticleController {
   @Roles(Role.USER, Role.ADMIN)
   @UseGuards(JwtAuthGuard, RoleGuard)
   async create(@Body() createArticleDto: CreateArticleDto, @User() user) {
+    console.log(user);
 
     return this.articleService.create({
       ...createArticleDto,
@@ -105,7 +106,6 @@ export class ArticleController {
           i.image = process.env.BASE_URL_IMAGE + i.image;
           return i
         })
-        article.store.user.socialNetwork = JSON.parse(article.store.user.socialNetwork);
         article.store.logo = (article.store.logo && article.store.logo !== 'none') ? process.env.BASE_URL_IMAGE + article.store.logo : null;
         return article;
       })
@@ -130,9 +130,6 @@ export class ArticleController {
           i.image = process.env.BASE_URL_IMAGE + i.image;
           return i
         })
-      }
-      if (article?.store?.user?.socialNetwork) {
-        article.store.user.socialNetwork = JSON.parse(article.store.user.socialNetwork);
       }
       article.store.logo = (article.store.logo && article.store.logo !== 'none') ? process.env.BASE_URL_IMAGE + article.store.logo : null;
       return article;
