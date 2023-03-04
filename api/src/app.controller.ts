@@ -144,26 +144,26 @@ export class AppController {
     })
   }
 
-  @Get('fake-user')
-  async addFakeArticle() {
-    let users = await this.userService.findAll();
-    users.rows.forEach(async (user) => {
-      for (let i = 0; i < 50; i++) {
-        await this.articleService.create({
-          storeId: user.store.id,
-          designation: faker.commerce.productName(),
-          detail: faker.commerce.productDescription(),
-          unitPrice: parseFloat(faker.commerce.price()),
-          images: [
-            faker.image.image(),
-            faker.image.image(),
-            faker.image.image(),
-            faker.image.image(),
-          ],
-          categoryId: faker.helpers.arrayElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]) as number,
-          stock: 10
-        });
-      }
-    });
-  }
+  // @Get('fake-user')
+  // async addFakeArticle() {
+  //   let users = await this.userService.findAll();
+  //   users.rows.forEach(async (user) => {
+  //     for (let i = 0; i < 50; i++) {
+  //       await this.articleService.create({
+  //         storeId: user.store.id,
+  //         designation: faker.commerce.productName(),
+  //         detail: faker.commerce.productDescription(),
+  //         unitPrice: parseFloat(faker.commerce.price()),
+  //         images: [
+  //           faker.image.image(),
+  //           faker.image.image(),
+  //           faker.image.image(),
+  //           faker.image.image(),
+  //         ],
+  //         categoryId: faker.helpers.arrayElement([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]) as number,
+  //         stock: 10
+  //       });
+  //     }
+  //   });
+  // }
 }

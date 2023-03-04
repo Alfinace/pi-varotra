@@ -14,6 +14,8 @@ export class OrderService {
     private orderRepository: typeof Order,
     @Inject('ARTICLE_ORDER_REPOSITORY')
     private articleOrderRepository: typeof ArticleOrder,
+    @Inject('ARTICLE_REPOSITORY')
+    private articleRepository: typeof Article,
   ) { }
 
   async create(createOrderDto: CreateOrderDto, userId) {
@@ -80,4 +82,32 @@ export class OrderService {
   remove(id: number) {
     return `This action removes a #${id} order`;
   }
+
+  async updateStock(orderId: number) {
+    let orders = await this.articleOrderRepository.findAll({
+      where: {
+        orderId
+      },
+      include: [
+        {
+          model: Article,
+          as: 'article',
+        }
+      ]
+    })
+    var promiseArray = []
+    for (let i = 0; i < orders.length; i++) {
+      const element = orders[i];
+      let p = this.articleRepository.update({
+        stock: element.article.stock - element.quantity
+      }, {
+        where: {
+          id: element.article.id
+        }
+      })
+      promiseArray.push(p)
+    }
+    return await Promise.all(promiseArray)
+  }
+
 }

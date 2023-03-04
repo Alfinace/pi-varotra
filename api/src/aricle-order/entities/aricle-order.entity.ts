@@ -5,6 +5,8 @@ import {
   Model,
   Table,
   DataType,
+  HasOne,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { Order } from 'src/order/entities/order.entity';
 
@@ -17,6 +19,11 @@ export class ArticleOrder extends Model {
   @Column({ field: 'article_id' })
   articleId: number;
 
+  @BelongsTo(() => Article)
+  article: Article;
+
+  @BelongsTo(() => Order)
+  order: Order;
   @ForeignKey(() => Order)
   @Column({ field: 'order_id' })
   orderId: number;
