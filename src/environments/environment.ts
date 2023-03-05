@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:7777/api',
-  BACKEND_URL: 'http://localhost:7777',
+  API_URL: 'https://api-service-pivarotra.onrender.com/api',
+  BACKEND_URL: 'https://api-service-pivarotra.onrender.com',
   prefix: 'pi-varotra-dev_'
 };
 

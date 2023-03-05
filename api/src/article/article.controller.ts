@@ -69,6 +69,8 @@ export class ArticleController {
         offset = offset * limit;
       }
       var articles = await this.articleService.findAllByStore(user.storeId, offset, limit);
+      console.log(articles);
+
       articles.rows = articles.rows.map((article) => {
         console.log(article);
 

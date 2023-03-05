@@ -8,6 +8,7 @@ import { PaymentService } from 'src/app/services/payment.service';
 import { UserService } from 'src/app/services/user.service';
 import { SessionService } from 'src/app/services/session.service';
 import { AuthResult } from 'src/app/models/auth-result';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class LoginPage implements OnInit {
   constructor(
     private toastService: ToastService,
     private http: HttpService,
+    private alertController: AlertController,
     private router: Router,
     private userService: UserService,
     private sessionService: SessionService,
@@ -39,6 +41,18 @@ export class LoginPage implements OnInit {
   }
 
   public async login() {
+    let userAgent = navigator.userAgent;
+    let isPiBrowser = userAgent.match(/PiBrowser/i);
+
+    // if (!isPiBrowser) {
+    //   const alert = await this.alertController.create({
+    //     header: 'Attention',
+    //     message: 'Vous devez utiliser l\'application Pi Browser pour vous connecter',
+    //     buttons: ['OK']
+    //   });
+    //   await alert.present();
+    //   return;
+    // }
     // if (this.loginForm.valid) {
     this.isSubmited = true;
     // if (this.loginForm.value.type === 'simple') {
