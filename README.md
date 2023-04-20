@@ -6,7 +6,7 @@
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
 <p>
-API Pi-VAROTRA une application conçue pour le site e-commerce ,une plate-forme qui permet aux utilisateurs d'acheter et de vendre des produits ou des services en ligne . Cette API  applications de commerce électronique incluent généralement des fonctionnalités  d'une système de paiement en crypto monnaie Pi, un catalogue de produits et la gestion des comptes d'utilisateurs. Certaines applications de commerce électronique offrent également des fonctionnalités supplémentaires telles que les avis des clients, les évaluations des produits et les recommandations. .</p>
+Pi-VAROTRA une application conçue pour le site e-commerce ,une plate-forme qui permet aux utilisateurs d'acheter et de vendre des produits ou des services en ligne . Cette API  applications de commerce électronique incluent généralement des fonctionnalités  d'une système de paiement en crypto monnaie Pi, un catalogue de produits et la gestion des comptes d'utilisateurs. Certaines applications de commerce électronique offrent également des fonctionnalités supplémentaires telles que les avis des clients, les évaluations des produits et les recommandations. .</p>
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
@@ -27,3 +27,4 @@ $ npm install
 $ npm run start
 
 ```
+ 
