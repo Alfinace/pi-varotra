@@ -53,16 +53,16 @@ export class PaymentService {
           this.cartService.removeAllCart()
           this.router.navigate(['client/space-client'])
           this.toastService.show('success', 'Paiement effectué avec succès')
-
+        resolve(true);
         },
         onCancel: (paymentId: string) => {
-          this.onCancel(paymentId);
+            reject(false);
           this.toastService.show('danger', 'Paiement annulé')
         },
         onError: (error: Error, payment: PaymentDTO | undefined) => {
           this.onError(error, payment);
           this.toastService.show('danger', 'Erreur lors du paiement')
-
+            reject(false);
         },
       });
       return payment;
@@ -71,13 +71,11 @@ export class PaymentService {
 
   public onReadyForServerApproval(paymentId: string) {
     this.http.post('orders/payments/approve', { paymentId }).toPromise().then((res: any) => {
-      console.log('Response', res);
     });
   }
 
   public onReadyForServerCompletion(paymentId: string, txid: string) {
     this.http.post('orders/payments/complete', { paymentId, txid }).toPromise().then((res: any) => {
-      console.log('Response', res);
     });
   }
 
@@ -87,7 +85,6 @@ export class PaymentService {
   }
 
   public onError(error: Error, payment?: PaymentDTO) {
-    console.log("onError", error);
     if (payment) {
       console.log(payment);
     }

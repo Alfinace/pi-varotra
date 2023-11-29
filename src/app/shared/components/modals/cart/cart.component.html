@@ -77,7 +77,7 @@
   </ng-container>
   <ng-template #falseCart>
     <div class="cart-empty">
-      <ng-container *ngIf="loading && paniers.length == 0 ;else templateEmpty">
+      <ng-container *ngIf="loading && paniers.length === 0 ;else templateEmpty">
         <ion-spinner size="large" name="circular"></ion-spinner>
       </ng-container>
       <ng-template #templateEmpty>

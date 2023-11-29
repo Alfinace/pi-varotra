@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { SessionService } from 'src/app/services/session.service';
 import { AuthResult } from 'src/app/models/auth-result';
 import { AlertController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
   public isSubmited: boolean = false;
+  public Pi = window['Pi'];
   public loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -37,22 +39,23 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.reditectTo = this.route.snapshot.queryParams.redirectTo || null;
+    this.reditectTo = this.route.snapshot.queryParams.redirectTo || null;    
   }
 
   public async login() {
     let userAgent = navigator.userAgent;
+    
     let isPiBrowser = userAgent.match(/PiBrowser/i);
 
-    // if (!isPiBrowser) {
-    //   const alert = await this.alertController.create({
-    //     header: 'Attention',
-    //     message: 'Vous devez utiliser l\'application Pi Browser pour vous connecter',
-    //     buttons: ['OK']
-    //   });
-    //   await alert.present();
-    //   return;
-    // }
+    if (!isPiBrowser && environment.production) {
+      const alert = await this.alertController.create({
+        header: 'Attention',
+        message: 'Vous devez utiliser l\'application Pi Browser pour vous connecter',
+        buttons: ['OK']
+      });
+      await alert.present();
+      return; 
+    }
     // if (this.loginForm.valid) {
     this.isSubmited = true;
     // if (this.loginForm.value.type === 'simple') {

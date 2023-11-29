@@ -29,13 +29,10 @@ export class AuthGuard implements CanActivate {
       .then((x) => {
         if (!x) {
           var url = '';
-          console.log(window.location.hostname);
           for (let index = 0; index < route.url.length; index++) {
             const element = route.url[index];
             url += '/' + element.path;
           }
-          console.log(url);
-
           this._router.navigateByUrl('/login?redirectTo=' + url);
           return false;
         } else {

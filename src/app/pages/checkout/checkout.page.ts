@@ -55,15 +55,15 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     this.loading = true;
     this.paimentService.statePayement$.pipe(takeUntil(this.unsubscribe$)).subscribe(state => {
       if (!state && this.loading) return;
-      // if (state.status == 'success') {
-      //   this.statusPayment = 1;
-      //   this.toastService.show('success', 'Paiement effectué avec succès')
+      if (state.status == 'success') {
+        this.statusPayment = 1;
+        this.toastService.show('success', 'Paiement effectué avec succès')
 
-      // } else if (state.status == 'cancelled') {
-      //   this.toastService.show('danger', 'Paiement annulé')
-      // } else {
-      //   this.toastService.show('danger', 'Erreur lors du paiement')
-      // }
+      } else if (state.status == 'cancelled') {
+        this.toastService.show('danger', 'Paiement annulé')
+      } else {
+        this.toastService.show('danger', 'Erreur lors du paiement')
+      }
       this.statusPayment = 0;
     })
   }
@@ -249,10 +249,12 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
       }
     );
     this.loading = false;
-    await this.paimentService.createPayment({
+    var test = await this.paimentService.createPayment({
       amount: newOrder.dataValues.totalAmount,
       memo,
       metadata: { orderId, itemIds }
     })
+    console.log('test', test);
+    
   }
 }

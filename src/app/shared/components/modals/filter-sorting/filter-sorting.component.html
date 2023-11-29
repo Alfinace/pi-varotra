@@ -36,7 +36,7 @@
     <div class="d-flex" style="flex-direction: column;gap: 10px;">
       <div class="d-flex ion-justify-content-between ion-align-items-center" style="flex-direction: row;gap: 10px;">
         <h4>Catégories</h4>
-        <ion-label (click)="selectAllCategorie()">{{filter.categories.length == categories.length ? 'Désélectionner'
+        <ion-label (click)="selectAllCategorie()">{{filter.categories.length === categories.length ? 'Désélectionner'
           :'Sélectionner'}} tous</ion-label>
       </div>
       <br>
@@ -91,7 +91,7 @@
       </button>
     </ion-col>
     <ion-col size="6">
-      <button (click)="apply()" [disabled]="filter?.categories?.length == 0 || filter.villes.length == 0"
+      <button (click)="apply()" [disabled]="filter.categories.length === 0 || filter.villes.length === 0"
         class="ion-activatable ripple-parent custom-parent btn-primary">
         Appliquer
         <ion-ripple-effect></ion-ripple-effect>

@@ -2,7 +2,6 @@ import { Animation, AnimationController } from "@ionic/angular";
 
 export const enterAnimation = (baseEl: HTMLElement, opts?: any): Animation => {
 	const DURATION = 300;
-	console.log('opts', opts);
 
 	const animationCtrl = new AnimationController();
 

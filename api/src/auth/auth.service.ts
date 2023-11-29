@@ -30,7 +30,6 @@ export class AuthService {
     } catch (err) {
       return null;
     }
-    console.log(auth);
 
     let user_ = await this.userService.findByArgs({ uid: auth.user.uid });
     if (!user_) {
