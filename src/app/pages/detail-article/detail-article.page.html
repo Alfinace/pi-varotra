@@ -13,10 +13,13 @@
 <ion-content *ngIf="article && article.images" class="ion-padding-horizontal" [scrollEvents]="true"
   (ionScrollStart)="logScrollStart()" (ionScroll)="logScrolling($event)" (ionScrollEnd)="logScrollEnd()">
   <br>
-  <div style="height: 300px; border-radius: 20px; background-color: gainsboro;overflow: hidden;position: relative;">
+  <div style="height: 300px; border-radius: 20px; background-color: transparent;overflow: hidden;position: relative;">
     <ion-slides pager="true" [options]="slideOpts">
       <ion-slide *ngFor="let item of article.images">
-        <img [src]="item!.image" alt="" srcset="">
+        <ion-img-viewer
+        [src]="item.image"
+        [slideOptions]="{ zoom: { maxRatio: 7}}"
+        ></ion-img-viewer>
       </ion-slide>
     </ion-slides>
   </div>
