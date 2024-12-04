@@ -3,11 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  API_URL: 'https://api-service-pivarotra.onrender.com/api',
-  BACKEND_URL: 'https://api-service-pivarotra.onrender.com',
-  prefix: 'pi-varotra-dev_'
-};
+    production: false,
+    API_URL: 'http://localhost:3000/api',
+    BACKEND_URL: 'http://localhost:3000',
+    prefix: 'pi-varotra-dev_'
+  };
 
 /*
  * For easier debugging in development mode, you can import the following file

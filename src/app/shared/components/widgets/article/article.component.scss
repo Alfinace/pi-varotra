@@ -34,3 +34,83 @@ p {
 p {
   text-align: left;
 }
+
+.image-container {
+  width: 100%;
+  height: 159px;
+}
+
+.product-title {
+  font-family: 'DM Sans Medium';
+}
+
+.price-container {
+  gap: 5px;
+}
+
+.price-label,.price-value {
+  font-family: 'DM Sans Medium';
+}
+
+.price-symbol {
+  font-family: Serif;
+}
+
+
+.location-container {
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.rating-container {
+  display: flex;
+  padding: 10px;
+}
+
+.star-rating {
+  gap: 5px;
+}
+
+.star-icon {
+  margin-bottom: 4px;
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 159px;
+}
+
+.skeleton-title {
+  width: 80%;
+  height: 15px;
+}
+
+.skeleton-price {
+  width: 20%;
+  height: 15px;
+}
+
+.skeleton-price-value {
+  width: 30%;
+  height: 15px;
+}
+
+.skeleton-location {
+  width: 50%;
+  height: 15px;
+}
+
+.skeleton-rating {
+  width: 10%;
+  height: 15px;
+}
+
+.skeleton-reviews {
+  width: 30%;
+  height: 15px;
+}
+
+.skeleton-cart {
+  width: 20%;
+  height: 20px;
+}

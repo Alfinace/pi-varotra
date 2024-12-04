@@ -6,8 +6,7 @@
   <ng-container
     *ngIf="loadedCategorie &&  loadedPub && loadedArticle && loadedNew && loadedStore;else skeletonTemplate">
     <div class="ion-padding-horizontal mt-70">
-      <!-- <ion-searchbar color="light" class="ion-no-border ion-no-padding" show-clear-button="always"></ion-searchbar>
-      <br> -->
+
       <swiper #swiperComponent [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange()">
         <ng-template *ngFor="let item of pubs" swiperSlide>
           <app-pub-card [pub]="item"></app-pub-card>
@@ -132,7 +131,7 @@
         </swiper>
       </swiper>
       <br>
-      <!-- 
+      <!--
       <div class=" d-flex ion-justify-content-between  ion-align-items-center">
         <ion-skeleton-text [animated]="true" style="width: 90px;height: 20px;"></ion-skeleton-text>
         <ion-skeleton-text [animated]="true" style="width: 50px;height: 20px;"></ion-skeleton-text>

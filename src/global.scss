@@ -89,19 +89,21 @@ b {
 
   position: relative;
   overflow: hidden;
-
   border: 1px solid transparent;
-
   user-select: none;
   background: var(--ion-color-primary);
   width: 100%;
-  height: 50px;
-  border-radius: 8px;
+  height: 40px;
+  border-radius: 5px;
 }
 
 .custom-parent {
   color: var(--ion-color-light);
   font-size: var(--ion-text-size-2x);
+}
+
+.btn-disabled {
+  background: var(--ion-color-medium-tint);
 }
 
 .btn-primary {
@@ -310,4 +312,50 @@ td,
   background-color: white;
   color: gray;
   border: none;
+}
+
+.text-small {
+  font-size: 12px;
+}
+
+.text-medium {
+  font-size: 14px;
+}
+
+.text-large {
+  font-size: 16px;
+}
+
+// text color
+.text-primary {
+  color: var(--ion-color-primary);
+}
+
+.text-secondary {
+  color: var(--ion-color-secondary);
+}
+
+.text-warning {
+  color: var(--ion-color-warning);
+}
+
+.text-danger {
+  color: var(--ion-color-danger);
+}
+
+.text-success {
+  color: var(--ion-color-success);
+}
+
+.text-light {
+  color: var(--ion-color-light);
+}
+
+.text-dark {
+  color: var(--ion-color-dark);
+}
+
+.price-value {
+  font-size: 14px;
+  color: green
 }
