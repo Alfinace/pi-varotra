@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-icon class="ion-padding-start" size="large" slot="start" (click)="close()" name="chevron-back-outline">
     </ion-icon>
-    <ion-title class="ion-text-center" style="font-weight: 900">Mes paniers({{paniers.length}}) </ion-title>
+    <ion-title class="ion-text-center"  style="font-weight: 900;font-size: small;">Mes paniers({{paniers.length}}) </ion-title>
   </ion-toolbar>
 </ion-header>
 <br>
@@ -15,17 +15,16 @@
       <ion-list *ngFor="let item of p;let j = index">
         <ion-item-sliding>
           <ion-item class="item-cart">
-            <div class=" d-flex ion-justify-content-between ion-margin-vertical" style="width: 100%">
+            <div class=" d-flex ion-justify-content-between" style="width: 100%;margin-bottom: 10px;">
               <div class="d-flex ion-justify-content-start" style="gap: 10px">
                 <div class="image-preview">
                   <img [src]="item?.images[0]?.image" />
                 </div>
                 <div class="cart-image">
-                  <h5> {{item.designation}} </h5>
+                  <div> {{item.designation}} </div>
                   <p style="display: flex;gap: 5px;align-items: flex-end;">
-                    <span style="font-family: Serif;font-size: 20px;" class="init">π</span>
-                    <span style="font-family: 'DM Sans Medium';font-size: 15px" class="price">
-                      {{item.unitPrice *item.quantity}}
+                    <span  class="price-value">
+                      {{item.unitPrice *item.quantity}} π
                     </span>
                   </p>
                 </div>
@@ -35,7 +34,7 @@
                 <ion-icon size="small" class="pointer" (click)="updateQuantity(item,item.quantity+1,i,j)"
                   color="primary" name="add-outline">
                 </ion-icon>
-                <span style="font-size:20px;min-width: 50px;text-align: center;">
+                <span>
                   {{item.quantity}}
                 </span>
                 <ion-icon size="small" class="pointer" (click)="updateQuantity(item,item.quantity-1,i,j)" color="danger"
@@ -52,12 +51,12 @@
       </ion-list>
       <div *ngIf="p.length > 0">
         <div class="ion-justify-content-between align-items-center d-flex">
-          <h5>
+          <div>
             TOTAL :
-          </h5>
-          <h5>
-            π{{totalCmd(p)}}
-          </h5>
+          </div>
+          <div>
+            <span class="price-value"> {{totalCmd(p)}} π </span>
+          </div>
         </div>
         <ion-row class="btn-row mt">
           <ion-col size="12">

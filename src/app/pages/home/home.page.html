@@ -14,7 +14,7 @@
       </swiper>
       <br>
       <div class=" d-flex ion-justify-content-between ion-align-items-center">
-        <h3>Catgories</h3>
+        <h4>Catgories</h4>
       </div>
       <br>
       <swiper [config]="catConfig">
@@ -30,7 +30,7 @@
     </div>
     <div class=" bg-white-around ion-padding-horizontal">
       <div class=" d-flex ion-justify-content-between  ion-align-items-center">
-        <h3>Magasins</h3>
+        <h4>Magasins</h4>
         <a href="#" [routerLink]="['/client/store']" routerLinkActive="router-link-active">Voir plus</a>
       </div>
       <br>
@@ -42,7 +42,7 @@
       <br>
 
       <div class=" d-flex ion-justify-content-between  ion-align-items-center">
-        <h3>Nouveau produit</h3>
+        <h4>Nouveau produit</h4>
         <a [routerLink]="['/client/search']">Voir plus</a>
       </div>
       <br>
@@ -68,7 +68,7 @@
       </swiper>
       <br> -->
       <div class=" d-flex ion-justify-content-between  ion-align-items-center">
-        <h3>Produit special</h3>
+        <h4>Produit special</h4>
         <a href="#" [routerLink]="['/client/search']">Voir plus</a>
       </div>
       <br>
@@ -82,7 +82,7 @@
     </div>
     <div class="ion-padding-horizontal d-flex flex-col">
       <div class=" d-flex ion-justify-content-between ion-align-items-center">
-        <h3>Derniére nouveau</h3>
+        <h4>Derniére nouveau</h4>
       </div>
       <app-new-card [_new]="_new" *ngFor="let _new of _news"></app-new-card>
       <ion-row class="btn-row mt">

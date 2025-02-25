@@ -1,38 +1,13 @@
 <ion-content>
-  <div class="ion-padding-horizontal header" *ngIf="store">
+  <div class="ion-padding-horizontal " *ngIf="store">
     <ion-avatar slot="start">
       <img [src]="store.logo" />
     </ion-avatar>
     <br>
     <br>
-    <ion-text class="ion-margin-bottom" color="primary">
-      <h4 class=" text-black ion-text-center">
-        {{store.name}}
-      </h4>
-    </ion-text>
-
-    <div class="d-flex ion-justify-content-start ion-margin-bottom ion-align-items-center">
-      <ion-icon size="small" name="call-outline"></ion-icon>
-      <span>
-        {{store.contact}}
-      </span>
-    </div>
-    <div class="d-flex ion-justify-content-start ion-align-items-center">
-      <ion-icon size="small" name="location-outline"></ion-icon>
-      <span>
-        {{store.address}}
-      </span>
-    </div>
-    <!-- <div class="d-flex ion-justify-content-around ion-margin-vertical">
-      <a [href]="item.value" *ngFor="let item of store.user.socialNetwork" target="_blank" rel="noopener noreferrer">
-        <img width="40px" height="40px" style="object-fit:cover" [src]="item.icon" />
-      </a>
-    </div> -->
-    <br>
-    <div class=" d-flex ion-justify-content-between  ion-align-items-center">
-      <h3>Produits</h3>
-      <!-- <ion-icon size="large" name="filter-outline"></ion-icon> -->
-    </div>
+    <h1 class="ion-margin-bottom text-center ion-margin-bottom" color="primary">
+       Bienvenue chez {{store.name}}
+    </h1>
     <br>
     <div style="display: flex; gap: 10px;" class="ion-justify-content-center ion-align-items-center ion-wrap">
       <app-article [article]="item" *ngFor="let item of articles"></app-article>

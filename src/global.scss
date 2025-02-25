@@ -333,5 +333,10 @@ td,
 
 .price-value {
   font-size: 14px;
-  color: green
+  color: var(--ion-color-primary)
+}
+.no-wrap , .product-title{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

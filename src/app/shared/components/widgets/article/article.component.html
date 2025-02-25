@@ -6,7 +6,7 @@
 	<div (click)="show()">
 		<div class="ion-margin-horizontal">
 			<p class="ion-no-margin product-title text-small text-dark">
-				{{ article.designation | truncate:20}}
+				{{ article.designation }}
 			</p>
 			<div class="d-flex ion-align-items-center ion-justify-content-start price-container text-small">
 				<label class="price-label">Prix :</label>
@@ -30,7 +30,7 @@
 		</button>
 		<ng-template #templateCart>
 			<button disabled class="ion-activatable ripple-parent custom-parent btn-disabled" fill="clear">
-          <ion-icon slot="icon-only" name="bag-check" color="light"></ion-icon>
+        Ajouté <ion-icon slot="icon-only" name="check" color="light"></ion-icon>
       </button>
 		</ng-template>
 	</div>

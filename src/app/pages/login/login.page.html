@@ -17,39 +17,6 @@
           <p class="ion-no-margin">Connectez-vous à votre compte</p>
         </ion-col>
       </ion-row>
-      <!-- <ion-row class="ion-no-margin">
-        <ion-col size="12">
-          <ion-item class="ion-no-padding">
-            <ion-label position="floating">Adresse email</ion-label>
-            <ion-input required formControlName="email" type="text"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-no-margin">
-        <ion-col size="12">
-          <ion-item class="ion-no-padding">
-            <ion-label position="floating">Mot de passe</ion-label>
-            <ion-input required type="password" formControlName="password"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-no-margin">
-        <ion-col size="12">
-          <ion-item>
-            <ion-label>Type compte</ion-label>
-            <ion-select formControlName="type" placeholder="Select Pizza">
-              <ion-select-option value="simple">Simple</ion-select-option>
-              <ion-select-option value="admin">Responsable</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row class="mt normal-size d-flex">
-        <ion-item lines="none" class="checkbox">
-          <ion-checkbox slot="start" mode="md"></ion-checkbox>
-          <ion-label>Souviens-moi</ion-label>
-        </ion-item>
-      </ion-row> -->
       <ion-row class="btn-row mt">
         <ion-col size="12">
           <button [disabled]="isSubmited" (click)="login()"
@@ -65,22 +32,7 @@
         </ion-col>
       </ion-row>
     </form>
-    <!-- <ion-item lines="none">
-      <ion-label slot="end">
-        Mot de passe oublié?
-      </ion-label>
-    </ion-item> -->
     <br>
     <br>
-    <!-- <ion-row class="normal-size w-full">
-      <ion-col size="12">
-        <div class="ion-justify-content-center gap-1x">
-          <span>Vous n'avez pas du compte?</span>
-          <a href="" [routerLink]="['/sign-up']" routerLinkActive="router-link-active">
-            <span class="text-primary">Inscription</span>
-          </a>
-        </div>
-      </ion-col>
-    </ion-row> -->
   </div>
 </ion-content>

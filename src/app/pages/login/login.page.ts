@@ -39,26 +39,24 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.reditectTo = this.route.snapshot.queryParams.redirectTo || null;    
+    this.reditectTo = this.route.snapshot.queryParams.redirectTo || null;
   }
 
   public async login() {
     let userAgent = navigator.userAgent;
-    
+
     let isPiBrowser = userAgent.match(/PiBrowser/i);
 
-    if (!isPiBrowser && environment.production) {
-      const alert = await this.alertController.create({
-        header: 'Attention',
-        message: 'Vous devez utiliser l\'application Pi Browser pour vous connecter',
-        buttons: ['OK']
-      });
-      await alert.present();
-      return; 
-    }
-    // if (this.loginForm.valid) {
+    // if (!isPiBrowser && environment.production) {
+    //   const alert = await this.alertController.create({
+    //     header: 'Attention',
+    //     message: 'Vous devez utiliser l\'application Pi Browser pour vous connecter',
+    //     buttons: ['OK']
+    //   });
+    //   await alert.present();
+    //   return;
+    // }
     this.isSubmited = true;
-    // if (this.loginForm.value.type === 'simple') {
     try {
       this.paymentService.auth().then((authResult: AuthResult) => {
         if (authResult.user) {
@@ -87,22 +85,6 @@ export class LoginPage implements OnInit {
       console.log('error', error);
 
     }
-    // } else {
-    //   this.userService.login({ ...this.loginForm.value }).subscribe((res: any) => {
-    //     this.localstorageService.setItem('token', res.token);
-    //     this.sessionService.getSessionStatus();
-    //     this.isSubmited = false;
-    //     this.toastService.show('success', 'Connexion réussie');
-    //     this.router.navigate([this.reditectTo || '/client']);
-    //   }
-    //     , (err: any) => {
-    //       console.log(err);
-    //       this.toastService.show('dark', 'Email ou mot de passe incorrect');
-    //       this.isSubmited = false;
-    //     }
-    //   )
-    // }
-    // }
   }
 
   public backHome(): void {
