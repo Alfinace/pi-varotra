@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  API_URL: 'https://api-service-pivarotra.onrender.com/api',
-  BACKEND_URL: 'https://api-service-pivarotra.onrender.com',
+  API_URL: 'https://api.pivarotra.com/api',
+  BACKEND_URL: 'https://api.pivarotra.com',
   prefix: 'pi-varotra-prod_'
 };
