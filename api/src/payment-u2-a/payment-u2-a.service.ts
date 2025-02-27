@@ -28,7 +28,7 @@ export class PaymentU2AService {
   }
 
   //Part implementation  payment Pi Network
-  getInfoPayment(paymentId) {
+  getInfoPayment(paymentId):  Observable<any> {
     return this.httpService.get(
       `${process.env.API_URL_MINEPI}/v2/payments/${paymentId}`,
       {
