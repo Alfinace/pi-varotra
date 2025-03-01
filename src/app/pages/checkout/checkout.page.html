@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button [routerLink]="['/client/home']" routerLinkActive="router-link-active">
-        <ion-icon slot="start" name="chevron-back-outline" size="large"></ion-icon>
+        <ion-icon slot="start" name="chevron-back-outline" size="small"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>
@@ -24,13 +24,7 @@
                 </div>
                 <div class="cart-image">
                   <h6> {{item.designation}} </h6>
-                  <p style="display: flex;gap: 5px;align-items: flex-end;">
-                    <span style="font-family: Serif;font-size: 20px;" class="init">π</span>
-                    <span style="font-family: 'DM Sans Medium';font-size: 15px" class="price">
-                      {{item.unitPrice}} x {{item.quantity}} = <span style="font-family: Serif;font-size: 20px;"
-                        class="init">π</span> {{item.unitPrice *item.quantity}}
-                    </span>
-                  </p>
+                  <span class="price-value"> {{item.unitPrice}}π x {{item.quantity}} =  {{item.unitPrice *item.quantity}}π</span>
                 </div>
               </div>
               <div
@@ -43,15 +37,24 @@
           </ion-item>
         </div>
         <br>
-        <strong style="margin-right: 10px">TOTAL:</strong>
-        <span style="font-family: Serif;font-size: 20px;">π</span>{{totalAmount}}
+        <h5 >Montant total à payer:</h5>
+        <span class="price-value"> {{totalAmount}} π </span>
         <br>
         <ion-row class="btn-row mt">
-          <ion-col size="12">
+          <ion-col size="6">
+            <button (click)="prev()" [disabled]="stepper === 0" class="ion-activatable ripple-parent custom-parent btn-primary">
+              <div style="display: flex; gap: 10px" class="ion-align-items-center">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+                <span class="custom-child">Précedant</span>
+              </div>
+              <ion-ripple-effect></ion-ripple-effect>
+            </button>
+          </ion-col>
+          <ion-col size="6">
             <button (click)="next()" class="ion-activatable ripple-parent custom-parent btn-primary">
               <div style="display: flex; gap: 10px" class="ion-align-items-center">
                 <span class="custom-child">Suivant</span>
-                <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
+                <ion-icon name="arrow-forward-outline"></ion-icon>
               </div>
               <ion-ripple-effect></ion-ripple-effect>
             </button>
@@ -63,32 +66,41 @@
       <div class="d-flex-col">
         <br>
         <h6>
-          Veuillez renseigner votre information de livraison en remplissant la formulaire ci-dessus.
+          Veuillez renseigner votre information de livraison en remplissant la formulaire ci-desssous.
         </h6>
         <form [formGroup]="paymentForm">
           <ion-item>
-            <ion-label position="floating">Nom et prémon</ion-label>
+            <ion-label position="floating" class="text-sm">Nom complet</ion-label>
             <ion-input required formControlName="fullname" type="text"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">Address de livraison</ion-label>
+            <ion-label position="floating" class="text-sm">Address de livraison</ion-label>
             <ion-input required formControlName="address" type="text"></ion-input>
           </ion-item>
-          <!-- <ion-item>
-            <ion-label position="floating">Contact rapide</ion-label>
-            <ion-input required formControlName="contact" type="text" placeholder="03488...."></ion-input>
-          </ion-item> -->
           <ion-item>
-            <ion-label position="floating">Ville</ion-label>
+            <ion-label position="floating" class="text-sm">Contact</ion-label>
+            <ion-input required formControlName="contact" type="text" maxlength="13"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating" class="text-sm">Ville</ion-label>
             <ion-input required formControlName="city" type="text"></ion-input>
           </ion-item>
           <ion-row class="btn-row mt">
-            <ion-col size="12">
-              <button [disabled]="paymentForm.invalid" class="ion-activatable ripple-parent custom-parent btn-primary">
+            <ion-col size="6">
+              <button (click)="prev()" [disabled]="stepper === 0" class="ion-activatable ripple-parent custom-parent btn-primary">
+                <div style="display: flex; gap: 10px" class="ion-align-items-center">
+                  <ion-icon name="arrow-back-outline"></ion-icon>
+                  <span class="custom-child">Précedant</span>
+                </div>
+                <ion-ripple-effect></ion-ripple-effect>
+              </button>
+            </ion-col>
+            <ion-col size="6">
+              <button (click)="next()"  [disabled]="paymentForm.invalid" class="ion-activatable ripple-parent custom-parent btn-primary">
                 <div style="display: flex; gap: 10px" class="ion-align-items-center">
                   <span class="custom-child">Suivant</span>
-                  <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
-                </div>
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                  </div>
                 <ion-ripple-effect></ion-ripple-effect>
               </button>
             </ion-col>
@@ -97,8 +109,8 @@
         <br>
         <br>
         <br>
-        <span (click)="next()" class="ion-margin-vertical" style="margin-top: 20px">
-          Je vais le récuperer moi-même
+        <span (click)="next()" class="ion-margin-vertical text-medium">
+          Non, je vais le récuperer moi-même
         </span>
       </div>
     </ion-slide>
@@ -136,7 +148,7 @@
                   Votre infomration
                 </ion-label>
               </ion-item-divider>
-              <!-- <ion-item>
+              <ion-item>
                 <ion-icon color="primary" slot="start" size="small" name="person"></ion-icon>
                 <ion-label>Client</ion-label>
                 <ion-text slot="end" color="primary">
@@ -144,10 +156,10 @@
                     {{f.fullname}}
                   </h6>
                   <ng-template #name>
-                    {{user.firstname}}
+                    {{user.username}}
                   </ng-template>
                 </ion-text>
-              <!-- </ion-item> -->
+              </ion-item>
               <ion-item>
                 <ion-icon color="primary" slot="start" size="small" name="mail"></ion-icon>
                 <ion-label>Adresse de livraison:</ion-label>
@@ -160,6 +172,13 @@
                 <ion-label>Ville:</ion-label>
                 <ion-text slot="end" color="primary">
                   <h6>{{f.city !== '' ? f.city : user.city}}</h6>
+                </ion-text>
+              </ion-item>
+              <ion-item>
+                <ion-icon color="primary" slot="start" size="small" name="call-outline"></ion-icon>
+                <ion-label>Contact:</ion-label>
+                <ion-text slot="end" color="primary">
+                  <h6>{{f.contact}}</h6>
                 </ion-text>
               </ion-item>
             </ion-item-group>
@@ -182,20 +201,28 @@
                 <ion-icon color="primary" slot="start" size="small" name="cash"></ion-icon>
                 <ion-label>Montant total à payer:</ion-label>
                 <ion-text slot="end" color="primary">
-                  <span style="font-family: Serif;font-size: 20px;">π</span>
-                  {{totalAmount}}
+                  <span class="price-value">  {{totalAmount}} π </span>
                 </ion-text>
               </ion-item>
             </ion-item-group>
           </ion-list>
           <ion-row class="btn-row mt">
-            <ion-col size="12">
+            <ion-col size="6">
+              <button (click)="prev()" [disabled]="statusPayment > 0" class="ion-activatable ripple-parent custom-parent btn-primary">
+                <div style="display: flex; gap: 10px" class="ion-align-items-center">
+                  <ion-icon name="arrow-back-outline"></ion-icon>
+                  <span class="custom-child">Précedant</span>
+                </div>
+                <ion-ripple-effect></ion-ripple-effect>
+              </button>
+            </ion-col>
+            <ion-col size="6">
               <button (click)="onStartProcessPayment()" [disabled]="statusPayment > 0"
                 class="ion-activatable ripple-parent custom-parent btn-primary">
                 <div style="display: flex; gap: 10px" class="ion-align-items-center">
                   <div [ngSwitch]="statusPayment">
                     <div *ngSwitchCase="0">
-                      <span class="custom-child">Lancer le paiement</span>
+                      <span class="custom-child">Payer maintenant</span>
                     </div>
                     <div *ngSwitchCase="1" style="display: flex; gap:10px; align-items: center;">
                       <span class="custom-child">Enregistrement du commande </span>

@@ -1,0 +1,10 @@
+ion-img::part(image) {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin: auto;
+}
+ion-content ion-img {
+  width: 100%;
+  height: 100%;
+}

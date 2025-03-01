@@ -65,7 +65,9 @@ export class PaymentU2AService {
     )
       .pipe(
         catchError((err) => {
-          throw new HttpException(err, 404);
+          console.log(err);
+
+          throw new HttpException(err, 400);
         }),
       );
   }

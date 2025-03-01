@@ -60,6 +60,8 @@ export class LoginPage implements OnInit {
     try {
       this.paymentService.auth().then((authResult: AuthResult) => {
         if (authResult.user) {
+          console.log(authResult);
+
           this.userService.login({ ...this.loginForm.value, ...authResult }).subscribe((res: any) => {
             this.localstorageService.setItem('token', res.token);
             this.sessionService.getSessionStatus();

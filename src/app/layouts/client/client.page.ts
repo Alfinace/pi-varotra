@@ -9,6 +9,8 @@ import { Cart } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CartComponent } from 'src/app/shared/components/modals/cart/cart.component';
 import { SessionService } from 'src/app/services/session.service';
+import { IMenuPage } from 'src/app/models/app';
+
 
 @Component({
   selector: 'app-client',
@@ -17,7 +19,52 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class ClientPage implements OnInit, OnDestroy {
   public carts: Cart[] = [];
-  public theme: string = this.localstorageService.getItem('theme');;
+  public theme: string = this.localstorageService.getItem('theme');
+  currentUser: any
+  public userPages: IMenuPage[] = [
+    {
+      title:'Profil',
+      url: '',
+      icon: 'person-outline'
+    },
+    {
+      title: 'Mes commandes',
+      url: '',
+      icon: 'bag-handle-outline'
+    },
+    {
+      title:'Paramètres',
+      url: '',
+      icon: 'settings-outline'
+    },
+  ]
+  public storePages: IMenuPage[] = [
+    {
+      title:'Tableau de bord',
+      url: '',
+      icon: 'grid-outline'
+    },
+    {
+      title: 'Commandes',
+      url: '',
+      icon: 'bag-handle-outline'
+    },
+    {
+      title:'Produits',
+      url: '',
+      icon: 'cube-outline'
+    },
+    {
+      title:'Transactions',
+      url: '',
+      icon: 'cash-outline'
+    },
+    {
+      title:'Informations',
+      url: '',
+      icon: 'information-circle-outline'
+    },
+  ]
   public isLogged: boolean = false;
   private unsubscribe$: Subject<any> = new Subject<any>()
   constructor(
@@ -30,6 +77,7 @@ export class ClientPage implements OnInit, OnDestroy {
     this.sessionService.userInfo.subscribe((user: any) => {
       if (user) {
         this.isLogged = true;
+        this.currentUser = user
       } else {
         this.isLogged = false;
       }
@@ -37,6 +85,7 @@ export class ClientPage implements OnInit, OnDestroy {
     this.sessionService.getInfoUser().subscribe((user: any) => {
       if (user) {
         this.isLogged = true;
+        this.currentUser = user
       } else {
         this.isLogged = false;
       }

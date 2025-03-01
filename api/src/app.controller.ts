@@ -112,9 +112,7 @@ export class AppController {
         throw new UnauthorizedException()
       }
     }).catch(err => {
-      // throw new UnauthorizedException()
-      console.log(err);
-
+      throw new UnauthorizedException()
     }
     )
   }

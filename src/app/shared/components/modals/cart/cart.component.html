@@ -1,8 +1,8 @@
 <ion-header [translucent]="true" class="ion-no-border" mode="md">
   <ion-toolbar>
-    <ion-icon class="ion-padding-start" size="large" slot="start" (click)="close()" name="chevron-back-outline">
+    <ion-icon class="ion-padding-start" size="small" slot="start" (click)="close()" name="chevron-back-outline">
     </ion-icon>
-    <ion-title class="ion-text-center"  style="font-weight: 900;font-size: small;">Mes paniers({{paniers.length}}) </ion-title>
+    <ion-title class="ion-text-center text-sm">Mes paniers({{paniers.length}}) </ion-title>
   </ion-toolbar>
 </ion-header>
 <br>
@@ -62,7 +62,7 @@
           <ion-col size="12">
             <button (click)="checkout(i+1)" class="ion-activatable ripple-parent custom-parent btn-primary">
               <ng-container *ngIf="true;else templateLoading">
-                Passer le commande
+                Passer la commande
               </ng-container>
               <ng-template #templateLoading>
                 <ion-spinner name="circular" style="color:#FFF"></ion-spinner>

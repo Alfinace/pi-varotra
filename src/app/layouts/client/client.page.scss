@@ -1,6 +1,8 @@
-ion-title {
+ion-title  {
   font-size: var(--ion-text-size-4x);
   font-weight: 600;
+  padding: 0 !important;
+  margin: 0 !important;
   font-family: 'DM sans medium';
   background: -webkit-linear-gradient(
     top left,
@@ -9,7 +11,12 @@ ion-title {
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  .app-name{
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
+i
 ion-header ion-icon.marked {
   position: relative;
   &::after {

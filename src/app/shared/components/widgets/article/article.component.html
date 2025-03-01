@@ -5,17 +5,17 @@
 	</div>
 	<div (click)="show()">
 		<div class="ion-margin-horizontal">
-			<p class="ion-no-margin product-title text-small text-dark">
+			<p class="ion-no-margin product-title text-sm text-dark">
 				{{ article.designation }}
 			</p>
-			<div class="d-flex ion-align-items-center ion-justify-content-start price-container text-small">
+			<div class="d-flex ion-align-items-center ion-justify-content-start price-container text-sm">
 				<label class="price-label">Prix :</label>
 				<span class="price-value">
 					{{article.unitPrice}} π
 				</span>
 			</div>
 			<div class="d-flex ion-align-items-center ion-justify-content-start location-container">
-				<span class="text-small">
+				<span class="text-sm">
 					{{article.store.city}}
 				</span>
 			</div>
@@ -24,7 +24,7 @@
 	<div class="rating-container ion-justify-content-between ion-align-items-center">
 
 		<button class="ion-activatable ripple-parent custom-parent btn-primary" *ngIf="!checkedArticleAddedToCart(); else templateCart" (click)="addPanier(article!.id)" fill="clear">
-			<span class="text-small">
+			<span class="text-sm">
 				Ajouter au panier
 			</span>
 		</button>

@@ -95,11 +95,10 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
         this.router.navigate(['client/space-client'])
       }
       this.items = [
-        { label: 'Mon commande' },
+        { label: 'Ma commande' },
         { label: 'Information de livraison' },
-        { label: 'Paiment' }
+        { label: 'Paiement' }
       ];
-      console.log(this.paymentForm.value);
 
     });
   }
@@ -254,7 +253,6 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
       memo,
       metadata: { orderId, itemIds }
     })
-    console.log('test', test);
-    
+
   }
 }

@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border" mode="md">
   <ion-toolbar>
-    <ion-icon class="ion-padding-start" size="large" slot="start" (click)="backHome()" name="chevron-back-outline">
+    <ion-icon class="ion-padding-start" size="small" slot="start" (click)="backHome()" name="chevron-back-outline">
     </ion-icon>
   </ion-toolbar>
 </ion-header>
@@ -22,7 +22,7 @@
           <button [disabled]="isSubmited" (click)="login()"
             class="ion-activatable ripple-parent custom-parent btn-primary">
             <ng-container *ngIf="!isSubmited;else templateLoading">
-              Se connecter pi network
+              Se connecter
             </ng-container>
             <ng-template #templateLoading>
               <ion-spinner name="circular" style="color:#FFF"></ion-spinner>
