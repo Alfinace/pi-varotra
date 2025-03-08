@@ -9,7 +9,7 @@ import {
   HasOne,
   BelongsTo,
 } from 'sequelize-typescript';
-import { ArticleOrder } from 'src/aricle-order/entities/aricle-order.entity';
+import { ArticleOrder } from 'src/aricle-order/entities/article-order.entity';
 import { PaymentU2A } from 'src/payment-u2-a/entities/payment-u2-a.entity';
 import { User } from 'src/user/entities/user.entity';
 import { Store } from 'src/store/entities/store.entity';

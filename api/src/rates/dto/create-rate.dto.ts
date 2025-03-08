@@ -12,6 +12,6 @@ export class CreateRateDto {
 	rate: number;
 
 	@IsNotEmpty()
-	@MaxLength(100)
+	@MaxLength(255)
 	comment: string;
 }

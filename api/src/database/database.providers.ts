@@ -5,7 +5,7 @@ import { Category } from 'src/category/entities/category.entity';
 import { Sequelize } from 'sequelize-typescript';
 import { Article } from 'src/article/entities/article.entity';
 import { User } from 'src/user/entities/user.entity';
-import { ArticleOrder } from 'src/aricle-order/entities/aricle-order.entity';
+import { ArticleOrder } from 'src/aricle-order/entities/article-order.entity';
 import { ImageUser } from 'src/image-user/entities/image-user.entity';
 import { PaymentU2A } from 'src/payment-u2-a/entities/payment-u2-a.entity';
 import { Store } from 'src/store/entities/store.entity';
@@ -24,6 +24,10 @@ export const databaseProviders = [
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
+        define:  {
+          charset: 'utf8mb4',
+          collate: 'utf8mb4_unicode_ci',
+        }
       });
       sequelize.addModels([
         User,
@@ -42,8 +46,8 @@ export const databaseProviders = [
         Pub,
       ]);
       await sequelize.sync({
-        // alter: true,
-        // force: true,
+        // alter: !Boolean(process.env.IS_PRODUCTION),
+        // force:  !Boolean(process.env.IS_PRODUCTION),
       });
       return sequelize;
     },

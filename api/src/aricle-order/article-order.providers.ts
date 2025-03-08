@@ -1,4 +1,4 @@
-import { ArticleOrder } from './entities/aricle-order.entity';
+import { ArticleOrder } from './entities/article-order.entity';
 
 export const articleOrderProviders = [
   {

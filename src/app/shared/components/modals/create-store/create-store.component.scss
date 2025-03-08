@@ -1,5 +1,8 @@
 ion-slides {
-  height: 100%;
+  height: calc(100% - 90px);
+  ion-slide{
+    overflow-y: auto;
+  }
 }
 h1 {
   margin-top: 0;
@@ -16,15 +19,9 @@ p {
   width: 100%;
 }
 @media screen and (max-width: 499px) {
-  ion-slides {
-    height: 100%;
-  }
-  ion-slides {
-    height: 100%;
-  }
+
   ion-content img {
     width: auto;
-    height: 200px;
     object-fit: cover;
   }
 }
@@ -37,12 +34,6 @@ p {
 }
 
 @media screen and (max-width: 400px) {
-  ion-slides {
-    height: 100%;
-  }
-  ion-slides {
-    height: 100%;
-  }
   ion-content img {
     width: auto;
     height: 90px;
@@ -53,7 +44,6 @@ p {
 @media screen and (min-width: 500px) {
   ion-content img {
     width: auto;
-    display: none;
     height: 134px;
     object-fit: cover;
   }

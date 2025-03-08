@@ -26,11 +26,8 @@
   </h5>
   <div style="display:flex; align-items: center; gap: 5px;justify-content: flex-start;">
     <label style="font-family: 'DM Sans Medium';">Prix :</label>
-    <span style="font-family: Serif" class="init">
-      π
-    </span>
-    <span style="font-family: 'DM Sans Medium';" class="price">
-      {{article.unitPrice}}
+    <span class="price-value">
+      {{article.unitPrice}} π
     </span>
   </div>
   <div style="display:flex;border-bottom: 1px solid #c5c3c3;"
@@ -129,7 +126,9 @@
         </ion-col>
         <ion-col size="3">
           <button (click)="onOpenModal()" class="ion-activatable ripple-parent custom-parent btn-warning">
-            <ion-label>Soumettre</ion-label>
+            <ion-label>
+              <ion-icon name="send"></ion-icon>
+            </ion-label>
             <ion-ripple-effect></ion-ripple-effect>
           </button>
         </ion-col>

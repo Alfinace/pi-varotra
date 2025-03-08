@@ -15,7 +15,7 @@
   <ion-slides mode="md" pager="false" #slider [options]="slideOpts">
     <ion-slide>
       <div class="d-flex-col">
-        <div style="max-height: 450px;overflow: scroll;">
+        <div >
           <ion-item class="item-cart" *ngFor="let item of paniers">
             <div class=" d-flex ion-justify-content-between ion-margin-vertical" style="width: 100%">
               <div class="d-flex ion-justify-content-start" style="gap: 10px">
@@ -39,27 +39,6 @@
         <br>
         <h5 >Montant total à payer:</h5>
         <span class="price-value"> {{totalAmount}} π </span>
-        <br>
-        <ion-row class="btn-row mt">
-          <ion-col size="6">
-            <button (click)="prev()" [disabled]="stepper === 0" class="ion-activatable ripple-parent custom-parent btn-primary">
-              <div style="display: flex; gap: 10px" class="ion-align-items-center">
-                <ion-icon name="arrow-back-outline"></ion-icon>
-                <span class="custom-child">Précedant</span>
-              </div>
-              <ion-ripple-effect></ion-ripple-effect>
-            </button>
-          </ion-col>
-          <ion-col size="6">
-            <button (click)="next()" class="ion-activatable ripple-parent custom-parent btn-primary">
-              <div style="display: flex; gap: 10px" class="ion-align-items-center">
-                <span class="custom-child">Suivant</span>
-                <ion-icon name="arrow-forward-outline"></ion-icon>
-              </div>
-              <ion-ripple-effect></ion-ripple-effect>
-            </button>
-          </ion-col>
-        </ion-row>
       </div>
     </ion-slide>
     <ion-slide>
@@ -85,39 +64,17 @@
             <ion-label position="floating" class="text-sm">Ville</ion-label>
             <ion-input required formControlName="city" type="text"></ion-input>
           </ion-item>
-          <ion-row class="btn-row mt">
-            <ion-col size="6">
-              <button (click)="prev()" [disabled]="stepper === 0" class="ion-activatable ripple-parent custom-parent btn-primary">
-                <div style="display: flex; gap: 10px" class="ion-align-items-center">
-                  <ion-icon name="arrow-back-outline"></ion-icon>
-                  <span class="custom-child">Précedant</span>
-                </div>
-                <ion-ripple-effect></ion-ripple-effect>
-              </button>
-            </ion-col>
-            <ion-col size="6">
-              <button (click)="next()"  [disabled]="paymentForm.invalid" class="ion-activatable ripple-parent custom-parent btn-primary">
-                <div style="display: flex; gap: 10px" class="ion-align-items-center">
-                  <span class="custom-child">Suivant</span>
-                  <ion-icon name="arrow-forward-outline"></ion-icon>
-                  </div>
-                <ion-ripple-effect></ion-ripple-effect>
-              </button>
-            </ion-col>
-          </ion-row>
         </form>
         <br>
-        <br>
-        <br>
-        <span (click)="next()" class="ion-margin-vertical text-medium">
+        <span (click)="next()" class="ion-margin-vertical text-sm text-primary">
           Non, je vais le récuperer moi-même
         </span>
       </div>
     </ion-slide>
     <ion-slide>
       <div style="width: 100%">
-        <div class="d-flex-col" style="max-height: 500px;overflow: scroll;" *ngIf="user">
-          <h6>Merci de verifier l'information de paiement et de livraison</h6>
+        <div class="d-flex-col" *ngIf="user">
+          <h6>Merci de verifier les informations renseignée avant proceder au paiement</h6>
           <ion-list *ngIf="f.panier[0]">
             <ion-item-group>
               <ion-item-divider>
@@ -137,7 +94,7 @@
               <ion-item>
                 <ion-icon color="primary" slot="start" size="small" name="mail"></ion-icon>
                 <ion-label>Siége:</ion-label>
-                <ion-text slot="end" color="primary">
+                <ion-text slot="end" color="primary" >
                   <h6> {{f.panier[0].store?.address}} à {{f.panier[0].store?.city}}</h6>
                 </ion-text>
               </ion-item>
@@ -206,43 +163,52 @@
               </ion-item>
             </ion-item-group>
           </ion-list>
-          <ion-row class="btn-row mt">
-            <ion-col size="6">
-              <button (click)="prev()" [disabled]="statusPayment > 0" class="ion-activatable ripple-parent custom-parent btn-primary">
-                <div style="display: flex; gap: 10px" class="ion-align-items-center">
-                  <ion-icon name="arrow-back-outline"></ion-icon>
-                  <span class="custom-child">Précedant</span>
-                </div>
-                <ion-ripple-effect></ion-ripple-effect>
-              </button>
-            </ion-col>
-            <ion-col size="6">
-              <button (click)="onStartProcessPayment()" [disabled]="statusPayment > 0"
-                class="ion-activatable ripple-parent custom-parent btn-primary">
-                <div style="display: flex; gap: 10px" class="ion-align-items-center">
-                  <div [ngSwitch]="statusPayment">
-                    <div *ngSwitchCase="0">
-                      <span class="custom-child">Payer maintenant</span>
-                    </div>
-                    <div *ngSwitchCase="1" style="display: flex; gap:10px; align-items: center;">
-                      <span class="custom-child">Enregistrement du commande </span>
-                      <ion-spinner color="light" name="circular"></ion-spinner>
-                    </div>
-                    <div *ngSwitchCase="2" style="display: flex; gap:10px;align-items: center;">
-                      <span class="custom-child">Transaction en cours</span>
-                      <ion-spinner color="light" name="circular"></ion-spinner>
-                    </div>
-                    <div *ngSwitchDefault>
-                      <span class="custom-child">OK</span>
-                    </div>
-                  </div>
-                </div>
-                <ion-ripple-effect></ion-ripple-effect>
-              </button>
-            </ion-col>
-          </ion-row>
         </div>
       </div>
     </ion-slide>
   </ion-slides>
+  <ion-row class="btn-row mt">
+    <ion-col size="6">
+      <button (click)="prev()" [disabled]="stepper === 0" class="ion-activatable ripple-parent custom-parent btn-danger">
+        <div style="display: flex; gap: 10px" class="ion-align-items-center">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          <span class="custom-child">Précedant</span>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </ion-col>
+    <ion-col size="6">
+      <button (click)="next()" [disabled]="paymentForm.invalid && stepper === 1" class="ion-activatable ripple-parent custom-parent btn-primary" *ngIf="stepper < 2;else finalStep">
+        <div style="display: flex; gap: 10px" class="ion-align-items-center">
+          <span class="custom-child">Suivant</span>
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </div>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+      <ng-template #finalStep>
+        <button (click)="onStartProcessPayment()" [disabled]="statusPayment > 0"
+          class="ion-activatable ripple-parent custom-parent btn-primary">
+          <div style="display: flex; gap: 10px" class="ion-align-items-center">
+            <div [ngSwitch]="statusPayment">
+              <div *ngSwitchCase="0">
+                <span class="custom-child">Payer maintenant</span>
+              </div>
+              <div *ngSwitchCase="1" style="display: flex; gap:10px; align-items: center;">
+                <span class="custom-child">Enregistrement du commande </span>
+                <ion-spinner color="light" name="circular"></ion-spinner>
+              </div>
+              <div *ngSwitchCase="2" style="display: flex; gap:10px;align-items: center;">
+                <span class="custom-child">Transaction en cours</span>
+                <ion-spinner color="light" name="circular"></ion-spinner>
+              </div>
+              <div *ngSwitchDefault>
+                <span class="custom-child">OK</span>
+              </div>
+            </div>
+          </div>
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
+      </ng-template>
+    </ion-col>
+  </ion-row>
 </ion-content>

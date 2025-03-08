@@ -261,7 +261,6 @@ button[disabled] {
   margin: auto;
 }
 app-article {
-  box-shadow: 0px 1px 3px #0000001a;
   display: block;
 }
 
@@ -339,4 +338,7 @@ td,
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.text-justify{
+  text-align: justify;
 }

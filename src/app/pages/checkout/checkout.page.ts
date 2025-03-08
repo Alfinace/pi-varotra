@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -127,6 +128,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async mappingData(carts: Cart[],) {
+    this.totalAmount = 0
     var panierObject = {}
     var promiseArray: any[] = []
     if (carts.length == 0) {
@@ -213,46 +215,49 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async onStartProcessPayment() {
-    const { panier } = this.paymentForm.value
-    let data = { ...this.paymentForm.value }
-    delete data.panier;
-    let order: Order = {
-      totalAmount: this.totalAmount,
-      articles: panier.map((p: any) => {
-        return {
-          id: p.articleId,
-          quantity: p.quantity,
-          unitPrice: p.unitPrice,
-          storeId: p.storeId,
-          designation: p.designation
-        }
-      }),
-    }
-    this.statusPayment = 1
-    const newOrder = await this.paimentService.addOrder(order).toPromise();
-    this.statusPayment = 2
-    let orderId: number = newOrder.dataValues.id;
-    var itemIds: number[] = []
-    var memo = ''
-    for (let i = 0; i < newOrder.articles.length; i++) {
-      const item = newOrder.articles[i];
-      itemIds.push(item.id);
-      memo += ` ${item.designation},`
-    }
-    memo += `#${orderId}`
-    console.log(
-      {
-        amount: newOrder.dataValues.totalAmount,
+    try {
+      const { panier } = this.paymentForm.value
+      let data = { ...this.paymentForm.value }
+
+      delete data.panier;
+      let order: Order = {
+        totalAmount: this.totalAmount,
+        articles: panier.map((p: any) => {
+          return {
+            id: p.articleId,
+            quantity: p.quantity,
+            unitPrice: p.unitPrice,
+            storeId: p.storeId,
+            designation: p.designation
+          }
+        }),
+        deliverieInfo: JSON.stringify(data)
+      }
+      this.statusPayment = 1
+      const newOrder = await this.paimentService.addOrder(order).toPromise();
+
+      this.statusPayment = 2
+      let orderId: number = newOrder.order.dataValues.id;
+      var itemIds: number[] = []
+      var memo = ''
+      for (let i = 0; i < newOrder.order.articles.length; i++) {
+        const item = newOrder.order.articles[i];
+        itemIds.push(item.id);
+        memo += ` ${item.designation},`
+      }
+      memo += `#${orderId}`
+
+      this.loading = false;
+      await this.paimentService.createPayment({
+        amount: newOrder.order.dataValues.totalAmount,
         memo,
         metadata: { orderId, itemIds }
-      }
-    );
-    this.loading = false;
-    var test = await this.paimentService.createPayment({
-      amount: newOrder.dataValues.totalAmount,
-      memo,
-      metadata: { orderId, itemIds }
-    })
+      })
+    } catch (error: any) {
+      this.loading = false;
+      this.statusPayment = 0
+      this.toastService.show('danger', error.error.message)
+    }
 
   }
 }

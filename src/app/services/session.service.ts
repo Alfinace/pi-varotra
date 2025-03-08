@@ -82,9 +82,6 @@ export class SessionService {
 
 
   setAuth(user: User): void {
-    // Set current user
-    console.log(user);
-
     this.userInfoSubject.next(user)
     // Set isAuthenticated to true
     this.isAuthenticatedSubject.next(true);

@@ -10,16 +10,16 @@ import {
   UploadedFiles,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { AricleOrderService } from './aricle-order.service';
-import { CreateAricleOrderDto } from './dto/create-aricle-order.dto';
-import { UpdateAricleOrderDto } from './dto/update-aricle-order.dto';
+import { ArticleOrderService } from './article-order.service';
+import { CreateArticleOrderDto } from './dto/create-article-order.dto';
+import { UpdateAricleOrderDto } from './dto/update-article-order.dto';
 
-@Controller('aricle-order')
-export class AricleOrderController {
-  constructor(private readonly aricleOrderService: AricleOrderService) {}
+@Controller('article-order')
+export class ArticleOrderController {
+  constructor(private readonly aricleOrderService: ArticleOrderService) {}
 
   @Post()
-  create(@Body() createAricleOrderDto: CreateAricleOrderDto) {
+  create(@Body() createAricleOrderDto: CreateArticleOrderDto) {
     return this.aricleOrderService.create(createAricleOrderDto);
   }
 

@@ -1,16 +1,16 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreateAricleOrderDto } from './dto/create-aricle-order.dto';
-import { UpdateAricleOrderDto } from './dto/update-aricle-order.dto';
-import { ArticleOrder } from './entities/aricle-order.entity';
+import { CreateArticleOrderDto } from './dto/create-article-order.dto';
+import { UpdateAricleOrderDto } from './dto/update-article-order.dto';
+import { ArticleOrder } from './entities/article-order.entity';
 
 @Injectable()
-export class AricleOrderService {
+export class ArticleOrderService {
   constructor(
     @Inject('ARTICLE_ORDER_REPOSITORY')
     private articleOrderRepository: typeof ArticleOrder,
   ) {}
 
-  create(createAricleOrderDto: CreateAricleOrderDto | any) {
+  create(createAricleOrderDto: CreateArticleOrderDto | any) {
     return this.articleOrderRepository.bulkCreate([...createAricleOrderDto]);
   }
 

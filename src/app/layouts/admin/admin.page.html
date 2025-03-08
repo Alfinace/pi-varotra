@@ -1,5 +1,5 @@
 <ion-split-pane when="xs" contentId="main">
-	<ion-menu contentId="main" [ngClass]="{'show':showMenu,'hide':!showMenu}">
+	<!-- <ion-menu contentId="main"  menuId="adminMenu" [ngClass]="{'show':showMenu,'hide':!showMenu}">
 		<ion-header class="ion-no-border">
 			<ion-toolbar>
 				<ion-title id="title">Pi-varotra Admin</ion-title>
@@ -46,7 +46,7 @@
 				</ion-item>
 			</ion-list>
 		</ion-content>
-	</ion-menu>
+	</ion-menu> -->
 
 	<div class="ion-page" id="main">
 		<ion-header class="ion-no-border">
@@ -66,7 +66,7 @@
 			</ion-toolbar>
 		</ion-header>
 		<ion-content class="ion-padding">
-			<ion-router-outlet></ion-router-outlet>
+			<ion-router-outlet id="main"></ion-router-outlet>
 		</ion-content>
 	</div>
 </ion-split-pane>

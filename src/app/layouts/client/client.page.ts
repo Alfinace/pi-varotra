@@ -23,7 +23,7 @@ export class ClientPage implements OnInit, OnDestroy {
   currentUser: any
   public userPages: IMenuPage[] = [
     {
-      title:'Profil',
+      title:'Profile',
       url: '',
       icon: 'person-outline'
     },

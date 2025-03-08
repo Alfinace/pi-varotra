@@ -10,7 +10,7 @@
 <br>
 <ion-content class="ion-padding-horizontal">
   <form [formGroup]="addProduitForm" (ngSubmit)="onSubmit()">
-    <ion-label>Images</ion-label>
+    <ion-label>Ajouter des images</ion-label>
     <app-images #imageComponent (selectImageEvent)="getImage($event)"></app-images>
     <app-images #imageComponentUpdate (selectImageEvent)="getImageUpdate($event)"></app-images>
 
@@ -27,7 +27,7 @@
       </div>
     </div>
     <ion-item>
-      <ion-label position="floating">Nom du produit</ion-label>
+      <ion-label position="floating">Designation</ion-label>
       <ion-input required formControlName="designation" type="text"></ion-input>
     </ion-item>
     <ion-item>

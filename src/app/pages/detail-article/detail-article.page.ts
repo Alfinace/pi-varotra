@@ -59,10 +59,9 @@ export class DetailArticlePage implements OnInit {
   onSubmit() {
 
     this.articleService.rateArticle({ ...this.rateForm.value, rate: this.rate, articleId: this.article.id }).subscribe((res: any) => {
-      this.article = res
-      this.rateForm.reset()
       this.isOpen = false;
-      this.rates.push({ ...res, ...this.rateForm.value, rate: this.rate, user: { ...this.currentUser } })
+      this.rates.unshift({ ...res, ...this.rateForm.value, rate: this.rate, user: { ...this.currentUser } })
+      this.rateForm.reset()
     })
   }
 
@@ -91,8 +90,8 @@ export class DetailArticlePage implements OnInit {
           this.articles = res.rows.filter((a: any) => a.id != this.article.id)
         })
 
-        this.articleService.getRateArticle(this.article.id).subscribe((res: any) => {
-          this.rates = res
+        this.articleService.getRateArticle(this.article.id).subscribe((res: any[]) => {
+          this.rates = res.sort((a: any, b: any) => b.id - a.id)
           this.commented = this.rates.filter(r => r.userId == this.currentUser.id).length > 0
         })
       })

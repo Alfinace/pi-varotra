@@ -29,24 +29,9 @@
   </h5>
   <div style="display:flex; align-items: center; gap: 5px;justify-content: flex-start;">
     <label style="font-family: 'DM Sans Medium';">Prix :</label>
-    <span style="font-family: Serif" class="init">
-      π
+    <span class="price-value">
+      {{article.unitPrice}} π
     </span>
-    <span style="font-family: 'DM Sans Medium';" class="price">
-      {{article.unitPrice}}
-    </span>
-  </div>
-  <div style="display:flex;border-bottom: 1px solid #c5c3c3;"
-    class=" ion-justify-content-between ion-align-items-center ion-padding-bottom ion-margin-vertical">
-    <div style=" display: flex; align-items: center;gap: 20px;">
-      <div style="display: flex; align-items: center;gap: 5px;">
-        <ion-icon style="margin-bottom: 4px;font-size:large;" color="warning" name="star"></ion-icon>
-        <span style="font-size: 17px">0</span>
-      </div>
-      <div style="font-size: 17px">
-        {{rates.length}} Avis
-      </div>
-    </div>
   </div>
   <br>
   <ion-item lines="full" [routerLink]="['/client/store/store-detail/', article.store!.id]"
@@ -73,16 +58,13 @@
   </ion-text>
   <br>
   <ion-item class="reviews" lines="full" *ngFor="let item of rates">
-    <ion-avatar slot="start">
-      <img [src]="item.user.avatar" />
-    </ion-avatar>
     <ion-text class="ion-margin-bottom" color="primary" style="width:100%">
       <div style="display:flex" class="ion-justify-content-between ion-align-items-center ion-margin-top">
-        <h4 style="font-size:25px;color: #000" class="ion-no-margin">
-          {{item.user.username}}
+        <h4  class=" text-sm ">
+          {{item.user.username | titlecase}}
         </h4>
-        <ion-note>
-          {{item.createdAt | date: 'dd/MM/yyyy'}}
+        <ion-note class="text-sm">
+          {{item.createdAt | date: 'dd/MM/yyyy  H:s aa'}}
         </ion-note>
       </div>
       <div style="display:flex; gap: 3px;font-size: 15px">
@@ -102,33 +84,22 @@
           name="{{item.rate > 4 ? 'star': 'star-outline'}}">
         </ion-icon>
       </div>
-      <p style="font-size:15px;color: #000">
+      <p class="tex-sm text-dark ion-margin-top text-justify">
         {{
         item.comment
         }}
       </p>
     </ion-text>
   </ion-item>
-  <div *ngIf="currentUser && !commented">
-    <form [formGroup]="rateForm">
-      <ion-row class=" mt">
-        <ion-col size="9">
-          <ion-item>
-            <ion-textarea formControlName="comment" placeholder="Commentaire ici..."></ion-textarea>
-          </ion-item>
-        </ion-col>
-        <ion-col size="3">
-          <button (click)="onOpenModal()" class="ion-activatable ripple-parent custom-parent btn-warning">
-            <ion-label>Soumettre</ion-label>
-            <ion-ripple-effect></ion-ripple-effect>
-          </button>
-        </ion-col>
-      </ion-row>
-    </form>
+  <div *ngIf="currentUser ">
+    <button (click)="onOpenModal()" class="ion-activatable ripple-parent custom-parent btn-warning">
+      <ion-label>Ajouter mon avis</ion-label>
+      <ion-ripple-effect></ion-ripple-effect>
+    </button>
   </div>
-  <div class=" d-flex ion-justify-content-between  ion-align-items-center">
+  <div *ngIf="articles.length > 0" class=" d-flex ion-justify-content-between  ion-align-items-center">
     <h3>Produits récommandés</h3>
-    <a href="http://">Voir plus</a>
+    <a href="http://" class="text-primary text-sm">Voir plus</a>
   </div>
   <br>
   <swiper [config]="configP">
@@ -139,7 +110,7 @@
     </ng-template>
   </swiper>
   <br>
-  <div #btnAddCart class="box-btn-row" *ngIf="!checkedArticleAddedToCart();">
+  <div class="box-btn-row" *ngIf="!checkedArticleAddedToCart();">
     <ion-row class="btn-row mt">
       <ion-col size="12">
         <button class="ion-activatable ripple-parent custom-parent btn-primary" (click)="addCart(article.id)">
@@ -154,12 +125,21 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>Note </ion-title>
+          <ion-title>Commentaire & Etoile </ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
+        <form [formGroup]="rateForm">
+          <ion-row class=" mt">
+            <ion-col >
+              <ion-item>
+                <ion-textarea formControlName="comment" placeholder="Commentaire ici..."></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </form>
         <br>
-        <div class="d-flex  ion-justify-content-center" style="gap: 25px">
+        <div class="d-flex  ion-justify-content-center" style="gap: 35px">
           <ion-icon slot="start" color="{{rate > 0 ? 'warning': ''}}" name="{{rate > 0 ? 'star': 'star-outline'}}"
             (click)="setRate(1)" size="large"></ion-icon>
           <ion-icon slot="start" color="{{rate > 1 ? 'warning': ''}}" name="{{rate > 1 ? 'star': 'star-outline'}}"

@@ -49,4 +49,7 @@ export class Store extends Model {
 
 	@Column({ field: 'created_at' })
 	createdAt: Date;
+
+  @Column({ field: 'description' , type: DataType.TEXT })
+	description: string;
 }

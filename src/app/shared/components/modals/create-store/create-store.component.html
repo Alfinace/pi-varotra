@@ -2,68 +2,54 @@
   <ion-toolbar>
     <ion-icon class="ion-padding-start" size="small" slot="start" (click)="prev()" name="chevron-back-outline">
     </ion-icon>
-    <ion-title class="ion-text-center" style="font-weight: 900">Création du magasin</ion-title>
+    <ion-title class="ion-text-center text-sm" >Création du magasin</ion-title>
   </ion-toolbar>
 </ion-header>
 <br>
 <ion-content class="ion-padding-horizontal">
-  <ion-slides #slider pager="true" [options]="slideOpts">
+  <ion-slides #slider  [options]="slideOpts">
     <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
-      <h1 class="ion-text-start">Bienvenue sur votre futur mangasin</h1>
+      <h1 class="ion-text-start text-medium">Bienvenue sur la création de votre magasin</h1>
       <div class="box-img">
         <img [src]="'./assets/images/store.png'" />
       </div>
-      <p>
+      <p class="text-sm text-justify">
         Votre magasin est un espace virtuel qui vous permet de vendre vos produits et services en ligne.
         Vous pouvez créer un magasin en quelques minutes et commencer à vendre en ligne.
 
       </p>
-      <ion-row class="btn-row mt">
-        <ion-col size="12">
-          <button style="padding: 0 20px" (click)="next()"
-            class="ion-activatable ripple-parent custom-parent btn-primary">
-            <ion-label>Suivant </ion-label>
-            <ion-ripple-effect></ion-ripple-effect>
-          </button>
-        </ion-col>
-      </ion-row>
+
     </ion-slide>
     <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
-      <h1 class="ion-text-start">Information necessaire</h1>
-      Veuillez renseigner les informations necessaire pour la creation de votre magasin.
+      <h1 class="ion-text-start text-medium">Information nécessaire</h1>
+      <p class="text-sm text-justify">
+        Veuillez renseigner les informations necessaire pour la creation de votre magasin.
+      </p>
       <br>
       <div class="box-img">
         <img [src]="'./assets/images/circle-store.png'" />
       </div>
-      <form [formGroup]="storeForm">
+      <form [formGroup]="storeForm" class="text-sm">
         <ion-item>
-          <ion-label position="floating">Nom du magasin</ion-label>
+          <ion-label class="text-sm" position="floating">Nom du magasin</ion-label>
           <ion-input required formControlName="name" type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Address exact</ion-label>
+          <ion-label class="text-sm" position="floating">Address exact</ion-label>
           <ion-input required formControlName="address" type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Contact </ion-label>
+          <ion-label class="text-sm" position="floating">Contact </ion-label>
           <ion-input required formControlName="contact" type="text"></ion-input>
         </ion-item>
-
-
         <ion-item>
-          <ion-label position="floating">Ville</ion-label>
+          <ion-label class="text-sm" position="floating">Ville</ion-label>
           <ion-input required formControlName="city" type="text"></ion-input>
         </ion-item>
-
-        <ion-row class="btn-row mt">
-          <ion-col size="12">
-            <button (click)="next()" [disabled]="storeForm.invalid"
-              class="ion-activatable ripple-parent custom-parent btn-primary">
-              <ion-label>Suivant</ion-label>
-              <ion-ripple-effect></ion-ripple-effect>
-            </button>
-          </ion-col>
-        </ion-row>
+        <ion-item>
+          <ion-label class="text-sm" position="floating">Description</ion-label>
+          <ion-textarea required formControlName="description"  type="text"></ion-textarea>
+        </ion-item>
       </form>
     </ion-slide>
     <ion-slide>
@@ -79,11 +65,11 @@
             <div *ngFor=" let d of deliverieMode().controls; let i=index" [formGroupName]="i" class="box-flex">
 
               <ion-item>
-                <ion-label position="floating">Distance en KM</ion-label>
+                <ion-label class="text-sm" position="floating">Distance en KM</ion-label>
                 <ion-input required formControlName="distance" placeholder="10" type="text"></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label position="floating">Frais en <span style="font-family: Serif;"> π </span></ion-label>
+                <ion-label class="text-sm" position="floating">Frais en <span style="font-family: Serif;"> π </span></ion-label>
                 <ion-input required formControlName="costs" placeholder="0.07" type="text"></ion-input>
               </ion-item>
               <ion-icon size="large" (click)="removeDeliverieMode(i)" color="danger" name="remove-circle-outline">
@@ -95,7 +81,7 @@
               <ion-col size="12">
                 <button type="submit" (click)="addDeliverieMode()" style="padding: 0 20px"
                   class="ion-activatable ripple-parent custom-parent btn-primary">
-                  <ion-label>Ajouter une distance</ion-label>
+                  <ion-label class="text-sm">Ajouter une distance</ion-label>
                   <ion-ripple-effect></ion-ripple-effect>
                 </button>
               </ion-col>
@@ -104,16 +90,16 @@
               <ion-col size="12">
                 <button type="submit" (click)="next()" style="padding: 0 20px"
                   class="ion-activatable ripple-parent custom-parent btn-primary">
-                  <ion-label>Suivant</ion-label>
+                  <ion-label class="text-sm">Suivant</ion-label>
                   <ion-ripple-effect></ion-ripple-effect>
                 </button>
               </ion-col>
             </ion-row>
           </div>
           <p>
-            Nous n'offrons pas la livraison pour le moment, passer à l'étape suivante
+            Nous n'offrons pas la livraison pour le moment,
             <span (click)="next()">
-              passer à l'étape suivante
+              passer à l'étape suivant
             </span>
           </p>
         </form>
@@ -132,11 +118,20 @@
         <ion-col size="12">
           <button style="padding: 0 20px" (click)="save()" [disabled]="storeForm.invalid"
             class="ion-activatable ripple-parent custom-parent btn-primary">
-            <ion-label>Soumettre </ion-label>
+            <ion-label class="text-sm">Soumettre </ion-label>
             <ion-ripple-effect></ion-ripple-effect>
           </button>
         </ion-col>
       </ion-row>
     </ion-slide>
   </ion-slides>
+  <ion-row class="btn-row mt">
+    <ion-col size="12">
+      <button style="padding: 0 20px" (click)="next()"
+        class="ion-activatable ripple-parent custom-parent btn-primary">
+        <ion-label class="text-sm">Suivant </ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </ion-col>
+  </ion-row>
 </ion-content>

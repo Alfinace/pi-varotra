@@ -9,6 +9,7 @@
     .p-steps-number {
       background-color: var(--ion-color-primary) !important;
       color: #fff;
+      font-size: 12px !important;
     }
   }
   .p-menuitem-link {
@@ -16,8 +17,13 @@
   }
 }
 
+.p-steps-number {
+  font-size: 12px !important
+}
+
 ion-slides {
-  height: calc(100% - 57px);
+  height: calc(100% - 120px);
+  overflow-y: auto;
 }
 
 .cart-empty {

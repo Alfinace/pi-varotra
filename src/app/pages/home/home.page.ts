@@ -72,18 +72,9 @@ export class HomePage implements OnInit, AfterViewInit {
   ngOnInit() {
 
   }
-  // ionViewWillEnter() {
-  //   this.route.params.subscribe(async params => {
-  //     if (params['state'] === 'cart') {
-  //       const modal = await this.modalController.create({
-  //         component: CartComponent,
-  //         componentProps: { value: 123 }
-  //       });
-
-  //       await modal.present();
-  //     }
-  //   });
-  // }
+  ionViewWillEnter() {
+    this.fetchData()
+  }
   public doRefresh(event: any) {
     this.fetchData(event)
   }

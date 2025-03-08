@@ -1,6 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Detail commande</ion-title>
+    <ion-title>Detaille commande</ion-title>
     <ion-icon class="ion-padding-start" size="small" slot="start" (click)="close()" name="chevron-back-outline">
     </ion-icon>
   </ion-toolbar>
@@ -12,29 +12,22 @@
         <ion-icon color="primary" slot="start" size="small" name="person"></ion-icon>
         <ion-label>Nom Client:</ion-label>
         <ion-text slot="end" color="primary">
-          {{order.user.username}}
-        </ion-text>
-      </ion-item>
-      <!-- <ion-item>
-        <ion-icon color="primary" slot="start" size="small" name="mail"></ion-icon>
-        <ion-label>Adresse email:</ion-label>
-        <ion-text slot="end" color="primary">
-          {{order.user.email}}
+          {{order.deliverieInfo?.fullname ?? 'N/A'}}
         </ion-text>
       </ion-item>
       <ion-item>
         <ion-icon color="primary" slot="start" size="small" name="call"></ion-icon>
         <ion-label>Contact :</ion-label>
         <ion-text slot="end" color="primary">
-          {{order.user.contact ?? 'N/A'}}
+          {{order.deliverieInfo?.contact ?? 'N/A'}}
         </ion-text>
-      </ion-item> -->
+      </ion-item>
       <ion-item>
         <ion-icon color="primary" slot="start" size="small" name="location"></ion-icon>
         <ion-label>Adresse:</ion-label>
         <ion-text slot="end" color="primary">
-          <ng-container *ngIf="order.user.address && order.user.city;else addressValue">{{order.user.address}} à
-            {{order.user.city}}
+          <ng-container *ngIf="order.deliverieInfo?.address && order.deliverieInfo?.city;else addressValue">{{order.deliverieInfo?.address}} à
+            {{order.deliverieInfo?.city}}
           </ng-container>
           <ng-template #addressValue>
             N/A
@@ -46,14 +39,14 @@
         <ion-label> Status paiment:</ion-label>
         <ion-text slot="end" color="warning">
           <ion-chip *ngIf="!order.paymentId" color="warning" size="small">
-            <ion-label>Non payé</ion-label>
+            <ion-label class="text-sm" >Non payé</ion-label>
           </ion-chip>
           <ion-chip *ngIf="order.paymentU2A && order.paymentU2A.paid " color="success" size="small">
-            <ion-label>Complete</ion-label>
+            <ion-label class="text-sm">Complete</ion-label>
           </ion-chip>
           <ion-chip *ngIf="order.paymentU2A && !order.paymentU2A.paid && !order.paymentU2A.cancelled" color="danger"
             size="small">
-            <ion-label>Annulé</ion-label>
+            <ion-label class="text-sm">Annulé</ion-label>
           </ion-chip>
         </ion-text>
       </ion-item>
@@ -94,8 +87,8 @@
     <ion-item>
       <ion-icon color="primary" slot="start" size="small" name="card-sharp"></ion-icon>
       <ion-label>Montant total</ion-label>
-      <ion-text slot="end" color="primary">
-        {{order.totalAmount}}pi
+      <ion-text slot="end" color="primary" class="price-value">
+        {{order.totalAmount}}π
       </ion-text>
     </ion-item>
   </ion-list>

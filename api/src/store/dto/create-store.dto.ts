@@ -15,4 +15,7 @@ export class CreateStoreDto {
 	deliveries: string;
 	@IsOptional()
 	userId: number;
+
+  @IsOptional()
+  description: string
 }

@@ -8,7 +8,7 @@ import { CategoryModule } from './category/category.module';
 import { ImageArticleModule } from './image-article/image-article.module';
 import { OrderModule } from './order/order.module';
 import { ConfigModule } from '@nestjs/config';
-import { AricleOrderModule } from './aricle-order/aricle-order.module';
+import { AricleOrderModule } from './aricle-order/article-order.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { AuthModule } from './auth/auth.module';
 import { join } from 'path';

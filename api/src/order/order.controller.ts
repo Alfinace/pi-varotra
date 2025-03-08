@@ -18,8 +18,13 @@ export class OrderController {
 
   @Post()
   @UseGuards(JwtAuthGuard, RoleGuard)
-  create(@Body() createOrderDto: CreateOrderDto, @User() user) {
-    return this.orderService.create(createOrderDto, user.userId);
+  async create(@Body() createOrderDto: CreateOrderDto, @User() user, @Res() res: Response) {
+    try {
+      const order =  await this.orderService.create(createOrderDto, user.userId);
+      return res.status(200).json({ order, message: 'Order created successfully' });
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
   }
 
   @Get()
@@ -31,7 +36,8 @@ export class OrderController {
       }
       var orders = await this.orderService.findByStore(user.storeId, limit, offset);
       orders.rows = orders.rows.map(order => {
-        order.deliverieInfo = JSON.parse(order.deliverieInfo) || null;
+        const deliverieInfo =JSON.parse(order.deliverieInfo ) || null
+        order.deliverieInfo = deliverieInfo;
         order.articles = order.articles.map((article: any) => {
           return { ...article.ArticleOrder.dataValues, article: article };
         })
@@ -39,6 +45,8 @@ export class OrderController {
       })
       return orders;
     } catch (error) {
+      console.log(error);
+
       throw new HttpException(error.message, 500);
     }
   }

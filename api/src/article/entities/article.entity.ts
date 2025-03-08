@@ -14,7 +14,7 @@ import { Category } from 'src/category/entities/category.entity';
 import { ImageArticle } from 'src/image-article/entities/image-article.entity';
 import { Store } from 'src/store/entities/store.entity';
 import { Rate } from 'src/rates/entities/rate.entity';
-import { ArticleOrder } from 'src/aricle-order/entities/aricle-order.entity';
+import { ArticleOrder } from 'src/aricle-order/entities/article-order.entity';
 import { Order } from 'src/order/entities/order.entity';
 
 @Table({ tableName: 'articles' })

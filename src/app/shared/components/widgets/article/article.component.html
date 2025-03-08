@@ -21,19 +21,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="rating-container ion-justify-content-between ion-align-items-center">
-
-		<button class="ion-activatable ripple-parent custom-parent btn-primary" *ngIf="!checkedArticleAddedToCart(); else templateCart" (click)="addPanier(article!.id)" fill="clear">
-			<span class="text-sm">
-				Ajouter au panier
-			</span>
-		</button>
-		<ng-template #templateCart>
-			<button disabled class="ion-activatable ripple-parent custom-parent btn-disabled" fill="clear">
-        Ajouté <ion-icon slot="icon-only" name="check" color="light"></ion-icon>
-      </button>
-		</ng-template>
-	</div>
+	<br>
 </div>
 <ng-template #noArticleTemplate>
 	<div class="card">

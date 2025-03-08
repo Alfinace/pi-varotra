@@ -32,7 +32,6 @@ export class ArticleController {
   @Roles(Role.USER, Role.ADMIN)
   @UseGuards(JwtAuthGuard, RoleGuard)
   async create(@Body() createArticleDto: CreateArticleDto, @User() user) {
-    console.log(user);
 
     return this.articleService.create({
       ...createArticleDto,
@@ -180,7 +179,6 @@ export class ArticleController {
     @User() user,
     @Res() response: Response,
   ) {
-    console.log(user);
 
     // try {
     let article = await this.articleService.findOne(+id);
@@ -231,9 +229,6 @@ export class ArticleController {
     try {
       let article = await this.articleService.findOne(+id);
       if (article) {
-        console.log(article);
-        console.log(user);
-
         if (article.storeId !== user.storeId) {
           throw new ForbiddenException("You don't have permission");
         }

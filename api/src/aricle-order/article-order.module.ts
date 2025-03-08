@@ -1,12 +1,12 @@
 import { DatabaseModule } from 'src/database/database.module';
 import { articleOrderProviders } from './article-order.providers';
 import { Module } from '@nestjs/common';
-import { AricleOrderService } from './aricle-order.service';
-import { AricleOrderController } from './aricle-order.controller';
+import { ArticleOrderService } from './article-order.service';
+import { ArticleOrderController } from './article-order.controller';
 
 @Module({
   imports: [DatabaseModule],
-  controllers: [AricleOrderController],
-  providers: [AricleOrderService, ...articleOrderProviders],
+  controllers: [ArticleOrderController],
+  providers: [ArticleOrderService, ...articleOrderProviders],
 })
 export class AricleOrderModule {}

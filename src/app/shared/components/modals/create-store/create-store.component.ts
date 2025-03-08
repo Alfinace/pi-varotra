@@ -40,7 +40,8 @@ export class CreateStoreComponent implements OnInit, AfterViewInit {
       city: ['', [Validators.required]],
       logo: ['',],
       contact: ['', [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10), Validators.minLength(10), Validators.maxLength(10)]],
-      deliveries: this.fb.array([]) // delivery mode,
+      deliveries: this.fb.array([]), // delivery mode
+      description: ['', [Validators.required]],
     })
     // this.addDeliverieMode()
   }
