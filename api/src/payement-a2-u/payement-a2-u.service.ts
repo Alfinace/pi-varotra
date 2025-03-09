@@ -5,6 +5,9 @@ import { catchError, map } from 'rxjs';
 import { CreatePayementA2UDto } from './dto/create-payement-a2-u.dto';
 import { UpdatePayementA2UDto } from './dto/update-payement-a2-u.dto';
 import { PayementA2U } from './entities/payement-a2-u.entity';
+import { Article } from 'src/article/entities/article.entity';
+import { Order } from 'src/order/entities/order.entity';
+import { ArticleOrder } from 'src/aricle-order/entities/article-order.entity';
 
 export interface PaymentData {
   amount: number;
@@ -21,6 +24,12 @@ export class PaymentA2UService {
   constructor(
     @Inject('PAYMENTA2U_REPOSITORY')
     private paymentA2URepository: typeof PayementA2U,
+    @Inject('ARTICLE_REPOSITORY')
+    private articleRepository: typeof Article,
+    @Inject('ORDER_REPOSITORY')
+    private orderRepository: typeof Order,
+    @Inject('ARTICLE_ORDER_REPOSITORY')
+    private articleOrderRepository: typeof ArticleOrder,
     private httpService: HttpService,
   ) {
     const apiKey = process.env.API_KEY_MINEPI;
@@ -33,8 +42,6 @@ export class PaymentA2UService {
     return new Promise((resolve, reject) => {
       this.paymentA2URepository.create(data).then(async res => {
         if (!res) reject('Error created data payment in database')
-        console.log(data);
-
         let paymentId = await this.pi.createPayment(
           {
             uid: data.uid,
@@ -48,6 +55,25 @@ export class PaymentA2UService {
           const txid = await this.pi.submitPayment(paymentId);
           await this.update(res.id, { txid })
           const completedPayment = await this.pi.completePayment(paymentId, txid);
+          console.log("data completedPayment", data);
+          const orderId = JSON.parse(data.metadata).orderId
+          const articles = await this.articleOrderRepository.findAll({
+            where: {
+              orderId: data.orderId
+            }
+          })
+
+          for (let i = 0; i < articles.length; i++) {
+            const article = await this.articleRepository.findByPk(articles[i].articleId)
+            await this.articleRepository.update({
+              stock: article.stock - articles[i].quantity
+            }, {
+              where: {
+                id: articles[i].articleId
+              }
+            })
+          }
+
           resolve(completedPayment)
         } else {
           resolve('Create payment failed')

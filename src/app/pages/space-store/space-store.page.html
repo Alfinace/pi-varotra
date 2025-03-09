@@ -1,117 +1,71 @@
 <ion-content class="ion-padding-horizontal">
-  <div class="d-flex ion-justify-content-around mt-70">
-    <div class="d-flex ion-align-items-center card">
-      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px">
-        <ion-icon size="large" color="primary" name="reader-outline"></ion-icon>
-        <div>
-          <span class="text-primary">Nombres</span>
-          <p style="font-size: 25px" color="primary" class="ion-no-margin primary">
-            {{totalRecords}}
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="d-flex ion-align-items-center card">
-      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px">
-        <ion-icon size="large" color="primary" name="bookmark-outline"></ion-icon>
-        <div>
-          <span class="text-primary">Vendus</span>
-          <p style="font-size: 25px" color="primary" class="ion-no-margin primary">
-            10
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="d-flex ion-align-items-center card">
-      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px">
-        <ion-icon size="large" color="primary" name="reader-outline"></ion-icon>
-        <div>
-          <span class="text-primary">Commandes </span>
-          <p style="font-size: 25px" color="primary" class="ion-no-margin primary">
-            {{orders.length}}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <br>
-  <div class="d-flex ion-justify-content-center ion-wrap ion-margin-horizontal" style="gap: 20px">
-    <div class="d-flex ion-align-items-center card" style="padding: 10px">
-      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px;flex-direction: column;">
-        <ion-icon size="large" color="primary" name="bag-handle-outline"></ion-icon>
-        <ion-label style="font-size: 10px">Mes produits</ion-label>
-      </div>
-    </div>
-    <div [routerLink]="['order']" routerLinkActive="router-link-active" class="d-flex ion-align-items-center card"
-      style="padding: 10px">
-      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px;flex-direction: column;">
-        <ion-icon size="large" color="primary" name="bag-check-outline"></ion-icon>
-        <ion-label style="font-size: 10px">Commandes</ion-label>
-      </div>
-    </div>
-    <div class="d-flex ion-align-items-center card" style="padding: 10px">
-      <div class="d-flex ion-justify-content-between ion-align-items-center" style="gap: 10px;flex-direction: column;">
-        <ion-icon size="large" color="primary" name="repeat-outline"></ion-icon>
-        <ion-label style="font-size: 10px">Transactions</ion-label>
-      </div>
-    </div>
-  </div>
+  <ion-grid>
+    <ion-row class="ion-justify-content-around mt-70">
+      <!-- Total Records -->
+      <ion-col size="12" size-md="4">
+        <ion-card class="stat-card">
+          <ion-card-content class="d-flex ion-align-items-center">
+            <ion-icon size="large"  name="reader-outline"></ion-icon>
+            <div class="stat-content">
+              <span >Nombres</span>
+              <p class="stat-value">{{ totalRecords }}</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Sold Items -->
+      <ion-col size="12" size-md="4">
+        <ion-card class="stat-card">
+          <ion-card-content class="d-flex ion-align-items-center">
+            <ion-icon size="large"  name="bookmark-outline"></ion-icon>
+            <div class="stat-content">
+              <span>Vendus</span>
+              <p class="stat-value">10</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Orders -->
+      <ion-col size="12" size-md="4">
+        <ion-card class="stat-card">
+          <ion-card-content class="d-flex ion-align-items-center">
+            <ion-icon size="large" name="cart-outline"></ion-icon>
+            <div class="stat-content">
+              <span>Commandes</span>
+              <p class="stat-value">{{ orders.length }}</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <div style="width: 100%">
     <br>
     <br>
-    <h3 class=" ion-no-marginion-margin-bottom ion-text-center">Liste produit</h3>
-    <p-table #dt1 [value]="produits">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center   ">
-              Nom produit
-            </div>
-          </th>
-          <th>
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center p-ai-center">
-              Prix
-            </div>
-          </th>
-          <th>
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center p-ai-center">
-              Stock
-            </div>
-          </th>
-          <th>
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center p-ai-center">
-              Actions
-            </div>
-          </th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-produit>
-        <tr>
-          <td>
-            {{produit.designation}}
-          </td>
-          <td>
-            <span class="image-text">{{produit.unitPrice}}pi </span>
-          </td>
-          <td>
-            <span class="image-text">{{produit.stock}}</span>
-          </td>
-          <td>
-            <div class="d-flex ion-justify-content-around" style="gap:15px">
-              <span class="warning btn-action" (click)="updateProduit(produit)"> Modifier</span>
-              <span class="primary2 btn-action" (click)="deleteProduit(produit)"> Supprimer</span>
-            </div>
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="emptymessage">
-        <tr>
-          <td colspan="7">Aucune donnée.</td>
-        </tr>
-      </ng-template>
-    </p-table>
-    <p-paginator [rows]="rows" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
+    <h3 class=" ion-no-marginion-margin-bottom text-large">Liste produit</h3>
+    <ion-list>
+      <ion-item *ngFor="let product of products; let i = index" (click)="displayActions(product,i)">
+        <ion-thumbnail slot="start">
+          <ion-img [src]="product.images[0].image" alt="Product Image"></ion-img>
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ product.designation }}</h2>
+          <p>Prix: {{ product.unitPrice }} π</p>
+          <p>Stock: {{ product.stock }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Chargement...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-list>
+
+
   </div>
   <br>
   <br>

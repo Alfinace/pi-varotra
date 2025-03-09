@@ -198,9 +198,7 @@ ion-content {
   }
 
   ion-img {
-    width: 20%;
     margin: auto;
-    height: 20%;
   }
   ion-item {
     font-size: var(--ion-text-size-2x);
@@ -271,7 +269,7 @@ td,
   .p-paginator
   .p-paginator-pages
   .p-paginator-page {
-  font-size: 12px;
+  font-size: 11px;
 }
 .text-upper {
   text-transform: uppercase;
@@ -341,4 +339,8 @@ td,
 }
 .text-justify{
   text-align: justify;
+}
+.action-sheet-group.sc-ion-action-sheet-md:first-child {
+  padding-top: 0;
+  border-radius: 20px 20px 0 0;
 }

@@ -1,6 +1,6 @@
 import { AddArticleComponent } from '../../shared/components/modals/add-article/add-article.component';
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ActionSheetController } from '@ionic/angular';
 import { ArticleService } from 'src/app/services/article.service';
 import { Article } from 'src/app/models/article.model';
 import { environment } from 'src/environments/environment';
@@ -13,20 +13,22 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class SpaceStorePage implements OnInit {
   rows = 8;
-
-  produits: Article[] = [];
+  page = 0;
+  products: Article[] = [];
   totalRecords: number;
   orders: any[] = [];
+  currentIndex: number;
 
   constructor(
     private modalController: ModalController,
     private toastService: ToastService,
+    private actionSheetController: ActionSheetController,
     private alertController: AlertController,
     private articleService: ArticleService) { }
 
   ngOnInit() {
     this.articleService.getArticlesCurrentUser(0, 8).toPromise().then(res => {
-      this.produits = res.rows;
+      this.products = res.rows;
       this.totalRecords = res.count;
     })
     this.articleService.getCmd(0, 8).toPromise().then(res => {
@@ -34,10 +36,15 @@ export class SpaceStorePage implements OnInit {
     })
   }
 
-  public paginate(e: any) {
-    this.articleService.getArticlesCurrentUser(e.page, e.rows).toPromise().then(res => {
-      this.produits = res.rows;
+  public loadMore(event: any) {
+    this.page++;
+    this.articleService.getArticlesCurrentUser(this.page, this.rows).toPromise().then(res => {
+      this.products = [...this.products,...res.rows];
       this.totalRecords = res.count;
+      if (event) {
+        event.target.complete();
+      }
+
     })
   }
 
@@ -50,7 +57,7 @@ export class SpaceStorePage implements OnInit {
 
     const data = await modal.onDidDismiss();
     if (!data.data) return;
-    this.produits.unshift(data.data as Article);
+    this.products.unshift(data.data as Article);
   }
 
 
@@ -66,14 +73,14 @@ export class SpaceStorePage implements OnInit {
     let ar = data.data as Article;
     if (!ar) return;
     if (data.role === 'update') {
-      this.produits = this.produits.map((produit: Article) => {
+      this.products = this.products.map((produit: Article) => {
         if (produit.id === ar.id) {
           return ar;
         }
         return produit;
       })
     } else {
-      this.produits.push(ar);
+      this.products.push(ar);
     }
   }
 
@@ -93,7 +100,7 @@ export class SpaceStorePage implements OnInit {
           text: 'OUI',
           handler: () => {
             this.articleService.deleteArticle(produit.id).toPromise().then(res => {
-              this.produits = this.produits.filter(p => p.id !== produit.id)
+              this.products = this.products.filter(p => p.id !== produit.id)
               this.toastService.show('dark', 'La suppression du produit ' + produit.designation + ' a été effectué')
             })
           }
@@ -102,5 +109,40 @@ export class SpaceStorePage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async displayActions(item: any, index: number) {
+    this.currentIndex = index;
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Actions',
+      buttons: [
+        // {
+        //   text: 'Detail',
+        //   icon: 'eye',
+        //   cssClass: 'text-sm',
+        //   handler: () => {
+        //     this.(item);
+        //   }
+        // },
+        {
+          text: 'Modifier',
+          icon: 'pencil',
+          cssClass: 'text-sm',
+          handler: () => {
+            this.updateProduit(item);
+          }
+        },
+        {
+        text: 'Supprimer',
+        role: 'destructive',
+        icon: 'trash',
+        cssClass: 'text-sm',
+        handler: () => {
+          this.deleteProduit(item);
+        }
+      }]
+    });
+
+    await actionSheet.present();
   }
 }

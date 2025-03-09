@@ -4,12 +4,14 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { Cart } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CartComponent } from 'src/app/shared/components/modals/cart/cart.component';
 import { SessionService } from 'src/app/services/session.service';
 import { IMenuPage } from 'src/app/models/app';
+import { ParamsComponent } from 'src/app/shared/components/modals/params/params.component';
+import { CreateStoreComponent } from 'src/app/shared/components/modals/create-store/create-store.component';
 
 
 @Component({
@@ -34,19 +36,19 @@ export class ClientPage implements OnInit, OnDestroy {
     },
     {
       title:'Paramètres',
-      url: '',
+      url: 'settings',
       icon: 'settings-outline'
     },
   ]
   public storePages: IMenuPage[] = [
     {
-      title:'Tableau de bord',
-      url: '',
+      title:'Mon magasin',
+      url: '/client/space-client/store',
       icon: 'grid-outline'
     },
     {
       title: 'Commandes',
-      url: '',
+      url: 'client/space-client/store/order',
       icon: 'bag-handle-outline'
     },
     {
@@ -72,6 +74,7 @@ export class ClientPage implements OnInit, OnDestroy {
     private cartService: CartService,
     private themeService: ThemeService,
     private localstorageService: LocalstorageService,
+    private menuCtrl: MenuController,
     private sessionService: SessionService,
     private modalController: ModalController) {
     this.sessionService.userInfo.subscribe((user: any) => {
@@ -101,7 +104,8 @@ export class ClientPage implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  ngOnInit() {
+  ngOnInit() { }
+  ionViewWillEnter() {
     this.cartService.getAllCart()
   }
 
@@ -119,6 +123,20 @@ export class ClientPage implements OnInit, OnDestroy {
 
   }
 
+  async navigateTo(url: string){
+    console.log(url);
+
+    switch (url) {
+      case 'settings':
+        await this.onOpenParams()
+        break;
+      default:
+        this.router.navigate([url])
+        break;
+    }
+    this.menuCtrl.close()
+  }
+
   swithTheme() {
     let theme = this.localstorageService.getItem('theme')
     console.log(theme);
@@ -131,6 +149,31 @@ export class ClientPage implements OnInit, OnDestroy {
       this.themeService.setDarkTheme(true)
       this.localstorageService.setItem('theme', 'dark')
       this.theme = 'dark  ';
+    }
+  }
+
+
+
+  async onOpenParams() {
+    const modal = await this.modalController.create({
+      component: ParamsComponent,
+      componentProps: { currentUser: this.currentUser }
+    });
+
+    await modal.present();
+
+  }
+
+  async createStore() {
+    const modal = await this.modalController.create({
+      component: CreateStoreComponent,
+      componentProps: { value: 123 }
+    });
+
+    await modal.present();
+    const data = await modal.onDidDismiss();
+    if (data.data) {
+      this.ionViewWillEnter()
     }
   }
 }

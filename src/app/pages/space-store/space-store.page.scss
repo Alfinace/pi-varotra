@@ -38,3 +38,25 @@ td {
   border: 1px solid var(--ion-color-primary);
   color: var(--ion-color-primary);
 }
+
+.stat-card {
+  border-radius: 15px;
+  box-shadow: -2px 2px 0px 0px #a855f7;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.stat-content {
+  margin-left: 10px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--ion-color-primary);
+  text-align: right;
+}
+
+.ion-align-items-center{
+  align-items: start !important;
+}

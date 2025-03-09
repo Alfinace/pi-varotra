@@ -39,14 +39,6 @@ export class OrderService {
           if(!article) throw new Error('Article introuvable');
           if (article.stock < order.quantity) {
             throw new Error('Stockage insuffisant pour l\'article ' + createOrderDto.articles[i].designation);
-          }else{
-            await this.articleRepository.update({
-              stock: article.stock - createOrderDto.articles[i].quantity
-            }, {
-              where: {
-                id: createOrderDto.articles[i].id
-              }
-            })
           }
         }
         const orderArticles = await this.articleOrderRepository.bulkCreate(

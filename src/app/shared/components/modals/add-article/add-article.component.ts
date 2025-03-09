@@ -125,7 +125,6 @@ export class AddArticleComponent implements OnInit {
     this.images[this.currentImageIndex] = event;
   }
 
-  public active1() { }
 
   async active(item: any, index: number) {
     this.currentImageIndex = index;
@@ -138,11 +137,6 @@ export class AddArticleComponent implements OnInit {
         icon: 'trash',
         handler: () => {
           this.images = this.images.filter((i) => i !== item);
-          // let imagesSaved = this.addProduitForm.value.images;
-          // imagesSaved = imagesSaved.splice(index, 1);
-          // this.addProduitForm.patchValue({
-          //   images: imagesSaved
-          // })
           this.imageIdDeleted.push(item.id);
         }
       }, {
