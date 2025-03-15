@@ -85,8 +85,6 @@ export class EditProfileComponent implements OnInit {
 
   public getImageRecto(event: any) {
     this.recto = event.preview
-    console.log(event);
-
     let formData = new FormData();
     formData.append('files', event.source);
     this.uploadService.upload(formData).then((res: any) => {

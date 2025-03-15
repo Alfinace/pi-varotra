@@ -22,11 +22,18 @@
 			</div>
 		</div>
 	</div>
-  <ion-fab horizontal="end" vertical="bottom">
+  <ion-fab horizontal="end" vertical="bottom" *ngIf="!checkedArticleAddedToCart(), else templateCart" (click)="addCart(article.id)">
     <ion-fab-button size="small">
       <ion-icon name="cart-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <ng-template #templateCart>
+    <ion-fab horizontal="end" vertical="bottom">
+      <ion-fab-button disabled size="small" color="gray">
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ng-template>
 	<br>
 </div>
 <ng-template #noArticleTemplate>

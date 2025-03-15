@@ -58,13 +58,12 @@ export class AddArticleComponent implements OnInit {
           preview: this.article.images[i].image,
           id: this.article.images[i].id,
         })
-
       }
-
     })
   }
 
   public async onSubmit() {
+    if(this.images.length == 0) return
     this.submitted = true;
     if (this.article) { // update
       this.addProduitForm.controls['images'].setValidators(null);

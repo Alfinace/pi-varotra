@@ -12,6 +12,7 @@ import { SessionService } from 'src/app/services/session.service';
 import { IMenuPage } from 'src/app/models/app';
 import { ParamsComponent } from 'src/app/shared/components/modals/params/params.component';
 import { CreateStoreComponent } from 'src/app/shared/components/modals/create-store/create-store.component';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -72,6 +73,7 @@ export class ClientPage implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private cartService: CartService,
+    private userService: UserService,
     private themeService: ThemeService,
     private localstorageService: LocalstorageService,
     private menuCtrl: MenuController,
@@ -104,7 +106,17 @@ export class ClientPage implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.userService.hasStoreObservable.pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe((hasStore: boolean) => {
+      this.sessionService.getInfoUser().subscribe((user: any) => {
+        if (user) {
+          this.currentUser = user
+        }
+      })
+    })
+  }
   ionViewWillEnter() {
     this.cartService.getAllCart()
   }
@@ -124,8 +136,6 @@ export class ClientPage implements OnInit, OnDestroy {
   }
 
   async navigateTo(url: string){
-    console.log(url);
-
     switch (url) {
       case 'settings':
         await this.onOpenParams()
@@ -139,8 +149,6 @@ export class ClientPage implements OnInit, OnDestroy {
 
   swithTheme() {
     let theme = this.localstorageService.getItem('theme')
-    console.log(theme);
-
     if (theme === 'dark') {
       this.themeService.setDarkTheme(false)
       this.localstorageService.setItem('theme', 'light');

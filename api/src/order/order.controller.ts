@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Res, HttpException, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Res, HttpException, Query, UseInterceptors } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
@@ -8,8 +8,10 @@ import { RoleGuard } from 'src/auth/role.guard';
 import { PaymentU2AService } from 'src/payment-u2-a/payment-u2-a.service';
 import { Response } from 'express';
 import { PaymentA2UService } from 'src/payement-a2-u/payement-a2-u.service';
+import { UserInterceptor } from 'src/auth/user.interceptor';
 
 @Controller('orders')
+@UseInterceptors(UserInterceptor)
 export class OrderController {
   constructor(
     private readonly orderService: OrderService,
@@ -34,6 +36,8 @@ export class OrderController {
       if (offset !== 0) {
         offset = offset * limit;
       }
+      console.log(user);
+
       var orders = await this.orderService.findByStore(user.storeId, limit, offset);
       orders.rows = orders.rows.map(order => {
         const deliverieInfo =JSON.parse(order.deliverieInfo ) || null
@@ -98,19 +102,12 @@ export class OrderController {
     if (!payment) {
       return res.status(404).json({ message: `Not found payment ${paymentId}` });
     }
-    console.log({
-      memo: payment.memo,
-      metadata: payment.metadata,
-      amount: payment.amount,
-      uid: payment.uid,
-      orderId: payment.orderId,
-    });
-
+    const ownerStore = await this.orderService.findOwnerStoreByOrderId(payment.orderId)
     let paymentA2U = await this.paymentA2UService.create({
       memo: payment.memo,
       metadata: payment.metadata,
       amount: payment.amount,
-      uid: payment.uid,
+      uid: ownerStore.store.user.uid,
       orderId: payment.orderId,
     })
     let final = await this.orderService.updateStock(payment.orderId)

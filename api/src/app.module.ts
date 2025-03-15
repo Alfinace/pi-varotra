@@ -20,6 +20,9 @@ import { NouveauModule } from './nouveau/nouveau.module';
 import { PubsModule } from './pubs/pubs.module';
 import { RatesModule } from './rates/rates.module';
 import { PayementA2UModule } from './payement-a2-u/payement-a2-u.module';
+import { RoleGuard } from './auth/role.guard';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { UserInterceptor } from './auth/user.interceptor';
 require('dotenv').config();
 
 @Module({

@@ -175,7 +175,6 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     this.paymentForm.patchValue({
       panier: [...this.paniers]
     })
-    console.log(this.paymentForm.value);
 
     this.loading = false;
   }

@@ -49,7 +49,7 @@
     <ion-list>
       <ion-item *ngFor="let product of products; let i = index" (click)="displayActions(product,i)">
         <ion-thumbnail slot="start">
-          <ion-img [src]="product.images[0].image" alt="Product Image"></ion-img>
+          <ion-img [src]="product.images.length > 0 ? product.images[0].image : ''" alt="Product Image"></ion-img>
         </ion-thumbnail>
         <ion-label>
           <h2>{{ product.designation }}</h2>

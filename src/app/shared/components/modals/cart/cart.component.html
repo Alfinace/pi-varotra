@@ -2,6 +2,8 @@
   <ion-toolbar>
     <ion-icon class="ion-padding-start" size="small" slot="start" (click)="close()" name="chevron-back-outline">
     </ion-icon>
+    <ion-icon class="ion-padding-end" size="small" slot="end" (click)="removeAllCart()" name="trash-outline" color="danger">
+    </ion-icon>
     <ion-title class="ion-text-center text-sm">Mes paniers({{paniers.length}}) </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -30,11 +32,11 @@
                 </div>
               </div>
               <div
-                style="display: flex;flex-direction: row; align-items: center;justify-content: space-around;gap: 30px;">
+                style="display: flex;flex-direction: row; align-items: center;justify-content: space-around;gap: 10px;">
                 <ion-icon size="small" class="pointer" (click)="updateQuantity(item,item.quantity+1,i,j)"
                   color="primary" name="add-outline">
                 </ion-icon>
-                <span>
+                <span class="item-quantity">
                   {{item.quantity}}
                 </span>
                 <ion-icon size="small" class="pointer" (click)="updateQuantity(item,item.quantity-1,i,j)" color="danger"

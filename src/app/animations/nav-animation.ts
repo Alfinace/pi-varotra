@@ -6,17 +6,12 @@ export const enterAnimation = (baseEl: HTMLElement, opts?: any): Animation => {
 	const animationCtrl = new AnimationController();
 
 	if (opts.direction === 'forward') {
-		console.log('direction - ', opts.direction);
-		console.log('opts.enteringEl', opts.enteringEl);
-		console.log('opts.leavingEl', opts.leavingEl);
-
 		return animationCtrl
 			.create()
 			.addElement(opts.enteringEl)
 			.duration(DURATION)
 			.fromTo('transform', 'translateX(400px)', 'translateX(0px)');
 	} else {
-		console.log('direction - ', opts.direction);
 		const rootAnimation = animationCtrl
 			.create()
 			.addElement(opts.enteringEl)

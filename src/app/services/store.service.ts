@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { HttpService } from './http.service';
 import { Injectable } from '@angular/core';
 
@@ -5,7 +6,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StoreService {
-
   constructor(private http: HttpService) { }
 
   getStores(page: number, size: number) {

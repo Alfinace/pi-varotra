@@ -26,8 +26,10 @@ import { User } from './auth/user.decorator';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import { StoreService } from './store/store.service';
 import { ArticleService } from './article/article.service';
+import { UserInterceptor } from './auth/user.interceptor';
 require('dotenv').config()
 @Controller()
+@UseInterceptors(UserInterceptor)
 export class AppController {
   constructor(
     private readonly appService: AppService,
@@ -120,7 +122,6 @@ export class AppController {
   @UseGuards(JwtAuthGuard)
   @Get('current-me')
   getProfile(@Request() req, @Res() response: Response, @User() user) {
-
     this.userService.findByArgs({ id: user.userId, username: user.username }).then(res => {
       var { password, ...user } = res.dataValues;
       user.images = user.images.map((i) => {

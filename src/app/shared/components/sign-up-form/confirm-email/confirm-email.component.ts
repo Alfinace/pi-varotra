@@ -47,7 +47,6 @@ export class ConfirmEmailComponent implements OnInit, OnDestroy {
 
   public onOtpChange(otp: any) {
     this.code = otp.toString();
-    console.log(this.code);
   }
 
   public resend(e: any) {

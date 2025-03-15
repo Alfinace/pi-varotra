@@ -54,9 +54,10 @@
     </ion-slide>
     <ion-slide>
       <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
-        <h1 class="ion-text-start">Lirvaison</h1>
-        Veuillez remplir les informations necessaire si votre magasin offre la livraison.
-
+        <h1 class="ion-text-start text-medium">Lirvaison</h1>
+        <p class="text-sm text-justify">
+          Veuillez remplir les informations necessaire si votre magasin offre la livraison.
+        </p>
         <div class="box-img">
           <img [src]="'./assets/images/delivery.png'" />
         </div>
@@ -69,7 +70,7 @@
                 <ion-input required formControlName="distance" placeholder="10" type="text"></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label class="text-sm" position="floating">Frais en <span style="font-family: Serif;"> π </span></ion-label>
+                <ion-label class="text-sm" position="floating">Frais</ion-label>
                 <ion-input required formControlName="costs" placeholder="0.07" type="text"></ion-input>
               </ion-item>
               <ion-icon size="large" (click)="removeDeliverieMode(i)" color="danger" name="remove-circle-outline">
@@ -86,47 +87,48 @@
                 </button>
               </ion-col>
             </ion-row>
-            <ion-row class="btn-row mt">
-              <ion-col size="12">
-                <button type="submit" (click)="next()" style="padding: 0 20px"
-                  class="ion-activatable ripple-parent custom-parent btn-primary">
-                  <ion-label class="text-sm">Suivant</ion-label>
-                  <ion-ripple-effect></ion-ripple-effect>
-                </button>
-              </ion-col>
-            </ion-row>
           </div>
-          <p>
-            Nous n'offrons pas la livraison pour le moment,
-            <span (click)="next()">
-              passer à l'étape suivant
-            </span>
-          </p>
         </form>
       </ion-slide>
     </ion-slide>
     <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
-      <h1 class="ion-text-start">Création</h1>
-      <p>
+      <h1 class="ion-text-start text-medium">Création</h1>
+      <p class="text-sm text-justify">
         Votre logo du magasin et soumession votre magasin pour la validation.
+      </p>
+      <div *ngIf="!preview" class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around"
+      style="gap: 10px;flex-wrap: wrap;">
+      <div class="add-image d-flex ion-align-items-center ion-justify-content-center"
+        (click)="imageComponent.selectImageSource()">
+        <ion-icon name="add" color="light"></ion-icon>
+      </div>
+      </div>
 
         <app-images #imageComponent (selectImageEvent)="getImage($event)"></app-images>
       <div class="box-img" [ngClass]="{'add': !preview}" (click)="imageComponent.selectImageSource()">
         <img [src]=" preview ? preview :'./assets/images/store-open.png'" />
       </div>
-      <ion-row class="btn-row mt">
-        <ion-col size="12">
-          <button style="padding: 0 20px" (click)="save()" [disabled]="storeForm.invalid"
-            class="ion-activatable ripple-parent custom-parent btn-primary">
-            <ion-label class="text-sm">Soumettre </ion-label>
-            <ion-ripple-effect></ion-ripple-effect>
-          </button>
-        </ion-col>
-      </ion-row>
     </ion-slide>
   </ion-slides>
-  <ion-row class="btn-row mt">
+  <ng-container *ngIf="currentIndex == 3;else btnStep">
     <ion-col size="12">
+      <button style="padding: 0 20px" (click)="save()" [disabled]="storeForm.invalid"
+        class="ion-activatable ripple-parent custom-parent btn-primary">
+        <ion-label class="text-sm">Soumettre </ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </ion-col>
+</ng-container>
+<ng-template #btnStep>
+  <ion-row class="btn-row mt">
+    <ion-col *ngIf="currentIndex == 2" size="6">
+      <button (click)="next()" style="padding: 0 20px"
+        class="ion-activatable ripple-parent custom-parent">
+        <ion-label class="text-sm">Ignorer</ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
+    </ion-col>
+    <ion-col [size]="currentIndex == 2 ? '6' : '12'">
       <button style="padding: 0 20px" (click)="next()"
         class="ion-activatable ripple-parent custom-parent btn-primary">
         <ion-label class="text-sm">Suivant </ion-label>
@@ -134,4 +136,5 @@
       </button>
     </ion-col>
   </ion-row>
+</ng-template>
 </ion-content>

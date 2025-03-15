@@ -60,7 +60,6 @@ export class SearchArticlePage implements OnInit {
         this.articleService.getArticles(0, 8).toPromise().then(res => {
           this.articles = res.rows
           this.totalCount = res.count,
-            console.log(this.totalCount);
           this.applyFilter.categories = [];
           this.categoryId = null;
           this.loading = false;

@@ -7,6 +7,7 @@ import { User } from 'src/user/entities/user.entity';
 import { Article } from 'src/article/entities/article.entity';
 import { PaymentU2A } from 'src/payment-u2-a/entities/payment-u2-a.entity';
 import { Sequelize } from 'sequelize-typescript';
+import { Store } from 'src/store/entities/store.entity';
 
 @Injectable()
 export class OrderService {
@@ -94,6 +95,28 @@ export class OrderService {
   findOne(id: number) {
     return `This action returns a #${id} order`;
   }
+
+  findOwnerStoreByOrderId(orderId: number) {
+    return this.orderRepository.findOne({
+      where: {
+        id: orderId
+      },
+      include: [
+        {
+          model: Store,
+          as: 'store',
+          include: [
+            {
+              model: User,
+              as: 'user',
+              attributes: ['uid']
+            }
+          ]
+        }
+      ]
+    });
+  }
+
 
   update(id: number, data) {
     return this.orderRepository.update(data, { where: { id } });

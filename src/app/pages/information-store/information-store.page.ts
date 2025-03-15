@@ -28,23 +28,17 @@ export class InformationStorePage implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.uploadedFiles[fileType] = input.files[0];
-      console.log(`Fichier ${fileType} chargé :`, this.uploadedFiles[fileType]);
     }
   }
 
   submitForm() {
     if (this.ownerForm.valid) {
-      console.log('Formulaire soumis avec succès !', this.ownerForm.value);
-      console.log('Fichiers téléversés :', this.uploadedFiles);
     } else {
-      console.log('Veuillez remplir tous les champs requis.');
     }
   }
 
 
   getImage(event: any, attribut: string) {
-    console.log(event, attribut);
-
       if (attribut === 'id') {
         this.ownerForm.get('frontDoc')?.setValue(event);
       } else if (attribut === 'back') {

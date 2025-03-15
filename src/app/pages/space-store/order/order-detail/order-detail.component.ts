@@ -13,8 +13,6 @@ export class OrderDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.order);
-
   }
 
   close() {

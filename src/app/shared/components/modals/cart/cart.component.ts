@@ -92,9 +92,13 @@ export class CartComponent implements OnInit {
     this.paniers = this.paniers.filter(p => p.length > 0)
   }
 
-  checkout(i: number) {
+public checkout(i: number) {
     this.router.navigate(['/checkout', i])
     this.modalController.dismiss()
   }
 
+public removeAllCart() {
+  this.cartService.removeAllCart()
+  this.paniers = [];
+}
 }

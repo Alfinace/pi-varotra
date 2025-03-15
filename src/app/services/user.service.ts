@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { AuthResult } from './../models/auth-result';
 import { HttpService } from 'src/app/services/http.service';
 import { Injectable } from '@angular/core';
@@ -6,7 +7,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserService {
-
+  private hasStore$: BehaviorSubject<any> = new BehaviorSubject<boolean>(false)
+  public hasStoreObservable = this.hasStore$.asObservable()
   constructor(private http: HttpService) { }
 
   public sendEmail(email: string) {
@@ -46,5 +48,9 @@ export class UserService {
 
   getAllUsers(page: number, size: number) {
     return this.http.get('user?page=' + page + '&size=' + size);
+  }
+
+  setHasStore(hasStore: boolean) {
+    this.hasStore$.next(hasStore)
   }
 }

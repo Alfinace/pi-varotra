@@ -13,6 +13,7 @@ import {
   UseGuards,
   ForbiddenException,
   Res,
+  UseInterceptors,
 } from '@nestjs/common';
 
 import { ArticleService } from './article.service';
@@ -23,8 +24,10 @@ import { Role } from 'src/enums/role.enum';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Roles } from 'src/auth/roles.decorator';
 import { User } from 'src/auth/user.decorator';
+import { UserInterceptor } from 'src/auth/user.interceptor';
 
 @Controller('articles')
+@UseInterceptors(UserInterceptor)
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) { }
 
@@ -68,11 +71,8 @@ export class ArticleController {
         offset = offset * limit;
       }
       var articles = await this.articleService.findAllByStore(user.storeId, offset, limit);
-      console.log(articles);
 
       articles.rows = articles.rows.map((article) => {
-        console.log(article);
-
         article.images = article.images.map(i => {
           i.image = process.env.BASE_URL_IMAGE + i.image;
           return i

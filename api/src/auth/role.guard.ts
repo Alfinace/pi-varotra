@@ -1,14 +1,18 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Inject, Injectable, Logger } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { Observable } from 'rxjs';
 import { Role } from 'src/enums/role.enum';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
-  constructor(private reflector: Reflector) { }
-  canActivate(
+  constructor(
+    private reflector: Reflector,
+    @Inject('USER_REPOSITORY')
+    private userRepository: typeof User,
+    ) { }
+  async canActivate(
     context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+  ): Promise<boolean> {
     const requireRoles = this.reflector.getAllAndOverride<Role[]>('roles', [
       context.getHandler(),
       context.getClass(),
@@ -17,6 +21,8 @@ export class RoleGuard implements CanActivate {
       return true;
     }
     const { user } = context.switchToHttp().getRequest();
-    return requireRoles.some((role) => user.role === role);
+
+    var data = await this.userRepository.findOne({ where: { id: user.userId },});
+    return requireRoles.some((role) => data.role === role);
   }
 }

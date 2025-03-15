@@ -37,3 +37,13 @@ ion-item:part(native) {
     padding-right: 0;
   }
 }
+
+.pointer{
+  border: 1px solid;
+  border-radius: 50%;
+}
+
+.item-quantity{
+  width: 30px;
+  text-align: center;
+}

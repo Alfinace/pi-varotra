@@ -9,6 +9,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from 'src/auth/auth.service';
+import { Store } from 'src/store/entities/store.entity';
 
 @Injectable()
 export class UserService {
@@ -45,7 +46,6 @@ export class UserService {
 
 
   findAll(offset: number = 0, limit: number = 10) {
-    console.log(offset, limit);
 
     return this.userRepository.findAndCountAll({
       include: [
@@ -75,6 +75,15 @@ export class UserService {
     });
   }
 
+  findOneWithStore(id: number) {
+    return this.userRepository.findOne({ where: { id },
+      include: {
+        model: Store,
+        as: 'store'
+      }
+    });
+  }
+
   findByArgs(data: any) {
     return this.userRepository.findOne({
       where: data,
@@ -93,8 +102,6 @@ export class UserService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    console.log(updateUserDto);
-
     return this.userRepository.update(
       { ...updateUserDto },
       { where: { id }, returning: true },

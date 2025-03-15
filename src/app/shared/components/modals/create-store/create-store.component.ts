@@ -21,6 +21,7 @@ export class CreateStoreComponent implements OnInit, AfterViewInit {
     speed: 400
   };
   preview: any;
+  currentIndex = 0
   constructor(
     private modalController: ModalController,
     private toastService: ToastService,
@@ -67,7 +68,10 @@ export class CreateStoreComponent implements OnInit, AfterViewInit {
     this.slider.lockSwipes(false);
     this.slider.slideNext();
     this.slider.lockSwipes(true);
+    this.currentIndex = await this.slider.getActiveIndex();
   }
+
+
 
   async prev() {
     if (await this.slider.getActiveIndex() == 0) {
@@ -76,6 +80,7 @@ export class CreateStoreComponent implements OnInit, AfterViewInit {
     this.slider.lockSwipes(false);
     this.slider.slidePrev();
     this.slider.lockSwipes(true);
+    this.currentIndex = await this.slider.getActiveIndex();
   }
 
   addDeliverieMode() {

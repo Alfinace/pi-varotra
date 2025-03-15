@@ -110,7 +110,6 @@ export class ParamsComponent implements OnInit {
 
   public getImage(event: any) {
     this.currentUser.avatar = event.preview
-    console.log(event);
     let formData = new FormData();
     formData.append('files', event.source);
     this.uploadService.upload(formData).then((res: any) => {

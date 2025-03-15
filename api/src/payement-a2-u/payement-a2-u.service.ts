@@ -35,7 +35,7 @@ export class PaymentA2UService {
     const apiKey = process.env.API_KEY_MINEPI;
     const walletPrivatedSeed = process.env.WALLET_PRIVATE_SEED;
     this.pi = new PiNetwork(apiKey, walletPrivatedSeed, {
-      baseUrl: process.env.API_URL_MINEPi,
+      baseUrl: process.env.API_URL_MINEPI,
     });
   }
   create(data: any) {
@@ -55,7 +55,6 @@ export class PaymentA2UService {
           const txid = await this.pi.submitPayment(paymentId);
           await this.update(res.id, { txid })
           const completedPayment = await this.pi.completePayment(paymentId, txid);
-          console.log("data completedPayment", data);
           const orderId = JSON.parse(data.metadata).orderId
           const articles = await this.articleOrderRepository.findAll({
             where: {
@@ -79,8 +78,6 @@ export class PaymentA2UService {
           resolve('Create payment failed')
         }
       }).catch(err => {
-        console.log(err);
-
         reject(err)
       })
     });
