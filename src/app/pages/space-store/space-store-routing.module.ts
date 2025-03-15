@@ -7,9 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: SpaceStorePage
-  },  {
+  },
+  {
     path: 'order',
     loadChildren: () => import('./order/order.module').then( m => m.OrderPageModule)
+  },
+  {
+    path: 'information-store',
+    loadChildren: () => import('../../pages/information-store/information-store.module').then( m => m.InformationStorePageModule)
   }
 
 ];

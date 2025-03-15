@@ -8,7 +8,7 @@
             <ion-icon size="large"  name="reader-outline"></ion-icon>
             <div class="stat-content">
               <span >Nombres</span>
-              <p class="stat-value">{{ totalRecords }}</p>
+              <p class="stat-value">{{ totalRecords ?? 0 }}</p>
             </div>
           </ion-card-content>
         </ion-card>
@@ -34,7 +34,7 @@
             <ion-icon size="large" name="cart-outline"></ion-icon>
             <div class="stat-content">
               <span>Commandes</span>
-              <p class="stat-value">{{ orders.length }}</p>
+              <p class="stat-value">{{ orders.length ?? 0 }}</p>
             </div>
           </ion-card-content>
         </ion-card>

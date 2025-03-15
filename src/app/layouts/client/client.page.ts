@@ -63,7 +63,7 @@ export class ClientPage implements OnInit, OnDestroy {
     },
     {
       title:'Informations',
-      url: '',
+      url: 'client/space-client/store/information-store',
       icon: 'information-circle-outline'
     },
   ]
@@ -165,6 +165,7 @@ export class ClientPage implements OnInit, OnDestroy {
   }
 
   async createStore() {
+    this.menuCtrl.close()
     const modal = await this.modalController.create({
       component: CreateStoreComponent,
       componentProps: { value: 123 }

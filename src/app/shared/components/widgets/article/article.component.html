@@ -1,10 +1,11 @@
-<div class="card" *ngIf="article;else noArticleTemplate">
+<div class="card relative" *ngIf="article;else noArticleTemplate">
 	<div class="image-container">
 		<ion-img (click)="show()" *ngIf="article.images.length" [src]="article!.images[0].image ?? ''">
 		</ion-img>
 	</div>
 	<div (click)="show()">
 		<div class="ion-margin-horizontal">
+
 			<p class="ion-no-margin product-title text-sm text-dark">
 				{{ article.designation }}
 			</p>
@@ -21,6 +22,11 @@
 			</div>
 		</div>
 	</div>
+  <ion-fab horizontal="end" vertical="bottom">
+    <ion-fab-button size="small">
+      <ion-icon name="cart-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 	<br>
 </div>
 <ng-template #noArticleTemplate>

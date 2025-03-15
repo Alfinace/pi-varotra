@@ -344,3 +344,25 @@ td,
   padding-top: 0;
   border-radius: 20px 20px 0 0;
 }
+.add-image {
+  border-radius: 5px;
+  ion-icon {
+    width: 50px;
+    height: 50px;
+  };
+  background-image: url('/assets/images/add-image.png');
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+}
+
+ion-fab-button{
+  margin: 0 !important;
+}
+
+.d-block{
+  display: block;
+}
+.mx-auto{
+  margin: auto;
+}

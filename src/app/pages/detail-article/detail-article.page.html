@@ -91,6 +91,11 @@
       </p>
     </ion-text>
   </ion-item>
+  <ion-fab slot="fixed" horizontal="end" vertical="bottom"  *ngIf="!checkedArticleAddedToCart();" (click)="addCart(article.id)">
+    <ion-fab-button size="small" class="bounce">
+      <ion-icon name="cart-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <div *ngIf="currentUser ">
     <button (click)="onOpenModal()" class="ion-activatable ripple-parent custom-parent btn-warning">
       <ion-label>Ajouter mon avis</ion-label>
@@ -110,16 +115,6 @@
     </ng-template>
   </swiper>
   <br>
-  <div class="box-btn-row" *ngIf="!checkedArticleAddedToCart();">
-    <ion-row class="btn-row mt">
-      <ion-col size="12">
-        <button class="ion-activatable ripple-parent custom-parent btn-primary" (click)="addCart(article.id)">
-          <ion-label>Ajouter du panier</ion-label>
-          <ion-ripple-effect></ion-ripple-effect>
-        </button>
-      </ion-col>
-    </ion-row>
-  </div>
   <br>
   <ion-modal mode="md" [initialBreakpoint]="0.40" [breakpoints]="[0, 0.25, 0.5, 0.75]" [isOpen]="isOpen">
     <ng-template>

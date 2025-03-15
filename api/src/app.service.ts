@@ -15,7 +15,7 @@ export class AppService {
     const tranEmailApi = new Sib.TransactionalEmailsApi()
     const sender = {
       email: process.env.SENDER_MAIL,
-      name: 'Pi-varotra dev',
+      name: 'Mpi-varotra dev',
     }
     const recevers = [{ email: to }]
     return await tranEmailApi

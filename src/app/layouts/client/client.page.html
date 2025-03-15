@@ -19,11 +19,20 @@
       <ion-item-divider>
         <ion-label class="text-sm">Magasin</ion-label>
       </ion-item-divider>
-
-      <ion-item *ngFor="let p of storePages" (click)="navigateTo(p.url)">
-        <ion-icon [name]="p.icon" slot="start"></ion-icon>
-        <ion-label class="text-sm">{{ p.title }}</ion-label>
-      </ion-item>
+      <ng-container *ngIf="currentUser?.store;else hasNotStore">
+        <ion-item *ngFor="let p of storePages" (click)="navigateTo(p.url)">
+          <ion-icon [name]="p.icon" slot="start"></ion-icon>
+          <ion-label class="text-sm">{{ p.title }}</ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-template #hasNotStore>
+        <ion-item (click)="createStore()">
+          <ion-icon slot="start" name="storefront-outline"></ion-icon>
+          <ion-label class="text-sm">
+            Créer un magasin
+          </ion-label>
+        </ion-item>
+      </ng-template>
     </ion-item-group>
   </ion-content>
 </ion-menu>
@@ -67,10 +76,10 @@
 			<ion-icon size="small" name="storefront-outline"></ion-icon>
 			<ion-label>Magasins</ion-label>
 		</ion-tab-button>
-		<!-- <ion-tab-button *ngIf="isLogged;else notLogged" size="small" tab="space-client">
+		<ion-tab-button *ngIf="isLogged;else notLogged" size="small" tab="space-client">
 			<ion-icon name="apps-outline"></ion-icon>
 			<ion-label>Espace client</ion-label>
-		</ion-tab-button> -->
+		</ion-tab-button>
 		<ng-template #notLogged>
 			<ion-tab-button size="small" (click)="gotoLogin()">
 				<ion-icon name="person-outline"></ion-icon>

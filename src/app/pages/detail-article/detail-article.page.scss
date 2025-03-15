@@ -88,3 +88,13 @@ ion-header .cart ion-icon {
     border-radius: 50%;
   }
 }
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1.2); }
+  50% { transform: scale(1); }
+
+}
+
+.bounce {
+  animation: bounce 0.4s ease-in-out infinite;
+}

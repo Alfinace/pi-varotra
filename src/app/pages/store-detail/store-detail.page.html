@@ -1,13 +1,12 @@
 <ion-content>
-  <div class="ion-padding-horizontal " *ngIf="store">
-    <ion-avatar slot="start">
-      <img [src]="store.logo" />
-    </ion-avatar>
-    <br>
-    <br>
+  <div class="ion-padding-horizontal mt-70" *ngIf="store">
+      <img [src]="store.logo" width="150px" height="150px" class="mx-auto d-block"/>
     <h1 class="ion-margin-bottom text-center ion-margin-bottom" color="primary">
        Bienvenue chez {{store.name}}
     </h1>
+    <p>
+      {{store.description}}
+    </p>
     <br>
     <div style="display: flex; gap: 10px;" class="ion-justify-content-center ion-align-items-center ion-wrap">
       <app-article [article]="item" *ngFor="let item of articles"></app-article>

@@ -1,0 +1,98 @@
+<ion-content class="ion-padding">
+  <form [formGroup]="ownerForm" (ngSubmit)="submitForm()">
+    <ion-list class="mt-70">
+      <!-- Nom Complet -->
+      <ion-item>
+        <ion-label position="floating">Nom Complet</ion-label>
+        <ion-input formControlName="fullName" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        class="text-sm"
+        *ngIf="ownerForm.get('fullName') && ownerForm.get('fullName')!.invalid && ownerForm.get('fullName')!.touched"
+      >
+        Nom requis !
+      </ion-text>
+
+      <!-- CIN ou Passeport -->
+      <ion-item>
+        <ion-label position="floating">Numéro CIN</ion-label>
+        <ion-input formControlName="idNumber" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        class="text-sm"
+        *ngIf="ownerForm.get('idNumber') && ownerForm.get('idNumber')!.invalid && ownerForm.get('idNumber')!.touched"
+      >
+        Numéro requis !
+      </ion-text>
+
+      <!-- Upload CIN/Passeport -->
+      <div>
+        <ion-label>CIN Recto</ion-label>
+        <div
+          class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around"
+          style="gap: 10px; flex-wrap: wrap"
+        >
+          <div
+            class="add-image d-flex ion-align-items-center ion-justify-content-center"
+            (click)="imageComponent.selectImageSource()"
+          >
+            <ion-icon name="add" color="light"></ion-icon>
+          </div>
+        </div>
+        <app-images
+          #imageComponent
+          (selectImageEvent)="getImage($event, 'frontDoc')"
+        ></app-images>
+        <p>
+          Veuillez
+        </p>
+      </div>
+      <hr>
+      <div>
+        <ion-label>CIN Verso</ion-label>
+        <div
+          class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around"
+          style="gap: 10px; flex-wrap: wrap"
+        >
+          <div
+            class="add-image d-flex ion-align-items-center ion-justify-content-center"
+            (click)="imageComponent2.selectImageSource()"
+          >
+            <ion-icon name="add" color="light"></ion-icon>
+          </div>
+        </div>
+        <app-images
+          #imageComponent2
+          (selectImageEvent)="getImage($event, 'backDoc')"
+        ></app-images>
+      </div>
+      <hr>
+      <!-- Upload Justificatif de Domicile -->
+      <div>
+        <ion-label>Justificatif de Domicile</ion-label>
+        <div
+          class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around"
+          style="gap: 10px; flex-wrap: wrap"
+        >
+          <div
+            class="add-image d-flex ion-align-items-center ion-justify-content-center"
+            (click)="imageComponent3.selectImageSource()"
+          >
+            <ion-icon name="add" color="light"></ion-icon>
+          </div>
+        </div>
+        <app-images
+          #imageComponent3
+          (selectImageEvent)="getImage($event, 'residenceProof')"
+        ></app-images>
+      </div>
+    </ion-list>
+
+    <!-- Bouton de soumission -->
+    <ion-button expand="full" type="submit" [disabled]="ownerForm.invalid"
+      >Valider</ion-button
+    >
+  </form>
+</ion-content>

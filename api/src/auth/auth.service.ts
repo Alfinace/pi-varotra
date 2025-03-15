@@ -39,7 +39,9 @@ export class AuthService {
     }
     const user = await this.userService.findByArgs({ uid: auth.user.uid });
     return {
-      token: this.jwtService.sign({ storeId: user?.store?.id, userId: user.id, role: user.role, username: user.username, uid: user.uid }),
+      token: this.jwtService.sign({ storeId: user?.store?.id, userId: user.id, role: user.role, username: user.username, uid: user.uid },{
+        expiresIn: '1d',
+      }),
     };
   }
 }
