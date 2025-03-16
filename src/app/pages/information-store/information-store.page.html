@@ -28,10 +28,10 @@
       </ion-text>
 
       <!-- Upload CIN/Passeport -->
-      <div>
-        <ion-label>CIN Recto</ion-label>
+      <div class="ion-margin-vertical">
+        <ion-label>Carte d'identité - Recto</ion-label>
         <div
-          class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around"
+          class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around upload-image"
           style="gap: 10px; flex-wrap: wrap"
         >
           <div
@@ -45,15 +45,16 @@
           #imageComponent
           (selectImageEvent)="getImage($event, 'frontDoc')"
         ></app-images>
-        <p>
-          Veuillez
+        <p class="text-sm">
+          <span class="text-danger">*</span>
+          Veuillez mettre votre carte d'identité recto.
         </p>
       </div>
       <hr>
       <div>
-        <ion-label>CIN Verso</ion-label>
+        <ion-label>Carte d'identité - Verso</ion-label>
         <div
-          class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around"
+          class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around upload-image"
           style="gap: 10px; flex-wrap: wrap"
         >
           <div
@@ -67,13 +68,17 @@
           #imageComponent2
           (selectImageEvent)="getImage($event, 'backDoc')"
         ></app-images>
+        <p class="text-sm">
+          <span class="text-danger">*</span>
+          Veuillez mettre votre carte d'identité verso.
+        </p>
       </div>
       <hr>
       <!-- Upload Justificatif de Domicile -->
       <div>
         <ion-label>Justificatif de Domicile</ion-label>
         <div
-          class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around"
+          class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around upload-image"
           style="gap: 10px; flex-wrap: wrap"
         >
           <div
@@ -90,9 +95,10 @@
       </div>
     </ion-list>
 
-    <!-- Bouton de soumission -->
-    <ion-button expand="full" type="submit" [disabled]="ownerForm.invalid"
-      >Valider</ion-button
-    >
+    <button style="padding: 0 20px"  type="submit"  [disabled]="ownerForm.invalid"
+        class="ion-activatable ripple-parent custom-parent btn-primary">
+        <ion-label class="text-sm">Valider </ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
   </form>
 </ion-content>

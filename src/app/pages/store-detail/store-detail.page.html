@@ -1,16 +1,60 @@
 <ion-content>
   <div class="ion-padding-horizontal mt-70" *ngIf="store">
-      <img [src]="store.logo" width="150px" height="150px" class="mx-auto d-block"/>
-    <h1 class="ion-margin-bottom text-center ion-margin-bottom" color="primary">
+      <!-- <img [src]="store.logo" width="150px" height="150px" class="mx-auto d-block"/>
+    <h1 class="ion-margin-bottom text-center ion-margin-bottom" color="primary" (click)="toggle()">
        Bienvenue chez {{store.name}}
-    </h1>
-    <p>
+    </h1> -->
+    <!-- <p>
       {{store.description}}
-    </p>
+    </p> -->
+    <ion-item lines="full"  (click)="toggle()">
+    <ion-avatar slot="start">
+      <img [src]="store.logo" />
+    </ion-avatar>
+    <ion-text class="ion-margin-bottom" color="primary">
+      <h5 class="text-sm">
+        {{store!.name}}
+      </h5>
+      <ion-label class="text-sm">
+        {{store.contact}}
+      </ion-label>
+    </ion-text>
+    <ion-icon name="resize-outline" slot="end"></ion-icon>
+  </ion-item>
     <br>
     <div style="display: flex; gap: 10px;" class="ion-justify-content-center ion-align-items-center ion-wrap">
       <app-article [article]="item" *ngFor="let item of articles"></app-article>
     </div>
-    <br><br><br>
   </div>
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-icon slot="end" (click)="toggle()" name="close" size="large"></ion-icon>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <div>
+          <ion-item>
+            <ion-icon slot="start" color="primary" size="small" name="storefront-outline"></ion-icon>
+           {{store.name}}
+          </ion-item>
+          <ion-item>
+            <ion-icon slot="start" color="primary" size="small" name="call"></ion-icon>
+            {{store.contact}}
+          </ion-item>
+          <ion-item>
+            <ion-icon slot="start" color="primary" size="small" name="location"></ion-icon>
+           Addresse: {{store.address}} à {{store.city}}
+          </ion-item>
+          <ion-item lines="none" class="text-justify ion-margin-top">
+            <ion-icon slot="start" color="primary" size="small" name="information-circle"></ion-icon>
+           {{store.description}}
+          </ion-item>
+        </div>
+        <div id="mapMagasin" style="width: 100%; height:calc(100vh - 470px); border: 3px solid #000;margin-top: 20px;">
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

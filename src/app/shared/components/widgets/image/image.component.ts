@@ -51,18 +51,13 @@ export class ImageComponent implements OnInit, OnDestroy {
       allowEditing: true,
       resultType: CameraResultType.Base64,
       source,
+      saveToGallery: true
     });
     const blobData = this.b64toBlob(
       image.base64String,
       `image/${image.format}`
     );
 
-    // this.f.previewUrl.setValue(
-    //   this.sanitizer.bypassSecurityTrustResourceUrl(
-    //     URL.createObjectURL(blobData)
-    //   )
-    // );
-    // this.f.images.setValue(blobData);
     const reader = new FileReader();
     reader.onload = () => {
       this.image = { preview: reader.result as string, source: blobData };

@@ -80,7 +80,7 @@ export class AddArticleComponent implements OnInit {
       }
 
     } else {
-      if (await this.uploadImage() && this.addProduitForm.valid) {
+      if (this.addProduitForm.valid && await this.uploadImage() ) {
         this.articleService.createArticle(this.addProduitForm.value).toPromise().then(async res => {
           let newData = await this.articleService.getArticle(res.id).toPromise();
           this.modelController.dismiss({ ...newData })

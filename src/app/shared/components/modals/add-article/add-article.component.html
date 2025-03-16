@@ -14,7 +14,7 @@
     <app-images #imageComponent (selectImageEvent)="getImage($event)"></app-images>
     <app-images #imageComponentUpdate (selectImageEvent)="getImageUpdate($event)"></app-images>
 
-    <div class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around"
+    <div class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around upload-image"
       style="gap: 10px;flex-wrap: wrap;">
       <div class="add-image d-flex ion-align-items-center ion-justify-content-center"
         (click)="imageComponent.selectImageSource()">
