@@ -37,10 +37,16 @@
           <div
             class="add-image d-flex ion-align-items-center ion-justify-content-center"
             (click)="imageComponent.selectImageSource()"
+            *ngIf="!previews.front;else hasImageFrontDoc"
           >
             <ion-icon name="add" color="light"></ion-icon>
           </div>
         </div>
+        <ng-template #hasImageFrontDoc>
+          <div class=" d-flex ion-align-items-center ion-justify-content-center">
+            <img class="image-preview" [src]="previews.front" alt="frontDoc">
+          </div>
+        </ng-template>
         <app-images
           #imageComponent
           (selectImageEvent)="getImage($event, 'frontDoc')"
@@ -60,10 +66,16 @@
           <div
             class="add-image d-flex ion-align-items-center ion-justify-content-center"
             (click)="imageComponent2.selectImageSource()"
+            *ngIf="!previews.back;else hasImageBackDoc"
           >
             <ion-icon name="add" color="light"></ion-icon>
           </div>
         </div>
+        <ng-template #hasImageBackDoc>
+          <div class=" d-flex ion-align-items-center ion-justify-content-center">
+            <img class="image-preview" [src]="previews.back" alt="frontDoc">
+          </div>
+        </ng-template>
         <app-images
           #imageComponent2
           (selectImageEvent)="getImage($event, 'backDoc')"
@@ -84,10 +96,16 @@
           <div
             class="add-image d-flex ion-align-items-center ion-justify-content-center"
             (click)="imageComponent3.selectImageSource()"
+            *ngIf="!previews.residenceProof;else hasImageResidenceProof"
           >
             <ion-icon name="add" color="light"></ion-icon>
           </div>
         </div>
+        <ng-template #hasImageResidenceProof>
+          <div class=" d-flex ion-align-items-center ion-justify-content-center">
+            <img class="image-preview" [src]="previews.residenceProof" alt="residenceProof">
+          </div>
+        </ng-template>
         <app-images
           #imageComponent3
           (selectImageEvent)="getImage($event, 'residenceProof')"

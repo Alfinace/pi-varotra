@@ -11,6 +11,8 @@ export class InformationStorePage implements OnInit {
   ownerForm: FormGroup;
   uploadedFiles: { idDocument?: File; residenceProof?: File } = {};
 
+  previews: { front?: string; residenceProof?: string, back?: string } = {};
+
   constructor(private fb: FormBuilder) {
     this.ownerForm = this.fb.group({
       fullName: ['', Validators.required],
@@ -39,12 +41,19 @@ export class InformationStorePage implements OnInit {
 
 
   getImage(event: any, attribut: string) {
-      if (attribut === 'id') {
-        this.ownerForm.get('frontDoc')?.setValue(event);
-      } else if (attribut === 'back') {
-        this.ownerForm.get('backDoc')?.setValue(event);
-      } else if (attribut === 'residence') {
-        this.ownerForm.get('residenceProof')?.setValue(event);
+    console.log(attribut);
+
+      if (attribut === 'frontDoc') {
+        this.ownerForm.get(attribut)?.setValue(event);
+        this.previews.front = event.preview;
+      } else if (attribut === 'backDoc') {
+        this.ownerForm.get(attribut)?.setValue(event);
+        this.previews.back = event.preview;
+      } else if (attribut === 'residenceProof') {
+        this.ownerForm.get(attribut)?.setValue(event);
+        this.previews.residenceProof = event.preview;
       }
+      console.log(this.previews);
+
     }
 }

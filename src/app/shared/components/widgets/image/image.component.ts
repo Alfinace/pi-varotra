@@ -11,7 +11,6 @@ import {
 import { FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { ActionSheetController, Platform } from '@ionic/angular';
 @Component({
   selector: 'app-images',
   templateUrl: './image.component.html',

@@ -25,6 +25,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Roles } from 'src/auth/roles.decorator';
 import { User } from 'src/auth/user.decorator';
 import { UserInterceptor } from 'src/auth/user.interceptor';
+import { log } from 'console';
 
 @Controller('articles')
 @UseInterceptors(UserInterceptor)
@@ -73,10 +74,13 @@ export class ArticleController {
       var articles = await this.articleService.findAllByStore(user.storeId, offset, limit);
 
       articles.rows = articles.rows.map((article) => {
-        article.images = article.images.map(i => {
+        article.images = article.images.sort((a, b) => b.id - a.id)
+        .map(i => {
           i.image = process.env.BASE_URL_IMAGE + i.image;
           return i
         })
+        console.log(article.images);
+
         return article;
       })
       return articles;
@@ -103,7 +107,8 @@ export class ArticleController {
       }
       let articles = await this.articleService.findAllByStore(id, offset, limit);
       articles.rows = articles.rows.map((article) => {
-        article.images = article.images.map(i => {
+        article.images = article.images.sort((a, b) => b.id - a.id)
+        .map(i => {
           i.image = process.env.BASE_URL_IMAGE + i.image;
           return i
         })
@@ -127,7 +132,8 @@ export class ArticleController {
     let articles = await this.articleService.findAllWithFilter(filter, offset, limit);
     articles.rows = articles.rows.map((article) => {
       if (article.images.length > 0) {
-        article.images = article?.images.map(i => {
+        article.images = article?.images.sort((a, b) => b.id - a.id)
+        .map(i => {
           i.image = process.env.BASE_URL_IMAGE + i.image;
           return i
         })
@@ -146,7 +152,8 @@ export class ArticleController {
     try {
       var article = await this.articleService.findOne(+id);
       if (!article) throw new HttpException('Article not found', 404)
-      article.images = article.images.map(i => {
+      article.images = article.images.sort((a, b) => b.id - a.id)
+      .map(i => {
         i.image = process.env.BASE_URL_IMAGE + i.image;
         return i
       })
@@ -161,7 +168,8 @@ export class ArticleController {
     try {
       var article = await this.articleService.findOneBySlug(slug);
       if (!article) throw new HttpException('Article not found', 404)
-      article.images = article.images.map(i => {
+      article.images = article.images.sort((a, b) => b.id - a.id)
+      .map(i => {
         i.image = process.env.BASE_URL_IMAGE + i.image;
         return i
       })
