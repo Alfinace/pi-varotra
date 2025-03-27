@@ -56,7 +56,7 @@ export class CreateProfilePasswordComponent implements OnInit, OnDestroy {
       this.userService.save(this.signUpForm.value).subscribe((res) => {
         this.isSubmited = false;
         this.localstorageService.setItem('accessToken', res.token);
-        this.router.navigate(['/client'])
+        this.router.navigate(['/'])
       }, err => {
         this.isSubmited = false;
       });

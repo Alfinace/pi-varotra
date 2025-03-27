@@ -135,7 +135,7 @@ export class ParamsComponent implements OnInit {
           text: 'OUI',
           handler: () => {
             this.sessionService.logout()
-            this.router.navigate(['/client']);
+            this.router.navigate(['/']);
             this.modalController.dismiss();
           }
         }

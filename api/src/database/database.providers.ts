@@ -27,7 +27,8 @@ export const databaseProviders = [
         define:  {
           charset: 'utf8mb4',
           collate: 'utf8mb4_unicode_ci',
-        }
+        },
+        logging: false,
       });
       sequelize.addModels([
         User,
@@ -47,7 +48,7 @@ export const databaseProviders = [
       ]);
       await sequelize.sync({
         // alter: !Boolean(process.env.IS_PRODUCTION),
-        // force:  !Boolean(process.env.IS_PRODUCTION),
+        // force: true,
       });
       return sequelize;
     },

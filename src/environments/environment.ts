@@ -3,10 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-    production: false,
-    API_URL: 'http://localhost:3000/api',
-    BACKEND_URL: 'http://localhost:3000',
-    prefix: 'pi-varotra-dev_'
+    production: true,
+    API_URL: 'https://api.pp.pivarotra.com/api',
+    BACKEND_URL: 'https://api.pp.pivarotra.com',
+    prefix: 'pi-varotra-prod_'
   };
 
 /*
