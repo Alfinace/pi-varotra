@@ -44,12 +44,12 @@ export class ClientPage implements OnInit, OnDestroy {
   public storePages: IMenuPage[] = [
     {
       title:'Mon magasin',
-      url: '/client/space-client/store',
+      url: 'space-client/store',
       icon: 'grid-outline'
     },
     {
       title: 'Commandes',
-      url: 'client/space-client/store/order',
+      url: 'space-client/store/order',
       icon: 'bag-handle-outline'
     },
     {
@@ -64,7 +64,7 @@ export class ClientPage implements OnInit, OnDestroy {
     },
     {
       title:'Informations',
-      url: 'client/space-client/store/information-store',
+      url: 'space-client/store/information-store',
       icon: 'information-circle-outline'
     },
   ]

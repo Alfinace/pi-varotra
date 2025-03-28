@@ -68,7 +68,7 @@ export class LoginPage implements OnInit {
             this.router.navigate([this.reditectTo || '/']);
           }, (err: any) => {
             console.log(err);
-            this.toastService.show('dark', 'Email ou mot de passe incorrect');
+            this.toastService.show('dark', 'Erreur de connexion');
             this.isSubmited = false;
           })
         } else {

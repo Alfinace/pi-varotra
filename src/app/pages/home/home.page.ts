@@ -81,7 +81,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
   goToArticles(id: number) {
     this.router.navigate(
-      ['/client/search'],
+      ['/search'],
       { queryParams: { categoryId: id } }
     );
   }
