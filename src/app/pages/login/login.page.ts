@@ -65,7 +65,7 @@ export class LoginPage implements OnInit {
             this.sessionService.getSessionStatus();
             this.isSubmited = false;
             this.toastService.show('success', 'Connexion réussie');
-            this.router.navigate([this.reditectTo || '/client']);
+            this.router.navigate([this.reditectTo || '/']);
           }, (err: any) => {
             console.log(err);
             this.toastService.show('dark', 'Email ou mot de passe incorrect');
@@ -88,6 +88,6 @@ export class LoginPage implements OnInit {
   }
 
   public backHome(): void {
-    this.router.navigate(['/client']);
+    this.router.navigate(['/']);
   }
 }
