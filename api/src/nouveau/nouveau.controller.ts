@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, HttpException, Put } from '@nestjs/common';
 import { NouveauService } from './nouveau.service';
 import { CreateNouveauDto } from './dto/create-nouveau.dto';
 import { UpdateNouveauDto } from './dto/update-nouveau.dto';
@@ -32,7 +32,7 @@ export class NouveauController {
     return this.nouveauService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateNouveauDto: UpdateNouveauDto) {
     return this.nouveauService.update(+id, updateNouveauDto);
   }

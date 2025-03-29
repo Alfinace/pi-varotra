@@ -39,7 +39,7 @@
 <div class="ion-page" id="main-content">
 <ion-header [translucent]="true" class="ion-no-border">
 	<ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="currentUser">
       <ion-menu-button ></ion-menu-button>
     </ion-buttons>
 		<ion-buttons slot="secondary">
@@ -50,8 +50,8 @@
 				<ion-icon [id]="carts.length" slot="icon-only" class="marked" name="cart-outline"></ion-icon>
 			</ion-button>
 		</ion-buttons>
-		<ion-title >
-      <h4 class="ion-text-left app-name">Mpi-Varotra</h4>
+		<ion-title>
+      <h4 class="ion-text-left app-name" [ngClass]="{'ion-margin-start': !currentUser}">Mpi-Varotra</h4>
     </ion-title>
 	</ion-toolbar>
 </ion-header>

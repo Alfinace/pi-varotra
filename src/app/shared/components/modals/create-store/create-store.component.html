@@ -22,7 +22,7 @@
     </ion-slide>
     <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
       <h1 class="ion-text-start text-medium">Information nécessaire</h1>
-      <p class="text-sm text-justify">
+      <p class="text-medium text-justify">
         Veuillez renseigner les informations necessaire pour la creation de votre magasin.
       </p>
       <br>
@@ -35,7 +35,7 @@
           <ion-input required formControlName="name" type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label class="text-sm" position="floating">Address du magasin</ion-label>
+          <ion-label class="text-sm" position="floating">Adresse</ion-label>
           <ion-input required formControlName="address" type="text"></ion-input>
         </ion-item>
         <ion-item>
@@ -59,7 +59,7 @@
           Veuillez remplir les informations necessaire si votre magasin offre la livraison.
         </p>
         <div class="box-img">
-          <img [src]="'./assets/images/delivery.png'" />
+          <img [src]="'./assets/images/delivery.png'" loading="lazy"/>
         </div>
         <form [formGroup]="storeForm">
           <div formArrayName="deliveries">
@@ -92,9 +92,9 @@
       </ion-slide>
     </ion-slide>
     <ion-slide class="flex flex-col ion-padding-horizontal ion-text-start">
-      <h1 class="ion-text-start text-medium">Création</h1>
+      <h1 class="ion-text-start text-medium">Ajouter une image</h1>
       <p class="text-sm text-justify">
-        Votre logo du magasin et soumession votre magasin pour la validation.
+        Si vous avez une image de votre magasin, vous pouvez l'ajouter ici et Soumettre afin de pouvoir commencer la vente.
       </p>
       <div *ngIf="!preview" class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around upload-image"
       style="gap: 10px;flex-wrap: wrap;">
@@ -106,7 +106,7 @@
 
         <app-images #imageComponent (selectImageEvent)="getImage($event)"></app-images>
       <div class="box-img" [ngClass]="{'add': !preview}" (click)="imageComponent.selectImageSource()">
-        <img [src]=" preview ? preview :'./assets/images/store-open.png'" />
+        <img [src]="preview" />
       </div>
     </ion-slide>
   </ion-slides>

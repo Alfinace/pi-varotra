@@ -62,7 +62,7 @@ export class CreateStoreComponent implements OnInit, AfterViewInit {
 
   async next() {
     if (await this.slider.getActiveIndex() > 0 && this.storeForm.invalid) {
-      this.toastService.show('dark', 'Verifiez remplir les champs');
+      this.toastService.show('danger', 'Veuillez remplir les champs');
       return;
     }
     this.slider.lockSwipes(false);
@@ -99,6 +99,7 @@ export class CreateStoreComponent implements OnInit, AfterViewInit {
 
     this.userService.createStore({ ...this.storeForm.value, deliveries: JSON.stringify(this.storeForm.value.deliveries) }).subscribe((res) => {
       this.toastService.show('dark', 'Votre magasin a été créer avec succès');
+      this.userService.setHasStore(true);
       this.modalController.dismiss(true)
     }, err => {
       this.toastService.show('dark', 'Il y a une erreur');

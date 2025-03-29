@@ -9,12 +9,12 @@
   gap: 20px;
   text-align: center;
   ion-label {
-    border-bottom: 3px solid gainsboro;
+    border-bottom:1px solid gainsboro;
     padding-bottom: 2px;
     width: 50%;
   }
   .selected {
     transition: 500ms all ease-in-out;
-    border-bottom: 3px solid var(--ion-color-primary);
+    border-bottom: 1px solid var(--ion-color-primary);
   }
 }

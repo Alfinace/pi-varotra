@@ -85,6 +85,7 @@ export class ClientPage implements OnInit, OnDestroy {
         this.currentUser = user
       } else {
         this.isLogged = false;
+        this.currentUser = null
       }
     })
     this.sessionService.getInfoUser().subscribe((user: any) => {

@@ -12,6 +12,7 @@ import {
   Res,
   UseGuards,
   Query,
+  Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -85,7 +86,7 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
-  @Patch('update')
+  @Put('update')
   @UseGuards(JwtAuthGuard)
   async update(
     @Body() updateUserDto: UpdateUserDto,
@@ -135,7 +136,7 @@ export class UserController {
       });
   }
 
-  // @Patch('update-password')
+  // @Put('update-password')
   // @UseGuards(JwtAuthGuard)
   // updatePassword(@Body() body: any, @Res() response: Response, @User() user,) {
   //   this.userService.findOne(+user.userId).then(async (res) => {

@@ -19,7 +19,7 @@ export class HttpService {
   }
 
   public put(url: string, data: any): Observable<any> {
-    return this.http.patch(`${this.API_URL}/${url}`, data)
+    return this.http.put(`${this.API_URL}/${url}`, data)
   }
 
   public delete(url: string): Observable<any> {

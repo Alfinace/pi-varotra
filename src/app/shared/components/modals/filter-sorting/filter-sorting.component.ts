@@ -16,13 +16,6 @@ export class FilterSortingComponent implements OnInit {
   @Input() filter: Filter;
   public ville = []
   public categories: Category[] = []
-  // public defaultFilter: Filter = {
-  //   categories: [...this.categories.map(c => c.id as number)],
-  //   order: 'ASC',
-  //   orderBy: 'updatedAt',
-  //   range: { lower: 0, upper: 110 },
-  //   villes: [...this.ville]
-  // }
 
   constructor(private modalController: ModalController,
     private categorieService: CategorieService) { }

@@ -14,6 +14,7 @@ import {
   ForbiddenException,
   Res,
   UseInterceptors,
+  Put,
 } from '@nestjs/common';
 
 import { ArticleService } from './article.service';
@@ -180,7 +181,7 @@ export class ArticleController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch('update/:id')
+  @Put('update/:id')
   async update(
     @Param('id') id: string,
     @Body() updateArticleDto: any,
@@ -199,32 +200,8 @@ export class ArticleController {
         .json(await this.articleService.update(+id, updateArticleDto));
     }
     throw new HttpException('Aricle not found', 404);
-    // } catch (error) {
-    //   throw new HttpException(error, 500);
-    // }
-  }
 
-  // @Delete(':id')
-  // @Roles(Role.USER)
-  // @UseGuards(JwtAuthGuard, RoleGuard)
-  // async remove(
-  //   @Param('id') id: string,
-  //   @User() user,
-  //   @Res() response: Response,
-  // ) {
-  //   try {
-  //     let article = await this.articleService.findOne(+id);
-  //     if (article) {
-  //       if (article.get('owner') !== user.userId) {
-  //         throw new ForbiddenException("You don't have permission");
-  //       }
-  //       return response.status(200).json(await this.articleService.remove(+id));
-  //     }
-  //     throw new HttpException('Aricle not found', 404);
-  //   } catch (error) {
-  //     throw new HttpException("Can't delete article", 500);
-  //   }
-  // }
+  }
 
   @Delete('delete/:id')
   @Roles(Role.USER, Role.CONTROLLER, Role.SUPER_ADMIN, Role.ADMIN)
@@ -250,7 +227,7 @@ export class ArticleController {
     }
   }
 
-  @Patch('publish/:id')
+  @Put('publish/:id')
   @Roles(Role.ADMIN, Role.SUPER_ADMIN)
   @UseGuards(JwtAuthGuard)
   async publishOrUnpublish(

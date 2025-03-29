@@ -8,6 +8,7 @@ import {
   Delete,
   UseInterceptors,
   UploadedFiles,
+  Put,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { ArticleOrderService } from './article-order.service';
@@ -33,7 +34,7 @@ export class ArticleOrderController {
     return this.aricleOrderService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(
     @Param('id') id: string,
     @Body() updateAricleOrderDto: UpdateAricleOrderDto,

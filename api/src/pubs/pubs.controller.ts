@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, Put } from '@nestjs/common';
 import { PubsService } from './pubs.service';
 import { CreatePubDto } from './dto/create-pub.dto';
 import { UpdatePubDto } from './dto/update-pub.dto';
@@ -37,7 +37,7 @@ export class PubsController {
     return this.pubsService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updatePubDto: UpdatePubDto) {
     return this.pubsService.update(+id, updatePubDto);
   }

@@ -49,24 +49,12 @@
       <!-- <swiper [config]="configP"> -->
       <ion-grid fixed>
         <ion-row>
-          <ion-col size="6" *ngFor="let item of articles">
+          <ion-col size="6" *ngFor="let item of articles"  data-aos="fade-up">
             <app-article class="ion-no-margin border-1" [article]="item"></app-article>
           </ion-col>
         </ion-row>
       </ion-grid>
-      <!-- <div class=" d-flex ion-justify-content-between  ion-align-items-center ion-wrap" style="gap:15px ;">
-        </app-article>
-      </div> -->
-      <!-- </swiper> -->
       <br>
-
-      <!-- <br>
-      <swiper [config]="configP">
-        <ng-template *ngFor="let item of articles" swiperSlide>
-          <app-article [article]="item"></app-article>
-        </ng-template>
-      </swiper>
-      <br> -->
       <div class=" d-flex ion-justify-content-between  ion-align-items-center">
         <h4>Produit special</h4>
         <a href="#" [routerLink]="['/search']">Voir plus</a>
@@ -82,7 +70,7 @@
     </div>
     <div class="ion-padding-horizontal d-flex flex-col">
       <div class=" d-flex ion-justify-content-between ion-align-items-center">
-        <h4>Derniére nouveau</h4>
+        <h4>Actualités</h4>
       </div>
       <app-new-card [_new]="_new" *ngFor="let _new of _news"></app-new-card>
       <ion-row class="btn-row mt">

@@ -11,7 +11,7 @@ import { ArticleModule } from 'src/app/shared/components/widgets/article/article
 import { StoreCardModule } from 'src/app/shared/components/widgets/store-card/store-card.module';
 import { NewDetailModule } from 'src/app/shared/components/modals/new-detail/new-detail.module';
 import { CartModule } from 'src/app/shared/components/modals/cart/cart.module';
-
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
@@ -25,6 +25,7 @@ import { CartModule } from 'src/app/shared/components/modals/cart/cart.module';
     NewCardModule,
     NewDetailModule,
     ArticleModule,
+    ScrollingModule,
     StoreCardModule
   ],
   declarations: [HomePage]

@@ -16,17 +16,17 @@ export class MarkerService {
   coordonne = this.coordonne$.asObservable()
   private idForMap$: BehaviorSubject<string> = new BehaviorSubject<any>(null);
   idForMap = this.idForMap$.asObservable()
-  makePubMarkers(map: any, res: any): void {
-    for (const pub of res) {
-      let lon = pub.publication.positionPub[1];
-      let lat = pub.publication.positionPub[0];
-      let marker = L.marker([lat, lon]).on('click', () => {
-        this.idForMap$.next(pub.publication._id)
+  makePubMarkers(map: any, data: any[], icon: any): void {
+    for (const d of data) {
+      let lon = d.lon;
+      let lat = d.lat;
+      let marker = L.marker([lat, lon],{icon}).on('click', () => {
+        this.idForMap$.next(d.id)
       });
-      if (pub.publication._materiel) {
-        marker.addTo(map).bindPopup(pub.publication._materiel.designationMat).openPopup();
+      if (d?.username) {
+        marker.addTo(map).bindPopup(d?.username).openPopup();
       } else {
-        marker.addTo(map).bindPopup(pub.publication.titre).openPopup();
+        marker.addTo(map).bindPopup(d.name).openPopup();
       }
     }
   }

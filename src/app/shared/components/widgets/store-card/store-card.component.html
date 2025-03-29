@@ -3,9 +3,10 @@
     <img
       style="margin: auto; height: 130px; display: block"
       [src]="store!.logo"
-      onerror="this.onerror=null; this.src='./assets/images/shopping.png'"
+      loading="lazy"
+      [alt]="'Logo '+store!.name"
     />
-    <h5 class="ion-no-margin no-wrap text-medium ion-margin-top">
+    <h5 class="ion-no-margin no-wrap text-medium ion-margin-top ion-text-start">
       {{ store.name }}
     </h5>
     <div

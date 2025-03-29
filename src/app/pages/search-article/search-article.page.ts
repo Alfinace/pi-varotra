@@ -79,11 +79,11 @@ export class SearchArticlePage implements OnInit {
     const modal = await this.modalController.create({
       component: FilterSortingComponent,
       componentProps: { filter: this.applyFilter },
-      // initialBreakpoint: 0.75,
-      // breakpoints: [0, 0.75, 0.5, 0.75],
+      id: 'filter-modal',
       cssClass: 'filter-modal',
       backdropDismiss: false,
       animated: true,
+      mode: 'md'
 
     });
 

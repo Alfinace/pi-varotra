@@ -13,6 +13,7 @@ import {
   HttpStatus,
   HttpException,
   Res,
+  Put,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -61,7 +62,7 @@ export class CategoryController {
     return this.categoryService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   @Roles(Role.ADMIN)
   @UseGuards(JwtAuthGuard, RoleGuard)
   update(

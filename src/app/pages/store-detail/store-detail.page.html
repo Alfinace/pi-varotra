@@ -1,12 +1,5 @@
 <ion-content>
   <div class="ion-padding-horizontal mt-70" *ngIf="store">
-      <!-- <img [src]="store.logo" width="150px" height="150px" class="mx-auto d-block"/>
-    <h1 class="ion-margin-bottom text-center ion-margin-bottom" color="primary" (click)="toggle()">
-       Bienvenue chez {{store.name}}
-    </h1> -->
-    <!-- <p>
-      {{store.description}}
-    </p> -->
     <ion-item lines="full"  (click)="toggle()">
     <ion-avatar slot="start">
       <img [src]="store.logo" />
@@ -28,7 +21,7 @@
   </div>
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
-      <ion-header>
+      <ion-header class="ion-no-border">
         <ion-toolbar>
           <ion-icon slot="end" (click)="toggle()" name="close" size="large"></ion-icon>
         </ion-toolbar>
@@ -52,8 +45,9 @@
            {{store.description}}
           </ion-item>
         </div>
-        <div id="mapMagasin" style="width: 100%; height:calc(100vh - 470px); border: 1px solid #b8b8b8;margin-top: 20px;">
-        </div>
+        <app-map></app-map>
+        <!-- <div id="mapMagasin" style="width: 100%; height: calc(100% - 285px);; border: 1px solid #b8b8b8;margin-top: 20px;">
+        </div> -->
       </ion-content>
     </ng-template>
   </ion-modal>

@@ -4,5 +4,8 @@
 }
 
 #map {
-  height: 100%;
+  width: 100%;
+  height: calc(100% - 285px);
+  border: 1px solid #b8b8b8;
+  margin-top: 20px;
 }

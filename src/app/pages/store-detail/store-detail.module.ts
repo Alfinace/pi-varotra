@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { StoreDetailPageRoutingModule } from './store-detail-routing.module';
 
 import { StoreDetailPage } from './store-detail.page';
+import { MapModule } from 'src/app/shared/components/widgets/map/map.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { StoreDetailPage } from './store-detail.page';
     FormsModule,
     IonicModule,
     StoreDetailPageRoutingModule,
-    ArticleModule
+    ArticleModule,
+    MapModule
   ],
   declarations: [StoreDetailPage]
 })
