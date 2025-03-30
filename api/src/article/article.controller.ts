@@ -56,6 +56,7 @@ export class ArticleController {
           i.image = process.env.BASE_URL_IMAGE + i.image;
           return i
         })
+        article.store.logo = process.env.BASE_URL_IMAGE + article?.store?.logo
         return article;
       })
 
@@ -249,8 +250,6 @@ export class ArticleController {
       }
       throw new HttpException('Article not found', 404);
     } catch (error) {
-      console.log(error);
-
       throw new HttpException(error.message, 400);
     }
   }

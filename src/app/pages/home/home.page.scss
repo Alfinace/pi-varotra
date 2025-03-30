@@ -102,3 +102,41 @@ h4 {
 .d-flex {
   display: flex;
 }
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin: 0 auto;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .banner-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+
+    h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 5px 0 10px;
+      font-size: 14px;
+    }
+  }
+}
+
+ion-slides {
+  padding: 16px;
+}

@@ -91,7 +91,7 @@
       </p>
     </ion-text>
   </ion-item>
-  <ion-fab slot="fixed" horizontal="end" vertical="bottom"  *ngIf="!checkedArticleAddedToCart();" (click)="addCart(article.id)">
+  <ion-fab slot="fixed" horizontal="end" vertical="bottom"  *ngIf="!checkedArticleAddedToCart();" (click)="addCart(article.id, $event)">
     <ion-fab-button size="small" class="bounce">
       <ion-icon name="cart-outline"></ion-icon>
     </ion-fab-button>

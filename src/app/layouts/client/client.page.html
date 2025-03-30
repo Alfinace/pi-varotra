@@ -1,7 +1,7 @@
 <ion-menu menuId="clientMenu" contentId="main-content" *ngIf="currentUser">
   <ion-content class="ion-padding ">
     <ion-item>
-      <span class="text-success">Connecté : </span>
+      <span class="text-success">Connecté: </span>
       <span class="text-primary">
          {{currentUser?.username}}
       </span>
@@ -78,7 +78,7 @@
 		</ion-tab-button>
 		<ion-tab-button *ngIf="isLogged;else notLogged" size="small" tab="space-client">
 			<ion-icon name="apps-outline"></ion-icon>
-			<ion-label>Espace client</ion-label>
+			<ion-label>Dashboard</ion-label>
 		</ion-tab-button>
 		<ng-template #notLogged>
 			<ion-tab-button size="small" (click)="gotoLogin()">

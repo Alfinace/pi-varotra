@@ -11,7 +11,6 @@ import { PubService } from 'src/app/services/pub.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CartComponent } from 'src/app/shared/components/modals/cart/cart.component';
-import Aos from 'aos';
 SwiperCore.use([Autoplay, Keyboard]);
 @Component({
   selector: 'app-home',
@@ -71,7 +70,6 @@ export class HomePage implements OnInit, AfterViewInit {
     private storeService: StoreService
   ) { }
   ngOnInit() {
-    Aos.init();
   }
   ionViewWillEnter() {
     this.fetchData()
