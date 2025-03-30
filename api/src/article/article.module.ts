@@ -9,10 +9,11 @@ import { userProviders } from 'src/user/user.providers';
 import { userInterceptorProviders } from 'src/auth/user.interceptor.providers';
 import { imageUserProviders } from 'src/image-user/image-user.providers';
 import { UserService } from 'src/user/user.service';
+import { AppService } from 'src/app.service';
 @Module({
   imports: [DatabaseModule],
   controllers: [ArticleController],
-  providers: [ArticleService, UserService,...imageUserProviders,...userProviders, ...articleProviders, ...imageArticleProviders,...userInterceptorProviders],
+  providers: [ArticleService, AppService, UserService,...imageUserProviders,...userProviders, ...articleProviders, ...imageArticleProviders,...userInterceptorProviders],
   exports: [ArticleService]
 })
 export class ArticleModule { }

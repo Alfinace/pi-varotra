@@ -1,8 +1,6 @@
-import { orderProviders } from './order/order.providers';
 import { UserService } from 'src/user/user.service';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { AuthService } from './auth/auth.service';
-import { faker } from '@faker-js/faker';
 import {
   Body,
   Controller,
@@ -15,7 +13,6 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { AppService } from './app.service';
@@ -23,10 +20,10 @@ import { storage } from './config/storage-config';
 import { templateSendCodeConfirm } from './config/templates/confirm-email';
 import { PaymentU2AService } from './payment-u2-a/payment-u2-a.service';
 import { User } from './auth/user.decorator';
-import { LocalAuthGuard } from './auth/local-auth.guard';
 import { StoreService } from './store/store.service';
 import { ArticleService } from './article/article.service';
 import { UserInterceptor } from './auth/user.interceptor';
+import * as path from 'path';
 require('dotenv').config()
 @Controller()
 @UseInterceptors(UserInterceptor)
@@ -47,11 +44,23 @@ export class AppController {
 
   @Post('upload')
   @UseInterceptors(FilesInterceptor('files', 10, { storage }))
-  uploadFile(
+  async uploadFile(
     @UploadedFiles() files: Array<Express.Multer.File>,
     @Res() response: Response,
   ) {
-    return response.status(200).json({ images: files.map((f) => f.filename) });
+    const compressedImages = [];
+    if(files.length > 0) {
+      const uploadPath = path.join(__dirname, '..', 'public/uploads');
+      for (const file of files) {
+        const filePath = path.join(uploadPath, file.filename);
+        const newFilename = 'c'+ file.filename;
+        compressedImages.push(newFilename);
+        const compressedPath = path.join(uploadPath, newFilename);
+        await this.appService.compressImage(filePath, compressedPath);
+        this.appService.deleteFile(filePath);
+      }
+    }
+    return response.status(200).json({ images: compressedImages });
   }
 
 

@@ -197,6 +197,8 @@ export class ArticleController {
       if (article.storeId !== user.storeId) {
         throw new ForbiddenException("You don't have permission");
       }
+      console.log(updateArticleDto);
+
       return response
         .status(200)
         .json(await this.articleService.update(+id, updateArticleDto));

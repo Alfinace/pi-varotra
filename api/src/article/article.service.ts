@@ -7,6 +7,8 @@ import { User } from 'src/user/entities/user.entity';
 import { Op } from 'sequelize';
 import { Store } from 'src/store/entities/store.entity';
 import { Category } from 'src/category/entities/category.entity';
+import { AppService } from 'src/app.service';
+import * as path from 'path';
 
 @Injectable()
 export class ArticleService {
@@ -15,6 +17,7 @@ export class ArticleService {
     private articleRepository: typeof Article,
     @Inject('IMAGE_ARTICLE_REPOSITORY')
     private imageArticleRepository: typeof ImageArticle,
+    private appService : AppService
   ) { }
   private stringToSlug(str) {
     str = str.replace(/^\s+|\s+$/g, ''); // trim
@@ -185,7 +188,12 @@ export class ArticleService {
   async update(id: number, article: UpdateArticleDto | any) {
     for (let index = 0; index < article.imageIdDeleted.length; index++) {
       const element = article.imageIdDeleted[index];
-      this.imageArticleRepository.destroy({ where: { id: element } });
+      const filename = await this.imageArticleRepository.findOne({ where: { id: element } });
+      this.imageArticleRepository.destroy({ where: { id: element } }).then(() => {
+        this.appService.deleteFile(path.join(__dirname, '../..', 'public/uploads', filename.image)).then(() => {
+          console.log('file deleted');
+        });
+      })
     }
     if (article.images.length > 0) {
       await this.imageArticleRepository.bulkCreate(

@@ -12,10 +12,11 @@
           <app-pub-card [pub]="item"></app-pub-card>
         </ng-template>
       </swiper>
-      <ion-slides pager="true" [options]="{ slidesPerView: 1, autoplay: true, spaceBetween: 10, pagination: false }">
+      <ion-slides pager="true" [options]="{ slidesPerView: 1, autoplay: true, loop: true, spaceBetween: 10, pagination: false }">
         <ion-slide>
           <div class="banner">
-            <img src="assets/images/img5.jpg" alt="Special Offer" loading="lazy">
+            <ion-img src="assets/images/img5.jpg" alt="Special Offer" loading="lazy">
+            </ion-img>
             <div class="banner-content">
               <h2 class="ion-text-start text-light">
                 Offre spéciale
@@ -36,7 +37,8 @@
         </ion-slide>
         <ion-slide>
           <div class="banner">
-            <img src="assets/images/img2.jpg" alt="New Collection" loading="lazy">
+            <ion-img src="assets/images/img2.jpg" alt="New Collection" loading="lazy">
+            </ion-img>
             <div class="banner-content">
               <h2 class="ion-text-start text-light">
                 Nouveau Collection
