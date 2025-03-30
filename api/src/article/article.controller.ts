@@ -175,6 +175,7 @@ export class ArticleController {
         i.image = process.env.BASE_URL_IMAGE + i.image;
         return i
       })
+      article.store.logo = process.env.BASE_URL_IMAGE + article.store?.logo
       return article;
     } catch (error) {
       throw new HttpException("Can't get articles", 500);
