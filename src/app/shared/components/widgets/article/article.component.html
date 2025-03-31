@@ -22,7 +22,7 @@
 			</div>
 		</div>
 	</div>
-  <ion-fab horizontal="end" vertical="bottom" *ngIf="!checkedArticleAddedToCart(), else templateCart" (click)="addCart(article.id)">
+  <ion-fab horizontal="end" vertical="bottom" *ngIf="!checkedArticleAddedToCart(), else templateCart" (click)="addCart(article.id, $event)">
     <ion-fab-button size="small">
       <ion-icon name="cart-outline"></ion-icon>
     </ion-fab-button>

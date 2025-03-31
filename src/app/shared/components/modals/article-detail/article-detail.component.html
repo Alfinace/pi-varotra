@@ -178,7 +178,7 @@
           <div style="font-size: 12px">
             {{item!.rate}} Reviews
           </div>
-          <ion-button *ngIf="!checkedArticleAddedToCart(); else templateCart" (click)="addCart(item!.id)" fill="clear">
+          <ion-button *ngIf="!checkedArticleAddedToCart(); else templateCart" (click)="addCart(item!.id,$event)" fill="clear">
             <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
           </ion-button>
           <ng-template #templateCart>
@@ -194,7 +194,7 @@
   <div #btnAddCart class="box-btn-row" *ngIf="!checkedArticleAddedToCart();">
     <ion-row class="btn-row mt">
       <ion-col size="12">
-        <button class="ion-activatable ripple-parent custom-parent btn-primary" (click)="addCart(article.id)">
+        <button class="ion-activatable ripple-parent custom-parent btn-primary" (click)="addCart(article.id, $event)">
           <ion-label>Ajouter du panier</ion-label>
           <ion-ripple-effect></ion-ripple-effect>
         </button>

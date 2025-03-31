@@ -39,8 +39,8 @@ export class ArticleComponent implements OnInit {
     // });
   }
 
-  public addCart(articleId: any) {
-    this.cartService.addCart({ articleId, quantity: 1 })
+  public addCart(articleId: any, event: any) {
+    this.cartService.addCart({ articleId, quantity: 1 }, event);
   }
 
   checkedArticleAddedToCart() {

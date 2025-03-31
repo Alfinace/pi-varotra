@@ -11,7 +11,6 @@ import { SessionService } from 'src/app/services/session.service';
 import { CartComponent } from 'src/app/shared/components/modals/cart/cart.component';
 import { UtilsService } from 'src/app/utils/utils.service';
 import { SwiperOptions } from 'swiper';
-import * as party from 'party-js';
 
 @Component({
   selector: 'app-detail-article',
@@ -137,21 +136,8 @@ export class DetailArticlePage implements OnInit {
   addCart(articleId: number, event: any) {
     this.cartService.addCart({
       articleId: articleId, quantity: 1,
-    })
+    },event)
     this.checkedArticleAddedToCart()
-    party.sparkles(event as HTMLElement, {
-      count: party.variation.range(20, 40),
-      size: party.variation.range(0.1, 1),
-      speed: party.variation.range(100, 200),
-      color: party.variation.gradientSample(
-        party.Gradient.simple(
-          party.Color.fromHex('#6d2b8a')
-        )
-      ),
-      // shape  cart icon svg,
-      shapes: ['circle', 'triangle', 'square', 'cross', 'star'],
-    });
-
   }
 
   public show(article: any) {

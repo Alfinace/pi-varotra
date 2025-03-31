@@ -130,10 +130,10 @@ export class ArticleDetailComponent implements OnInit {
     return false
   }
 
-  addCart(articleId: number) {
+  addCart(articleId: number, event: any) {
     this.cartService.addCart({
       articleId: articleId, quantity: 1,
-    })
+    },event)
   }
 
   public show(article: any) {

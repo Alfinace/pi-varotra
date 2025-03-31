@@ -90,11 +90,11 @@ ion-header .cart ion-icon {
 }
 
 @keyframes bounce {
-  0%, 100% { transform: scale(1.2); }
+  0%, 100% { transform: scale(1.5); }
   50% { transform: scale(1); }
 
 }
 
 .bounce {
-  animation: bounce 0.4s ease-in-out infinite;
+  animation: bounce 0.8s ease-in-out infinite;
 }
