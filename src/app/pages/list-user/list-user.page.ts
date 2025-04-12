@@ -52,7 +52,6 @@ export class ListUserPage implements OnInit {
 
   ionViewWillEnter() {
     this.userService.getAllUsers(0, 10).toPromise().then((res: any) => {
-      console.log(res);
       this.customers = res.rows;
       this.totalRecords = res.count;
     });

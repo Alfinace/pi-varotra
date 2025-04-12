@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { ClientPageRoutingModule } from './client-routing.module';
 import { ClientPage } from './client.page';
 import { CartModule } from 'src/app/shared/components/modals/cart/cart.module';
+import { FlyToCartModule } from 'src/app/shared/components/widgets/fly-to-cart/fly-to-cart.module';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { CartModule } from 'src/app/shared/components/modals/cart/cart.module';
     FormsModule,
     IonicModule,
     ClientPageRoutingModule,
-    CartModule
+    CartModule,
+    FlyToCartModule
   ],
   declarations: [ClientPage]
 })

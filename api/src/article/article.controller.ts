@@ -5,7 +5,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Query,
@@ -70,9 +69,14 @@ export class ArticleController {
   @UseGuards(JwtAuthGuard)
   async findAllCurrentUser(@Query('size') limit: number, @Query('page') offset: number, @User() user) {
     try {
+      if(!limit && !offset) {
+        limit = 10
+        offset = 0
+      }
       if (offset !== 0) {
         offset = offset * limit;
       }
+
       var articles = await this.articleService.findAllByStore(user.storeId, offset, limit);
 
       articles.rows = articles.rows.map((article) => {
@@ -81,8 +85,6 @@ export class ArticleController {
           i.image = process.env.BASE_URL_IMAGE + i.image;
           return i
         })
-        console.log(article.images);
-
         return article;
       })
       return articles;
@@ -91,15 +93,7 @@ export class ArticleController {
     }
   }
 
-  // @Get('user')
-  // @UseGuards(JwtAuthGuard)
-  // findAllByStore(@Query('size') limit: number, @Query('page') offset: number, @User() user) {
-  //   try {
-  //     return this.articleService.findAllByStore(user.storeId, offset, limit);
-  //   } catch (error) {
-  //     throw new HttpException("Can't get articles", 500);
-  //   }
-  // }
+
 
   @Get('store/:id')
   async findAllByStore(@Query('size') limit: number, @Query('page') offset: number, @Param('id') id: string) {
@@ -197,7 +191,6 @@ export class ArticleController {
       if (article.storeId !== user.storeId) {
         throw new ForbiddenException("You don't have permission");
       }
-      console.log(updateArticleDto);
 
       return response
         .status(200)

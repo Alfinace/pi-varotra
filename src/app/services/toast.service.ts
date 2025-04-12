@@ -21,7 +21,7 @@ export class ToastService {
       animated: true,
       color,
       cssClass: 'toast-custom',
-      duration: 5000,
+      duration: 3000,
       keyboardClose: true,
       message,
       position: 'bottom',

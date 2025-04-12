@@ -5,4 +5,7 @@ import { CreateStoreDto } from './create-store.dto';
 export class UpdateStoreDto extends PartialType(CreateStoreDto) {
 	@IsOptional()
 	images: { type: string, url: string }[];
+
+  @IsOptional()
+  piPaiementId: string
 }

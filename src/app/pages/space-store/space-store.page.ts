@@ -1,10 +1,12 @@
-import { AddArticleComponent } from '../../shared/components/modals/add-article/add-article.component';
+import { ActionSheetController, AlertController, ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController, ActionSheetController } from '@ionic/angular';
-import { ArticleService } from 'src/app/services/article.service';
+
+import { AddArticleComponent } from '../../shared/components/modals/add-article/add-article.component';
 import { Article } from 'src/app/models/article.model';
-import { environment } from 'src/environments/environment';
+import { ArticleService } from 'src/app/services/article.service';
+import { PaymentService } from 'src/app/services/payment.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-space-store',
@@ -24,22 +26,24 @@ export class SpaceStorePage implements OnInit {
     private toastService: ToastService,
     private actionSheetController: ActionSheetController,
     private alertController: AlertController,
-    private articleService: ArticleService) { }
+    private articleService: ArticleService,
+    private payementService: PaymentService
+  ) { }
 
   ngOnInit() {
-    this.articleService.getArticlesCurrentUser(0, 8).toPromise().then(res => {
+    this.articleService.getArticlesCurrentUser().pipe(take(1)).subscribe(res => {
       this.products = res.rows;
       this.totalRecords = res.count;
     })
-    this.articleService.getCmd(0, 8).toPromise().then(res => {
+    this.articleService.getCmd(0, 8).pipe(take(1)).subscribe(res => {
       this.orders = res.rows;
     })
   }
 
   public loadMore(event: any) {
     this.page++;
-    this.articleService.getArticlesCurrentUser(this.page, this.rows).toPromise().then(res => {
-      this.products = [...this.products,...res.rows];
+    this.articleService.getArticlesCurrentUser(this.page, this.rows).pipe(take(1)).subscribe(res => {
+      this.products = [...this.products, ...res.rows];
       this.totalRecords = res.count;
       if (event) {
         event.target.complete();
@@ -116,14 +120,6 @@ export class SpaceStorePage implements OnInit {
     const actionSheet = await this.actionSheetController.create({
       header: 'Actions',
       buttons: [
-        // {
-        //   text: 'Detail',
-        //   icon: 'eye',
-        //   cssClass: 'text-sm',
-        //   handler: () => {
-        //     this.(item);
-        //   }
-        // },
         {
           text: 'Modifier',
           icon: 'pencil',
@@ -133,16 +129,46 @@ export class SpaceStorePage implements OnInit {
           }
         },
         {
-        text: 'Supprimer',
-        role: 'destructive',
-        icon: 'trash',
-        cssClass: 'text-sm',
-        handler: () => {
-          this.deleteProduit(item);
-        }
-      }]
+          text: 'Supprimer',
+          role: 'destructive',
+          icon: 'trash',
+          cssClass: 'text-sm',
+          handler: () => {
+            this.deleteProduit(item);
+          }
+        }]
     });
 
     await actionSheet.present();
+  }
+
+  async pay(event: any) {
+    event.preventDefault();
+    const alert = await this.alertController.create({
+      header: 'Confirmation!',
+      message: 'Voulez-vous vraiment payer le frais?',
+      buttons: [
+        {
+          text: 'OUI',
+          handler: () => {
+            this.payementService.createPaymentStore(
+              {
+                amount: 5,
+                memo: 'Store fees',
+                metadata: { store: 'test' }
+              }
+            )
+          }
+        },
+        {
+          text: 'NON',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            alert.dismiss();
+          }
+        }]
+    })
+    await alert.present();
   }
 }

@@ -41,8 +41,6 @@ export class InformationStorePage implements OnInit {
 
 
   getImage(event: any, attribut: string) {
-    console.log(attribut);
-
       if (attribut === 'frontDoc') {
         this.ownerForm.get(attribut)?.setValue(event);
         this.previews.front = event.preview;
@@ -53,7 +51,5 @@ export class InformationStorePage implements OnInit {
         this.ownerForm.get(attribut)?.setValue(event);
         this.previews.residenceProof = event.preview;
       }
-      console.log(this.previews);
-
     }
 }

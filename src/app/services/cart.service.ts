@@ -40,12 +40,14 @@ export class CartService {
       // shape  cart icon svg,
       shapes: ['circle', 'triangle', 'square', 'cross', 'star'],
     }
-    if (cartElement) {
-      party.sparkles(cartElement as HTMLElement, options);
-    }
-    if(cartElement2){
-      party.sparkles(cartElement2 as HTMLElement, options);
-    }
+    setTimeout(() => {
+      if (cartElement) {
+        party.sparkles(cartElement as HTMLElement, options);
+      }
+      if(cartElement2){
+        party.sparkles(cartElement2 as HTMLElement, options);
+      }
+    }, 1500);
   }
 
   public updateQuantity(articleId: number, quantity: number) {

@@ -76,13 +76,13 @@
 			<ion-icon size="small" name="storefront-outline"></ion-icon>
 			<ion-label>Magasins</ion-label>
 		</ion-tab-button>
-		<ion-tab-button *ngIf="isLogged;else notLogged" size="small" tab="space-client">
-			<ion-icon name="apps-outline"></ion-icon>
-			<ion-label>Dashboard</ion-label>
+		<ion-tab-button *ngIf="isLogged && currentUser.role === 'ADMIN';else notLogged" size="small" tab="space-client">
+			<ion-icon name="apps-outline" size="small"></ion-icon>
+			<ion-label>Tableau de bord</ion-label>
 		</ion-tab-button>
 		<ng-template #notLogged>
-			<ion-tab-button size="small" (click)="gotoLogin()">
-				<ion-icon name="person-outline"></ion-icon>
+			<ion-tab-button *ngIf="!isLogged" size="small" (click)="gotoLogin()">
+				<ion-icon name="person-outline" size="small"></ion-icon>
 				<ion-label>Compte</ion-label>
 			</ion-tab-button>
 		</ng-template>

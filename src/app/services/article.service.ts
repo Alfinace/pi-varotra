@@ -16,7 +16,10 @@ export class ArticleService {
     return this.http.get('articles?page=' + page + '&size=' + size + '&categoryId=' + categoryId);
   }
 
-  public getArticlesCurrentUser(page: number, size: number) {
+  public getArticlesCurrentUser(page?: number, size?: number) {
+    if(page === undefined || size === undefined){
+      return this.http.get('articles/current-user');
+    }
     return this.http.get('articles/current-user?page=' + page + '&size=' + size);
   }
 

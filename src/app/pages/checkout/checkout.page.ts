@@ -93,7 +93,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
         var carts = this.cartService.getAllCartData()
         this.mappingData(carts)
       } else {
-        this.router.navigate(['client/space-client'])
+        this.router.navigate(['space-client'])
       }
       this.items = [
         { label: 'Ma commande' },
@@ -132,7 +132,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     var panierObject = {}
     var promiseArray: any[] = []
     if (carts.length == 0) {
-      this.router.navigate(['client/space-client']);
+      this.router.navigate(['space-client']);
       return
     }
     for (let i = 0; i < carts.length; i++) {

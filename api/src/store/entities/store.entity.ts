@@ -44,12 +44,16 @@ export class Store extends Model {
 	@Column({ type: DataType.STRING })
 	contact: string;
 
-	@Column({ type: DataType.ENUM('pedding', 'active', 'inactive'), defaultValue: 'pedding' })
-	status: boolean;
-
 	@Column({ field: 'created_at' })
 	createdAt: Date;
 
   @Column({ field: 'description' , type: DataType.TEXT })
 	description: string;
+
+  @Column({ field: 'state', type: DataType.ENUM('active', 'inactive', 'blocked'), defaultValue: 'inactive' })
+  state: string
+
+  @Column({ field: 'pi_payment_id', type: DataType.STRING , unique: true, allowNull: true })
+  piPaymentId: string
+
 }

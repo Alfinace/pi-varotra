@@ -63,3 +63,8 @@
 		</div>
 	</div>
 </ng-template>
+<div class="fly-cart-item" *ngIf="checkedArticleAddedToCart() && tmpShow"
+  @flyToCart>
+      <ion-img (click)="show()" *ngIf="article.images.length" [src]="article!.images[0].image ?? ''">
+      </ion-img>
+</div>

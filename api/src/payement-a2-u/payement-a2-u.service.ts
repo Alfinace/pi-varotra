@@ -38,7 +38,7 @@ export class PaymentA2UService {
       baseUrl: process.env.API_URL_MINEPI,
     });
   }
-  create(data: any) {
+  create(data: any, type: string = 'order') {
     return new Promise((resolve, reject) => {
       this.paymentA2URepository.create(data).then(async res => {
         if (!res) reject('Error created data payment in database')
@@ -55,24 +55,6 @@ export class PaymentA2UService {
           const txid = await this.pi.submitPayment(paymentId);
           await this.update(res.id, { txid })
           const completedPayment = await this.pi.completePayment(paymentId, txid);
-          const orderId = JSON.parse(data.metadata).orderId
-          const articles = await this.articleOrderRepository.findAll({
-            where: {
-              orderId: data.orderId
-            }
-          })
-
-          for (let i = 0; i < articles.length; i++) {
-            const article = await this.articleRepository.findByPk(articles[i].articleId)
-            await this.articleRepository.update({
-              stock: article.stock - articles[i].quantity
-            }, {
-              where: {
-                id: articles[i].articleId
-              }
-            })
-          }
-
           resolve(completedPayment)
         } else {
           resolve('Create payment failed')

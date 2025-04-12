@@ -164,7 +164,6 @@ export class UserService {
 
   async addImageUser(id: number, createImageUserDto: CreateImageUserDto) {
     const user = await this.userRepository.findOne({ where: { id: id } });
-    console.log(createImageUserDto.filename);
     if (!user) {
       return Promise.reject('User not found');
     }

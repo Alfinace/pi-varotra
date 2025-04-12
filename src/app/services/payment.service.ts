@@ -1,11 +1,10 @@
+import { BehaviorSubject } from 'rxjs';
+import { CartService } from './cart.service';
 import { HttpService } from 'src/app/services/http.service';
 import { Injectable } from '@angular/core';
-import { PaymentDTO } from '../models/payment.dto.model';
-import { AuthResult } from '../models/auth-result';
 import { Order } from '../models/order.model';
-import { BehaviorSubject } from 'rxjs';
+import { PaymentDTO } from '../models/payment.dto.model';
 import { Router } from '@angular/router';
-import { CartService } from './cart.service';
 import { ToastService } from './toast.service';
 
 type PaymentData = {
@@ -43,6 +42,7 @@ export class PaymentService {
    */
   public async createPayment(data: PaymentData) {
     await this.auth();
+
     return new Promise(async (resolve, reject) => {
       const payment = await this.Pi.createPayment(data, {
         onReadyForServerApproval: (paymentId: any) => {
@@ -51,18 +51,18 @@ export class PaymentService {
         onReadyForServerCompletion: (paymentId: string, txid: string) => {
           this.onReadyForServerCompletion(paymentId, txid);
           this.cartService.removeAllCart()
-          this.router.navigate(['client/space-client'])
+          this.router.navigate(['space-client'])
           this.toastService.show('success', 'Paiement effectué avec succès')
-        resolve(true);
+          resolve(true);
         },
         onCancel: (paymentId: string) => {
-            reject(false);
+          reject(false);
           this.toastService.show('danger', 'Paiement annulé')
         },
         onError: (error: Error, payment: PaymentDTO | undefined) => {
           this.onError(error, payment);
           this.toastService.show('danger', 'Erreur lors du paiement')
-            reject(false);
+          reject(false);
         },
       });
       return payment;
@@ -88,6 +88,49 @@ export class PaymentService {
     if (payment) {
       console.log(payment);
     }
+  }
+
+
+  public async createPaymentStore(data: PaymentData) {
+    await this.auth();
+    return new Promise(async (resolve, reject) => {
+      const payment = await this.Pi.createPayment(data, {
+        onReadyForServerApproval: (paymentId: any) => {
+          this.onReadyForServerApprovalStore(paymentId);
+        },
+        onReadyForServerCompletion: (paymentId: string, txid: string) => {
+          this.onReadyForServerCompletionStore(paymentId, txid);
+          this.cartService.removeAllCart()
+          this.router.navigate(['space-client'])
+          this.toastService.show('success', 'Paiement effectué avec succès')
+          resolve(true);
+        },
+        onCancel: (paymentId: string) => {
+          reject(false);
+          this.toastService.show('danger', 'Paiement annulé')
+        },
+        onError: (error: Error, payment: PaymentDTO | undefined) => {
+          this.onError(error, payment);
+          this.toastService.show('danger', 'Erreur lors du paiement')
+          reject(false);
+        },
+      });
+      return payment;
+    });
+  }
+  public onReadyForServerApprovalStore(paymentId: string) {
+    this.http.post('stores/payments/approve', { paymentId }).toPromise().then((res: any) => {
+    });
+  }
+
+  public onReadyForServerCompletionStore(paymentId: string, txid: string) {
+    this.http.post('stores/payments/complete', { paymentId, txid }).toPromise().then((res: any) => {
+    });
+  }
+
+  public onCancelStore(paymentId: string) {
+    this.http.post('stores/payments/cancelled_payment', { paymentId }).toPromise().then((res: any) => {
+    });
   }
 
   public addOrder(order: Order) {

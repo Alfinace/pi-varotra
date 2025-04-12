@@ -70,7 +70,10 @@ export class ArticleService {
         },
         {
           model: Store,
-          as: 'store'
+          as: 'store',
+          where: {
+            state: 'active'
+          }
         },
         {
           model: Category,
@@ -97,7 +100,7 @@ export class ArticleService {
       as: 'store',
       where: {
         city: { [Op.in]: [...filter.villes] },
-
+        state: 'active'
       }
     }
     if (filter.villes.length === 1 && filter.villes[0] === 'Tous') {
@@ -159,6 +162,9 @@ export class ArticleService {
         {
           model: Store,
           as: 'store',
+          where: {
+            state: 'active'
+          },
           include: [{
             model: User,
             as: 'user',
@@ -174,14 +180,26 @@ export class ArticleService {
   findOne(id: number) {
     return this.articleRepository.findOne({
       where: { id, archived: false },
-      include: [ImageArticle, Store],
+      include: [ImageArticle, {
+        model: Store,
+        as: 'store'
+      }],
     });
   }
 
   findOneBySlug(slug: string) {
     return this.articleRepository.findOne({
       where: { slug, archived: false },
-      include: [ImageArticle, Store],
+      include: [
+        ImageArticle,
+        {
+          model: Store,
+          as: 'store',
+          where: {
+            state: 'active'
+          }
+        }
+      ],
     });
   }
 

@@ -121,3 +121,9 @@ p {
 .relative{
   position: relative;
 }
+.fly-cart-item {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  z-index: 100;
+}

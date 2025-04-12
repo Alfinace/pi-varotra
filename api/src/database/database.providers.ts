@@ -47,7 +47,7 @@ export const databaseProviders = [
         Pub,
       ]);
       await sequelize.sync({
-        // alter: !Boolean(process.env.IS_PRODUCTION),
+        alter: true,
         // force: true,
       });
       return sequelize;

@@ -5,6 +5,7 @@ import { ArticleComponent } from './article.component';
 import { IonicModule } from '@ionic/angular';
 import { ArticleDetailModule } from '../../modals/article-detail/article-detail.module';
 import { TruncatePipeModule } from 'src/app/pipes/truncate.pipe.module';
+import { FlyToCartModule } from '../fly-to-cart/fly-to-cart.module';
 
 
 
@@ -16,7 +17,8 @@ import { TruncatePipeModule } from 'src/app/pipes/truncate.pipe.module';
     IonicModule,
     RouterModule,
     ArticleDetailModule,
-    TruncatePipeModule
+    TruncatePipeModule,
+    FlyToCartModule
   ]
 })
 export class ArticleModule { }

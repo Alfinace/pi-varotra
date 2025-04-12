@@ -24,8 +24,9 @@ export class StoreService {
         {
           model: User,
           as: 'user',
-        }
+        },
       ],
+      where: { state: 'active' },
       limit,
       offset,
       distinct: true,

@@ -3,16 +3,16 @@
     <ion-icon class="ion-padding-start" size="small" slot="start" (click)="close()" name="chevron-back-outline">
     </ion-icon>
     <ion-title class="ion-text-center" style="font-weight: 900">
-      {{article ? 'Mis à jour du produit' : 'Nouveau produit'}}
+      {{article ? 'Mis à jour article' : 'Nouveau article'}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <br>
 <ion-content class="ion-padding-horizontal">
   <form [formGroup]="addProduitForm" (ngSubmit)="onSubmit()">
-    <ion-label>Ajouter des images</ion-label>
-    <app-images #imageComponent (selectImageEvent)="getImage($event)"></app-images>
-    <app-images #imageComponentUpdate (selectImageEvent)="getImageUpdate($event)"></app-images>
+    <ion-label>Ajouter les photos</ion-label>
+      <app-images #imageComponent (selectImageEvent)="getImage($event)"></app-images>
+      <app-images #imageComponentUpdate (selectImageEvent)="getImageUpdate($event)"></app-images>
 
     <div class="ion-margin-vertical d-flex ion-align-items-center ion-justify-content-around upload-image"
       style="gap: 10px;flex-wrap: wrap;">

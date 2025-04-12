@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Article } from 'src/article/entities/article.entity';
+import { Store } from 'src/store/entities/store.entity';
 
 @Injectable()
 export class CategoryService {

@@ -22,6 +22,7 @@ export class CreateStoreComponent implements OnInit, AfterViewInit {
   };
   preview: any;
   currentIndex = 0
+  priceValue = 5;
   constructor(
     private modalController: ModalController,
     private toastService: ToastService,

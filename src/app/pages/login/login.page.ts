@@ -47,15 +47,15 @@ export class LoginPage implements OnInit {
 
     let isPiBrowser = userAgent.match(/PiBrowser/i);
 
-    // if (!isPiBrowser && environment.production) {
-    //   const alert = await this.alertController.create({
-    //     header: 'Attention',
-    //     message: 'Vous devez utiliser l\'application Pi Browser pour vous connecter',
-    //     buttons: ['OK']
-    //   });
-    //   await alert.present();
-    //   return;
-    // }
+    if (!isPiBrowser && environment.production) {
+      const alert = await this.alertController.create({
+        header: 'Attention',
+        message: 'Vous devez utiliser l\'application Pi Browser pour vous connecter',
+        buttons: ['OK']
+      });
+      await alert.present();
+      return;
+    }
     this.isSubmited = true;
     try {
       this.paymentService.auth().then((authResult: AuthResult) => {

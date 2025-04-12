@@ -36,7 +36,6 @@ export class OrderController {
       if (offset !== 0) {
         offset = offset * limit;
       }
-      console.log(user);
 
       var orders = await this.orderService.findByStore(user.storeId, limit, offset);
       orders.rows = orders.rows.map(order => {
@@ -49,7 +48,6 @@ export class OrderController {
       })
       return orders;
     } catch (error) {
-      console.log(error);
 
       throw new HttpException(error.message, 500);
     }

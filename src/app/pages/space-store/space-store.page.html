@@ -1,13 +1,17 @@
 <ion-content class="ion-padding-horizontal">
+  <div class="mt-70 text-sm warning-box">
+    Votre boutique n'est pas encore active tant que vous n'avez pas paye le frais , vous pouvez le payer en cliquant sur le bouton sur
+    <a href="#" (click)="pay($event)">Payer</a>
+  </div>
   <ion-grid>
-    <ion-row class="ion-justify-content-around mt-70">
+    <ion-row class="ion-justify-content-around">
       <!-- Total Records -->
       <ion-col size="12" size-md="4">
         <ion-card class="stat-card">
-          <ion-card-content class="d-flex ion-align-items-center">
-            <ion-icon size="large"  name="reader-outline"></ion-icon>
+          <ion-card-content class="d-flex ion-align-items-center ion-no-padding-bottom">
+            <ion-icon size="small"  name="reader-outline"></ion-icon>
             <div class="stat-content">
-              <span >Nombres</span>
+              <span class="text-sm">Nombres d'articles</span>
               <p class="stat-value">{{ totalRecords ?? 0 }}</p>
             </div>
           </ion-card-content>
@@ -17,11 +21,11 @@
       <!-- Sold Items -->
       <ion-col size="12" size-md="4">
         <ion-card class="stat-card">
-          <ion-card-content class="d-flex ion-align-items-center">
-            <ion-icon size="large"  name="bookmark-outline"></ion-icon>
+          <ion-card-content class="d-flex ion-align-items-center ion-no-padding-bottom">
+            <ion-icon size="small"  name="bookmark-outline"></ion-icon>
             <div class="stat-content">
-              <span>Vendus</span>
-              <p class="stat-value">10</p>
+              <span class="text-sm">Vendus</span>
+              <p class="stat-value">0</p>
             </div>
           </ion-card-content>
         </ion-card>
@@ -30,10 +34,10 @@
       <!-- Orders -->
       <ion-col size="12" size-md="4">
         <ion-card class="stat-card">
-          <ion-card-content class="d-flex ion-align-items-center">
+          <ion-card-content class="d-flex ion-align-items-center ion-no-padding-bottom">
             <ion-icon size="large" name="cart-outline"></ion-icon>
             <div class="stat-content">
-              <span>Commandes</span>
+              <span class="text-sm">Commandes</span>
               <p class="stat-value">{{ orders.length ?? 0 }}</p>
             </div>
           </ion-card-content>
@@ -45,7 +49,7 @@
   <div style="width: 100%">
     <br>
     <br>
-    <h3 class=" ion-no-marginion-margin-bottom text-large">Liste produit</h3>
+    <h3 class=" ion-no-marginion-margin-bottom text-large">Liste article</h3>
     <ion-list>
       <ion-item *ngFor="let product of products; let i = index" (click)="displayActions(product,i)">
         <ion-thumbnail slot="start">
