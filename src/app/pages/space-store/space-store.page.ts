@@ -1,25 +1,29 @@
 import { ActionSheetController, AlertController, ModalController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { take, takeUntil } from 'rxjs/operators';
 
 import { AddArticleComponent } from '../../shared/components/modals/add-article/add-article.component';
 import { Article } from 'src/app/models/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { PaymentService } from 'src/app/services/payment.service';
+import { SessionService } from 'src/app/services/session.service';
+import { Subject } from 'rxjs';
 import { ToastService } from 'src/app/services/toast.service';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-space-store',
   templateUrl: './space-store.page.html',
   styleUrls: ['./space-store.page.scss'],
 })
-export class SpaceStorePage implements OnInit {
+export class SpaceStorePage implements OnInit, OnDestroy {
   rows = 8;
   page = 0;
   products: Article[] = [];
   totalRecords: number;
   orders: any[] = [];
   currentIndex: number;
+  private destroy$: any = new Subject<void>();
+  currentUser: any = null;
 
   constructor(
     private modalController: ModalController,
@@ -27,10 +31,15 @@ export class SpaceStorePage implements OnInit {
     private actionSheetController: ActionSheetController,
     private alertController: AlertController,
     private articleService: ArticleService,
-    private payementService: PaymentService
+    private payementService: PaymentService,
+    private sessionService: SessionService,
   ) { }
 
   ngOnInit() {
+    this.sessionService.getInfoUser().pipe(takeUntil(this.destroy$)).subscribe(user => {
+      this.currentUser = user;
+    })
+
     this.articleService.getArticlesCurrentUser().pipe(take(1)).subscribe(res => {
       this.products = res.rows;
       this.totalRecords = res.count;
@@ -50,6 +59,13 @@ export class SpaceStorePage implements OnInit {
       }
 
     })
+  }
+
+  get isStoreActive() {
+    if (this.currentUser && this.currentUser.store) {
+      return this.currentUser.store.state === 'active';
+    }
+    return false;
   }
 
   public async addProduit() {
@@ -170,5 +186,10 @@ export class SpaceStorePage implements OnInit {
         }]
     })
     await alert.present();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

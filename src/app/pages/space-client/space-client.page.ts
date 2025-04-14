@@ -1,9 +1,11 @@
-import { SessionService } from './../../services/session.service';
-import { ParamsComponent } from './../../shared/components/modals/params/params.component';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { Chart, registerables } from 'chart.js';
+
 import { CreateStoreComponent } from 'src/app/shared/components/modals/create-store/create-store.component';
+import { ModalController } from '@ionic/angular';
+import { ParamsComponent } from './../../shared/components/modals/params/params.component';
+import { SessionService } from './../../services/session.service';
+
 Chart.register(...registerables);
 
 
@@ -30,7 +32,7 @@ interface Product {
 export class SpaceClientPage implements OnInit, AfterViewInit {
   isOpen = false
   selectedTab = "orders"
-
+  private Pi: any = window.Pi;
   orders: Order[] = [
     { order: "#4532", date: "Apr 2, 2023", status: "Completed", amount: "$250.00" },
     { order: "#4531", date: "Apr 1, 2023", status: "Processing", amount: "$125.00" },
@@ -86,6 +88,7 @@ export class SpaceClientPage implements OnInit, AfterViewInit {
     private sessionService: SessionService) { }
 
   ngOnInit() {
+
   }
   ngAfterViewInit() {
     // this.barChartMethod();

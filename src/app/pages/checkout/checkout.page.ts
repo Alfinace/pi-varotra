@@ -1,17 +1,17 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { IonSlides, ModalController } from '@ionic/angular';
-import { Subject, takeUntil } from 'rxjs';
-import { Cart } from 'src/app/models/cart.model';
-import { Order } from 'src/app/models/order.model';
-import { User } from 'src/app/models/user.model';
+import { Subject, take, takeUntil } from 'rxjs';
+
 import { ArticleService } from 'src/app/services/article.service';
+import { Cart } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
+import { Order } from 'src/app/models/order.model';
 import { PaymentService } from 'src/app/services/payment.service';
 import { SessionService } from 'src/app/services/session.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-checkout',
@@ -38,11 +38,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private articleService: ArticleService) {
-    this.sessionService.getInfoUser().subscribe(user => {
-      if (user) {
-        this.user = user
-      }
-    })
+
   }
 
   @ViewChild('slider') slider: IonSlides;
@@ -85,6 +81,14 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
       fullname: [''],
       city: [''],
       contact: [''],
+    })
+    this.sessionService.getInfoUser().pipe(take(1)).subscribe(user => {
+      if (user) {
+        this.user = user
+        this.paymentForm.patchValue({
+          fullname: user.username,
+        })
+      }
     })
     this.route.params.subscribe(params => {
       this.paniers = []

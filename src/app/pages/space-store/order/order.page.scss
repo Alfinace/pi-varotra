@@ -1,24 +1,25 @@
 th,
 td,
-.p-datatable-customers
-  .p-datatable-gridlines
-  .p-paginator
-  .p-paginator-pages
-  .p-paginator-page {
+.p-datatable-customers .p-datatable-gridlines .p-paginator .p-paginator-pages .p-paginator-page {
   font-size: 10px;
+  padding: 10px 15px;
 }
+
 .text-upper {
   text-transform: uppercase;
 }
+
 .btn-action {
   padding: 5px 10px;
   font-size: 10px;
   border-radius: 3px;
 }
+
 .warning {
   border: 1px solid var(--ion-color-secondary);
   color: var(--ion-color-secondary);
 }
+
 .primary2 {
   border: 1px solid var(--ion-color-primary);
   color: var(--ion-color-primary);

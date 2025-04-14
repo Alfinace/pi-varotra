@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+
 import { ArticleService } from 'src/app/services/article.service';
+import { ModalController } from '@ionic/angular';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-order',
@@ -12,7 +14,7 @@ export class OrderPage implements OnInit {
   orders: any[] = [];
   totalRecords = 0;
   page = 0;
-  pageSize = 10;
+  pageSize = 7;
 
 
   constructor(
@@ -20,14 +22,20 @@ export class OrderPage implements OnInit {
     private modal: ModalController) { }
 
   ngOnInit() {
-    this.articleService.getCmd(0, 10).toPromise().then(res => {
+    this.loadData();
+  }
+
+  loadData() {
+    this.articleService.getCmd(this.page, this.pageSize).pipe(take(1)).subscribe((res: any) => {
       this.orders = res.rows;
       this.totalRecords = res.count;
     })
   }
 
+
   paginate(e: any) {
-    console.log(e);
+    this.page = e.page;
+    this.loadData();
   }
 
   async showOrder(order: any) {

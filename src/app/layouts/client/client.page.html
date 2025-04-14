@@ -1,10 +1,8 @@
 <ion-menu menuId="clientMenu" contentId="main-content" *ngIf="currentUser">
-  <ion-content class="ion-padding ">
+  <ion-content class="ion-padding">
     <ion-item>
       <span class="text-success">Connecté: </span>
-      <span class="text-primary">
-         {{currentUser?.username}}
-      </span>
+      <span class="text-primary"> {{currentUser?.username}} </span>
     </ion-item>
     <ion-item-group>
       <ion-item-divider>
@@ -28,65 +26,81 @@
       <ng-template #hasNotStore>
         <ion-item (click)="createStore()">
           <ion-icon slot="start" name="storefront-outline"></ion-icon>
-          <ion-label class="text-sm">
-            Créer un magasin
-          </ion-label>
+          <ion-label class="text-sm"> Créer un magasin </ion-label>
         </ion-item>
       </ng-template>
     </ion-item-group>
   </ion-content>
 </ion-menu>
 <div class="ion-page" id="main-content">
-<ion-header [translucent]="true" class="ion-no-border">
-	<ion-toolbar>
-    <ion-buttons slot="start" *ngIf="currentUser">
-      <ion-menu-button ></ion-menu-button>
-    </ion-buttons>
-		<ion-buttons slot="secondary">
-			<ion-button>
-				<ion-icon id="0" slot="icon-only" class="marked" name="notifications-outline"></ion-icon>
-			</ion-button>
-			<ion-button (click)="onCart()" id="cartElement">
-				<ion-icon [id]="carts.length" slot="icon-only" class="marked" name="cart-outline"></ion-icon>
-			</ion-button>
-		</ion-buttons>
-		<ion-title>
-      <h4 class="ion-text-left app-name" [ngClass]="{'ion-margin-start': !currentUser}">Mpi-Varotra</h4>
-    </ion-title>
-	</ion-toolbar>
-</ion-header>
-<ion-content>
-	<ion-router-outlet></ion-router-outlet>
-</ion-content>
-<ion-tabs>
-	<ion-tab-bar slot="bottom,top">
-		<ion-tab-button tab="home">
-			<ion-icon size="small" name="home-outline"></ion-icon>
-			<ion-label>Accueil</ion-label>
-		</ion-tab-button>
-		<ion-tab-button tab="search">
-			<ion-icon size="small" name="search-outline"></ion-icon>
-			<ion-label>Recherche</ion-label>
-		</ion-tab-button>
-		<ion-tab-button tab="new">
-			<ion-icon size="small" name="megaphone-outline"></ion-icon>
-			<ion-label>Acutalité</ion-label>
-		</ion-tab-button>
-		<ion-tab-button tab="store">
-			<ion-icon size="small" name="storefront-outline"></ion-icon>
-			<ion-label>Magasins</ion-label>
-		</ion-tab-button>
-		<ion-tab-button *ngIf="isLogged && currentUser.role === 'ADMIN';else notLogged" size="small" tab="space-client">
-			<ion-icon name="apps-outline" size="small"></ion-icon>
-			<ion-label>Tableau de bord</ion-label>
-		</ion-tab-button>
-		<ng-template #notLogged>
-			<ion-tab-button *ngIf="!isLogged" size="small" (click)="gotoLogin()">
-				<ion-icon name="person-outline" size="small"></ion-icon>
-				<ion-label>Compte</ion-label>
-			</ion-tab-button>
-		</ng-template>
-	</ion-tab-bar>
-</ion-tabs>
-
+  <ion-header [translucent]="true" class="ion-no-border">
+    <ion-toolbar>
+      <ion-buttons slot="start" *ngIf="currentUser">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="secondary">
+        <ion-button>
+          <ion-icon
+            id="0"
+            slot="icon-only"
+            class="marked"
+            name="notifications-outline"
+          ></ion-icon>
+        </ion-button>
+        <ion-button (click)="onCart()" id="cartElement">
+          <ion-icon
+            [id]="carts.length"
+            slot="icon-only"
+            class="marked"
+            name="cart-outline"
+          ></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>
+        <h4
+          class="ion-text-left app-name"
+          [ngClass]="{'ion-margin-start': !currentUser}"
+        >
+          Mpi-Varotra
+        </h4>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom,top">
+      <ion-tab-button tab="home">
+        <ion-icon size="small" name="home-outline"></ion-icon>
+        <ion-label>Accueil</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="search">
+        <ion-icon size="small" name="search-outline"></ion-icon>
+        <ion-label>Recherche</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="new">
+        <ion-icon size="small" name="megaphone-outline"></ion-icon>
+        <ion-label>Acutalité</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="store">
+        <ion-icon size="small" name="storefront-outline"></ion-icon>
+        <ion-label>Magasins</ion-label>
+      </ion-tab-button>
+      <ion-tab-button
+        *ngIf="isLogged && currentUser.role === 'ADMIN2';else notLogged"
+        size="small"
+        tab="space-client"
+      >
+        <ion-icon name="apps-outline" size="small"></ion-icon>
+        <ion-label>Tableau de bord</ion-label>
+      </ion-tab-button>
+      <ng-template #notLogged>
+        <ion-tab-button *ngIf="!isLogged" size="small" (click)="gotoLogin()">
+          <ion-icon name="person-outline" size="small"></ion-icon>
+          <ion-label>Compte</ion-label>
+        </ion-tab-button>
+      </ng-template>
+    </ion-tab-bar>
+  </ion-tabs>
 </div>
