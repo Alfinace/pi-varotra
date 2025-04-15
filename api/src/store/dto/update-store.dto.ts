@@ -1,11 +1,11 @@
-import { PartialType } from '@nestjs/swagger';
-import { IsOptional } from 'class-validator';
 import { CreateStoreDto } from './create-store.dto';
+import { IsOptional } from 'class-validator';
+import { PartialType } from '@nestjs/swagger';
 
 export class UpdateStoreDto extends PartialType(CreateStoreDto) {
-	@IsOptional()
-	images: { type: string, url: string }[];
+  @IsOptional()
+  images: { type: string; url: string }[];
 
   @IsOptional()
-  piPaiementId: string
+  piPaymentId: string;
 }

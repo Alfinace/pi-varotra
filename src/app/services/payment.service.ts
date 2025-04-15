@@ -100,9 +100,7 @@ export class PaymentService {
         },
         onReadyForServerCompletion: (paymentId: string, txid: string) => {
           this.onReadyForServerCompletionStore(paymentId, txid);
-          this.cartService.removeAllCart()
-          this.router.navigate(['space-client'])
-          this.toastService.show('success', 'Paiement effectué avec succès')
+          this.toastService.show('success', 'Votre paiement a été effectué avec succès, desormais votre boutique est active et visible au public')
           resolve(true);
         },
         onCancel: (paymentId: string) => {

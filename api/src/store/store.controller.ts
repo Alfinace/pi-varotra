@@ -148,6 +148,11 @@ export class StoreController {
         .status(404)
         .json({ message: `Not found payment ${paymentId}` });
     }
+    //update store
+    await this.storeService.updateByUserId(payment.userId, {
+      state: 'active',
+      piPaymentId: paymentId,
+    });
     return res
       .status(200)
       .json({ message: `Complete the payment ${paymentId}` });

@@ -12,7 +12,8 @@ export class StoreService {
     private readonly storeRepository: typeof Store,
 
     @Inject('CITY_REPOSITORY')
-    private readonly cityRepository: typeof City,) { }
+    private readonly cityRepository: typeof City,
+  ) { }
   create(createStoreDto: CreateStoreDto) {
     return this.storeRepository.create({ ...createStoreDto });
   }
@@ -40,13 +41,19 @@ export class StoreService {
         {
           model: User,
           as: 'user',
-        }
+        },
       ],
-    })
+    });
   }
 
   update(id: number, updateStoreDto: UpdateStoreDto) {
     return `This action updates a #${id} store`;
+  }
+
+  updateByUserId(userId: number, data: { state: string; piPaymentId: string }) {
+    return this.storeRepository.update(data, {
+      where: { userId },
+    });
   }
 
   remove(id: number) {

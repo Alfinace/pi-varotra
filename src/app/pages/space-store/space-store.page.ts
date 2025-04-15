@@ -35,11 +35,18 @@ export class SpaceStorePage implements OnInit, OnDestroy {
     private sessionService: SessionService,
   ) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.sessionService.getInfoUser().pipe(takeUntil(this.destroy$)).subscribe(user => {
       this.currentUser = user;
     })
+  }
 
+  ionViewDidLeave() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  ngOnInit() {
     this.articleService.getArticlesCurrentUser().pipe(take(1)).subscribe(res => {
       this.products = res.rows;
       this.totalRecords = res.count;
@@ -170,8 +177,8 @@ export class SpaceStorePage implements OnInit, OnDestroy {
             this.payementService.createPaymentStore(
               {
                 amount: 5,
-                memo: 'Store fees',
-                metadata: { store: 'test' }
+                memo: 'STORE_FEE',
+                metadata: { storeId: this.currentUser.store.id },
               }
             )
           }
