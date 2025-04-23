@@ -6,6 +6,7 @@ import { ClientPageRoutingModule } from './client-routing.module';
 import { ClientPage } from './client.page';
 import { CartModule } from 'src/app/shared/components/modals/cart/cart.module';
 import { FlyToCartModule } from 'src/app/shared/components/widgets/fly-to-cart/fly-to-cart.module';
+import { TransactionDetailsModule } from 'src/app/shared/components/widgets/transaction-details/transaction-details..module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { FlyToCartModule } from 'src/app/shared/components/widgets/fly-to-cart/f
     IonicModule,
     ClientPageRoutingModule,
     CartModule,
-    FlyToCartModule
+    FlyToCartModule,
+    TransactionDetailsModule
   ],
   declarations: [ClientPage]
 })

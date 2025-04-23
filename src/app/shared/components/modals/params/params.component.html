@@ -1,155 +1,55 @@
 <ion-header class="ion-no-border" mode="md">
   <ion-toolbar>
-    <ion-icon class="ion-padding-start" size="small" slot="start" (click)="close()" name="chevron-back-outline">
+    <ion-icon
+      class="ion-padding-start"
+      size="small"
+      slot="start"
+      (click)="close()"
+      name="chevron-back-outline"
+    >
     </ion-icon>
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="ion-padding">
   <ion-col class="params-page">
-    <app-images #imageComponent (selectImageEvent)="getImage($event)"></app-images>
-    <div class="params-header">
-      <ion-avatar class="avatar">
-        <ion-icon name="create-outline" class="icon-edit" (click)="imageComponent.selectImageSource()" size="large"
-          color="primary"></ion-icon>
-        <img [src]="currentUser?.avatar ? currentUser?.avatar :'https://www.w3schools.com/howto/img_avatar.png'" />
-      </ion-avatar>
-      <div class="user-info">
-        <h3> {{currentUser?.username}} </h3>
-      </div>
-    </div>
-    <br>
-    <br>
-    <br>
     <div class="params-content">
       <ion-list class="param-list">
-        <!-- <ion-item (click)="editProfile()">
-          <ion-label>Editer le profile</ion-label>
-          <ion-icon color="primary" slot="start" name="person-outline"></ion-icon>
-          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
-        </ion-item> -->
-        <!-- <ion-item id="open-modal">
-          <ion-label>Portefeuille</ion-label>
-          <ion-icon color="primary" slot="start" name="wallet-outline"></ion-icon>
-          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
-        </ion-item> -->
-        <!-- <ion-item (click)="editSocialNetwork()">
-          <ion-label>Réseaux sociaux</ion-label>
-          <ion-icon color="primary" slot="start" name="git-network-outline"></ion-icon>
-          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
-        </ion-item> -->
-        <!-- <ion-item id="open-security-modal">
-          <ion-label>Sécurité</ion-label>
-          <ion-icon color="primary" slot="start" name="lock-closed-outline"></ion-icon>
-          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
-        </ion-item> -->
-
         <ion-item>
           <ion-label>Langue</ion-label>
           <span class="language">Français</span>
-          <ion-icon color="primary" slot="start" name="language-outline"></ion-icon>
-          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
+          <ion-icon
+            color="primary"
+            slot="start"
+            name="language-outline"
+          ></ion-icon>
+          <ion-icon
+            color="primary"
+            slot="end"
+            name="chevron-forward-outline"
+          ></ion-icon>
         </ion-item>
 
         <ion-item>
-          <ion-label>Centre d'aide</ion-label>
+          <ion-label>Contactez le support</ion-label>
           <ion-icon color="primary" slot="start" name="help-outline"></ion-icon>
-          <ion-icon color="primary" slot="end" name="chevron-forward-outline"></ion-icon>
+          <ion-icon
+            color="primary"
+            slot="end"
+            name="chevron-forward-outline"
+          ></ion-icon>
         </ion-item>
       </ion-list>
     </div>
     <ion-row class="btn-row mt">
       <ion-col size="12">
-        <button (click)="onLogout()" class="ion-activatable ripple-parent custom-parent btn-danger">
+        <button
+          (click)="onLogout()"
+          class="ion-activatable ripple-parent custom-parent btn-danger"
+        >
           <ion-label>Déconnexion</ion-label>
           <ion-ripple-effect></ion-ripple-effect>
         </button>
       </ion-col>
     </ion-row>
   </ion-col>
-  <!-- <ion-modal #wallet trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-    <ng-template>
-      <ion-header [translucent]="true" class="ion-no-border" mode="md">
-        <ion-toolbar>
-          <ion-icon class="ion-padding-start" size="large" slot="start" (click)="cancel()" name="chevron-back-outline">
-          </ion-icon>
-          <ion-title class="ion-text-center" style="font-weight: 900">Editer portefeuille</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <ion-item>
-          <ion-label position="stacked">Adresse du portefeuille</ion-label>
-          <ion-input type="text" placeholder="GAXATSAEAA....." [(ngModel)]="publicKey"></ion-input>
-        </ion-item>
-        <ion-row class="btn-row mt">
-          <ion-col size="12">
-            <button [disabled]="publicKey && publicKey.length == 0" (click)="save()"
-              class="ion-activatable ripple-parent custom-parent btn-primary">
-              <ion-label>Enregister</ion-label>
-              <ion-ripple-effect></ion-ripple-effect>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-content>
-    </ng-template>
-  </ion-modal> -->
-
-
-  <ion-modal #security trigger="open-security-modal" (willDismiss)="onWillDismiss($event)">
-    <ng-template>
-      <ion-header [translucent]="true" class="ion-no-border" mode="md">
-        <ion-toolbar>
-          <ion-icon class="ion-padding-start" size="small" slot="start" (click)="cancel2()" name="chevron-back-outline">
-          </ion-icon>
-          <ion-title class="ion-text-center" style="font-weight: 900">Mis à jour mot de passe</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <form [formGroup]="updatePasswordForm">
-          <ion-row>
-            <ion-col size="12">
-              <ion-item>
-                <ion-label position="floating">Mot de passe actuel</ion-label>
-                <ion-input required formControlName="oldPassword" type="password"></ion-input>
-              </ion-item>
-            </ion-col>
-            <ion-col size="12">
-              <ion-item>
-                <ion-label position="floating">Nouveau mot de passe</ion-label>
-                <ion-input required formControlName="password" type="password"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12">
-              <ion-item>
-                <ion-label position="floating">Comfirmation</ion-label>
-                <ion-input required formControlName="confirmPassword" type="password"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-text *ngIf="password?.valid && password?.value !== confirmPassword?.value">
-            <span class="small-size" style="color: red;">
-              Mot de passe n'est pas confirmé
-            </span>
-          </ion-text>
-          <ion-row class="btn-row mt">
-            <ion-col size="12">
-              <button
-                [disabled]="isSubmited || updatePasswordForm.invalid || password?.value !== confirmPassword?.value"
-                (click)="save2()" class="ion-activatable ripple-parent custom-parent btn-primary">
-                <ng-container *ngIf="!isSubmited;else templateLoading">
-                  <ion-label>Mettre à jour</ion-label>
-                </ng-container>
-                <ng-template #templateLoading>
-                  <ion-spinner name="circular" style="color:#FFF"></ion-spinner>
-                </ng-template>
-                <ion-ripple-effect></ion-ripple-effect>
-              </button>
-            </ion-col>
-          </ion-row>
-        </form>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 </ion-content>

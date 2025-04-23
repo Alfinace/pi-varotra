@@ -1,16 +1,15 @@
-import { ToastService } from './../../services/toast.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { AlertController } from '@ionic/angular';
+import { AuthResult } from 'src/app/models/auth-result';
 import { HttpService } from 'src/app/services/http.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { PaymentService } from 'src/app/services/payment.service';
-import { UserService } from 'src/app/services/user.service';
 import { SessionService } from 'src/app/services/session.service';
-import { AuthResult } from 'src/app/models/auth-result';
-import { AlertController } from '@ionic/angular';
-import { environment } from 'src/environments/environment';
-
+import { ToastService } from './../../services/toast.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -43,19 +42,6 @@ export class LoginPage implements OnInit {
   }
 
   public async login() {
-    let userAgent = navigator.userAgent;
-
-    let isPiBrowser = userAgent.match(/PiBrowser/i);
-
-    if (!isPiBrowser && environment.production) {
-      const alert = await this.alertController.create({
-        header: 'Attention',
-        message: 'Vous devez utiliser l\'application Pi Browser pour vous connecter',
-        buttons: ['OK']
-      });
-      await alert.present();
-      return;
-    }
     this.isSubmited = true;
     try {
       this.paymentService.auth().then((authResult: AuthResult) => {

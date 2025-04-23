@@ -13,6 +13,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { TransactionDetailsModule } from 'src/app/shared/components/widgets/transaction-details/transaction-details..module';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
     ProgressBarModule,
     ToastModule,
     TableModule,
+    TransactionDetailsModule
   ],
   declarations: [OrderPage, OrderDetailComponent]
 })

@@ -27,11 +27,8 @@ export class AuthService {
         .getMyInfo(auth.accessToken)
         .pipe(take(1))
         .subscribe(
-          (response) => {
-            console.log('User info:', response);
-          },
+          (response) => { },
           (error) => {
-            console.error('Error fetching user info:', error);
             throw new Error('Invalid access token');
           },
         );

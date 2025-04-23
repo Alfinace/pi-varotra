@@ -1,18 +1,20 @@
 .container-category {
-  max-width: 490px;
   overflow: auto;
 }
+
 .tabs {
   gap: 10px;
   font-family: 'DM Sans Medium';
   font-size: large;
   gap: 20px;
   text-align: center;
+
   ion-label {
-    border-bottom:1px solid gainsboro;
+    border-bottom: 1px solid gainsboro;
     padding-bottom: 2px;
     width: 50%;
   }
+
   .selected {
     transition: 500ms all ease-in-out;
     border-bottom: 1px solid var(--ion-color-primary);

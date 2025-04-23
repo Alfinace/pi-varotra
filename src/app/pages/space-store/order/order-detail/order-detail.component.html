@@ -94,4 +94,10 @@
       </ion-text>
     </ion-item>
   </ion-list>
+  <app-transaction-details *ngIf="transaction; else noTransaction" [transaction]="transaction"></app-transaction-details>
+  <ng-template #noTransaction>
+    <div class="ion-text-center ion-padding ion-margin">
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+  </ng-template>
 </ion-content>

@@ -1,0 +1,211 @@
+<div class="min-h-screen bg-gradient-to-b">
+  <div class="container">
+    <header class="header">
+      <h1 class="title text-medium">Pi Network Transaction Explorer</h1>
+      <p class="subtitle text-sm">
+        View and analyze transaction details on the Pi Network testnet
+      </p>
+    </header>
+
+    <div class="card text-sm">
+      <div class="card-header">
+        <div class="header-content">
+          <div class="w-full">
+            <div class="d-flex ion-justify-content-between">
+              <h2 class="card-title text-sm">Transaction Details</h2>
+              <div class="badge" [ngClass]="transaction.successful ? 'badge-success' : 'badge-danger'">
+                {{ transaction.successful ? 'Successful' : 'Failed' }}
+              </div>
+            </div>
+            <p class="card-description text-sm d-flex ion-justify-content-between">
+              Transaction ID: {{ truncateHash(transaction.id) }}
+              <button class="icon-button" (click)="copyToClipboard(transaction.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="card-content">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="info-group">
+              <h3 class="info-label">Created At</h3>
+              <p class="info-value">{{ formatDate(transaction.created_at) }}</p>
+            </div>
+            <div class="info-group">
+              <h3 class="info-label">Ledger</h3>
+              <p class="info-value">{{ transaction.ledger }}</p>
+            </div>
+            <div class="info-group">
+              <h3 class="info-label">Operation Count</h3>
+              <p class="info-value">{{ transaction.operation_count }}</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="info-group">
+              <h3 class="info-label">Source Account</h3>
+              <div class="flex-row">
+                <p class="info-value truncate">{{ truncateHash(transaction.source_account) }}</p>
+                <button class="icon-button" (click)="copyToClipboard(transaction.source_account)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="info-group">
+              <h3 class="info-label">Fee</h3>
+              <p class="info-value">{{ formatAmount(transaction.fee_charged) }} Pi</p>
+            </div>
+            <div class="info-group">
+              <h3 class="info-label">Memo</h3>
+              <p class="info-value">{{ transaction.memo }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <button class="toggle-button" (click)="toggleSection('links')">
+            <span class="toggle-text">Links</span>
+            <svg *ngIf="!expandedSections.links" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            <svg *ngIf="expandedSections.links" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+          </button>
+
+          <div *ngIf="expandedSections.links" class="section-content">
+            <div class="row">
+              <div *ngFor="let key of getObjectKeys(transaction._links)" class="col-md-6 link-item">
+                <span class="link-label">{{ key }}:</span>
+                <a [href]="transaction._links[key].href" target="_blank" rel="noopener noreferrer" class="link">
+                  View
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <div class="tab-header">
+            <button class="tab-button" [ngClass]="{'active': activeTab === 'details'}" (click)="setActiveTab('details')">Details</button>
+            <button class="tab-button" [ngClass]="{'active': activeTab === 'technical'}" (click)="setActiveTab('technical')">Technical Data</button>
+            <button class="tab-button" [ngClass]="{'active': activeTab === 'signatures'}" (click)="setActiveTab('signatures')">Signatures</button>
+          </div>
+
+          <div class="tab-content" *ngIf="activeTab === 'details'">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="info-group">
+                  <h3 class="info-label">Valid After</h3>
+                  <p class="info-value">{{ formatDate(transaction.valid_after) }}</p>
+                </div>
+                <div class="info-group">
+                  <h3 class="info-label">Valid Before</h3>
+                  <p class="info-value">{{ formatDate(transaction.valid_before) }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-group">
+                  <h3 class="info-label">Fee Account</h3>
+                  <p class="info-value truncate">{{ truncateHash(transaction.fee_account) }}</p>
+                </div>
+                <div class="info-group">
+                  <h3 class="info-label">Max Fee</h3>
+                  <p class="info-value">{{ formatAmount(transaction.max_fee) }} π</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" *ngIf="activeTab === 'technical'">
+            <div class="section">
+              <button class="toggle-button" (click)="toggleSection('envelope')">
+                <span class="toggle-text">Envelope XDR</span>
+                <svg *ngIf="!expandedSections.envelope" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                <svg *ngIf="expandedSections.envelope" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+              </button>
+
+              <div *ngIf="expandedSections.envelope" class="code-container">
+                <pre class="code">{{ transaction.envelope_xdr }}</pre>
+                <button class="icon-button copy-button" (click)="copyToClipboard(transaction.envelope_xdr)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="section">
+              <button class="toggle-button" (click)="toggleSection('results')">
+                <span class="toggle-text">Result XDR</span>
+                <svg *ngIf="!expandedSections.results" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                <svg *ngIf="expandedSections.results" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+              </button>
+
+              <div *ngIf="expandedSections.results" class="code-container">
+                <pre class="code">{{ transaction.result_xdr }}</pre>
+                <button class="icon-button copy-button" (click)="copyToClipboard(transaction.result_xdr)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" *ngIf="activeTab === 'signatures'">
+            <h3 class="info-label">Signatures</h3>
+            <div *ngFor="let signature of transaction.signatures; let i = index" class="signature-container">
+              <p class="signature">{{ signature }}</p>
+              <button class="icon-button copy-button" (click)="copyToClipboard(signature)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="button button-outline text-sm" (click)="openInPiExplorer()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          View on Pi Explorer
+        </button>
+        <button class="button button-primary text-sm" (click)="copyToClipboard(transaction.id)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          Transaction ID
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

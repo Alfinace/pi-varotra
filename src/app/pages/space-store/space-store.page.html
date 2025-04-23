@@ -4,7 +4,7 @@
       <ion-buttons slot="start"> </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <div class="text-sm warning-box ion-padding" *ngIf="!isStoreActive">
+  <div class="text-sm warning-box ion-padding" *ngIf="currentUser && !isStoreActive">
     Votre boutique n'est pas encore active tant que vous n'avez pas paye le
     frais , vous pouvez le payer en cliquant sur le bouton sur
     <a href="#" (click)="pay($event)">Payer</a>

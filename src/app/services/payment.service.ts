@@ -6,6 +6,7 @@ import { Order } from '../models/order.model';
 import { PaymentDTO } from '../models/payment.dto.model';
 import { Router } from '@angular/router';
 import { ToastService } from './toast.service';
+import { environment } from 'src/environments/environment';
 
 type PaymentData = {
   amount: number,
@@ -21,6 +22,8 @@ export class PaymentService {
   public statePayement$ = this.statePayement.asObservable();
   private Pi: any = window.Pi;
   private scopes: string[] = ['username', 'payments', 'wallet_address'];
+  private EXPLORER_URL = environment.EXPLORER_URL;
+  private API_PI_NETWORK_ENV = environment.API_PI_NETWORK_ENV
   constructor(
     private http: HttpService,
     private router: Router,
@@ -29,7 +32,15 @@ export class PaymentService {
   ) { }
 
   public auth(): Promise<any> {
-    return this.Pi.authenticate(this.scopes, this.onIncompletePaymentFound)
+    try {
+      console.log(this.Pi);
+
+      return this.Pi.authenticate(this.scopes, this.onIncompletePaymentFound)
+    } catch (error) {
+      console.log(error);
+
+      return Promise.reject(error);
+    }
   }
 
   public onIncompletePaymentFound = (payment: PaymentDTO) => {
@@ -133,6 +144,15 @@ export class PaymentService {
 
   public addOrder(order: Order) {
     return this.http.post('orders', { ...order });
+  }
+
+
+  public getTransaction(url: string) {
+    return this.http.getFromExternal(this.API_PI_NETWORK_ENV, url);
+  }
+
+  public infoExplorer(url: string) {
+    return this.http.getFromExternal(this.EXPLORER_URL, url);
   }
 
 }

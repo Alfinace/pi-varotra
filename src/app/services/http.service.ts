@@ -25,4 +25,9 @@ export class HttpService {
   public delete(url: string): Observable<any> {
     return this.http.delete(`${this.API_URL}/${url}`)
   }
+
+  public getFromExternal(base_url: string,url: string): Observable<any> {
+    return this.http.get(`${base_url}/${url}`)
+  }
+
 }

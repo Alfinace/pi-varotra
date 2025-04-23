@@ -1,10 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
+
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/models/article.model';
-import * as L from 'leaflet';
-import { MarkerService } from 'src/app/services/marker.service';
 import { StoreService } from 'src/app/services/store.service';
-import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-store-detail',
   templateUrl: './store-detail.page.html',
@@ -21,8 +21,9 @@ export class StoreDetailPage implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   ngOnDestroy() {
+    this.isModalOpen = false
   }
 
   ionViewWillEnter() {
@@ -35,7 +36,7 @@ export class StoreDetailPage implements OnInit {
     })
   }
 
-  toggle(){
+  toggle() {
     this.isModalOpen = !this.isModalOpen
   }
 }

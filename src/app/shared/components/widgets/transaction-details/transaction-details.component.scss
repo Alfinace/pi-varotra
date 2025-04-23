@@ -1,0 +1,347 @@
+:host {
+  display: block;
+}
+
+// Variables
+$primary-color: #5a67d8;
+$success-color: #10b981;
+$danger-color: #ef4444;
+$text-color: #1f2937;
+$text-muted: #6b7280;
+$border-color: #e5e7eb;
+$bg-light: #f9fafb;
+$bg-card: #ffffff;
+$bg-code: #f3f4f6;
+$shadow-color: rgba(0, 0, 0, 0.1);
+$border-radius: 0.5rem;
+$spacing-unit: 0.25rem;
+
+// Utility classes
+.min-h-screen {
+  min-height: 100vh;
+}
+
+
+
+.container {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.col-md-6 {
+  width: 100%;
+  padding: 0 15px;
+  margin-bottom: 4 * $spacing-unit;
+
+  @media (min-width: 768px) {
+    width: 50%;
+    margin-bottom: 0;
+  }
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Header styles
+.header {
+  margin-bottom: 8 * $spacing-unit;
+}
+
+.title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: $text-color;
+  margin-bottom: 2 * $spacing-unit;
+}
+
+.subtitle {
+  color: $text-muted;
+}
+
+// Card styles
+.card {
+  background-color: $bg-card;
+  border-radius: $border-radius;
+  margin-bottom: 8 * $spacing-unit;
+  overflow: hidden;
+}
+
+.card-header {
+  // padding: 6 * $spacing-unit 6 * $spacing-unit 2 * $spacing-unit;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1 * $spacing-unit;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.card-description {
+  color: $text-muted;
+  display: flex;
+  align-items: center;
+}
+
+
+.card-footer {
+  padding: 4 * $spacing-unit 6 * $spacing-unit;
+  border-top: 1px solid $border-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Badge styles
+.badge {
+  display: inline-block;
+  padding: $spacing-unit 3 * $spacing-unit;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+.badge-success {
+  background-color: $success-color;
+  color: white;
+}
+
+.badge-danger {
+  background-color: $danger-color;
+  color: white;
+}
+
+// Info group styles
+.info-group {
+  margin-bottom: 4 * $spacing-unit;
+}
+
+.info-label {
+  font-weight: 500;
+  color: $text-muted;
+  margin: 0 0 1 * $spacing-unit;
+}
+
+.info-value {
+  font-weight: 500;
+  margin: 0;
+}
+
+// Section styles
+.section {
+  padding-top: 4 * $spacing-unit;
+}
+
+.section-content {
+  margin-top: 4 * $spacing-unit;
+  padding-left: 4 * $spacing-unit;
+}
+
+.toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 2 * $spacing-unit 0;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.toggle-text {
+  font-weight: 500;
+}
+
+// Link styles
+.link-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4 * $spacing-unit;
+}
+
+.link-label {
+  font-weight: 500;
+  color: $text-muted;
+  margin-right: 2 * $spacing-unit;
+}
+
+.link {
+  color: $primary-color;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-left: 1 * $spacing-unit;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Tab styles
+.tabs {
+  padding-top: 4 * $spacing-unit;
+}
+
+.tab-header {
+  display: flex;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: 4 * $spacing-unit;
+}
+
+.tab-button {
+  padding: 2 * $spacing-unit 4 * $spacing-unit;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-weight: 500;
+  color: $text-muted;
+  cursor: pointer;
+
+  &.active {
+    color: $primary-color;
+    border-bottom-color: $primary-color;
+  }
+
+  &:hover:not(.active) {
+    color: darken($text-muted, 15%);
+  }
+}
+
+.tab-content {
+  padding: 2 * $spacing-unit 0;
+}
+
+// Code styles
+.code-container {
+  position: relative;
+  margin-top: 2 * $spacing-unit;
+}
+
+.code {
+  background-color: $bg-code;
+  padding: 4 * $spacing-unit;
+  border-radius: 0.375rem;
+  font-family: monospace;
+  overflow-x: auto;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.copy-button {
+  position: absolute;
+  top: 2 * $spacing-unit;
+  right: 2 * $spacing-unit;
+}
+
+// Signature styles
+.signature-container {
+  position: relative;
+  background-color: $bg-code;
+  padding: 4 * $spacing-unit;
+  border-radius: 0.375rem;
+  margin-bottom: 4 * $spacing-unit;
+}
+
+.signature {
+  font-family: monospace;
+  margin: 0;
+  padding-right: 8 * $spacing-unit;
+  word-break: break-all;
+}
+
+// Button styles
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  padding: 0 4 * $spacing-unit;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.button-icon {
+  margin-right: 2 * $spacing-unit;
+}
+
+.button-outline {
+  background-color: transparent;
+  border: 1px solid $border-color;
+  color: $text-color;
+
+  &:hover {
+    background-color: $bg-light;
+  }
+}
+
+.button-primary {
+  background-color: $primary-color;
+  border: 1px solid $primary-color;
+  color: white;
+
+  &:hover {
+    background-color: darken($primary-color, 5%);
+  }
+}
+
+// Icon button
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: $text-muted;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+// Tooltip
+.tooltip {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 2 * $spacing-unit 3 * $spacing-unit;
+  border-radius: 4px;
+  z-index: 1000;
+  pointer-events: none;
+}
