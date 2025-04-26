@@ -6,42 +6,22 @@
       <ng-template pTemplate="header">
         <tr>
           <th>
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center">
-              Nom complet
+            <div class="p-d-flex p-jc-between p-ai-left">
+              Utilisateur
             </div>
           </th>
           <th>
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center">
-              Ville
+            <div class="p-d-flex p-jc-between p-ai-left">
+              Magasin
             </div>
           </th>
           <th>
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center">
-              Contact
-            </div>
-          </th>
-          <th>
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center">
-              Email
-            </div>
-          </th>
-          <th>
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center">
-              ROLE
-            </div>
-          </th>
-          <!-- <th>
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center">
-              Status
+            <div class="p-d-flex p-jc-between p-ai-left">
+              Role
             </div>
           </th>
           <th style="width: 8rem">
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center">
-              Verified
-            </div>
-          </th> -->
-          <th style="width: 8rem">
-            <div class="p-d-flex p-jc-between  text-upper p-ai-center">
+            <div class="p-d-flex p-jc-between p-ai-left">
               Actions
             </div>
           </th>
@@ -50,27 +30,17 @@
       <ng-template pTemplate="body" let-customer>
         <tr>
           <td>
-            {{customer.lastname}}
-            {{customer.firstname}}
+            {{customer.username}}
           </td>
           <td>
-            <span class="image-text">{{customer.city}} </span>
-          </td>
-          <td>
-            <span class="image-text">{{customer.contact}}</span>
-          </td>
-          <td>
-            {{customer.email}}
+            {{customer.store.name || '-'}}
           </td>
           <td>
             {{customer.role}}
           </td>
-
           <td>
             <div class="d-flex ion-justify-content-around" style="gap: 20px">
-
               <i class="pi pi-eye" (click)="show(customer)"></i>
-              <i class="pi pi-ban"></i>
             </div>
           </td>
         </tr>

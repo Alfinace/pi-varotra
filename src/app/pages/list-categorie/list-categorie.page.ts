@@ -91,4 +91,8 @@ export class ListCategoriePage implements OnInit {
     this.categorieForm.reset();
     this.editMode = false;
   }
+
+  delete(categorie: any) {
+
+  }
 }

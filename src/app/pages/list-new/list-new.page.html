@@ -1,10 +1,15 @@
 <ion-content class="ion-padding">
 
-  <div class="d-flex ion-align-items-start">
+  <div class="d-flex ion-align-items-start mt-70">
     <div class="card" style="width: 100%">
       <div class="d-flex ion-justify-content-between">
-        <h5 class=" ion-no-marginion-margin-bottom">Nouveau publié</h5>
-        <ion-button (click)="add()" color="primary" fill="outline">Ajouter</ion-button>
+        <h5 class=" ion-no-marginion-margin-bottom">Liste des nouvelles</h5>
+        <button (click)="add()" class="ion-activatable ripple-parent custom-parent btn-primary">
+          <div style="display: flex; gap: 10px" class="ion-align-items-center">
+            <span class="custom-child">Ajouter</span>
+          </div>
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
       </div>
       <p-table #dt1 [value]="_news">
         <ng-template pTemplate="header">

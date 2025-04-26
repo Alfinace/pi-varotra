@@ -1,32 +1,37 @@
 <ion-content class="ion-padding">
 
-  <div class="d-flex ion-align-items-start">
+  <div class="d-flex ion-align-items-start mt-70">
     <div class="card" style="width:100%">
       <div class="d-flex ion-justify-content-between">
-        <h5 class=" ion-no-marginion-margin-bottom">Liste catégorie d'article</h5>
-        <ion-button (click)="display = true" color="primary" fill="outline">Ajouter</ion-button>
+        <h5 class=" ion-no-marginion-margin-bottom">Liste catégorie</h5>
+        <button (click)="display = true" class="ion-activatable ripple-parent custom-parent btn-primary">
+          <div style="display: flex; gap: 10px" class="ion-align-items-center">
+            <span class="custom-child">Nouveau</span>
+          </div>
+          <ion-ripple-effect></ion-ripple-effect>
+        </button>
       </div>
       <p-table #dt1 [value]="categories">
         <ng-template pTemplate="header">
           <tr>
             <th>
-              <div class="p-d-flex p-jc-between  text-upper p-ai-center   ">
-                Nom de categorié
+              <div class="p-d-flex p-jc-between  ">
+                Nom
               </div>
             </th>
-            <th>
-              <div class="p-d-flex p-jc-between  text-upper p-ai-center p-ai-center">
+            <!-- <th>
+              <div class="p-d-flex p-jc-between">
                 Description
               </div>
-            </th>
+            </th> -->
             <th>
-              <div class="p-d-flex p-jc-between  text-upper p-ai-center p-ai-center">
-                Nombre produits
+              <div class="p-d-flex p-jc-between">
+                Nombre
               </div>
             </th>
 
             <th style="width: 8rem">
-              <div class="p-d-flex p-jc-between  text-upper p-ai-center p-ai-center">
+              <div class="p-d-flex p-jc-between">
                 Actions
               </div>
             </th>
@@ -37,16 +42,16 @@
             <td>
               {{categorie.name}}
             </td>
-            <td>
-              <span class="image-text">{{categorie.description ? categorie.description : 'N/A'}} </span>
-            </td>
+            <!-- <td>
+              <span class="image-text">{{categorie.description ? categorie.description : '-'}} </span>
+            </td> -->
             <td>
               <span class="image-text">{{categorie.articles.length}}</span>
             </td>
             <td>
               <div class="d-flex ion-justify-content-around" style="width:100px">
-                <ion-icon name="create-outline" (click)="edit(categorie)"></ion-icon>
-                <ion-icon name="trash-outline"></ion-icon>
+                <ion-icon name="create-outline" color="primary" (click)="edit(categorie)"></ion-icon>
+                <!-- <ion-icon name="trash-outline" color="danger" (click)="delete(categorie)"></ion-icon> -->
               </div>
             </td>
           </tr>

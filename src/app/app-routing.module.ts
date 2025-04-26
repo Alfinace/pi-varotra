@@ -1,4 +1,3 @@
-import { AdminPage } from './layouts/admin/admin.page';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ClientPage } from './layouts/client/client.page';
@@ -12,17 +11,6 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./layouts/client/client.module').then(m => m.ClientPageModule)
-      }
-    ]
-  },
-  {
-    path: 'admin',
-    canActivate: [AuthGuard],
-    component: AdminPage,
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./layouts/admin/admin.module').then(m => m.AdminPageModule)
       }
     ]
   },
