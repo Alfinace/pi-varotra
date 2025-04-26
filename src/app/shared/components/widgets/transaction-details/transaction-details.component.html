@@ -1,20 +1,13 @@
 <div class="min-h-screen bg-gradient-to-b">
-  <div class="container">
-    <header class="header">
-      <h1 class="title text-medium">Pi Network Transaction Explorer</h1>
-      <p class="subtitle text-sm">
-        View and analyze transaction details on the Pi Network testnet
-      </p>
-    </header>
-
+  <div class="container ion-padding">
     <div class="card text-sm">
       <div class="card-header">
         <div class="header-content">
           <div class="w-full">
             <div class="d-flex ion-justify-content-between">
-              <h2 class="card-title text-sm">Transaction Details</h2>
+              <h2 class="card-title text-sm"> Details Transaction</h2>
               <div class="badge" [ngClass]="transaction.successful ? 'badge-success' : 'badge-danger'">
-                {{ transaction.successful ? 'Successful' : 'Failed' }}
+                {{ transaction.successful ? 'Succès' : 'Echoué' }}
               </div>
             </div>
             <p class="card-description text-sm d-flex ion-justify-content-between">
@@ -33,7 +26,9 @@
         <div class="row">
           <div class="col-md-6">
             <div class="info-group">
-              <h3 class="info-label">Created At</h3>
+              <h3 class="info-label">
+                Date de création
+              </h3>
               <p class="info-value">{{ formatDate(transaction.created_at) }}</p>
             </div>
             <div class="info-group">
@@ -41,13 +36,17 @@
               <p class="info-value">{{ transaction.ledger }}</p>
             </div>
             <div class="info-group">
-              <h3 class="info-label">Operation Count</h3>
+              <h3 class="info-label">
+                Nombre d'operations
+              </h3>
               <p class="info-value">{{ transaction.operation_count }}</p>
             </div>
           </div>
           <div class="col-md-6">
             <div class="info-group">
-              <h3 class="info-label">Source Account</h3>
+              <h3 class="info-label">
+                Source de transaction
+              </h3>
               <div class="flex-row">
                 <p class="info-value truncate">{{ truncateHash(transaction.source_account) }}</p>
                 <button class="icon-button" (click)="copyToClipboard(transaction.source_account)">
@@ -59,8 +58,8 @@
               </div>
             </div>
             <div class="info-group">
-              <h3 class="info-label">Fee</h3>
-              <p class="info-value">{{ formatAmount(transaction.fee_charged) }} Pi</p>
+              <h3 class="info-label">Frais de transaction</h3>
+              <p class="info-value">{{ formatAmount(transaction.fee_charged) }} π</p>
             </div>
             <div class="info-group">
               <h3 class="info-label">Memo</h3>
@@ -71,7 +70,7 @@
 
         <div class="section">
           <button class="toggle-button" (click)="toggleSection('links')">
-            <span class="toggle-text">Links</span>
+            <span class="toggle-text">Liens</span>
             <svg *ngIf="!expandedSections.links" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="6 9 12 15 18 9"></polyline>
             </svg>
@@ -85,7 +84,7 @@
               <div *ngFor="let key of getObjectKeys(transaction._links)" class="col-md-6 link-item">
                 <span class="link-label">{{ key }}:</span>
                 <a [href]="transaction._links[key].href" target="_blank" rel="noopener noreferrer" class="link">
-                  View
+                  Visualiser
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                     <polyline points="15 3 21 3 21 9"></polyline>
@@ -100,7 +99,7 @@
         <div class="tabs">
           <div class="tab-header">
             <button class="tab-button" [ngClass]="{'active': activeTab === 'details'}" (click)="setActiveTab('details')">Details</button>
-            <button class="tab-button" [ngClass]="{'active': activeTab === 'technical'}" (click)="setActiveTab('technical')">Technical Data</button>
+            <button class="tab-button" [ngClass]="{'active': activeTab === 'technical'}" (click)="setActiveTab('technical')">Donnée technique</button>
             <button class="tab-button" [ngClass]="{'active': activeTab === 'signatures'}" (click)="setActiveTab('signatures')">Signatures</button>
           </div>
 
@@ -108,21 +107,27 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="info-group">
-                  <h3 class="info-label">Valid After</h3>
+                  <h3 class="info-label">
+                    Après validé
+                  </h3>
                   <p class="info-value">{{ formatDate(transaction.valid_after) }}</p>
                 </div>
                 <div class="info-group">
-                  <h3 class="info-label">Valid Before</h3>
+                  <h3 class="info-label">
+                    Avant validé
+                  </h3>
                   <p class="info-value">{{ formatDate(transaction.valid_before) }}</p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="info-group">
-                  <h3 class="info-label">Fee Account</h3>
+                  <h3 class="info-label">
+                    Compte de frais
+                  </h3>
                   <p class="info-value truncate">{{ truncateHash(transaction.fee_account) }}</p>
                 </div>
                 <div class="info-group">
-                  <h3 class="info-label">Max Fee</h3>
+                  <h3 class="info-label">Frais maximum</h3>
                   <p class="info-value">{{ formatAmount(transaction.max_fee) }} π</p>
                 </div>
               </div>

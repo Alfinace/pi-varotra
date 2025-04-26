@@ -62,7 +62,6 @@ export class PaymentService {
         onReadyForServerCompletion: (paymentId: string, txid: string) => {
           this.onReadyForServerCompletion(paymentId, txid);
           this.cartService.removeAllCart()
-          this.router.navigate(['space-client'])
           this.toastService.show('success', 'Paiement effectué avec succès')
           resolve(true);
         },
