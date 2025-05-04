@@ -115,7 +115,7 @@ export class AppController {
 
   // @UseGuards(AuthGuard('local'))
   @Post('auth/login')
-  async login(@Res() response: Response, @Body() auth: { accessToken: string, user: { uid: string, username: string } }) {
+  async login(@Res() response: Response, @Body() auth: { accessToken: string, user: { uid: string, username: string }, long ?: number, lat?: number }) {
     return this.authService.login(auth).then(res => {
       if (res) {
         return response.json(res);

@@ -4,6 +4,7 @@ import { User } from 'src/user/entities/user.entity';
 import { CreateStoreDto } from './dto/create-store.dto';
 import { UpdateStoreDto } from './dto/update-store.dto';
 import { Store } from './entities/store.entity';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class StoreService {
@@ -27,10 +28,18 @@ export class StoreService {
           as: 'user',
         },
       ],
-      where: { state: 'active' },
+      where: { state: 'active'},
       limit,
       offset,
       distinct: true,
+    });
+  }
+
+  findLocalization() {
+    return this.storeRepository.findAndCountAll({
+        attributes: ['id', 'lat', 'long', 'name', 'logo'],
+        where: { state: 'active',longitude: { [Op.not]: null } , latitude: { [Op.not]: null } },
+        distinct: true,
     });
   }
 
@@ -50,8 +59,8 @@ export class StoreService {
     return `This action updates a #${id} store`;
   }
 
-  updateByUserId(userId: number, data: { state: string; piPaymentId: string }) {
-    return this.storeRepository.update(data, {
+  updateByUserId(userId: number, data: any) {
+    return this.storeRepository.update({ ...data }, {
       where: { userId },
     });
   }

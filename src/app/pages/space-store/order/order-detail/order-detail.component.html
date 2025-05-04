@@ -96,7 +96,7 @@
   </ion-list>
   <app-transaction-details *ngIf="transaction ; else noTransaction" [transaction]="transaction"></app-transaction-details>
   <ng-template #noTransaction>
-    <div class="ion-text-center ion-padding ion-margin" *ngIf="order && order.paymentU2A.txid">
+    <div class="ion-text-center ion-padding ion-margin" *ngIf="order && order.paymentU2A?.txid">
       <ion-spinner name="crescent"></ion-spinner>
     </div>
   </ng-template>

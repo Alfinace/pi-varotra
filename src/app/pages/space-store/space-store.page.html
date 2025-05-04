@@ -90,6 +90,7 @@
   </div>
   <br />
   <br />
+  <app-map *ngIf="currentUser" [id]="'map_2'" [modeStoreView]="true" [storeName]="currentUser.store.name" [stores]="[currentUser.store]"></app-map>
   <br />
   <br />
   <ion-fab

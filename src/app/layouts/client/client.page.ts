@@ -26,13 +26,8 @@ export class ClientPage implements OnInit, OnDestroy {
   currentUser: any
   public userPages: IMenuPage[] = [
     {
-      title:'Profile',
-      url: '',
-      icon: 'person-outline'
-    },
-    {
       title: 'Mes commandes',
-      url: '',
+      url: 'my-order',
       icon: 'bag-handle-outline'
     },
     {
@@ -62,18 +57,8 @@ export class ClientPage implements OnInit, OnDestroy {
       url: '',
       icon: 'cash-outline'
     },
-    {
-      title:'Informations',
-      url: 'space-client/store/information-store',
-      icon: 'information-circle-outline'
-    },
   ]
   public AdminPages: IMenuPage[] = [
-    {
-      title:'Tableau de bord',
-      url: 'admin/dashboard',
-      icon: 'bar-chart-outline'
-    },
     {
       title: 'Utilisateurs',
       url: 'admin/users',
@@ -99,11 +84,11 @@ export class ClientPage implements OnInit, OnDestroy {
       url: 'admin/categories',
       icon: 'color-palette-outline'
     },
-    {
-      title:'Publicités',
-      url: 'admin/list-pub',
-      icon: 'megaphone-outline'
-    },
+    // {
+    //   title:'Publicités',
+    //   url: 'admin/list-pub',
+    //   icon: 'megaphone-outline'
+    // },
   ]
   public isLogged: boolean = false;
   private unsubscribe$: Subject<any> = new Subject<any>()
@@ -222,5 +207,9 @@ export class ClientPage implements OnInit, OnDestroy {
     if (data.data) {
       this.ionViewWillEnter()
     }
+  }
+
+  showMap(){
+    this.router.navigateByUrl('/map')
   }
 }

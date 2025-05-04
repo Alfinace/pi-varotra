@@ -18,6 +18,7 @@ export class OrderDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(!this.order.paymentU2A?.txid) return
     this.payementService.getTransaction('transactions/'+this.order.paymentU2A.txid).pipe(take(1)).subscribe((res: any) => {
       this.transaction = res
     })

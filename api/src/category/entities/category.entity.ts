@@ -5,6 +5,7 @@ import { Article } from 'src/article/entities/article.entity';
   tableName: 'categories',
   createdAt: false,
   updatedAt: false,
+  indexes: [{ unique: true, fields: ['name'], name: 'idx_name' }],
 })
 export class Category extends Model {
   @Column({ unique: true })

@@ -1,0 +1,11 @@
+<!-- <ion-header class="ion-no-border" mode="md">
+  <ion-toolbar>
+
+  </ion-toolbar>
+</ion-header> -->
+<ion-content>
+  <span class="fixed-top" (click)="close()">
+    <ion-icon  class="ion-padding-start" color="light" slot="start" name="close-outline"></ion-icon>
+  </span>
+  <app-map *ngIf="!loadingUsers && !loadingStores" [heightMap]="0" [stores]="stores" [users]="users"></app-map>
+</ion-content>

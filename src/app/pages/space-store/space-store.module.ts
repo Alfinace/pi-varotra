@@ -14,6 +14,7 @@ import { SliderModule } from 'primeng/slider';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { AddArticleModule } from 'src/app/shared/components/modals/add-article/add-article.module';
+import { MapModule } from 'src/app/shared/components/widgets/map/map.module';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { AddArticleModule } from 'src/app/shared/components/modals/add-article/a
     ProgressBarModule,
     ToastModule,
     TableModule,
+    MapModule,
     AddArticleModule
   ],
   declarations: [SpaceStorePage]

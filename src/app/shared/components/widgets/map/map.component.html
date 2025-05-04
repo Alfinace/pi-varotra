@@ -1,5 +1,14 @@
+
 <div
+  *ngIf="!id;else templateMap2"
   id="map"
-  [ngStyle]="{'height ': 'calc(100% - '+ heightMap + 'px)'}"
+  [ngStyle]="{'height ': 'calc(100% - 0px) !important'}"
 >
 </div>
+<ng-template #templateMap2>
+  <div
+    id="map_2"
+    [ngStyle]="{'height ': 'calc(100% - 0px) !important'}"
+  >
+  </div>
+</ng-template>

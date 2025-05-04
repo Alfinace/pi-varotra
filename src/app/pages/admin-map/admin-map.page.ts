@@ -88,10 +88,6 @@ export class AdminMapPage implements OnInit {
       this.map.on("click", (e: any) => {
         //to do
       });
-      // this._markerService.coordonne.subscribe((data: any) => {
-      //   this.centerLeafletMapOnMarker(this.map, this.makersLayer, data);
-      // });
-      // this._markerService.makePubMarkers(this.makersLayer, this.store);
       if (this.user) {
         L.marker([this.user.position[0], this.user.position[1]], { icon: redIcon })
           .addTo(this.map)

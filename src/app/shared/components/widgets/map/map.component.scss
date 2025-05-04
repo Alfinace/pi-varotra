@@ -3,9 +3,8 @@
   height: 100%;
 }
 
-#map {
+#map, #map_2 {
   width: 100%;
-  height: calc(100% - 285px);
+  height: calc(100% - 0px) !important;
   border: 1px solid #b8b8b8;
-  margin-top: 20px;
 }

@@ -32,6 +32,11 @@ const routes: Routes = [
     loadChildren: () => import('../../pages/space-client/space-client.module').then(m => m.SpaceClientPageModule)
   },
   {
+    path: 'my-order',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('../../pages/my-order/my-order.module').then(m => m.MyOrderPageModule)
+  },
+  {
     path: 'admin',
     canActivate: [AdminGuard],
     children : [

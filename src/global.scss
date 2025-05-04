@@ -178,9 +178,10 @@ ion-content {
   ion-title,
   h2,
   h3 {
-    font-size: var(--ion-text-size-1x);
+    font-size: var(--ion-text-size-2x);
     font-family: 'DM sans medium';
     color: var(--ion-color-primary);
+    padding: 0;
   }
   ion-row {
     margin: 10px 0;

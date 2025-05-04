@@ -36,6 +36,7 @@ export class SpaceStorePage implements OnInit, OnDestroy {
   ) { }
 
   ionViewWillEnter() {
+    this.currentUser = null;
     this.sessionService.getInfoUser().pipe(takeUntil(this.destroy$)).subscribe(user => {
       this.currentUser = user;
     })

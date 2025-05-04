@@ -1,0 +1,17 @@
+.fixed-top{
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  right: 0;
+  z-index: 1000;
+  width: 40px;
+  height: 40px;
+  background: var(--ion-color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ion-icon{
+    padding-inline-start: 0
+  }
+}

@@ -19,4 +19,12 @@ export class CreateUserDto {
   @ApiProperty()
   @IsOptional()
   lastname: string;
+
+  @ApiProperty()
+  @IsOptional()
+  long: number;
+
+  @ApiProperty()
+  @IsOptional()
+  lat: number;
 }

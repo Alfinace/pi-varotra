@@ -18,4 +18,10 @@ export class CreateStoreDto {
 
   @IsOptional()
   description: string
+
+  @IsOptional()
+  longitude: number
+
+  @IsOptional()
+  latitude: number
 }

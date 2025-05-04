@@ -33,36 +33,11 @@ export class User extends Model {
   @Column({ field: 'access_token' })
   accessToken: string;
 
-  // @IsEmail
-  // @Column({
-  //   unique: { name: 'email', msg: 'email is already exist' },
-  //   allowNull: true,
-  // })
-  // email: string;
+  @Column({ field: 'long', allowNull: true, type: DataType.DOUBLE })
+  longitude: number;
 
-  // @Column({
-  //   type: DataType.ENUM,
-  //   values: ['male', 'female']
-  // })
-  // gender: string;
-
-  // @Column
-  // firstname: string;
-
-  // @Column
-  // lastname: string;
-
-  // @Column
-  // password: string;
-
-  // @Column
-  // contact: string;
-
-  // // @Column({ field: 'public_key' })
-  // // publicKey: string;
-
-  // @Column({ type: DataType.DATEONLY, allowNull: true })
-  // birthday?: Date;
+  @Column({ field: 'lat', allowNull: true, type: DataType.DOUBLE })
+  latitude: number;
 
   @Column({
     type: DataType.ENUM,

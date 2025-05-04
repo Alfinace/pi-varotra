@@ -17,6 +17,7 @@ import { User } from 'src/user/entities/user.entity';
 @Table({
   tableName: 'stores',
   updatedAt: false,
+  indexes: [{ unique: true, fields: ['pi_payment_id'] }],
 })
 export class Store extends Model {
   @ForeignKey(() => User)
@@ -76,4 +77,10 @@ export class Store extends Model {
     allowNull: true,
   })
   piPaymentId: string;
+
+  @Column({ field: 'long', allowNull: true, type: DataType.DOUBLE })
+  longitude: number;
+
+  @Column({ field: 'lat', allowNull: true, type: DataType.DOUBLE })
+  latitude: number;
 }

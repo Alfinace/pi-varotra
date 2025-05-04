@@ -19,4 +19,12 @@ export class StoreService {
   getArticlesByStore(id: number, page: number, size: number) {
     return this.http.get('articles/store/' + id + '?page=' + page + '&size=' + size)
   }
+
+  getLocalizationStores() {
+    return this.http.get('stores/localization')
+  }
+
+  updateLocalizationStores(data:{ lat: number, long: number }) {
+    return this.http.put('stores/localization', {...data})
+  }
 }

@@ -30,7 +30,7 @@ export class UserService {
     return { email: createUserDto.email }
   }
 
-  async createUserByAccessPi(payload: { username: string, uid: string, accessToken: string }) {
+  async createUserByAccessPi(payload: { username: string, uid: string, accessToken: string, longitude: number, latitude: number }) {
     return await this.userRepository.create(payload);
   }
 
@@ -50,11 +50,6 @@ export class UserService {
     return this.userRepository.findAndCountAll({
       include: [
         { all: true }
-        // {
-        //   model: Article,
-        //   as: 'articles',
-        // },
-        // { model: ImageUser, as: 'images' }
       ],
       distinct: true,
       attributes: {
@@ -65,6 +60,13 @@ export class UserService {
       },
       limit,
       offset,
+    });
+  }
+
+  findLocalization() {
+    return this.userRepository.findAndCountAll({
+      distinct: true,
+      attributes: ['username', 'long', 'lat'],
     });
   }
 
@@ -116,11 +118,18 @@ export class UserService {
   }
 
 
-  updateByUid(uid: string, data: any) {
-    return this.userRepository.update(
+  updateByUid(uid: string, data: { username: string, uid: string, accessToken: string, longitude: number, latitude: number }) {
+    console.log(data);
+
+    // return this.userRepository.update(
+    //   { ...data },
+    //   { where: { uid }, returning: true },
+    // );
+    console.log(this.userRepository.update(
       { ...data },
       { where: { uid }, returning: true },
-    );
+    ));
+
   }
 
   updateByuserId(id: number, data: any) {

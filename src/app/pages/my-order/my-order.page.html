@@ -1,0 +1,47 @@
+<ion-content>
+  <div class="ion-padding-horizontal mt-70">
+    <br />
+    <ion-title>
+      Mes commandes
+    </ion-title>
+    <ion-list>
+      <ion-item
+        *ngFor="let o of myOrders; let i = index"
+        (click)="showOrder(o)"
+      >
+        <ion-label>
+          <h6> Commande {{ o.id }}</h6>
+          <p>Nombre d'articles: {{ o.articles.length }} | Montant payé : {{ o.totalAmount }} π</p>
+          <p>
+            <ion-text slot="end" color="warning">
+              <ion-chip *ngIf="!o.paymentId" color="warning" size="small">
+                <ion-label class="text-sm" >Non payé</ion-label>
+              </ion-chip>
+              <ion-chip *ngIf="o.paymentU2A && o.paymentU2A.paid " color="success" size="small">
+                <ion-label class="text-sm">Payé</ion-label>
+              </ion-chip>
+              <ion-chip *ngIf="o.paymentU2A && o.paymentU2A.paid  && !o.delivered" color="warning" size="small">
+                <ion-label class="text-sm">Non Livré</ion-label>
+              </ion-chip>
+              <ion-chip *ngIf="o.paymentU2A && o.paymentU2A.paid  && o.delivered" color="primary" size="small">
+                <ion-label class="text-sm">Livraison effectuée</ion-label>
+              </ion-chip>
+              <ion-chip *ngIf="o.paymentU2A && !o.paymentU2A.paid && !o.paymentU2A.cancelled" color="danger"
+                size="small">
+                <ion-label class="text-sm">Annulé</ion-label>
+              </ion-chip>
+            </ion-text>
+          </p>
+        </ion-label>
+
+      </ion-item>
+      <!-- <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Chargement..."
+        >
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll> -->
+    </ion-list>
+  </div>
+</ion-content>

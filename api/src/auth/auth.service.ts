@@ -36,18 +36,23 @@ export class AuthService {
       return null;
     }
 
+
     const user_ = await this.userService.findByArgs({ uid: auth.user.uid });
     if (!user_) {
       await this.userService.createUserByAccessPi({
         username: auth.user.username,
         uid: auth.user.uid,
         accessToken: auth.accessToken,
+        longitude: auth.long,
+        latitude: auth.lat,
       });
     } else {
       await this.userService.updateByUid(auth.user.uid, {
         uid: auth.user.uid,
         username: auth.user.username,
         accessToken: auth.accessToken,
+        longitude: auth.long,
+        latitude: auth.lat,
       });
     }
     const user = await this.userService.findByArgs({ uid: auth.user.uid });

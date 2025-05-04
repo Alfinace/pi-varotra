@@ -30,22 +30,16 @@
         </ion-item>
       </ng-template>
     </ion-item-group>
-    <ion-item-group>
+    <ion-item-group *ngIf="currentUser?.role === 'ADMIN'">
       <ion-item-divider>
         <ion-label class="text-sm">Espace Administrateur</ion-label>
       </ion-item-divider>
-      <ng-container *ngIf="currentUser?.role === 'ADMIN';else hasNotStore">
+      <ng-container >
         <ion-item *ngFor="let p of AdminPages" (click)="navigateTo(p.url)">
           <ion-icon [name]="p.icon" slot="start"></ion-icon>
           <ion-label class="text-sm">{{ p.title }}</ion-label>
         </ion-item>
       </ng-container>
-      <ng-template #hasNotStore>
-        <ion-item (click)="createStore()">
-          <ion-icon slot="start" name="storefront-outline"></ion-icon>
-          <ion-label class="text-sm"> Créer un magasin </ion-label>
-        </ion-item>
-      </ng-template>
     </ion-item-group>
   </ion-content>
 </ion-menu>
@@ -103,6 +97,10 @@
       <ion-tab-button tab="store">
         <ion-icon size="small" name="storefront-outline"></ion-icon>
         <ion-label>Magasins</ion-label>
+      </ion-tab-button>
+      <ion-tab-button (click)="showMap()">
+        <ion-icon size="small" name="map-outline"></ion-icon>
+        <ion-label>Carte</ion-label>
       </ion-tab-button>
       <ion-tab-button
         *ngIf="isLogged && currentUser.role === 'ADMIN2';else notLogged"

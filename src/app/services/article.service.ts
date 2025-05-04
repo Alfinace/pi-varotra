@@ -59,4 +59,8 @@ export class ArticleService {
   public getCmd(page: number, size: number) {
     return this.http.get(`orders?page=${page}&size=${size}`);
   }
+
+  public geMyOrders(page: number, size: number) {
+    return this.http.get(`orders/current-user?page=${page}&size=${size}`);
+  }
 }

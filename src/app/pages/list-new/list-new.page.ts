@@ -44,8 +44,7 @@ export class ListNewPage implements OnInit {
           editMode: true
         }
       },
-      width: '50%',
-
+      width: '100%',
       height: '100%',
       contentStyle: { "overflow": "auto" },
       baseZIndex: 10000,
@@ -75,7 +74,7 @@ export class ListNewPage implements OnInit {
   add() {
     this.ref = this.dialogService.open(AddNewComponent, {
       header: 'Publier une nouvelle',
-      width: '90%',
+      width: '100%',
       height: '100%',
       contentStyle: { "overflow": "auto" },
       baseZIndex: 10000,

@@ -54,8 +54,6 @@ export class StoreController {
       if (offset !== 0) {
         offset = offset * limit;
       }
-      // offset = isNaN(offset) ? offset : 0;
-      // limit = isNaN(limit) ? limit : 10;
       const stores = await this.storeService.findAll(offset, limit);
       stores.rows = stores.rows.map((store) => {
         store.logo =
@@ -68,6 +66,37 @@ export class StoreController {
       });
 
       return stores;
+    } catch (error) {
+      console.log(error);
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @Get('localization')
+  async findLocalizationStore() {
+    try {
+
+      const stores = await this.storeService.findLocalization();
+      stores.rows = stores.rows.map((store) => {
+        store.logo =
+          store.logo && store.logo !== 'none'
+            ? process.env.BASE_URL_IMAGE + store.logo
+            : null;
+        return store;
+      });
+
+      return stores;
+    } catch (error) {
+      console.log(error);
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  @Put('localization')
+  @UseGuards(JwtAuthGuard)
+  async updateLocalizationStore(@User() user: any, @Body() data: { lat: number, long: number }) {
+    try {
+      return await this.storeService.updateByUserId(user.userId, {longitude: data.long, latitude: data.lat});
     } catch (error) {
       console.log(error);
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
@@ -170,4 +199,5 @@ export class StoreController {
       .status(200)
       .json({ message: `Complete the payment ${paymentId}` });
   }
+
 }

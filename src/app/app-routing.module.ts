@@ -33,17 +33,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'sign-up',
-    loadChildren: () => import('./pages/sign-up/sign-up.module').then(m => m.SignUpPageModule)
-  },
-  {
     path: 'new',
     loadChildren: () => import('./pages/new/new.module').then(m => m.NewPageModule)
   },
   {
     path: 'detail-article/:slug',
     loadChildren: () => import('./pages/detail-article/detail-article.module').then(m => m.DetailArticlePageModule)
+  },
+  {
+    path: 'map',
+    loadChildren: () => import('./pages/map/map.module').then( m => m.MapPageModule)
   }
+
 ];
 
 @NgModule({

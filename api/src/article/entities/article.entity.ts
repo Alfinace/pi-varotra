@@ -17,7 +17,10 @@ import { Rate } from 'src/rates/entities/rate.entity';
 import { ArticleOrder } from 'src/aricle-order/entities/article-order.entity';
 import { Order } from 'src/order/entities/order.entity';
 
-@Table({ tableName: 'articles' })
+@Table({
+  tableName: 'articles',
+  indexes: [{ unique: true, fields: ['slug'], name: 'idx_slug' }],
+})
 export class Article extends Model {
   @ForeignKey(() => Store)
   @Column({ field: 'store_id' })

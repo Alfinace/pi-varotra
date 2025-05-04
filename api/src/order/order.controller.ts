@@ -53,6 +53,30 @@ export class OrderController {
     }
   }
 
+  @Get('current-user')
+  @UseGuards(JwtAuthGuard, RoleGuard)
+  async findAllByUser(@User() user, @Query('size') limit: number, @Query('page') offset: number) {
+    try {
+      if (offset !== 0) {
+        offset = offset * limit;
+      }
+
+      var orders = await this.orderService.findByUser(user.userId, limit, offset);
+      orders.rows = orders.rows.map(order => {
+        const deliverieInfo =JSON.parse(order.deliverieInfo ) || null
+        order.deliverieInfo = deliverieInfo;
+        order.articles = order.articles.map((article: any) => {
+          return { ...article.ArticleOrder.dataValues, article: article };
+        })
+        return order;
+      })
+      return orders;
+    } catch (error) {
+
+      throw new HttpException(error.message, 500);
+    }
+  }
+
   @Get(':id')
   @UseGuards(JwtAuthGuard, RoleGuard)
   findOne(@Param('id') id: string) {

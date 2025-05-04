@@ -19,6 +19,8 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginPage implements OnInit {
   public isSubmited: boolean = false;
   public Pi = window['Pi'];
+  public long = 0;
+  public lat = 0;
   public loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -44,28 +46,34 @@ export class LoginPage implements OnInit {
   public async login() {
     this.isSubmited = true;
     try {
-      this.paymentService.auth().then((authResult: AuthResult) => {
-        if (authResult.user) {
-          this.userService.login({ ...this.loginForm.value, ...authResult }).subscribe((res: any) => {
-            this.localstorageService.setItem('token', res.token);
-            this.sessionService.getSessionStatus();
-            this.isSubmited = false;
-            this.toastService.show('success', 'Connexion réussie');
-            this.router.navigate([this.reditectTo || '/']);
-          }, (err: any) => {
-            console.log(err);
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.long = position.coords.longitude
+        this.lat = position.coords.latitude
+        this.paymentService.auth().then((authResult: AuthResult) => {
+          if (authResult.user) {
+            console.log(this.long, this.lat);
+
+            this.userService.login({ ...this.loginForm.value, ...authResult, long: this.long, lat: this.lat }).subscribe((res: any) => {
+              this.localstorageService.setItem('token', res.token);
+              this.sessionService.getSessionStatus();
+              this.isSubmited = false;
+              this.toastService.show('success', 'Connexion réussie');
+              this.router.navigate([this.reditectTo || '/']);
+            }, (err: any) => {
+              console.log(err);
+              this.toastService.show('dark', 'Erreur de connexion');
+              this.isSubmited = false;
+            })
+          } else {
             this.toastService.show('dark', 'Erreur de connexion');
             this.isSubmited = false;
-          })
-        } else {
+          }
+        }).catch((err: any) => {
+          alert(err)
           this.toastService.show('dark', 'Erreur de connexion');
           this.isSubmited = false;
-        }
-      }).catch((err: any) => {
-        alert(err)
-        this.toastService.show('dark', 'Erreur de connexion');
-        this.isSubmited = false;
-      })
+        })
+      });
 
     } catch (error) {
       console.log('error', error);

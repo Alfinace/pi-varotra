@@ -91,6 +91,34 @@ export class OrderService {
       nest: true
     });
   }
+  findByUser(userId: number, limit: number, offset: number) {
+    return this.orderRepository.findAndCountAll({
+      where: {
+        userId
+      },
+      include: [
+        {
+          model: Article,
+          as: 'articles',
+        },
+        {
+          model: PaymentU2A,
+          as: 'paymentU2A'
+        },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['id']
+        }
+      ],
+      order: [
+        ['createdAt', 'DESC']
+      ],
+      limit,
+      offset,
+      nest: true
+    });
+  }
 
   findOne(id: number) {
     return `This action returns a #${id} order`;

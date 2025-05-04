@@ -50,6 +50,10 @@ export class UserService {
     return this.http.get('user?page=' + page + '&size=' + size);
   }
 
+  getLocalization() {
+    return this.http.get('user/localization');
+  }
+
   setHasStore(hasStore: boolean) {
     this.hasStore$.next(hasStore)
   }

@@ -64,22 +64,12 @@ export class UserController {
     return users;
   }
 
-  // @Get('image')
-  // @UseGuards(JwtAuthGuard)
-  // imageUserAdd(
-  //   @Body() data: CreateImageUserDto,
-  //   @Res() response: Response,
-  //   @User() user,
-  // ) {
-  //   return this.userService
-  //     .addImageUser(+user.userId, data)
-  //     .then((res) => {
-  //       return response.json(res);
-  //     })
-  //     .catch((error) => {
-  //       return response.status(400).json(error);
-  //     });
-  // }
+  @Get('localization')
+  async findLocalizationUser() {
+    var users = await this.userService.findLocalization();
+    return users;
+  }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {
