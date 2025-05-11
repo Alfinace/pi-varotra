@@ -9,6 +9,8 @@ import { Store } from 'src/store/entities/store.entity';
 import { Category } from 'src/category/entities/category.entity';
 import { AppService } from 'src/app.service';
 import * as path from 'path';
+import { Order } from 'src/order/entities/order.entity';
+import { PaymentU2A } from 'src/payment-u2-a/entities/payment-u2-a.entity';
 
 @Injectable()
 export class ArticleService {
@@ -83,6 +85,35 @@ export class ArticleService {
     });
   }
 
+  findAllPlusVendu(offset: number, limit: number) {
+    if (isNaN(offset) || isNaN(limit)) {
+      offset = 0;
+      limit = 10;
+    }
+    return this.articleRepository.findAndCountAll({
+      where: {
+        archived: false
+      },
+      limit,
+      offset,
+      distinct: true,
+      include: [{
+        all: true,
+      },
+      {
+        model: Order,
+        as: 'orders',
+        include: [{
+          model: PaymentU2A,
+          as: 'paymentU2A',
+          where: {
+            paid: true
+          }
+        }]
+      }],
+    });
+  }
+
   findAllWithFilter(filter, offset: number, limit: number) {
     var condition: any = {
       categoryId: { [Op.in]: [...filter.categories] },
@@ -146,6 +177,7 @@ export class ArticleService {
           include: [{
             model: User,
             as: 'user',
+
           }],
         }],
       limit,

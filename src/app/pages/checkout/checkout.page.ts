@@ -97,7 +97,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
         var carts = this.cartService.getAllCartData()
         this.mappingData(carts)
       } else {
-        this.router.navigate(['space-client'])
+        this.router.navigate(['/'])
       }
       this.items = [
         { label: 'Ma commande' },

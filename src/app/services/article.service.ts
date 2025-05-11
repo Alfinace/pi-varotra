@@ -16,6 +16,10 @@ export class ArticleService {
     return this.http.get('articles?page=' + page + '&size=' + size + '&categoryId=' + categoryId);
   }
 
+  public getArticlesPlusVendu(page: number, size: number) {
+    return this.http.get('articles/plus-vendu?page=' + page + '&size=' + size );
+  }
+
   public getArticlesCurrentUser(page?: number, size?: number) {
     if(page === undefined || size === undefined){
       return this.http.get('articles/current-user');
@@ -62,5 +66,9 @@ export class ArticleService {
 
   public geMyOrders(page: number, size: number) {
     return this.http.get(`orders/current-user?page=${page}&size=${size}`);
+  }
+
+  public updateStatusOrder(payementId: number) {
+    return this.http.put(`orders/update/${payementId}`, { });
   }
 }

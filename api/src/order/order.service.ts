@@ -150,6 +150,10 @@ export class OrderService {
     return this.orderRepository.update(data, { where: { id } });
   }
 
+  updateByPayementIdStore(paymentId: number, storeId: number) {
+    return this.orderRepository.update({delivered: new Date()}, { where: { paymentId, storeId} });
+  }
+
   remove(id: number) {
     return `This action removes a #${id} order`;
   }

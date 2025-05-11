@@ -55,6 +55,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
 
   public articles: Article[] = []
+  public articlesPlusVendu: Article[] = []
   @ViewChild('swiperComponent') swiperComponent: SwiperComponent;
   categories: any;
   stores: any[];
@@ -63,16 +64,11 @@ export class HomePage implements OnInit, AfterViewInit {
     private categoryService: CategorieService,
     private articleService: ArticleService,
     private newService: NewService,
-    private route: ActivatedRoute,
-    private modalController: ModalController,
     private router: Router,
     private pubService: PubService,
     private storeService: StoreService
   ) { }
   ngOnInit() {
-  }
-  ionViewWillEnter() {
-    this.fetchData()
   }
   public doRefresh(event: any) {
     this.fetchData(event)
@@ -95,6 +91,7 @@ export class HomePage implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.swiperComponent.swiperRef.autoplay.running = true;
     this.fetchData()
+
   }
 
   fetchData(e?: any) {
@@ -107,6 +104,9 @@ export class HomePage implements OnInit, AfterViewInit {
         this.articleService.getArticles(0, 10).toPromise().then((res: any) => {
           this.articles = res.rows;
           this.loadedArticle = true;
+          this.articleService.getArticlesPlusVendu(0, 10).toPromise().then((res: any) => {
+            this.articlesPlusVendu = res.rows;
+          })
           this.storeService.getStores(0, 10).toPromise().then((res: any) => {
             this.stores = res.rows as any[];
             this.loadedStore = true;

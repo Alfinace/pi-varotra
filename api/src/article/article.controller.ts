@@ -19,7 +19,7 @@ import {
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
-import { Response } from 'express';
+import e, { Response } from 'express';
 import { Role } from 'src/enums/role.enum';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Roles } from 'src/auth/roles.decorator';
@@ -117,7 +117,40 @@ export class ArticleController {
     }
   }
 
+  @Get('plus-vendu')
+  async findAllPlusVendu(@Query('size') limit: number, @Query('page') offset: number, @User() user) {
+    try {
+      if(!limit && !offset) {
+        limit = 10
+        offset = 0
+      }
+      if (offset !== 0) {
+        offset = offset * limit;
+      }
 
+      var articles = await this.articleService.findAllPlusVendu(offset, limit);
+      articles.rows = articles.rows.map((article) => {
+        article.images = article.images.sort((a, b) => b.id - a.id)
+        .map(i => {
+          i.image = process.env.BASE_URL_IMAGE + i.image;
+          return i
+        })
+        return article;
+      }).sort((a, b) => {
+        if (a.orders.length > b.orders.length) {
+          return -1;
+        }
+        if (a.orders.length < b.orders.length) {
+          return 1;
+        }
+        return 0;
+      })
+      articles.rows = articles.rows.slice(offset, offset + limit);
+      return articles;
+    } catch (error) {
+      throw new HttpException(error.message, 500);
+    }
+  }
 
   @Post('filter')
   async findAllWith(@Body() filter: any, @Query('size') limit: number, @Query('page') offset: number) {
@@ -249,4 +282,6 @@ export class ArticleController {
       throw new HttpException(error.message, 400);
     }
   }
+
+
 }

@@ -20,11 +20,6 @@
               Role
             </div>
           </th>
-          <th style="width: 8rem">
-            <div class="p-d-flex p-jc-between p-ai-left">
-              Actions
-            </div>
-          </th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-customer>
@@ -33,21 +28,28 @@
             {{customer.username}}
           </td>
           <td>
-            {{customer?.store?.name || '-'}}
+            {{customer?.store?.name || 'N/R'}}
           </td>
           <td>
-            {{customer.role}}
+            <ion-chip color="success" size="small" *ngIf="customer.role == 'ADMIN'; else notAdmin">
+              <ion-label class="text-sm">
+                Administrateur
+              </ion-label>
+            </ion-chip>
+            <ng-template #notAdmin>
+              <ion-chip color="warning" size="small">
+                <ion-label class="text-sm">
+                  Utilisateur
+                </ion-label>
+              </ion-chip>
+            </ng-template>
           </td>
-          <td>
-            <div class="d-flex ion-justify-content-around" style="gap: 20px">
-              <i class="pi pi-eye" (click)="show(customer)"></i>
-            </div>
-          </td>
+
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="7">Aucune donnée.</td>
+          <td colspan="7" class="text-center">Aucune donnée.</td>
         </tr>
       </ng-template>
     </p-table>

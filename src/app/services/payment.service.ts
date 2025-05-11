@@ -62,6 +62,7 @@ export class PaymentService {
         onReadyForServerCompletion: (paymentId: string, txid: string) => {
           this.onReadyForServerCompletion(paymentId, txid);
           this.cartService.removeAllCart()
+          this.statePayement.next({ status: 'success' });
           this.toastService.show('success', 'Paiement effectué avec succès')
           resolve(true);
         },

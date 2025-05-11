@@ -41,7 +41,7 @@ export class OrderPage implements OnInit {
   async showOrder(order: any) {
     const modal = await this.modal.create({
       component: OrderDetailComponent,
-      componentProps: { order }
+      componentProps: { order, showDeliveryMark: true },
     });
 
     await modal.present();

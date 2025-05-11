@@ -24,14 +24,6 @@
               <p>
                 Profitez de nos offres exclusives
               </p>
-              <!-- <button  class="ion-activatable ripple-parent custom-parent btn-primary">
-                <div style="display: flex; gap: 10px" class="ion-align-items-center">
-                  <span class="custom-child">
-                    Acheter dés maintenant
-                  </span>
-                </div>
-                <ion-ripple-effect></ion-ripple-effect>
-              </button> -->
             </div>
           </div>
         </ion-slide>
@@ -46,13 +38,6 @@
               <p>
                 Explorez notre nouvelle collection
               </p>
-              <!-- <button  class="ion-activatable ripple-parent custom-parent btn-primary">
-                <div style="display: flex; gap: 10px" class="ion-align-items-center">
-                  <span class="custom-child">Explorer</span>
-                  <ion-icon name="arrow-forward-outline"></ion-icon>
-                </div>
-                <ion-ripple-effect></ion-ripple-effect>
-              </button> -->
             </div>
           </div>
         </ion-slide>
@@ -105,7 +90,7 @@
       </div>
       <br>
       <swiper [config]="configP">
-        <ng-template *ngFor="let item of articles" swiperSlide>
+        <ng-template *ngFor="let item of articlesPlusVendu" swiperSlide>
           <app-article [article]="item"></app-article>
         </ng-template>
       </swiper>

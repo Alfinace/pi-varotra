@@ -83,6 +83,13 @@ export class OrderController {
     return this.orderService.findOne(+id);
   }
 
+  @Put('update/:payementId')
+  @UseGuards(JwtAuthGuard, RoleGuard)
+  updatePayementId(@Param('payementId') id: number ,@User() user: any,) {
+    return this.orderService.updateByPayementIdStore(id, user.storeId);
+  }
+
+
   @Put(':id')
   update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
     return this.orderService.update(+id, updateOrderDto);

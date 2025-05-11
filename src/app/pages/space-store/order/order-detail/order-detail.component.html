@@ -94,9 +94,14 @@
       </ion-text>
     </ion-item>
   </ion-list>
+  <button style="padding: 0 20px" (click)="changeStatusOrder()" *ngIf="showDeliveryMark && order.paymentU2A?.txid && !order.delivered "
+        class="ion-activatable ripple-parent custom-parent btn-primary">
+        <ion-label class="text-sm">Marquer comme livrer </ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </button>
   <app-transaction-details *ngIf="transaction ; else noTransaction" [transaction]="transaction"></app-transaction-details>
   <ng-template #noTransaction>
-    <div class="ion-text-center ion-padding ion-margin" *ngIf="order && order.paymentU2A?.txid">
+    <div class="ion-text-center ion-padding ion-margin" *ngIf="order && order.paymentU2A?.txid && isLoading">
       <ion-spinner name="crescent"></ion-spinner>
     </div>
   </ng-template>

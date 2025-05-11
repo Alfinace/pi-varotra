@@ -100,6 +100,13 @@ b {
   border-radius: 5px;
 }
 
+.leaflet-routing-container{
+  height: 420px !important;
+    overflow: auto !important;
+    background: white !important;
+    padding: 10px   !important;
+}
+
 .custom-parent {
   color: var(--ion-color-light);
   font-size: var(--ion-text-size-2x);

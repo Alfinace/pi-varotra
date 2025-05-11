@@ -19,6 +19,7 @@ export class SpaceStorePage implements OnInit, OnDestroy {
   rows = 8;
   page = 0;
   products: Article[] = [];
+  showMap = false;
   totalRecords: number;
   orders: any[] = [];
   currentIndex: number;
@@ -74,6 +75,10 @@ export class SpaceStorePage implements OnInit, OnDestroy {
       return this.currentUser.store.state === 'active';
     }
     return false;
+  }
+
+  toggleMapView() {
+    this.showMap = !this.showMap;
   }
 
   public async addProduit() {

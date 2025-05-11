@@ -8,7 +8,7 @@ export const environment = {
     EXPLORER_URL: 'https://blockexplorer.minepi.com/testnet',
     API_URL: 'http://localhost:3000/api',
     BACKEND_URL: 'http://localhost:3000',
-    prefix: 'pi-varotra-prod_'
+    prefix: 'pi-varotra-dev_'
   };
 
 /*

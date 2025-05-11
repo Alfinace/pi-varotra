@@ -24,11 +24,6 @@ export class MapPage implements OnInit {
 
 
   ngOnInit() {
-
-
-  }
-
-  ionViewWillEnter() {
     this.loadingStores = true;
     this.storeService.getLocalizationStores().pipe(take(1)).subscribe((stores) => {
       this.stores = stores.rows;
@@ -39,6 +34,9 @@ export class MapPage implements OnInit {
       this.users = users.rows;
       this.loadingUsers = false;
     });
+  }
+  ionViewWillEnter() {
+
   }
 
   public close(): void {

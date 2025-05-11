@@ -59,9 +59,10 @@
   </ion-grid>
 
   <div style="width: 100%">
-    <br />
-    <br />
-    <h3 class="ion-no-marginion-margin-bottom text-large">Liste article</h3>
+    <div class="d-flex ion-justify-content-between ion-align-items-center">
+      <h3 class="ion-no-marginion-margin-bottom text-large">Liste article</h3>
+      <ion-icon name="map-outline" (click)="toggleMapView()" size="large"></ion-icon>
+    </div>
     <ion-list>
       <ion-item
         *ngFor="let product of products; let i = index"
@@ -88,19 +89,31 @@
       </ion-infinite-scroll>
     </ion-list>
   </div>
-  <br />
-  <br />
-  <app-map *ngIf="currentUser" [id]="'map_2'" [modeStoreView]="true" [storeName]="currentUser.store.name" [stores]="[currentUser.store]"></app-map>
-  <br />
-  <br />
-  <ion-fab
+  <div class="map-view" *ngIf="showMap">
+
+    <app-map *ngIf="currentUser" [id]="'map_2'" [modeStoreView]="true" [storeName]="currentUser.store.name" [stores]="[currentUser.store]"></app-map>
+  </div>
+  <ion-fab *ngIf="!showMap"
     vertical="bottom"
     horizontal="end"
     (click)="addProduit()"
     slot="fixed"
   >
-    <ion-fab-button>
+    <ion-fab-button >
       <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab
+    *ngIf="showMap"
+    style="top: 60px;"
+    vertical="top"
+    horizontal="start"
+    (click)="toggleMapView()"
+    slot="fixed"
+    size="small"
+  >
+    <ion-fab-button >
+      <ion-icon name="close" size="small"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
