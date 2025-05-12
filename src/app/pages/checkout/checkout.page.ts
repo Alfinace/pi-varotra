@@ -162,7 +162,7 @@ export class CheckoutPage implements OnInit, AfterViewInit, OnDestroy {
     for (let i = 0; i < data.length; i++) {
       const p = data[i];
       let key = p.storeId?.toString()
-      if (!panierObject.hasOwnProperty(`${key}`)) {
+      if (!Object.prototype.hasOwnProperty.call(panierObject, `${key}`)) {
         panierObject = {
           ...panierObject,
           [key as any]: data.filter(d => d.storeId == key)
