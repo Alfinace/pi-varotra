@@ -4,6 +4,7 @@ import { CartComponent } from './cart.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
+import { TruncatePipeModule } from 'src/app/pipes/truncate.pipe.module';
 
 
 
@@ -14,6 +15,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     FormsModule,
     IonicModule,
+    TruncatePipeModule,
     RouterModule
   ]
 })

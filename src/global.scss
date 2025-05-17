@@ -108,7 +108,7 @@ b {
 }
 
 .custom-parent {
-  color: var(--ion-color-light);
+  color: var(--ion-color-secondary-contrast);
   font-size: var(--ion-text-size-2x);
 }
 
@@ -161,10 +161,11 @@ ion-content {
   ion-item,
   .checkbox {
     --background-hover: transparent;
-    --background: transparent;
+    --background: var(--ion-background-color);
     --border-radius: 0;
     &::part(native) {
       padding-inline-start: 0;
+      color: var(--ion-color-dark);
       .item-inner {
         padding-inline-end: 0;
       }
@@ -286,13 +287,20 @@ td,
 }
 .p-datatable .p-datatable-tbody > tr > td {
   padding: 0.5rem 0.5rem;
-  // text-align: center;
+  color: var(--ion-color-gray-850) !important;
   white-space: nowrap;
 }
 .p-datatable .p-datatable-thead > tr > th {
-  background-color: white;
-  color: gray;
+  background-color: var(--ion-color-gray-850);
+  color: var(--ion-color-gray-850) !important;
   border: none;
+}
+
+.icon-dark{
+  color: #000 !important;
+}
+icon-light{
+  color: #fff !important;
 }
 
 .text-sm {
@@ -384,4 +392,37 @@ app-article,
 app-store-card,
 app-pub-card {
   width: 100%;
+}
+
+.price-label {
+  color: var(--ion-color-dark);
+}
+
+p,label, .text-gray{
+  color: var(--ion-color-dark) !important;
+}
+
+ion-checkbox::part(label) {
+  color: var(--ion-color-dark);
+}
+
+.action-sheet-icon, h2 {
+  color: var(--ion-color-gray-850) !important;
+}
+
+h3 {
+  color: var(--ion-color-dark) !important;
+}
+
+ion-title {
+  color: var(--ion-color-diff) !important;
+}
+
+ion-menu{
+  --background: var(--ion-color-light);
+  --ion-background-color: var(--ion-color-light);
+  --ion-text-color: var(--ion-color-dark);
+  --ion-text-color-rgb: 34, 36, 40;
+  --ion-text-color-contrast: var(--ion-color-dark-contrast);
+  --ion-text-color-contrast-rgb: 255, 255, 255;
 }

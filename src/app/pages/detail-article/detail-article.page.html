@@ -24,11 +24,11 @@
     </ion-slides>
   </div>
   <br>
-  <h5 style="color: #000;font-family: 'DM Sans Medium';">
+  <h5 class="text-gray">
     {{article.designation}}
   </h5>
   <div style="display:flex; align-items: center; gap: 5px;justify-content: flex-start;">
-    <label style="font-family: 'DM Sans Medium';">Prix :</label>
+    <label class="price-label">Prix :</label>
     <span class="price-value">
       {{article.unitPrice}} π
     </span>
@@ -41,7 +41,7 @@
       </ion-img>
     </ion-avatar>
     <ion-text class="ion-margin-bottom" color="primary">
-      <h5 class="text-black">
+      <h5 class="text-gray">
         {{article.store!.name}}
       </h5>
       <ion-label class="text-black" style="font-size:15px">

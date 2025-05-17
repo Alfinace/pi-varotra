@@ -6,23 +6,12 @@
       loading="lazy"
       [alt]="'Logo '+store!.name"
     />
-    <h5 class="ion-no-margin no-wrap text-medium ion-margin-top ion-text-start">
+    <h5 class="ion-no-margin text-medium ion-margin-top text-gray ion-text-start">
       {{ store.name }}
     </h5>
-    <div
-      class="d-flex ion-align-items-center ion-justify-content-start"
-      style="gap: 5px"
-    >
-      <label class="text-sm  no-wrap">
-        {{ store.city }}
-      </label>
-    </div>
-  </div>
-  <div
-    style="display: flex"
-    class="ion-justify-content-between ion-align-items-center ion-margin-vertical"
-  >
-    <div style="font-size: 12px">{{ store.articles.length > 0 ? store.articles.length : "Aucun" }} articles</div>
+      <p class="text-sm">
+        {{ store.city }} | {{ store.articles.length > 0 ? store.articles.length : "Aucun" }} articles
+      </p>
   </div>
   <ion-row class="btn-row mt">
     <ion-col size="12">

@@ -4,7 +4,7 @@
     <ion-title>
       Mes commandes
     </ion-title>
-    <ion-list>
+    <ion-list *ngIf="myOrders.length;else emptyTemplate">
       <ion-item
         *ngFor="let o of myOrders; let i = index"
         (click)="showOrder(o)"
@@ -43,5 +43,16 @@
         </ion-infinite-scroll-content>
       </ion-infinite-scroll> -->
     </ion-list>
+    <ng-template #emptyTemplate>
+      <br>
+      <ion-card class="ion-no-margin ">
+        <ion-card-header>
+          <ion-title>Aucune commande trouvée</ion-title>
+        </ion-card-header>
+        <ion-card-content class="text-sm">
+          Vous n'avez pas encore passé de commande.
+        </ion-card-content>
+      </ion-card>
+    </ng-template>
   </div>
 </ion-content>

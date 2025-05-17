@@ -7,7 +7,7 @@
         Recherche
       </div>
     </div>
-    <ion-icon size="large" (click)="openFilter()" slot="end" name="filter-outline"></ion-icon>
+    <ion-icon size="large" (click)="openFilter()" slot="end" color="primary" name="filter-outline"></ion-icon>
   </div>
   <ng-container *ngIf="!loading &&  articles.length > 0 ;else templateLoadingEmpty">
     <br>

@@ -84,11 +84,6 @@ export class ClientPage implements OnInit, OnDestroy {
       url: 'admin/categories',
       icon: 'color-palette-outline'
     },
-    // {
-    //   title:'Publicités',
-    //   url: 'admin/list-pub',
-    //   icon: 'megaphone-outline'
-    // },
   ]
   public isLogged: boolean = false;
   private unsubscribe$: Subject<any> = new Subject<any>()
@@ -170,8 +165,10 @@ export class ClientPage implements OnInit, OnDestroy {
     this.menuCtrl.close()
   }
 
-  swithTheme() {
+  toggleTheme() {
     let theme = this.localstorageService.getItem('theme')
+    console.log('theme', this.theme);
+
     if (theme === 'dark') {
       this.themeService.setDarkTheme(false)
       this.localstorageService.setItem('theme', 'light');
@@ -179,8 +176,9 @@ export class ClientPage implements OnInit, OnDestroy {
     } else {
       this.themeService.setDarkTheme(true)
       this.localstorageService.setItem('theme', 'dark')
-      this.theme = 'dark  ';
+      this.theme = 'dark';
     }
+
   }
 
 

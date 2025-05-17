@@ -4,11 +4,15 @@
 
 export const environment = {
     production: false,
+    // API_PI_NETWORK_ENV: 'https://api.testnet.minepi.com',
+    // EXPLORER_URL: 'https://blockexplorer.minepi.com/testnet',
+    // API_URL: 'http://localhost:3000/api',
+    // BACKEND_URL: 'http://localhost:3000',
+    prefix: 'pi-varotra-dev_',
     API_PI_NETWORK_ENV: 'https://api.testnet.minepi.com',
     EXPLORER_URL: 'https://blockexplorer.minepi.com/testnet',
-    API_URL: 'http://localhost:3000/api',
-    BACKEND_URL: 'http://localhost:3000',
-    prefix: 'pi-varotra-dev_'
+    API_URL: 'https://api.pp.pivarotra.com/api',
+    BACKEND_URL: 'https://api.pp.pivarotra.com',
   };
 
 /*

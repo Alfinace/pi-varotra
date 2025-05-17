@@ -4,7 +4,7 @@
     </ion-icon>
     <ion-icon class="ion-padding-end" size="small" slot="end" (click)="removeAllCart()" name="trash-outline" color="danger">
     </ion-icon>
-    <ion-title class="ion-text-center text-sm">Mes paniers({{paniers.length}}) </ion-title>
+    <ion-title class="ion-text-center text-sm text-gray">Mes paniers({{paniers.length}}) </ion-title>
   </ion-toolbar>
 </ion-header>
 <br>
@@ -23,8 +23,8 @@
                   <img [src]="item?.images[0]?.image" />
                 </div>
                 <div class="cart-image">
-                  <div> {{item.designation}} </div>
-                  <p style="display: flex;gap: 5px;align-items: flex-end;">
+                  <div class="text-gray"> {{item.designation | truncate:30}} </div>
+                  <p>
                     <span  class="price-value">
                       {{item.unitPrice *item.quantity}} π
                     </span>
@@ -53,7 +53,7 @@
       </ion-list>
       <div *ngIf="p.length > 0">
         <div class="ion-justify-content-between align-items-center d-flex">
-          <div>
+          <div class="text-gray">
             TOTAL :
           </div>
           <div>

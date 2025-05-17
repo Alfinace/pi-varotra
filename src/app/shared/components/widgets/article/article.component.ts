@@ -4,7 +4,6 @@ import { ModalController } from '@ionic/angular';
 import { Article } from 'src/app/models/article.model';
 import { Cart } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
-import { ArticleDetailComponent } from '../../modals/article-detail/article-detail.component';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
