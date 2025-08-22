@@ -10,7 +10,6 @@ $text-color: #1f2937;
 $text-muted: #6b7280;
 $border-color: #e5e7eb;
 $bg-light: #f9fafb;
-$bg-card: #ffffff;
 $bg-code: #f3f4f6;
 $shadow-color: rgba(0, 0, 0, 0.1);
 $border-radius: 0.5rem;
@@ -20,6 +19,8 @@ $spacing-unit: 0.25rem;
 .min-h-screen {
   min-height: 100vh;
 }
+
+
 
 
 
@@ -74,7 +75,6 @@ $spacing-unit: 0.25rem;
 
 // Card styles
 .card {
-  background-color: $bg-card;
   border-radius: $border-radius;
   margin-bottom: 8 * $spacing-unit;
   overflow: hidden;
@@ -300,7 +300,7 @@ $spacing-unit: 0.25rem;
 .button-outline {
   background-color: transparent;
   border: 1px solid $border-color;
-  color: $text-color;
+  color: gray;
 
   &:hover {
     background-color: $bg-light;

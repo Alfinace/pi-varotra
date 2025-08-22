@@ -13,6 +13,7 @@ import { IMenuPage } from 'src/app/models/app';
 import { ParamsComponent } from 'src/app/shared/components/modals/params/params.component';
 import { CreateStoreComponent } from 'src/app/shared/components/modals/create-store/create-store.component';
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -84,6 +85,12 @@ export class ClientPage implements OnInit, OnDestroy {
       url: 'admin/categories',
       icon: 'color-palette-outline'
     },
+    {
+      title:'Acceder au back office',
+      url: '' + environment.BACK_OFFICE_URL+'/login?token=',
+      icon: 'settings-outline',
+      blank: true
+    },
   ]
   public isLogged: boolean = false;
   private unsubscribe$: Subject<any> = new Subject<any>()
@@ -124,6 +131,7 @@ export class ClientPage implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
+
   ngOnInit() {
     this.userService.hasStoreObservable.pipe(
       takeUntil(this.unsubscribe$)
@@ -153,7 +161,13 @@ export class ClientPage implements OnInit, OnDestroy {
 
   }
 
-  async navigateTo(url: string){
+  async navigateTo(url: string, blank : boolean = false) {
+    if (blank) {
+      let token = this.localstorageService.getItem('token')
+      window.open(url + token, '_blank');
+      this.menuCtrl.close();
+      return;
+    }
     switch (url) {
       case 'settings':
         await this.onOpenParams()

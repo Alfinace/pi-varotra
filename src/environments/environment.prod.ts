@@ -4,5 +4,7 @@ export const environment = {
   EXPLORER_URL: 'https://blockexplorer.minepi.com/testnet',
   API_URL: 'https://api.pp.pivarotra.com/api',
   BACKEND_URL: 'https://api.pp.pivarotra.com',
-  prefix: 'pi-varotra-prod_'
+  prefix: 'pi-varotra-prod_',
+  BACK_OFFICE_URL: 'https://admin.pivarotra.com',
+
 };

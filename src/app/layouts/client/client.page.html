@@ -37,7 +37,7 @@
         <ion-label class="text-sm">Espace Administrateur</ion-label>
       </ion-item-divider>
       <ng-container >
-        <ion-item *ngFor="let p of AdminPages" (click)="navigateTo(p.url)">
+        <ion-item *ngFor="let p of AdminPages" (click)="navigateTo(p.url, p.blank)">
           <ion-icon [name]="p.icon" slot="start" color="gray"></ion-icon>
           <ion-label class="text-sm">{{ p.title }}</ion-label>
         </ion-item>
