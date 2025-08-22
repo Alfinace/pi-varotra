@@ -64,26 +64,6 @@ export class AppController {
   }
 
 
-  // @Post('send-email')
-  // sendCode(@Body() body: any, @Res() response: Response) {
-  //   var code = Math.floor(1000 + Math.random() * 9000);
-  //   this.userService.createEmail({ email: body.email, confirmCodeEmail: code }).then(res => {
-  //     this.appService.sendEmail({
-  //       to: body.email,
-  //       subject: 'Code de vérification email',
-  //       html: templateSendCodeConfirm(code),
-  //     }).then(res => {
-  //       response.status(200).json({ message: 'Email envoyé avec succès' })
-  //     }).catch(err => {
-  //       response.status(400).json(err)
-  //     })
-  //   }).catch(err => {
-  //     console.log(err);
-
-  //     response.status(400).json(err?.original?.code)
-  //   })
-  // }
-
   @Post('resend-code')
   resendCode(@Body() body: any, @Res() response: Response) {
     var code = Math.floor(1000 + Math.random() * 9000);
@@ -104,14 +84,6 @@ export class AppController {
     })
   }
 
-  // @Post('confirm-email')
-  // confirmEmail(@Body() body: any, @Res() response: Response) {
-  //   this.userService.confirmEmail(body.email, parseInt(body.code)).then(res => {
-  //     response.status(200).json({ message: 'Email confirmé avec succès' })
-  //   }).catch(err => {
-  //     response.status(400).json(err)
-  //   })
-  // }
 
   // @UseGuards(AuthGuard('local'))
   @Post('auth/login')

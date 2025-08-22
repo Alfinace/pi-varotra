@@ -92,14 +92,6 @@ export class UserController {
     }
     return this.userService
       .update(+user.userId, updateUserDto)
-    // .then((data) => {
-    //   this.userService.findOne(+user.userId).then((res) => {
-    //     return response.json({ ...res, avatar: process.env.BASE_URL_IMAGE + res.avatar });
-    //   })
-    // })
-    // .catch((error) => {
-    //   return response.status(400).json({ ...error });
-    // });
   }
 
   @Delete(':id')
@@ -125,25 +117,4 @@ export class UserController {
         return response.status(400).json(error);
       });
   }
-
-  // @Put('update-password')
-  // @UseGuards(JwtAuthGuard)
-  // updatePassword(@Body() body: any, @Res() response: Response, @User() user,) {
-  //   this.userService.findOne(+user.userId).then(async (res) => {
-  //     if (res && (await bcrypt.compare(body.oldPassword, res.password))) {
-  //       let hashed = await bcrypt.hash(body.password, 10);
-  //       return this.userService
-  //         .updateByuserId(+user.userId, { password: hashed })
-  //         .then((res) => {
-  //           return response.json({ ...res });
-  //         })
-  //         .catch((error) => {
-  //           return response.status(400).json({ ...error });
-  //         });
-
-  //     } else {
-  //       return response.status(400).json({ error: 'Ancien mot de passe incorrect' });
-  //     }
-  //   });
-  // }
 }
